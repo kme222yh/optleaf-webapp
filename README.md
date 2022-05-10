@@ -8,6 +8,7 @@ OptLeafのwebクライアント。
 * Node.js v16.14.0
 * npm 8.3.1
 * react.js ^18.1.0
+* typescript ^4.6.4
 
 
 
@@ -23,8 +24,17 @@ npx create-react-app optleaf-webapp --template typescript
 npm run eject
 
 # scss 対応
-npm install -s node sass
+npm install -s node-sass
 
-#storybook セットアップ
+# storybook セットアップ
 npx -p @storybook/cli sb init --use-npm
+
+# eslint セットアップ コンパイル時に厳しくチェックするやつ
+npm install eslint --save-dev
+npm init @eslint/config
+npm add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npx install-peerdeps --dev eslint-config-airbnb
+
+# Prettier セットアップ
+npm add -D prettier eslint-config-prettier
 ```
