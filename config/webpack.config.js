@@ -167,6 +167,13 @@ module.exports = function (webpackEnv) {
       },
     ].filter(Boolean);
     if (preProcessor) {
+        // グローバルscssファイル読み込み
+        const options = {
+            sourceMap: true,
+        };
+        if(preProcessor == 'sass-loader'){
+            options.additionalData = paths.prependsScss;
+        }
       loaders.push(
         {
           loader: require.resolve('resolve-url-loader'),
@@ -177,9 +184,7 @@ module.exports = function (webpackEnv) {
         },
         {
           loader: require.resolve(preProcessor),
-          options: {
-            sourceMap: true,
-          },
+          options: options,
         }
       );
     }

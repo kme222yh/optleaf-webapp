@@ -1,0 +1,20 @@
+// Desktop design as the basic of the design.
+
+// wider than
+@mixin desktop{
+    @media screen and (min-width: $tablet-max){
+        @content;
+    }
+}
+
+// smaller than
+@mixin tablet{
+    @media screen and (max-width: $tablet-max){
+        @content;
+    }
+}
+@mixin mobile{
+    @media screen and (max-width: $mobile-max){
+        @content;
+    }
+}
