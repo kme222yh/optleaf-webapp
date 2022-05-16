@@ -7,13 +7,13 @@ import { protectedRoutes } from './protected'
 // import { publicRoutes } from './public';
 
 export function AppRoutes() {
-  // const auth = useAuth();
-  //
-  // const commonRoutes = [{ path: '/', element: <Landing /> }];
-  //
-  // const routes = auth.user ? protectedRoutes : publicRoutes;
+    // const auth = useAuth();
+    //
+    // const commonRoutes = [{ path: '/', element: <Landing /> }];
+    //
+    // const routes = auth.user ? protectedRoutes : publicRoutes;
 
-  const element = useRoutes(protectedRoutes);
+    const element = useRoutes(protectedRoutes)
 
-  return element;
+    return element
 }

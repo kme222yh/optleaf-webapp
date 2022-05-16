@@ -8,9 +8,9 @@ type AppProviderProps = {
 }
 
 export function AppProvider({ children }: AppProviderProps) {
-  return (
+    return (
     // <AuthProvider>
-    <Router>{children}</Router>
+        <Router>{children}</Router>
     // </AuthProvider>
-  )
+    )
 }

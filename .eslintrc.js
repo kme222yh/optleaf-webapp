@@ -54,6 +54,8 @@ module.exports = {
           allowAsStatement: true,
         },
       ],
+      // タブサイズは4が好き
+      "indent": ["error", 4]
     },
     settings: {
         'import/resolver': {
