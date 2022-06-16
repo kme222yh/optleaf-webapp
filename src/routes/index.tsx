@@ -3,8 +3,8 @@ import { useRoutes } from 'react-router-dom'
 // import { Landing } from '@/features/misc';
 // import { useAuth } from '@/lib/auth';
 //
-import { protectedRoutes } from './protected'
-// import { publicRoutes } from './public';
+// import { protectedRoutes } from './protected'
+import { publicRoutes } from './public'
 
 export function AppRoutes() {
     // const auth = useAuth();
@@ -13,7 +13,7 @@ export function AppRoutes() {
     //
     // const routes = auth.user ? protectedRoutes : publicRoutes;
 
-    const element = useRoutes(protectedRoutes)
+    const element = useRoutes(publicRoutes)
 
     return element
 }

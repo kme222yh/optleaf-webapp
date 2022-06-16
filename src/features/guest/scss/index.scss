@@ -1,0 +1,49 @@
+.GuestLayout{
+    background-color: $color-main;
+    height: 100%;
+
+    &-body{
+        @include outerBody;
+    }
+
+    &-header{
+        border-bottom: 2px solid $color-sub;
+        &-body{
+            padding: 13px 0;
+            @include outerBody;
+            display: flex;
+            justify-content: flex-start;
+        }
+        &-logo{
+            width: 111px;
+        }
+    }
+
+}
+
+
+.authLinks{
+    &-list{
+        display: flex;
+        justify-content: center;
+        padding-top: 30vh;
+    }
+    &-item a{
+        background-color: $color-sub;
+        width: 245px;
+        height: 100px;
+        border-radius: 5px;
+        margin: 0 50px;
+        color: white;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .5s;
+        outline-color: $color-sub;
+        outline: 1px solid $color-sub;
+        &:hover{
+            outline: 5px solid $color-sub;
+        }
+    }
+}
