@@ -4,18 +4,16 @@ type GuestLayoutProps = {
   children: React.ReactNode
 }
 
-const hoge = 'hogehogehoge'
-
 export function Layout({ children }: GuestLayoutProps) {
     return (
         <div className="GuestLayout">
-            <div className="GuestLayout-header">
+            <header className="GuestLayout-header">
                 <div className="GuestLayout-header-body">
                     <img className="GuestLayout-header-logo" src={logo} alt="OptLeaf" />
                 </div>
-            </div>
+            </header>
 
-            <div className="GuestLayout-body">{children}</div>
+            <main className="GuestLayout-body">{children}</main>
         </div>
     )
 }
