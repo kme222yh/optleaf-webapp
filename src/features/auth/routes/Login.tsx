@@ -4,7 +4,7 @@ import { useAuth } from '../providers/auth'
 import { LoginCredentials } from '../types'
 
 export function Login() {
-    const { user, login, error } = useAuth()
+    const { login } = useAuth()
 
     const methods = useForm<LoginCredentials>()
 
@@ -32,7 +32,7 @@ export function Login() {
                     />
                 </div>
                 <button className="authForm-button" type="submit" name="button">
-          ログイン
+                    ログイン
                 </button>
             </form>
         </div>

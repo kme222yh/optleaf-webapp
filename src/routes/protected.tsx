@@ -1,7 +1,6 @@
-// import { Suspense } from 'react'
 import { Navigate, Outlet, RouteObject } from 'react-router-dom'
 
-import { Layout } from '@/features/guest'
+import { Layout } from '@/features/dashboard'
 
 function App() {
     return (

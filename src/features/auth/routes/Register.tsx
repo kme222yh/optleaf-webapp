@@ -4,13 +4,12 @@ import { useAuth } from '../providers/auth'
 import { RegisterCredentials } from '../types'
 
 export function Register() {
-    const { user, register } = useAuth()
+    const { register } = useAuth()
 
     const methods = useForm<RegisterCredentials>()
 
     const isValid = async (data: RegisterCredentials) => {
         const res = await register(data)
-        console.log(res)
     }
     const isInValid = (erros: any) => {
         console.log('Fail Register')

@@ -1,4 +1,3 @@
-// import { Suspense } from 'react'
 import { Navigate, Outlet, RouteObject } from 'react-router-dom'
 
 import { Top, Layout } from '@/features/guest'
