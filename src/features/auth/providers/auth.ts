@@ -1,6 +1,6 @@
 import { initReactQueryAuth } from 'react-query-auth'
 import { loadUser, loginFn, registerFn, logoutFn } from '../lib/auth'
-import { LoginCredentials, RegisterCredentials, User } from '../types'
+import { LoginCredentials, RegisterCredentials, User, Error } from '../types'
 
 const authConfig = {
     loadUser,

@@ -7,7 +7,7 @@ export const storage = {
 
     useRefreshToken: () => {
         const refreshToken = localStorage.getItem('refreshToken')
-        localStorage.setItem('refreshToken', refreshToken === null ? '' : refreshToken)
+        localStorage.setItem('accessToken', refreshToken === null ? '' : refreshToken)
     },
 
     clearToken: () => {

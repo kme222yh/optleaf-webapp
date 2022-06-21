@@ -18,3 +18,9 @@ export type LoginResponse = {
   access_token: string
   refresh_token: string
 }
+
+export type Error = {
+  code: string
+  detail: any
+  message: string
+}

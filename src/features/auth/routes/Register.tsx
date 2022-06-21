@@ -4,7 +4,7 @@ import { useAuth } from '../providers/auth'
 import { RegisterCredentials } from '../types'
 
 export function Register() {
-    const { user, register, error } = useAuth()
+    const { user, register } = useAuth()
 
     const methods = useForm<RegisterCredentials>()
 
@@ -41,7 +41,7 @@ export function Register() {
                     />
                 </div>
                 <button className="authForm-button" type="submit" name="button">
-          登録
+                    登録
                 </button>
             </form>
         </div>
