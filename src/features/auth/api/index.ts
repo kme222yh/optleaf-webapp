@@ -1,7 +1,7 @@
 import { axios } from '@/lib/axios'
 import { LoginCredentials, RegisterCredentials, User, LoginResponse } from '../types'
 
-export async function registerWithCredentials(data: RegisterCredentials): Promise<User> {
+export async function registerWithCredentials(data: RegisterCredentials): Promise<LoginResponse> {
     return axios.postForm('/auth/register', data)
 }
 

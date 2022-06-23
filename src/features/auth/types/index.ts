@@ -1,6 +1,6 @@
 export type User = {
-  id: string
   email: string
+  name: string
 }
 
 export type LoginCredentials = {
@@ -17,6 +17,7 @@ export type RegisterCredentials = {
 export type LoginResponse = {
   access_token: string
   refresh_token: string
+  user: User
 }
 
 export type Error = {
