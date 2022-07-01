@@ -1,0 +1,144 @@
+query projects {
+    projects {
+        id
+        name
+        owner {
+            ID
+        }
+        administrators {
+            ID
+        }
+        teams {
+            id
+        }
+        created_at
+        updated_at
+    }
+}
+
+query project(
+    $id: String
+) {
+    project(
+        id: $id
+    ) {
+        id
+        name
+        description
+        owner {
+            ID
+            name
+        }
+        administrators {
+            ID
+        }
+        teams {
+            id
+        }
+        tasks {
+            id
+            name
+            completed
+            children {
+                id
+            }
+        }
+        chats {
+            id
+            content
+            author_id
+            created_at
+            updated_at
+        }
+        created_at
+        updated_at
+    }
+}
+
+mutation createProject(
+    $name: String!
+    $description: String!
+    $menbers: [Int]
+    $administrators: [Int]
+    $teams: [String]
+) {
+    createProject(
+        name: $name
+        description: $description
+        menbers: $menbers
+        administrators: $administrators
+        teams: $teams
+    ) {
+        id
+        name
+        description
+        owner {
+            ID
+            name
+        }
+        administrators {
+            ID
+        }
+        teams {
+            id
+        }
+        tasks {
+            id
+            name
+            completed
+            children {
+                id
+            }
+        }
+        chats {
+            id
+            content
+            author_id
+            created_at
+            updated_at
+        }
+        created_at
+        updated_at
+    }
+}
+
+mutation updateProject(
+    $name: String!
+    $description: String!
+    $menbers: [Int]
+    $administrators: [Int]
+    $teams: [String]
+) {
+    createProject(
+        name: $name
+        description: $description
+        menbers: $menbers
+        administrators: $administrators
+        teams: $teams
+    ) {
+        name
+        description
+        menbers {
+            ID
+            name
+        }
+        administrators {
+            ID
+            name
+        }
+        teams {
+            id
+            name
+        }
+    }
+}
+
+mutation deleteProject(
+    $id: String!
+){
+    deleteProject(
+        id: $id
+    ) {
+        id
+    }
+}

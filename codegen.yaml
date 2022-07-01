@@ -1,0 +1,16 @@
+schema: "../optleaf-api/**/*.graphql"
+documents: "./src/graphql/query/*.graphql"
+generates:
+  ./src/graphql/generated.ts:
+    plugins:
+      - add:
+          content: "import { storage } from '@/lib/storage'"
+      - typescript
+      - typescript-operations
+      - typescript-react-query
+    config:
+      fetcher:
+        endpoint: "process.env.REACT_APP_GRAPHQL_API"
+        fetchParams:
+          headers:
+            Authorization: "`Bearer ${storage.getAccessToken()}`"
