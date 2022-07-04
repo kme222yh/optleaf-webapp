@@ -3,16 +3,18 @@
     height: 100%;
 
     &-body {
-        @include innerBody;
+        height: calc(100vh - 50px);
+        display: flex;
+        justify-content: flex-start;
     }
 
     &-header {
 
         &-body {
-            padding: 13px 0;
             @include innerBody;
             display: flex;
             justify-content: flex-start;
+            height: 50px;
         }
 
         &-logo {
@@ -20,4 +22,142 @@
         }
     }
 
+}
+
+
+.globalNav {
+    flex-grow: 0;
+    flex-shrink: 1;
+
+    &-body {
+        @include innerBody;
+        padding-top: 5px;
+    }
+
+    &-item {
+        font-size: 15px;
+        line-height: 30px;
+        color: $color-white;
+    }
+}
+
+
+.app {
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: calc(100% - 150px);
+
+    padding-bottom: 10px;
+    padding-right: 10px;
+
+    &-body {
+        height: 100%;
+    }
+}
+
+
+.top {
+    border: 1px solid $color-white;
+    border-radius: 5px;
+    height: 100%;
+    color: $color-white;
+
+    &-body {
+        @include outerBody;
+        padding-top: 35px;
+        max-width: 930px;
+    }
+
+    &-greeting {
+        font-size: 30px;
+        line-height: 1.8;
+        text-align: center;
+        border-bottom: 1px solid;
+        margin-bottom: 22px;
+    }
+}
+
+
+.informatonBoard {
+    padding-bottom: 30px;
+    border-bottom: 1px solid;
+
+    &-body {
+        margin: 0 auto;
+        max-width: 827px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-projects {
+        &-title {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .icon {
+                font-size: 40px;
+                margin-right: 15px;
+            }
+
+            .text {
+                font-size: 20px;
+                line-height: 40px;
+            }
+        }
+
+        &-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 511px;
+        }
+
+        &-item {
+            width: 245px;
+            height: 100px;
+            border-radius: 5px;
+            background-color: #99D982;
+            margin-bottom: 20px;
+            transition: .5s;
+
+            &:hover {
+                background-color: $color-sub;
+            }
+
+            &-body {
+                display: block;
+                padding: 10px 12px;
+            }
+
+            &-title {
+                font-size: 15px;
+                line-height: 18px;
+                margin-bottom: 2.5px;
+            }
+
+            &-description {
+                font-size: 10px;
+                line-height: 15px;
+                color: $color-black;
+            }
+
+            .create {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .icon {
+                    font-size: 34px;
+                }
+            }
+        }
+
+        &-more {
+            display: block;
+            text-align: center;
+        }
+    }
 }

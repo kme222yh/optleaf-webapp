@@ -2,6 +2,7 @@ query projects {
     projects {
         id
         name
+        description
         owner {
             ID
         }

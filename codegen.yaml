@@ -4,13 +4,11 @@ generates:
   ./src/graphql/generated.ts:
     plugins:
       - add:
-          content: "import { storage } from '@/lib/storage'"
+          content: "import { fetchParams } from '@/graphql/config'"
       - typescript
       - typescript-operations
       - typescript-react-query
     config:
       fetcher:
         endpoint: "process.env.REACT_APP_GRAPHQL_API"
-        fetchParams:
-          headers:
-            Authorization: "`Bearer ${storage.getAccessToken()}`"
+        fetchParams: "fetchParams"

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import logo from '@/assets/logo.svg'
 
 type DashboardLayoutProps = {
@@ -13,7 +14,22 @@ export function Layout({ children }: DashboardLayoutProps) {
                 </div>
             </header>
 
-            <main className="DashboardLayout-body">{children}</main>
+            <main className="DashboardLayout-body">
+                <div className="globalNav">
+                    <ul className='globalNav-body'>
+                        <li className="globalNav-item"><Link to="/projects">Project</Link></li>
+                        <li className="globalNav-item"><Link to="/teams">Team</Link></li>
+                        <li className="globalNav-item"><Link to="/tasks">Task</Link></li>
+                        <li className="globalNav-item"><Link to="/chat">Chat</Link></li>
+                    </ul>
+                </div>
+
+                <div className="app">
+                    <div className="app-body">
+                        {children}
+                    </div>
+                </div>
+            </main>
         </div>
     )
 }

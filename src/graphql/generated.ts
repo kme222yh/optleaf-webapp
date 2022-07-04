@@ -1,4 +1,4 @@
-import { storage } from '@/lib/storage'
+import { fetchParams } from '@/graphql/config'
 import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -10,7 +10,7 @@ function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
   return async (): Promise<TData> => {
     const res = await fetch(process.env.REACT_APP_GRAPHQL_API as string, {
     method: "POST",
-    ...({"headers":{"Authorization":"`Bearer ${storage.getAccessToken()}`"}}),
+    ...(fetchParams),
       body: JSON.stringify({ query, variables }),
     });
 
@@ -311,7 +311,7 @@ export type DeleteChatMutation = { __typename?: 'Mutation', deleteChat?: { __typ
 export type ProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id?: string | null, name?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null } | null, administrators?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null } | null> | null } | null> | null };
+export type ProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id?: string | null, name?: string | null, description?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null } | null, administrators?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null } | null> | null } | null> | null };
 
 export type ProjectQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
@@ -516,6 +516,7 @@ export const ProjectsDocument = `
   projects {
     id
     name
+    description
     owner {
       ID
     }
