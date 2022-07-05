@@ -1,0 +1,56 @@
+.DashboardLayout {
+    background-color: $color-main;
+    height: 100%;
+
+    &-body {
+        height: calc(100vh - 50px);
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &-header {
+
+        &-body {
+            @include innerBody;
+            display: flex;
+            justify-content: flex-start;
+            height: 50px;
+        }
+
+        &-logo {
+            width: 111px;
+        }
+    }
+
+}
+
+
+.globalNav {
+    flex-grow: 0;
+    flex-shrink: 1;
+
+    &-body {
+        @include innerBody;
+        padding-top: 5px;
+    }
+
+    &-item {
+        font-size: 15px;
+        line-height: 30px;
+        color: $color-white;
+    }
+}
+
+
+.app {
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: calc(100% - 150px);
+
+    padding-bottom: 10px;
+    padding-right: 10px;
+
+    &-body {
+        height: 100%;
+    }
+}

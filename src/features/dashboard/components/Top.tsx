@@ -1,3 +1,5 @@
+import '../scss/top.scss'
+
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNoteSticky, faPlus } from '@fortawesome/free-solid-svg-icons'
