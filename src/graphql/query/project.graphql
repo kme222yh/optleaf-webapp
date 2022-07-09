@@ -104,13 +104,15 @@ mutation createProject(
 }
 
 mutation updateProject(
+    $id: String!
     $name: String!
     $description: String!
     $menbers: [Int]
     $administrators: [Int]
     $teams: [String]
 ) {
-    createProject(
+    updateProject(
+        id: $id
         name: $name
         description: $description
         menbers: $menbers

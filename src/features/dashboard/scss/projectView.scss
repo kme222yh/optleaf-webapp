@@ -149,15 +149,20 @@
         padding: 0 15px;
         box-sizing: border-box;
         color: $color-black;
+        position: relative;
 
         &-body {
             padding: 18px 30px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         &-title {
             font-size: 20px;
             line-height: 24px;
             margin-bottom: 30px;
+            width: 100%;
         }
 
         &-row {
@@ -179,6 +184,8 @@
             border-top: 1px solid $color-main;
             margin: 0 -15px;
             padding: 15px;
+            width: 100%;
+            flex-grow: 1;
         }
     }
 

@@ -25,7 +25,7 @@ export function Top() {
                     </Link>
                 </li>
             )
-            if (i === 3) {
+            if (i === 2) {
                 break
             }
         }

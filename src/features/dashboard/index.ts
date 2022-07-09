@@ -1,3 +1,3 @@
 export * from './components/Layout'
-export * from './components/Top'
-export * from './components/ProjectView'
+export * from './route/Top'
+export * from './route/ProjectView'

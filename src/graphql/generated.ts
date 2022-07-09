@@ -332,6 +332,7 @@ export type CreateProjectMutationVariables = Exact<{
 export type CreateProjectMutation = { __typename?: 'Mutation', createProject?: { __typename?: 'Project', id?: string | null, name?: string | null, description?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null, name: string } | null, administrators?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null } | null> | null, tasks?: Array<{ __typename?: 'Task', id?: string | null, name?: string | null, completed?: boolean | null, children?: Array<{ __typename?: 'Task', id?: string | null } | null> | null } | null> | null, chats?: Array<{ __typename?: 'Chat', id?: string | null, content?: string | null, author_id?: number | null, created_at?: any | null, updated_at?: any | null } | null> | null } | null };
 
 export type UpdateProjectMutationVariables = Exact<{
+  id: Scalars['String'];
   name: Scalars['String'];
   description: Scalars['String'];
   menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>>;
@@ -340,7 +341,7 @@ export type UpdateProjectMutationVariables = Exact<{
 }>;
 
 
-export type UpdateProjectMutation = { __typename?: 'Mutation', createProject?: { __typename?: 'Project', name?: string | null, description?: string | null, menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, administrators?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null, name?: string | null } | null> | null } | null };
+export type UpdateProjectMutation = { __typename?: 'Mutation', updateProject?: { __typename?: 'Project', name?: string | null, description?: string | null, menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, administrators?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null, name?: string | null } | null> | null } | null };
 
 export type DeleteProjectMutationVariables = Exact<{
   id: Scalars['String'];
@@ -643,8 +644,9 @@ export const useCreateProjectMutation = <
       options
     );
 export const UpdateProjectDocument = `
-    mutation updateProject($name: String!, $description: String!, $menbers: [Int], $administrators: [Int], $teams: [String]) {
-  createProject(
+    mutation updateProject($id: String!, $name: String!, $description: String!, $menbers: [Int], $administrators: [Int], $teams: [String]) {
+  updateProject(
+    id: $id
     name: $name
     description: $description
     menbers: $menbers

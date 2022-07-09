@@ -5,6 +5,8 @@ import iconUncompleted from '@/assets/uncompleted.svg'
 import { useParams } from 'react-router-dom';
 import { useProjectQuery } from '@/graphql/generated'
 
+import { ProjectInfo } from '../components/ProjectInfo';
+
 
 export function ProjectView() {
     const { projectId } = useParams();
@@ -71,20 +73,7 @@ export function ProjectView() {
                     </div>
                 </div>
 
-                <div className='projectInfo'>
-                    <div className="projectInfo-body">
-                        <p className="projectInfo-title">{data?.project?.name}</p>
-                        <div className='projectInfo-row'>
-                            <p className='projectInfo-row-head'>Created</p>
-                            <p className='projectInfo-row-body'>{data?.project?.created_at}</p>
-                        </div>
-                        <div className='projectInfo-row'>
-                            <p className='projectInfo-row-head'>Owner</p>
-                            <p className='projectInfo-row-body'>{data?.project?.owner?.name}</p>
-                        </div>
-                        <p className='projectInfo-description'>{data?.project?.description}</p>
-                    </div>
-                </div>
+                <ProjectInfo />
 
             </div>
         </div>
