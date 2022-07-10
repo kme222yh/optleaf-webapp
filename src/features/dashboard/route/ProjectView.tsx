@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useProjectQuery } from '@/graphql/generated'
 
 import { ProjectInfo } from '../components/ProjectInfo';
+import { ProjectChats } from '../components/ProjectChats';
 
 
 export function ProjectView() {
@@ -28,25 +29,6 @@ export function ProjectView() {
     }
 
 
-    const $chatList = [];
-    // if (isLoading) {
-    for (let i = 0; i < 10; i += 1) {
-        $chatList.push(
-            <li className="chatList-item" key={i}>
-                <div className="chatList-item-icon">
-                    <div className="chatList-item-icon-circle" />
-                </div>
-                <div className="chatList-item-content">
-                    <p className="chatList-item-author">名無さん</p>
-                    <p className='chatList-item-text'>もしおわんなかったらどうする？<br />開発進められんよな</p>
-                </div>
-                <small className='chatList-item-date'>2020/12/4</small>
-            </li>
-        )
-    }
-    // }
-
-
     return (
         <div className="projectView">
             <div className="projectView-body">
@@ -57,21 +39,7 @@ export function ProjectView() {
                     </ul>
                 </div>
 
-                <div className="chatList">
-                    <div className="chatList-wrap">
-                        <ul className="chatList-body">
-                            {$chatList}
-                        </ul>
-                    </div>
-                    <div className="chatList-form">
-                        <div className="chatList-form-body">
-                            <div className='chatList-form-buttons'>
-                                <button type='button' className='send'>send</button>
-                            </div>
-                            <textarea className='chatList-form-input' placeholder='メッセージを入力…' />
-                        </div>
-                    </div>
-                </div>
+                <ProjectChats />
 
                 <ProjectInfo />
 

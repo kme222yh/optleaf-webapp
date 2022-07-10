@@ -283,7 +283,7 @@ export type ChatsQuery = { __typename?: 'Query', chats?: Array<{ __typename?: 'C
 
 export type CreateChatMutationVariables = Exact<{
   project_id: Scalars['String'];
-  task_id: Scalars['String'];
+  task_id?: InputMaybe<Scalars['String']>;
   content: Scalars['String'];
 }>;
 
@@ -323,13 +323,10 @@ export type ProjectQuery = { __typename?: 'Query', project?: { __typename?: 'Pro
 export type CreateProjectMutationVariables = Exact<{
   name: Scalars['String'];
   description: Scalars['String'];
-  menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>>;
-  administrators?: InputMaybe<Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>>;
-  teams?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
 }>;
 
 
-export type CreateProjectMutation = { __typename?: 'Mutation', createProject?: { __typename?: 'Project', id?: string | null, name?: string | null, description?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null, name: string } | null, administrators?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null } | null> | null, tasks?: Array<{ __typename?: 'Task', id?: string | null, name?: string | null, completed?: boolean | null, children?: Array<{ __typename?: 'Task', id?: string | null } | null> | null } | null> | null, chats?: Array<{ __typename?: 'Chat', id?: string | null, content?: string | null, author_id?: number | null, created_at?: any | null, updated_at?: any | null } | null> | null } | null };
+export type CreateProjectMutation = { __typename?: 'Mutation', createProject?: { __typename?: 'Project', id?: string | null } | null };
 
 export type UpdateProjectMutationVariables = Exact<{
   id: Scalars['String'];
@@ -459,7 +456,7 @@ export const useChatsQuery = <
       options
     );
 export const CreateChatDocument = `
-    mutation createChat($project_id: String!, $task_id: String!, $content: String!) {
+    mutation createChat($project_id: String!, $task_id: String, $content: String!) {
   createChat(project_id: $project_id, task_id: $task_id, content: $content) {
     id
     content
@@ -593,44 +590,9 @@ export const useProjectQuery = <
       options
     );
 export const CreateProjectDocument = `
-    mutation createProject($name: String!, $description: String!, $menbers: [Int], $administrators: [Int], $teams: [String]) {
-  createProject(
-    name: $name
-    description: $description
-    menbers: $menbers
-    administrators: $administrators
-    teams: $teams
-  ) {
+    mutation createProject($name: String!, $description: String!) {
+  createProject(name: $name, description: $description) {
     id
-    name
-    description
-    owner {
-      ID
-      name
-    }
-    administrators {
-      ID
-    }
-    teams {
-      id
-    }
-    tasks {
-      id
-      name
-      completed
-      children {
-        id
-      }
-    }
-    chats {
-      id
-      content
-      author_id
-      created_at
-      updated_at
-    }
-    created_at
-    updated_at
   }
 }
     `;

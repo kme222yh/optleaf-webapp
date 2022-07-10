@@ -11,7 +11,9 @@ export function Layout({ children }: DashboardLayoutProps) {
         <div className="DashboardLayout">
             <header className="DashboardLayout-header">
                 <div className="DashboardLayout-header-body">
-                    <img className="DashboardLayout-header-logo" src={logo} alt="OptLeaf" />
+                    <Link to='/' className="DashboardLayout-header-logo" >
+                        <img src={logo} alt="OptLeaf" />
+                    </Link>
                 </div>
             </header>
 

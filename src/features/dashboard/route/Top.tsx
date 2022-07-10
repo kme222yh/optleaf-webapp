@@ -1,14 +1,18 @@
 import '../scss/top.scss'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNoteSticky, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { useProjectsQuery, useTeamsQuery } from '@/graphql/generated'
+import { useProjectsQuery, useTeamsQuery, useCreateProjectMutation } from '@/graphql/generated'
 import { useAuth } from '@/features/auth'
+
+import { Loading } from '../components/Loading'
 
 
 export function Top() {
     const { user } = useAuth()
+    const navigation = useNavigate();
+    const projectMutator = useCreateProjectMutation();
 
     const projectData = useProjectsQuery();
     const $projects = [];
@@ -39,6 +43,14 @@ export function Top() {
             )
         }
         return null;
+    }
+
+    const createProject = async () => {
+        const project = await projectMutator.mutateAsync({
+            name: '新規プロジェクト',
+            description: 'ここにプロジェクトの詳細を入力してください！',
+        });
+        navigation(`/project/${String(project.createProject?.id)}`)
     }
 
     const teamsData = useTeamsQuery();
@@ -74,6 +86,8 @@ export function Top() {
 
     return (
         <div className="top">
+            {projectMutator.isLoading ? <Loading /> : null}
+
             <div className="top-body">
                 <h2 className="top-greeting">こんにちわ！ {user?.name}さん</h2>
 
@@ -84,9 +98,9 @@ export function Top() {
                             <ul className="informatonBoard-projects-list">
                                 {$projects}
                                 <li className="informatonBoard-projects-item">
-                                    <Link to="/chat" className='informatonBoard-projects-item-body create'>
+                                    <button type='button' className='informatonBoard-projects-item-body create' onClick={createProject}>
                                         <FontAwesomeIcon className='icon' icon={faPlus} />
-                                    </Link>
+                                    </button>
                                 </li>
                             </ul>
                             {projectMore()}

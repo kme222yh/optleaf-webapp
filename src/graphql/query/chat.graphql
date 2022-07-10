@@ -16,7 +16,7 @@ query chats(
 
 mutation createChat(
     $project_id: String!
-    $task_id: String!
+    $task_id: String
     $content: String!
 ) {
     createChat(
