@@ -1,12 +1,17 @@
-import '../scss/layout.scss'
-import { Link } from 'react-router-dom'
+import '../scss/DashboardLayout.scss'
+import { Link, useParams } from 'react-router-dom'
+
 import logo from '@/assets/logo.svg'
+
+import { ProjectPath } from '../components/ProjectPath'
 
 type DashboardLayoutProps = {
     children: React.ReactNode
 }
 
-export function Layout({ children }: DashboardLayoutProps) {
+export function DashboardLayout({ children }: DashboardLayoutProps) {
+    const { projectId } = useParams();
+
     return (
         <div className="DashboardLayout">
             <header className="DashboardLayout-header">
@@ -14,6 +19,7 @@ export function Layout({ children }: DashboardLayoutProps) {
                     <Link to='/' className="DashboardLayout-header-logo" >
                         <img src={logo} alt="OptLeaf" />
                     </Link>
+                    {projectId ? <ProjectPath /> : null}
                 </div>
             </header>
 

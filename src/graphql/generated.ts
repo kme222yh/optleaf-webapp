@@ -182,6 +182,7 @@ export type Query = {
   project?: Maybe<Project>;
   projects?: Maybe<Array<Maybe<Project>>>;
   task?: Maybe<Task>;
+  tasks?: Maybe<Array<Maybe<Task>>>;
   team?: Maybe<Team>;
   teams?: Maybe<Array<Maybe<Team>>>;
   /** Find a single user by an identifying attribute. */
@@ -194,6 +195,7 @@ export type Query = {
 /** Indicates what fields are available at the top level of a query operation. */
 export type QueryChatsArgs = {
   project_id?: InputMaybe<Scalars['String']>;
+  task_id?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -207,6 +209,13 @@ export type QueryProjectArgs = {
 export type QueryTaskArgs = {
   id?: InputMaybe<Scalars['String']>;
   project_id?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Indicates what fields are available at the top level of a query operation. */
+export type QueryTasksArgs = {
+  project_id?: InputMaybe<Scalars['String']>;
+  task_id?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -276,6 +285,7 @@ export type User = {
 
 export type ChatsQueryVariables = Exact<{
   project_id: Scalars['String'];
+  task_id?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -353,7 +363,15 @@ export type TaskQueryVariables = Exact<{
 }>;
 
 
-export type TaskQuery = { __typename?: 'Query', task?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null, author?: { __typename?: 'User', ID?: string | null, name: string } | null, assigned_menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, parent?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, created_at?: any | null, updated_at?: any | null } | null, children?: Array<{ __typename?: 'Task', id?: string | null, name?: string | null, completed?: boolean | null, children?: Array<{ __typename?: 'Task', id?: string | null } | null> | null } | null> | null } | null };
+export type TaskQuery = { __typename?: 'Query', task?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null, author?: { __typename?: 'User', ID?: string | null, name: string } | null, assigned_menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, parent?: { __typename?: 'Task', id?: string | null, parent?: { __typename?: 'Task', id?: string | null } | null } | null } | null };
+
+export type TasksQueryVariables = Exact<{
+  project_id: Scalars['String'];
+  task_id?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type TasksQuery = { __typename?: 'Query', tasks?: Array<{ __typename?: 'Task', id?: string | null, name?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null } | null> | null };
 
 export type CreateTaskMutationVariables = Exact<{
   project_id: Scalars['String'];
@@ -376,7 +394,6 @@ export type UpdateTaskMutationVariables = Exact<{
   completed?: InputMaybe<Scalars['Boolean']>;
   due_date?: InputMaybe<Scalars['String']>;
   assigned_menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>>;
-  new_parent?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -432,8 +449,8 @@ export type DeleteTeamMutation = { __typename?: 'Mutation', deleteTeam?: { __typ
 
 
 export const ChatsDocument = `
-    query chats($project_id: String!) {
-  chats(project_id: $project_id) {
+    query chats($project_id: String!, $task_id: String) {
+  chats(project_id: $project_id, task_id: $task_id) {
     id
     content
     task_id
@@ -675,17 +692,7 @@ export const TaskDocument = `
     }
     parent {
       id
-      name
-      description
-      completed
-      created_at
-      updated_at
-    }
-    children {
-      id
-      name
-      completed
-      children {
+      parent {
         id
       }
     }
@@ -704,6 +711,30 @@ export const useTaskQuery = <
     useQuery<TaskQuery, TError, TData>(
       ['task', variables],
       fetcher<TaskQuery, TaskQueryVariables>(TaskDocument, variables),
+      options
+    );
+export const TasksDocument = `
+    query tasks($project_id: String!, $task_id: String) {
+  tasks(project_id: $project_id, task_id: $task_id) {
+    id
+    name
+    completed
+    due_date
+    created_at
+    updated_at
+  }
+}
+    `;
+export const useTasksQuery = <
+      TData = TasksQuery,
+      TError = unknown
+    >(
+      variables: TasksQueryVariables,
+      options?: UseQueryOptions<TasksQuery, TError, TData>
+    ) =>
+    useQuery<TasksQuery, TError, TData>(
+      ['tasks', variables],
+      fetcher<TasksQuery, TasksQueryVariables>(TasksDocument, variables),
       options
     );
 export const CreateTaskDocument = `
@@ -753,7 +784,7 @@ export const useCreateTaskMutation = <
       options
     );
 export const UpdateTaskDocument = `
-    mutation updateTask($project_id: String!, $id: String!, $name: String!, $description: String!, $completed: Boolean, $due_date: String, $assigned_menbers: [Int], $new_parent: Int) {
+    mutation updateTask($project_id: String!, $id: String!, $name: String!, $description: String!, $completed: Boolean, $due_date: String, $assigned_menbers: [Int]) {
   updateTask(
     project_id: $project_id
     id: $id

@@ -1,12 +1,12 @@
 import { Navigate, Outlet, RouteObject } from 'react-router-dom'
 
-import { Layout, ProjectView, Top } from '@/features/dashboard'
+import { DashboardLayout, ProjectView, ProjectTaskView, Top } from '@/features/dashboard'
 
 function App() {
     return (
-        <Layout>
+        <DashboardLayout>
             <Outlet />
-        </Layout>
+        </DashboardLayout>
     )
 }
 
@@ -17,6 +17,7 @@ export const protectedRoutes: RouteObject[] = [
         children: [
             { path: '', element: <Top /> },
             { path: 'project/:projectId', element: <ProjectView /> },
+            { path: 'project/:projectId/:taskId', element: <ProjectTaskView /> },
             { path: '*', element: <Navigate to="." /> },
         ],
     },

@@ -1,0 +1,72 @@
+.ProjectTasks {
+    padding: 0;
+
+    &-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    &-list {
+        padding: 13px 0;
+        width: 15vw;
+        min-width: 200px;
+        border-right: 2px solid $color-main;
+        flex-shrink: 0;
+        position: relative;
+
+        &:last-of-type {
+            border: none;
+        }
+
+        &.parent,
+        &.children {
+            background-color: rgb(95 102 92 / 5%);
+
+        }
+    }
+
+    &-item {
+        padding: 0 13px;
+        border-bottom: 1px solid $color-main;
+        font-size: 15px;
+        line-height: 2.5;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        &-status {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 7px;
+        }
+
+        &:last-child {
+            border: none;
+        }
+
+        &.selected {
+            background-color: rgba(144, 204, 122, 0.2);
+        }
+
+        &.completed {
+            opacity: .6;
+        }
+    }
+
+    &-createButton {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        background-color: $color-main;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $color-white;
+        cursor: pointer;
+    }
+}

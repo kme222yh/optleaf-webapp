@@ -1,8 +1,10 @@
 query chats(
     $project_id: String!
+    $task_id: String
 ) {
     chats(
         project_id: $project_id
+        task_id: $task_id
     ) {
         id
         content

@@ -21,20 +21,27 @@ query task(
         }
         parent {
             id
-            name
-            description
-            completed
-            created_at
-            updated_at
-        }
-        children{
-            id
-            name
-            completed
-            children {
+            parent {
                 id
             }
         }
+        created_at
+        updated_at
+    }
+}
+
+query tasks(
+    $project_id: String!
+    $task_id: String
+) {
+    tasks(
+        project_id: $project_id
+        task_id: $task_id
+    ) {
+        id
+        name
+        completed
+        due_date
         created_at
         updated_at
     }
@@ -93,7 +100,7 @@ mutation updateTask(
     $completed: Boolean
     $due_date: String
     $assigned_menbers: [Int]
-    $new_parent: Int
+    # $new_parent: Int
 ) {
     updateTask(
         project_id: $project_id

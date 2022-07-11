@@ -1,3 +1,5 @@
-export * from './components/Layout'
-export * from './route/Top'
-export * from './route/ProjectView'
+export * from './layout/DashboardLayout'
+
+export * from './views/Top'
+export * from './views/ProjectView'
+export * from './views/ProjectTaskView'

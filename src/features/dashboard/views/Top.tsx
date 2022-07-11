@@ -6,7 +6,7 @@ import { faNoteSticky, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useProjectsQuery, useTeamsQuery, useCreateProjectMutation } from '@/graphql/generated'
 import { useAuth } from '@/features/auth'
 
-import { Loading } from '../components/Loading'
+import { Loading } from '../layout/Loading'
 
 
 export function Top() {
