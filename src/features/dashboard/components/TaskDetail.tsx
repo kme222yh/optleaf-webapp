@@ -35,6 +35,7 @@ export function TaskDetail() {
     }
 
     const taskInfoIsValid = async (taskData: UpdateTaskMutationVariables) => {
+        clearTimeout(TaskInfoStatus.updateTimeoutId);
         const mutationData = taskData;
         mutationData.project_id = projectId as string;
         if (areTaskDataDifferent(TaskInfoStatus.oldData, mutationData)) {
@@ -45,10 +46,6 @@ export function TaskDetail() {
     }
     const taskInfoIsInValid = (erros: any) => {
         console.log('Fail to update project.')
-    }
-    const clearTaskUpdateTimeout = () => {
-        clearTimeout(TaskInfoStatus.updateTimeoutId);
-        console.log('aejoaijefo')
     }
 
     const deleteTask = async () => {
@@ -61,7 +58,7 @@ export function TaskDetail() {
 
     return (
         <InfoBlock className='TaskDetail' isLoading={query.isLoading || mutation.isLoading || deleter.isLoading}>
-            <form className="TaskDetail-form" onFocus={clearTaskUpdateTimeout} onBlur={taskInfoForm.handleSubmit(taskInfoIsValid, taskInfoIsInValid)}>
+            <form className="TaskDetail-form" onChange={taskInfoForm.handleSubmit(taskInfoIsValid, taskInfoIsInValid)}>
                 <input className="TaskDetail-title" {...taskInfoForm.register('name', { required: '名前を入力してください' })} />
                 <div className='TaskDetail-row'>
                     <p className='TaskDetail-row-head'>Created</p>

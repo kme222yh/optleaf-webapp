@@ -2,6 +2,7 @@ import '../scss/ProjectTasks.scss'
 
 import { useTasksQuery, useTaskQuery, Task, useCreateTaskMutation, useUpdateTaskMutation } from '@/graphql/generated'
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useQueryClient } from 'react-query';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
@@ -21,16 +22,22 @@ TaskItem.defaultProps = {
     isSelected: false,
 }
 function TaskItem({ task, projectId, isSelected }: TaskItemProps) {
+    const taskQuery = useTaskQuery({ project_id: projectId, id: task.id as string })
     const taskMutator = useUpdateTaskMutation();
+    const queryQrient = useQueryClient();
 
     const updateTask = async () => {
         await taskMutator.mutateAsync({
             project_id: projectId,
-            id: task.id as string,
-            name: task.name as string,
-            completed: !task.completed,
-            description: task.description as string,
+            id: taskQuery.data?.task?.id as string,
+            name: taskQuery.data?.task?.name as string,
+            completed: !taskQuery.data?.task?.completed,
+            description: taskQuery.data?.task?.description as string,
         });
+        await queryQrient.resetQueries(['tasks', {
+            project_id: projectId,
+            task_id: taskQuery.data?.task?.parent?.id
+        }]);
     }
 
     return (
@@ -80,19 +87,21 @@ function CurrentList() {
     const taskQuery = useTaskQuery({ project_id: projectId as string, id: taskId as string })
     const tasksQuery = useTasksQuery({ project_id: projectId as string, task_id: taskQuery.data?.task?.parent?.id as string | null });
     const navigation = useNavigate();
+    const queryQrient = useQueryClient();
 
     const taskMutator = useCreateTaskMutation();
 
     const createTask = async () => {
-        // if (!taskQuery.data?.task?.parent?.id) {
-        //     return;
-        // }
         const task = await taskMutator.mutateAsync({
             project_id: projectId as string,
             task_id: taskQuery.data?.task?.parent?.id,
             name: '新規プロジェクト',
             description: 'ここにプロジェクトの詳細を入力してください！',
         });
+        await queryQrient.resetQueries(['tasks', {
+            project_id: projectId,
+            task_id: taskQuery.data?.task?.parent?.id
+        }]);
         navigation(`/project/${projectId as string}/${String(task.createTask?.id)}`)
     }
 
@@ -106,15 +115,6 @@ function CurrentList() {
                 <FontAwesomeIcon className='icon' icon={faPen} />
             </button>
         </TaskList>
-    )
-}
-function CurrentListDummy() {
-    return (
-        <TaskList
-            isLoading
-            tasks={undefined}
-            projectId=''
-        />
     )
 }
 
@@ -141,6 +141,7 @@ function ChildrenList() {
     const { projectId, taskId } = useParams();
     const childrenTasksQuery = useTasksQuery({ project_id: projectId as string, task_id: taskId });
     const navigation = useNavigate();
+    const queryQrient = useQueryClient();
     const taskMutator = useCreateTaskMutation();
 
     const createTask = async () => {
@@ -150,6 +151,10 @@ function ChildrenList() {
             name: '新規タスク',
             description: 'ここにタスクの詳細を入力してください！',
         });
+        await queryQrient.resetQueries(['tasks', {
+            project_id: projectId,
+            task_id: taskId
+        }]);
         navigation(`/project/${projectId as string}/${String(task.createTask?.id)}`)
     }
 
