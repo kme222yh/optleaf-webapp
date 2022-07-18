@@ -32,6 +32,8 @@ export function TaskDetail() {
     if (areTaskDataDifferent(TaskInfoStatus.oldData, query.data?.task as UpdateTaskMutationVariables)) {
         TaskInfoStatus.oldData = query.data?.task as UpdateTaskMutationVariables;
         taskInfoForm.reset(query.data?.task as UpdateTaskMutationVariables);
+        console.log('reset!!')
+        console.log(query.data?.task)
     }
 
     const taskInfoIsValid = async (taskData: UpdateTaskMutationVariables) => {

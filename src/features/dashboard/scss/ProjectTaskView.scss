@@ -35,4 +35,25 @@
             max-height: 600px;
         }
     }
+
+
+
+    .react-tabs {
+        height: 100%;
+
+        &__tab-panel {
+            height: calc(100% - 100px);
+            overflow-x: scroll;
+        }
+
+        .ProjectChats {
+            height: 100%;
+        }
+
+        .TaskDetail {
+            &-body {
+                padding: 10px;
+            }
+        }
+    }
 }

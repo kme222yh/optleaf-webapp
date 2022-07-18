@@ -38,4 +38,29 @@
             margin-bottom: 10px;
         }
     }
+
+
+
+    .react-tabs {
+        height: 100%;
+
+        &__tab-panel {
+            height: calc(100% - 100px);
+            overflow-x: scroll;
+        }
+
+        .ProjectChats {
+            height: 100%;
+        }
+
+        .ProjectInfo {
+            width: 100%;
+        }
+
+        .ProjectDetail {
+            &-body {
+                padding: 10px;
+            }
+        }
+    }
 }
