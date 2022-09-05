@@ -72,7 +72,7 @@ export function TaskDetail() {
                 </div> : null}
                 <div className='TaskDetail-row'>
                     <p className='TaskDetail-row-head'>Created by</p>
-                    <p className='TaskDetail-row-body'>{query.data?.task?.author?.name}</p>
+                    {/* <p className='TaskDetail-row-body'>{query.data?.task?.owner?.name}</p> */}
                 </div>
                 <textarea className="TaskDetail-description" {...taskInfoForm.register('description', { required: '詳細を入力してください' })} />
             </form>

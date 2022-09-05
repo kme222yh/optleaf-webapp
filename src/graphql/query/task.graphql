@@ -40,7 +40,6 @@ mutation createTask(
   $task_id: String
   $name: String!
   $description: String!
-  $completed: Boolean
   $due_date: String
   $assigned_menbers: [Int]
 ) {

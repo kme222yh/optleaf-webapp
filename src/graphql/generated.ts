@@ -381,7 +381,6 @@ export type CreateTaskMutationVariables = Exact<{
   task_id?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
   description: Scalars['String'];
-  completed?: InputMaybe<Scalars['Boolean']>;
   due_date?: InputMaybe<Scalars['String']>;
   assigned_menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>>;
 }>;
@@ -749,7 +748,7 @@ export const useTasksQuery = <
       options
     );
 export const CreateTaskDocument = `
-    mutation createTask($project_id: String!, $task_id: String, $name: String!, $description: String!, $completed: Boolean, $due_date: String, $assigned_menbers: [Int]) {
+    mutation createTask($project_id: String!, $task_id: String, $name: String!, $description: String!, $due_date: String, $assigned_menbers: [Int]) {
   createTask(
     project_id: $project_id
     task_id: $task_id
