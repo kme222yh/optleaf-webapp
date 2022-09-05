@@ -1,112 +1,107 @@
 query projects {
-    projects {
-        id
-        name
-        description
-        owner {
-            ID
-        }
-        administrators {
-            ID
-        }
-        teams {
-            id
-        }
-        created_at
-        updated_at
+  projects {
+    id
+    name
+    description
+    owner {
+      ID
     }
+    administrators {
+      ID
+    }
+    menbers {
+      ID
+    }
+    teams {
+      id
+    }
+    created_at
+    updated_at
+  }
 }
 
-query project(
-    $id: String
-) {
-    project(
-        id: $id
-    ) {
-        id
-        name
-        description
-        owner {
-            ID
-            name
-        }
-        administrators {
-            ID
-        }
-        teams {
-            id
-        }
-        tasks {
-            id
-            name
-            completed
-            children {
-                id
-            }
-        }
-        chats {
-            id
-            content
-            author_id
-            created_at
-            updated_at
-        }
-        created_at
-        updated_at
+query project($id: String) {
+  project(id: $id) {
+    id
+    name
+    description
+    owner {
+      ID
+      name
     }
+    administrators {
+      ID
+    }
+    menbers {
+      ID
+    }
+    pending {
+      ID
+    }
+    teams {
+      id
+    }
+    tasks {
+      id
+      name
+      completed
+      children {
+        id
+      }
+    }
+    chats {
+      id
+      content
+      owner_id
+      created_at
+      updated_at
+    }
+    created_at
+    updated_at
+  }
 }
 
-mutation createProject(
-    $name: String!
-    $description: String!
-) {
-    createProject(
-        name: $name
-        description: $description
-    ) {
-        id
-    }
+mutation createProject($name: String!, $description: String!) {
+  createProject(name: $name, description: $description) {
+    id
+  }
 }
 
 mutation updateProject(
-    $id: String!
-    $name: String!
-    $description: String!
-    $menbers: [Int]
-    $administrators: [Int]
-    $teams: [String]
+  $id: String!
+  $name: String!
+  $description: String!
+  $menbers: [Int]
+  $administrators: [Int]
+  $teams: [String]
 ) {
-    updateProject(
-        id: $id
-        name: $name
-        description: $description
-        menbers: $menbers
-        administrators: $administrators
-        teams: $teams
-    ) {
-        name
-        description
-        menbers {
-            ID
-            name
-        }
-        administrators {
-            ID
-            name
-        }
-        teams {
-            id
-            name
-        }
+  updateProject(
+    id: $id
+    name: $name
+    description: $description
+    menbers: $menbers
+    administrators: $administrators
+    teams: $teams
+  ) {
+    name
+    description
+    menbers {
+      ID
+      name
     }
+    administrators {
+      ID
+      name
+    }
+    teams {
+      id
+      name
+    }
+  }
 }
 
-mutation deleteProject(
-    $id: String!
-){
-    deleteProject(
-        id: $id
-    ) {
-        id
-    }
+mutation deleteProject($id: String!) {
+  deleteProject(id: $id) {
+    id
+  }
 }

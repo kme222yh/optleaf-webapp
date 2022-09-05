@@ -40,12 +40,11 @@ export type Scalars = {
 
 export type Chat = {
   __typename?: 'Chat';
-  author?: Maybe<User>;
-  author_id?: Maybe<Scalars['Int']>;
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['DateTime']>;
   id?: Maybe<Scalars['String']>;
-  task_id?: Maybe<Scalars['String']>;
+  owner?: Maybe<User>;
+  owner_id?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['DateTime']>;
 };
 
@@ -74,17 +73,13 @@ export type MutationCreateChatArgs = {
 
 
 export type MutationCreateProjectArgs = {
-  administrators?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   description?: InputMaybe<Scalars['String']>;
-  menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   name?: InputMaybe<Scalars['String']>;
-  teams?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
 export type MutationCreateTaskArgs = {
   assigned_menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  completed?: InputMaybe<Scalars['Boolean']>;
   description?: InputMaybe<Scalars['String']>;
   due_date?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -94,9 +89,7 @@ export type MutationCreateTaskArgs = {
 
 
 export type MutationCreateTeamArgs = {
-  administrators?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   description?: InputMaybe<Scalars['String']>;
-  menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -136,6 +129,9 @@ export type MutationUpdateProjectArgs = {
   id?: InputMaybe<Scalars['String']>;
   menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   name?: InputMaybe<Scalars['String']>;
+  owner?: InputMaybe<Scalars['Int']>;
+  pending?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  permission_level?: InputMaybe<Scalars['String']>;
   teams?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -147,7 +143,7 @@ export type MutationUpdateTaskArgs = {
   due_date?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  new_parent?: InputMaybe<Scalars['Int']>;
+  parent_id?: InputMaybe<Scalars['String']>;
   project_id?: InputMaybe<Scalars['String']>;
 };
 
@@ -158,6 +154,9 @@ export type MutationUpdateTeamArgs = {
   id?: InputMaybe<Scalars['String']>;
   menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   name?: InputMaybe<Scalars['String']>;
+  owner?: InputMaybe<Scalars['Int']>;
+  pending?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  permission_level?: InputMaybe<Scalars['String']>;
 };
 
 export type Project = {
@@ -170,6 +169,8 @@ export type Project = {
   menbers?: Maybe<Array<Maybe<User>>>;
   name?: Maybe<Scalars['String']>;
   owner?: Maybe<User>;
+  pending?: Maybe<Array<Maybe<User>>>;
+  permission_level?: Maybe<Scalars['String']>;
   tasks?: Maybe<Array<Maybe<Task>>>;
   teams?: Maybe<Array<Maybe<Team>>>;
   updated_at?: Maybe<Scalars['DateTime']>;
@@ -240,7 +241,6 @@ export type QueryUsersArgs = {
 export type Task = {
   __typename?: 'Task';
   assigned_menbers?: Maybe<Array<Maybe<User>>>;
-  author?: Maybe<User>;
   chats?: Maybe<Array<Maybe<Chat>>>;
   children?: Maybe<Array<Maybe<Task>>>;
   completed?: Maybe<Scalars['Boolean']>;
@@ -249,6 +249,7 @@ export type Task = {
   due_date?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  owner?: Maybe<User>;
   parent?: Maybe<Task>;
   updated_at?: Maybe<Scalars['DateTime']>;
 };
@@ -262,6 +263,8 @@ export type Team = {
   menbers?: Maybe<Array<Maybe<User>>>;
   name?: Maybe<Scalars['String']>;
   owner?: Maybe<User>;
+  pending?: Maybe<Array<Maybe<User>>>;
+  permission_level?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['DateTime']>;
 };
 
@@ -289,7 +292,7 @@ export type ChatsQueryVariables = Exact<{
 }>;
 
 
-export type ChatsQuery = { __typename?: 'Query', chats?: Array<{ __typename?: 'Chat', id?: string | null, content?: string | null, task_id?: string | null, author_id?: number | null, created_at?: any | null, updated_at?: any | null } | null> | null };
+export type ChatsQuery = { __typename?: 'Query', chats?: Array<{ __typename?: 'Chat', id?: string | null, owner_id?: number | null, content?: string | null, created_at?: any | null, updated_at?: any | null } | null> | null };
 
 export type CreateChatMutationVariables = Exact<{
   project_id: Scalars['String'];
@@ -321,14 +324,14 @@ export type DeleteChatMutation = { __typename?: 'Mutation', deleteChat?: { __typ
 export type ProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id?: string | null, name?: string | null, description?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null } | null, administrators?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null } | null> | null } | null> | null };
+export type ProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id?: string | null, name?: string | null, description?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null } | null, administrators?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, menbers?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null } | null> | null } | null> | null };
 
 export type ProjectQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type ProjectQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id?: string | null, name?: string | null, description?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null, name: string } | null, administrators?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null } | null> | null, tasks?: Array<{ __typename?: 'Task', id?: string | null, name?: string | null, completed?: boolean | null, children?: Array<{ __typename?: 'Task', id?: string | null } | null> | null } | null> | null, chats?: Array<{ __typename?: 'Chat', id?: string | null, content?: string | null, author_id?: number | null, created_at?: any | null, updated_at?: any | null } | null> | null } | null };
+export type ProjectQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id?: string | null, name?: string | null, description?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null, name: string } | null, administrators?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, menbers?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, pending?: Array<{ __typename?: 'User', ID?: string | null } | null> | null, teams?: Array<{ __typename?: 'Team', id?: string | null } | null> | null, tasks?: Array<{ __typename?: 'Task', id?: string | null, name?: string | null, completed?: boolean | null, children?: Array<{ __typename?: 'Task', id?: string | null } | null> | null } | null> | null, chats?: Array<{ __typename?: 'Chat', id?: string | null, content?: string | null, owner_id?: number | null, created_at?: any | null, updated_at?: any | null } | null> | null } | null };
 
 export type CreateProjectMutationVariables = Exact<{
   name: Scalars['String'];
@@ -363,7 +366,7 @@ export type TaskQueryVariables = Exact<{
 }>;
 
 
-export type TaskQuery = { __typename?: 'Query', task?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null, author?: { __typename?: 'User', ID?: string | null, name: string } | null, assigned_menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, parent?: { __typename?: 'Task', id?: string | null, parent?: { __typename?: 'Task', id?: string | null } | null } | null } | null };
+export type TaskQuery = { __typename?: 'Query', task?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null, name: string } | null, assigned_menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, parent?: { __typename?: 'Task', id?: string | null, parent?: { __typename?: 'Task', id?: string | null } | null } | null } | null };
 
 export type TasksQueryVariables = Exact<{
   project_id: Scalars['String'];
@@ -384,7 +387,7 @@ export type CreateTaskMutationVariables = Exact<{
 }>;
 
 
-export type CreateTaskMutation = { __typename?: 'Mutation', createTask?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null, author?: { __typename?: 'User', ID?: string | null, name: string } | null, assigned_menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, parent?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, created_at?: any | null, updated_at?: any | null } | null } | null };
+export type CreateTaskMutation = { __typename?: 'Mutation', createTask?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null, name: string } | null, assigned_menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, parent?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, created_at?: any | null, updated_at?: any | null } | null } | null };
 
 export type UpdateTaskMutationVariables = Exact<{
   project_id: Scalars['String'];
@@ -397,7 +400,7 @@ export type UpdateTaskMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTaskMutation = { __typename?: 'Mutation', updateTask?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null, author?: { __typename?: 'User', ID?: string | null, name: string } | null, assigned_menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, parent?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, created_at?: any | null, updated_at?: any | null } | null, children?: Array<{ __typename?: 'Task', id?: string | null, name?: string | null, completed?: boolean | null, children?: Array<{ __typename?: 'Task', id?: string | null } | null> | null } | null> | null } | null };
+export type UpdateTaskMutation = { __typename?: 'Mutation', updateTask?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, due_date?: string | null, created_at?: any | null, updated_at?: any | null, owner?: { __typename?: 'User', ID?: string | null, name: string } | null, assigned_menbers?: Array<{ __typename?: 'User', ID?: string | null, name: string } | null> | null, parent?: { __typename?: 'Task', id?: string | null, name?: string | null, description?: string | null, completed?: boolean | null, created_at?: any | null, updated_at?: any | null } | null, children?: Array<{ __typename?: 'Task', id?: string | null, name?: string | null, completed?: boolean | null, children?: Array<{ __typename?: 'Task', id?: string | null } | null> | null } | null> | null } | null };
 
 export type DeleteTaskMutationVariables = Exact<{
   project_id: Scalars['String'];
@@ -452,9 +455,8 @@ export const ChatsDocument = `
     query chats($project_id: String!, $task_id: String) {
   chats(project_id: $project_id, task_id: $task_id) {
     id
+    owner_id
     content
-    task_id
-    author_id
     created_at
     updated_at
   }
@@ -538,6 +540,9 @@ export const ProjectsDocument = `
     administrators {
       ID
     }
+    menbers {
+      ID
+    }
     teams {
       id
     }
@@ -571,6 +576,12 @@ export const ProjectDocument = `
     administrators {
       ID
     }
+    menbers {
+      ID
+    }
+    pending {
+      ID
+    }
     teams {
       id
     }
@@ -585,7 +596,7 @@ export const ProjectDocument = `
     chats {
       id
       content
-      author_id
+      owner_id
       created_at
       updated_at
     }
@@ -682,7 +693,7 @@ export const TaskDocument = `
     description
     completed
     due_date
-    author {
+    owner {
       ID
       name
     }
@@ -744,7 +755,6 @@ export const CreateTaskDocument = `
     task_id: $task_id
     name: $name
     description: $description
-    completed: $completed
     due_date: $due_date
     assigned_menbers: $assigned_menbers
   ) {
@@ -753,7 +763,7 @@ export const CreateTaskDocument = `
     description
     completed
     due_date
-    author {
+    owner {
       ID
       name
     }
@@ -799,7 +809,7 @@ export const UpdateTaskDocument = `
     description
     completed
     due_date
-    author {
+    owner {
       ID
       name
     }
@@ -913,12 +923,7 @@ export const useTeamQuery = <
     );
 export const CreateTeamDocument = `
     mutation createTeam($name: String!, $description: String!, $menbers: [Int], $administrators: [Int]) {
-  createTeam(
-    name: $name
-    description: $description
-    menbers: $menbers
-    administrators: $administrators
-  ) {
+  createTeam(name: $name, description: $description) {
     id
     name
     description
