@@ -30,7 +30,7 @@
         padding: 0 13px;
         border-bottom: 1px solid $color-main;
         font-size: 15px;
-        line-height: 2.5;
+        line-height: 1.5;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -39,8 +39,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;
             margin-right: 7px;
             cursor: pointer;
+        }
+
+        &-title{
+            padding: 5px 0;
         }
 
         &:last-child {
