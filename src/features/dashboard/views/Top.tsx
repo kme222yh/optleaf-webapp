@@ -3,10 +3,11 @@ import '../scss/top.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNoteSticky, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { useProjectsQuery, useTeamsQuery, useCreateProjectMutation } from '@/graphql/generated'
+import { useProjectsQuery, useTeamsQuery, useCreateProjectMutation, Project } from '@/graphql/generated'
 import { useAuth } from '@/features/auth'
 
 import { Loading } from '../layout/Loading'
+import {ProjectListItem} from '../components/ProjectListItem'
 
 
 export function Top() {
@@ -21,14 +22,7 @@ export function Top() {
         projectLength = projectData.data!.projects!.length
         for (let i = 0; i < projectLength; i += 1) {
             const project = projectData.data!.projects![i]
-            $projects.push(
-                <li className="informatonBoard-projects-item " key={i}>
-                    <Link to={`/project/${String(project?.id)}`} className='informatonBoard-projects-item-body'>
-                        <p className='informatonBoard-projects-item-title'>{project?.name}</p>
-                        <p className='informatonBoard-projects-item-description'>{project?.description}</p>
-                    </Link>
-                </li>
-            )
+            $projects.push(<ProjectListItem key={i} data={project as Project} />)
             if (i === 2) {
                 break
             }
@@ -37,7 +31,7 @@ export function Top() {
     const projectMore = () => {
         if (projectLength > 3) {
             return (
-                <Link to="/chat" className='informatonBoard-projects-more'>
+                <Link to="/projects" className='informatonBoard-projects-more'>
                     もっとみる…
                 </Link>
             )
@@ -74,9 +68,9 @@ export function Top() {
         }
     }
     const teamMore = () => {
-        if (projectLength > 2) {
+        if (teamsLength > 2) {
             return (
-                <Link to="/team" className='informatonBoard-projects-more'>
+                <Link to="/teams" className='informatonBoard-projects-more'>
                     もっとみる…
                 </Link>
             )

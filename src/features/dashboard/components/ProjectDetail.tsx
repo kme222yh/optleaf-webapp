@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
+import { useQueryClient } from 'react-query';
 import { InfoBlock } from '../layout/InfoBlock'
 
 
@@ -26,6 +27,7 @@ export function ProjectDetail() {
     const mutation = useUpdateProjectMutation();
     const deleter = useDeleteProjectMutation();
     const navigation = useNavigate();
+    const queryQrient = useQueryClient();
 
     const projectInfoForm = useForm<UpdateProjectMutationVariables>();
 
@@ -52,7 +54,8 @@ export function ProjectDetail() {
         const result = window.confirm("プロジェクトを削除してよろしいですか？");
         if (result) {
             await deleter.mutateAsync({ id: projectId as string });
-            navigation(`/`);
+            await queryQrient.resetQueries(['projects']);
+            navigation(`/projects`);
         }
     }
 

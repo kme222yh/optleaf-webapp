@@ -26,10 +26,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <main className="DashboardLayout-body">
                 <div className="globalNav">
                     <ul className='globalNav-body'>
-                        <li className="globalNav-item"><Link to="/projects">Project</Link></li>
-                        <li className="globalNav-item"><Link to="/teams">Team</Link></li>
-                        <li className="globalNav-item"><Link to="/tasks">Task</Link></li>
-                        <li className="globalNav-item"><Link to="/chat">Chat</Link></li>
+                        <li className="globalNav-item"><Link to="/">DashBoard</Link></li>
+                        <li className="globalNav-item"><Link to="/projects">Projects</Link></li>
+                        {/* <li className="globalNav-item"><Link to="/teams">Teams</Link></li> */}
                     </ul>
                 </div>
 

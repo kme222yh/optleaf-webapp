@@ -32,8 +32,8 @@ export function TaskDetail() {
     if (areTaskDataDifferent(TaskInfoStatus.oldData, query.data?.task as UpdateTaskMutationVariables)) {
         TaskInfoStatus.oldData = query.data?.task as UpdateTaskMutationVariables;
         taskInfoForm.reset(query.data?.task as UpdateTaskMutationVariables);
-        console.log('reset!!')
-        console.log(query.data?.task)
+        // console.log('reset!!')
+        // console.log(query.data?.task)
     }
 
     const taskInfoIsValid = async (taskData: UpdateTaskMutationVariables) => {
@@ -72,7 +72,7 @@ export function TaskDetail() {
                 </div> : null}
                 <div className='TaskDetail-row'>
                     <p className='TaskDetail-row-head'>Created by</p>
-                    {/* <p className='TaskDetail-row-body'>{query.data?.task?.owner?.name}</p> */}
+                    <p className='TaskDetail-row-body'>{query.data?.task?.owner?.name}</p>
                 </div>
                 <textarea className="TaskDetail-description" {...taskInfoForm.register('description', { required: '詳細を入力してください' })} />
             </form>
