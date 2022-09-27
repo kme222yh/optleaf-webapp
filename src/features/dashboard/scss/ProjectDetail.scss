@@ -3,6 +3,12 @@
         padding: 3px 15px;
     }
 
+    &-form{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
     &-title {
         font-size: 20px;
         line-height: 24px;

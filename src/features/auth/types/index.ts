@@ -1,6 +1,7 @@
 export type User = {
   email: string
   name: string
+  icon_image: string
 }
 
 export type LoginCredentials = {

@@ -5,6 +5,8 @@ import logo from '@/assets/logo.svg'
 
 import { ProjectPath } from '../components/ProjectPath'
 
+import {UserDisplay} from '../components/UserDisplay'
+
 type DashboardLayoutProps = {
     children: React.ReactNode
 }
@@ -20,7 +22,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                         <img src={logo} alt="OptLeaf" />
                     </Link>
                     {projectId ? <ProjectPath /> : null}
+                    <UserDisplay />
                 </div>
+
             </header>
 
             <main className="DashboardLayout-body">

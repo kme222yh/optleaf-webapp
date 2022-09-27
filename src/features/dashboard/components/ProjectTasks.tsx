@@ -95,8 +95,8 @@ function CurrentList() {
         const task = await taskMutator.mutateAsync({
             project_id: projectId as string,
             task_id: taskQuery.data?.task?.parent?.id,
-            name: '新規プロジェクト',
-            description: 'ここにプロジェクトの詳細を入力してください！',
+            name: '新規タスク',
+            description: 'ここにタスクの詳細を入力してください！',
         });
         await queryQrient.resetQueries(['tasks', {
             project_id: projectId,
