@@ -1,5 +1,6 @@
 import '../scss/UserDisplay.scss'
 
+import { storage } from '@/lib/storage'
 import { useState } from 'react';
 import {CSSTransition} from "react-transition-group";
 import { useAuth } from '@/features/auth'
@@ -16,6 +17,11 @@ export function UserDisplay() {
         setUser(!isOpen);
     }
 
+    const logoutFn = () => {
+        storage.clearToken();
+        window.location.assign(window.location.origin as unknown as string);
+    }
+
     return (
         <div className='UserDisplay' onClick={toggleMenu} role="button" onKeyDown={toggleMenu} tabIndex={0}>
             <UserIconImage imageUrl={user?.icon_image as string} />
@@ -30,6 +36,9 @@ export function UserDisplay() {
                     <ul className='UserDisplayMenu-body'>
                         <li className='UserDisplayMenu-item'>
                             <Link to="/user/setting">ユーザー設定</Link>
+                        </li>
+                        <li className='UserDisplayMenu-item'>
+                            <button type='button' onClick={logoutFn} onKeyDown={logoutFn}>ログアウト</button>
                         </li>
                     </ul>
                 </nav>
