@@ -16,3 +16,7 @@ export async function refreshWIthRefreshToken(): Promise<LoginResponse> {
 export async function getUser(): Promise<User> {
     return axios.get('/user/me')
 }
+
+export async function deleteUser(): Promise<User> {
+    return axios.delete('/user/me')
+}

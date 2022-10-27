@@ -1,11 +1,13 @@
 import '../scss/UserSettingView.scss'
 
 import { useForm } from 'react-hook-form'
+import { useAuth, deleteUser } from '@/features/auth'
 import { UserInputData } from '../types'
 import { UpdateUserData } from '../api'
 import { Loading } from '../layout/Loading'
 
 export function UserSettingView() {
+    const { logout } = useAuth();
 
     const methods = useForm<UserInputData>()
 
@@ -17,14 +19,19 @@ export function UserSettingView() {
         console.log('失敗しました')
     }
 
+    const deleteUserUser = async () => {
+        if (window.confirm("本当にユーザーを削除しますか？")) {
+            await deleteUser();
+            await logout();
+        }
+    }
+
     return (
         <div className="UserSettingView">
             {methods.formState.isSubmitting ? <Loading /> : null}
 
             <div className="UserSettingView-body">
-                <h2 className="ProjectListView-title">User Setting</h2>
-
-
+                <h2 className="ProjectListView-title">ユーザー設定</h2>
                 <form action="POST" className="authForm-body" onSubmit={methods.handleSubmit(isValid, isInValid)}>
                     <div className="authForm-item">
                         <label htmlFor="email">メールアドレス</label>
@@ -50,6 +57,10 @@ export function UserSettingView() {
                         更新
                     </button>
                 </form>
+
+
+                <h2 className="ProjectListView-title">ユーザーの削除</h2>
+                <button className="authForm-button delete" type="button" name="delete" onClick={deleteUserUser} onKeyDown={deleteUserUser}>削除</button>
             </div>
         </div>
     )

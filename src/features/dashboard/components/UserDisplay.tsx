@@ -10,16 +10,15 @@ import {UserIconImage} from './UserIconImage'
 
 
 export function UserDisplay() {
-    const { user } = useAuth()
+    const { user, logout } = useAuth()
 
     const [isOpen, setUser] = useState<boolean>(false)
     const toggleMenu = () => {
         setUser(!isOpen);
     }
 
-    const logoutFn = () => {
-        storage.clearToken();
-        window.location.assign(window.location.origin as unknown as string);
+    const logoutFn = async () => {
+        await logout();
     }
 
     return (
