@@ -8,7 +8,7 @@
         "preview": "vite preview",
         "lint": "eslint --ext .tsx,.ts src/",
         "lintfix": "npm run lint -- --fix",
-        "format": "prettier --write \"**/*.+(js|json|yml|ts|tsx)\"",
+        "format": "prettier --write \"**/*.+(js|json|yml|ts|tsx|css|scss)\"",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook",
         "codegen": "graphql-codegen --config codegen.yml"
