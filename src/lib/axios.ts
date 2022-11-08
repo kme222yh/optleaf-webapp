@@ -1,26 +1,26 @@
-import Axios, { AxiosRequestConfig } from 'axios'
-import { storage } from './storage'
+import Axios, { AxiosRequestConfig } from 'axios';
+import { storage } from './storage';
 
-const apiUrl = process.env.REACT_APP_API
+const apiUrl = process.env.REACT_APP_API;
 
 export const axios = Axios.create({
-    baseURL: apiUrl,
-})
+    baseURL: apiUrl
+});
 
 function authRequestInterceptor(config: AxiosRequestConfig) {
-    const token = storage.getAccessToken()
+    const token = storage.getAccessToken();
     if (config === null) {
-        return null
+        return null;
     }
-    const newConfig = config
+    const newConfig = config;
     if (token) {
-        newConfig.headers!.authorization = `Bearer ${token}`
+        newConfig.headers!.authorization = `Bearer ${token}`;
     }
-    newConfig.headers!.Accept = 'application/json'
-    return newConfig
+    newConfig.headers!.Accept = 'application/json';
+    return newConfig;
 }
 
-axios.interceptors.request.use(authRequestInterceptor)
+axios.interceptors.request.use(authRequestInterceptor);
 
 axios.interceptors.response.use(
     /* eslint-disable */
@@ -30,4 +30,4 @@ axios.interceptors.response.use(
         return Promise.reject(message);
     }
     /* eslint-enable */
-)
+);

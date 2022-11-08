@@ -1,0 +1,41 @@
+env:
+    browser: true
+    es2021: true
+extends:
+    - plugin:react/recommended
+    - plugin:react-hooks/recommended
+    - airbnb
+    - airbnb-typescript
+    - prettier
+settings:
+    import/resolver:
+        typescript: []
+parser: '@typescript-eslint/parser'
+parserOptions:
+    ecmaFeatures:
+        jsx: true
+    ecmaVersion: latest
+    project: ./tsconfig.json
+    sourceType: module
+plugins:
+    - react
+    - react-hooks
+    - '@typescript-eslint'
+rules:
+    react-hooks/rules-of-hooks: error
+    react-hooks/exhaustive-deps: warn
+    react/react-in-jsx-scope: off
+    import/prefer-default-export: off
+    import/newline-after-import: off
+    semi:
+        - error
+overrides:
+    - files:
+          - '*.stories.@(ts|tsx|js)'
+      extends:
+          - plugin:storybook/recommended
+      rules:
+          # default export を許可する
+          import/no-default-export: off
+          # devDependencies からの import を許可する
+          import/no-extraneous-dependencies: off

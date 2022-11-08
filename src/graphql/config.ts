@@ -1,8 +1,8 @@
-import { storage } from '@/lib/storage'
+import { storage } from '@/lib/storage';
 
 export const fetchParams = {
     headers: {
-        Authorization: 'Bearer ' + storage.getAccessToken(),
-        "Content-Type": "application/json"
+        Authorization: `Bearer ${storage.getAccessToken()}`,
+        'Content-Type': 'application/json'
     }
-}
+};
