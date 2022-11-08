@@ -26,6 +26,8 @@ module.exports = {
                 const { feature, name, have_props } = answers;
                 const { join } = require('node:path');
 
+                const timestamp = Date.now();
+
                 const path = join(
                     'src/',
                     feature ? `features/${feature}` : '',
@@ -34,6 +36,6 @@ module.exports = {
                 );
                 const type_annotate = have_props ? `FC<${name}Props>` : 'FC';
                 const props = have_props ? '(props)' : '()';
-                return { ...answers, path, type_annotate, props };
+                return { ...answers, path, type_annotate, props, timestamp };
             })
 };

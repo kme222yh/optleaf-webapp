@@ -12,7 +12,7 @@ export type <%= name%>Props = {
 
 export function <%= name %>(<% if (have_props) { -%>{val}: <%= name %>Props<% } -%>) {
     return (
-        <div className='<%= name %>'>
+        <div className='<%= name %> <%= name %>_<%= timestamp %>'>
             This is <%= name %> component.
         </div>
     );

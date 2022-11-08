@@ -12,7 +12,6 @@ export default defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                // scss file to be added to each vue template
                 additionalData: '@import "@/scss/prepends.scss";'
             }
         }
