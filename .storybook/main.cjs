@@ -29,6 +29,7 @@ module.exports = {
                     scss: {
                         additionalData: `
                             @import "@/scss/prepends.scss";
+                            @import "@/scss/index.scss";
                             @import "/reset.css";
                         `   // storybookの時はcomponent自体にreset.cssを差し込む
                     }

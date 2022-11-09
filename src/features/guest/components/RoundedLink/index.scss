@@ -1,0 +1,36 @@
+.RoundedLink {
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    display: inline-block;
+
+    cursor: pointer;
+    color: #ecf4e9;
+    border: 2px solid #ecf4e9;
+    background-color: #90cc7a;
+    border-radius: 100px;
+    padding: 4px 16px;
+    transition: 0.2s;
+    font-size: 20px;
+    line-height: 23px;
+    &:hover {
+        background-color: #ecf4e9;
+        color: #90cc7a;
+    }
+
+    span:last-child {
+        margin-left: 9px;
+    }
+
+    &.collor_reverse {
+        color: #90cc7a;
+        border: 2px solid #90cc7a;
+        background-color: #ecf4e9;
+        &:hover {
+            background-color: #90cc7a;
+            color: #ecf4e9;
+        }
+    }
+}

@@ -20,6 +20,13 @@ module.exports = {
                     message: 'Is it have props?',
                     choices: ['Yes', 'No'],
                     initial: 'Yes'
+                },
+                {
+                    type: 'confirm',
+                    name: 'have_default_props',
+                    message: 'Is it have default props?',
+                    choices: ['Yes', 'No'],
+                    initial: 'No'
                 }
             ])
             .then((answers) => {

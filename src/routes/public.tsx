@@ -2,6 +2,7 @@ import { Outlet, RouteObject } from 'react-router-dom';
 
 // import { Top, Layout } from '@/features/guest';
 // import { Login, Register } from '@/features/auth';
+import { RoundedLink } from '@/features/guest';
 
 function App() {
     return (
@@ -16,7 +17,14 @@ export const publicRoutes: RouteObject[] = [
         path: '/',
         element: <App />,
         children: [
-            { path: '', element: <p>Hello World</p> }
+            {
+                path: '',
+                element: (
+                    <RoundedLink>
+                        <p>ああああああああ</p>
+                    </RoundedLink>
+                )
+            }
             // { path: '', element: <Top /> },
             // { path: 'login', element: <Login /> },
             // { path: 'register', element: <Register /> },

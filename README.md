@@ -25,9 +25,6 @@ npm run dev --host
 ```
 # コンポーネント
 hygen component new
-hygen component new-scoped    # scoped-css
-✔ What is feature which fc belongs ? · sample
-✔ Whta is components name? · SampleButton
 
 # GraphQL
 npm run codegen
