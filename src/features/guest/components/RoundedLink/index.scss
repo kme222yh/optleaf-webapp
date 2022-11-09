@@ -23,6 +23,9 @@
     span:last-child {
         margin-left: 9px;
     }
+    span:first-child {
+        margin-left: 0px;
+    }
 
     &.collor_reverse {
         color: #90cc7a;

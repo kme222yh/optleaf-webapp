@@ -28,16 +28,16 @@ export function RoundedLink({
     return (
         <Link
             to={href}
-            className={`RoundedLink${
-                collor_reverse ? ' collor_reverse' : ''
-            }${disabled ? ' disabled' : ''}`}
+            className={`RoundedLink${collor_reverse ? ' collor_reverse' : ''}${
+                disabled ? ' disabled' : ''
+            }`}
         >
             {layout_reverse ? (
                 <span className="RoundedLink-text">{text}</span>
             ) : (
                 ''
             )}
-            <span className="RoundedLink-icon">{icon}</span>
+            {icon ? <span className="RoundedLink-icon">{icon}</span> : ''}
             {!layout_reverse ? (
                 <span className="RoundedLink-text">{text}</span>
             ) : (
