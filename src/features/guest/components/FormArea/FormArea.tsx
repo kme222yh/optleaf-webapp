@@ -7,14 +7,18 @@ export type FormAreaProps = {
     onSubmit: React.FormEventHandler<HTMLFormElement>;
 };
 FormArea.defaultProps = {
-    className: '',
+    className: ''
 };
 
-
-export function FormArea({className, children, action, onSubmit}: FormAreaProps) {
+export function FormArea({
+    className,
+    children,
+    action,
+    onSubmit
+}: FormAreaProps) {
     return (
         <div className={`${className} FormArea`}>
-            <form action={action} onSubmit={onSubmit} className='FormArea-body'>
+            <form action={action} onSubmit={onSubmit} className="FormArea-body">
                 {children}
             </form>
         </div>

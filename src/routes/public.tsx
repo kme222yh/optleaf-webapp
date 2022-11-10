@@ -20,9 +20,7 @@ export const publicRoutes: RouteObject[] = [
             {
                 path: '',
                 element: (
-                    <RoundedLink>
-                        <p>ああああああああ</p>
-                    </RoundedLink>
+                    <RoundedLink href='/' text='hoge' />
                 )
             }
             // { path: '', element: <Top /> },

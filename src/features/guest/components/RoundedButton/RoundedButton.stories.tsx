@@ -11,7 +11,7 @@ export default {
     args: {
         text: 'testtest',
         collor_reverse: false,
-        disabled: false,
+        disabled: false
     }
 } as Meta;
 

@@ -13,15 +13,28 @@ export type FormInputTextProps = {
 FormInputText.defaultProps = {
     placeholder: '',
     warning: '',
-    required: false,
+    required: false
 };
 
-
-export function FormInputText({id, type, placeholder, warning, required, config}: FormInputTextProps) {
+export function FormInputText({
+    id,
+    type,
+    placeholder,
+    warning,
+    required,
+    config
+}: FormInputTextProps) {
     return (
-        <div className='FormInputText'>
-            <input className='FormInputText-input' id={id} type={type} placeholder={placeholder} required={required} {...config} />
-            <span className='FormInputText-warning'>{warning}</span>
+        <div className="FormInputText">
+            <input
+                className="FormInputText-input"
+                id={id}
+                type={type}
+                placeholder={placeholder}
+                required={required}
+                {...config}
+            />
+            <span className="FormInputText-warning">{warning}</span>
         </div>
     );
 }

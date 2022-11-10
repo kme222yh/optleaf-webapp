@@ -7,7 +7,7 @@ export type RoundedButtonProps = {
 };
 RoundedButton.defaultProps = {
     collor_reverse: false,
-    disabled: false,
+    disabled: false
 };
 
 export function RoundedButton({

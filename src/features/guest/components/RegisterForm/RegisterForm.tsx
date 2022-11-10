@@ -26,12 +26,12 @@ export function RegisterForm() {
                 required
             />
             <FormInputText
-                id="password_confirmed"
+                id="password_confirmation"
                 placeholder="confirm password"
                 type="password"
                 required
             />
-            <RoundedButton text="register" collor_reverse />
+            <RoundedButton text="register" collor_reverse disabled />
         </FormArea>
     );
 }
