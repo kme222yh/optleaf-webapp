@@ -24,7 +24,10 @@ npm run dev --host
 ## コード生成
 ```
 # コンポーネント
-hygen component new
+hygen new atom
+hygen new organism
+hygen new view
+hygen new layout
 
 # GraphQL
 npm run codegen
@@ -114,4 +117,7 @@ npx graphql-code-generator init
 ? How to name the config file? codegen.yml
 ? What script in package.json should run the codegen? codegen
 npm install -D @graphql-codegen/typescript-react-query
+
+# scoped css
+# see https://www.npmjs.com/package/rollup-plugin-react-scoped-css
 ```
