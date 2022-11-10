@@ -1,25 +1,18 @@
 ---
 to: <%= path %>/<%= name %>.tsx
 ---
-import './index.scss';
+import './<%= style_file_name %>';
 
-<% if (have_props) { -%><% if (have_default_props) { -%>
 export type <%= name%>Props = {
-    val?: any
+    className?: string
 };
 <%= name%>.defaultProps = {
-    val: null
+    className: ''
 };
-<% } else { -%>
-export type <%= name%>Props = {
-    val: any
-};
-<% } -%><% } -%>
 
-
-export function <%= name %>(<% if (have_props) { -%>{val}: <%= name %>Props<% } -%>) {
+export function <%= name %>({className}: <%= name %>Props) {
     return (
-        <div className='<%= name %>'>
+        <div className={`<%= name %> ${className}`}>
             This is <%= name %> component.
         </div>
     );

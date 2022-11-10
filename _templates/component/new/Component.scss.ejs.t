@@ -1,6 +1,6 @@
 ---
-to: <%= path %>/index.scss
+to: <%= path %>/<%= style_file_name %>
 ---
 .<%= name %>{
-
+    // write css here !!
 }

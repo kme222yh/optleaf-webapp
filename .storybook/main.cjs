@@ -29,12 +29,17 @@ module.exports = {
                     scss: {
                         additionalData: `
                             @import "@/scss/prepends.scss";
+
+                            // storybookの時はcomponent自体にindex.scssとreset.cssを差し込む
                             @import "@/scss/index.scss";
                             @import "/reset.css";
-                        `   // storybookの時はcomponent自体にreset.cssを差し込む
+                        `
                     }
                 }
-            }
+            },
+            plugins: [
+                require('rollup-plugin-react-scoped-css').reactScopedCssPlugin(),
+            ]
         });
     }
 };

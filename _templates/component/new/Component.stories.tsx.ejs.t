@@ -10,9 +10,9 @@ type Story = ComponentStoryObj<T>;
 
 export default {
     component: <%= name %>,
-    <% if (have_props) { -%>
-    args: {},
-    <% } -%>
+    args: {
+        // add props here !!
+    },
 } as Meta;
 
 
