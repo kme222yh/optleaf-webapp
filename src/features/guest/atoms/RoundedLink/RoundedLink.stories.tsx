@@ -1,5 +1,4 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { MemoryRouter } from 'react-router-dom';

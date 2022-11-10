@@ -1,1 +1,1 @@
-export * from './components/RoundedLink';
+export * from './atoms/RoundedLink';

@@ -19,9 +19,7 @@ export const publicRoutes: RouteObject[] = [
         children: [
             {
                 path: '',
-                element: (
-                    <RoundedLink href='/' text='hoge' />
-                )
+                element: <RoundedLink href="/" text="hoge" />
             }
             // { path: '', element: <Top /> },
             // { path: 'login', element: <Login /> },

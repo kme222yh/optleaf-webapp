@@ -11,7 +11,7 @@ module.exports = {
                 {
                     type: 'input',
                     name: 'name',
-                    message: 'What is component\'s name ?',
+                    message: "What is component's name ?",
                     initial: 'Unknown'
                 },
                 {
@@ -20,7 +20,7 @@ module.exports = {
                     message: 'Is the style scoped ?',
                     choices: ['Yes', 'No'],
                     initial: 'Yes'
-                },
+                }
             ])
             .then((answers) => {
                 const { feature, name, use_scoped_style } = answers;
@@ -32,7 +32,9 @@ module.exports = {
                     'organisms',
                     name
                 );
-                const style_file_name = `${name}.${use_scoped_style?'scoped.':''}scss`;
+                const style_file_name = `${name}.${
+                    use_scoped_style ? 'scoped.' : ''
+                }scss`;
                 return { ...answers, path, style_file_name };
             })
 };

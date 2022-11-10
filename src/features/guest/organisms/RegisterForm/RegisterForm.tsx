@@ -1,12 +1,23 @@
-import './index.scss';
+import './RegisterForm.scoped.scss';
 
-import { FormArea } from '../FormArea';
-import { FormInputText } from '../FormInputText';
-import { RoundedButton } from '../RoundedButton';
+import { FormArea } from '../../atoms/FormArea';
+import { FormInputText } from '../../atoms/FormInputText';
+import { RoundedButton } from '../../atoms/RoundedButton';
 
-export function RegisterForm() {
+export type RegisterFormProps = {
+    className?: string;
+};
+RegisterForm.defaultProps = {
+    className: ''
+};
+
+export function RegisterForm({ className }: RegisterFormProps) {
     return (
-        <FormArea action="POST" className="RegisterForm" onSubmit={() => {}}>
+        <FormArea
+            className={`RegisterForm ${className}`}
+            action="POST"
+            onSubmit={() => {}}
+        >
             <FormInputText
                 id="name"
                 placeholder="user name"

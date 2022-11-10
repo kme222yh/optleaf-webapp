@@ -1,8 +1,9 @@
-import './index.scss';
+import './FormInputText.scoped.scss';
 
 import { UseFormRegister, FieldValues } from 'react-hook-form';
 
 export type FormInputTextProps = {
+    className?: string;
     id: string;
     type: string;
     placeholder?: string;
@@ -11,12 +12,14 @@ export type FormInputTextProps = {
     config: UseFormRegister<FieldValues>;
 };
 FormInputText.defaultProps = {
+    className: '',
     placeholder: '',
     warning: '',
     required: false
 };
 
 export function FormInputText({
+    className,
     id,
     type,
     placeholder,
@@ -25,7 +28,7 @@ export function FormInputText({
     config
 }: FormInputTextProps) {
     return (
-        <div className="FormInputText">
+        <div className={`FormInputText ${className}`}>
             <input
                 className="FormInputText-input"
                 id={id}

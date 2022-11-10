@@ -11,14 +11,16 @@ module.exports = {
                 {
                     type: 'input',
                     name: 'name',
-                    message: 'What is layout\'s name ?',
+                    message: "What is layout's name ?",
                     initial: 'Unknown'
-                },
+                }
             ])
             .then((answers) => {
                 const { feature } = answers;
                 const { join } = require('node:path');
-                const name = `${feature[0].toUpperCase()}${feature.slice(1)}${answers.name}Layout`;
+                const name = `${feature[0].toUpperCase()}${feature.slice(1)}${
+                    answers.name
+                }Layout`;
                 const path = join(
                     'src/',
                     feature ? `features/${feature}` : '',

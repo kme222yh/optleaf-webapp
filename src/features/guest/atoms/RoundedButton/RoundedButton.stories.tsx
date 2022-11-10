@@ -1,5 +1,4 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-
 import { RoundedButton } from './RoundedButton';
 
 type T = typeof RoundedButton;

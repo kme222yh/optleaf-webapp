@@ -1,4 +1,4 @@
-import './index.scss';
+import './FormArea.scoped.scss';
 
 export type FormAreaProps = {
     className?: string;
@@ -17,7 +17,7 @@ export function FormArea({
     onSubmit
 }: FormAreaProps) {
     return (
-        <div className={`${className} FormArea`}>
+        <div className={`FormArea ${className}`}>
             <form action={action} onSubmit={onSubmit} className="FormArea-body">
                 {children}
             </form>
