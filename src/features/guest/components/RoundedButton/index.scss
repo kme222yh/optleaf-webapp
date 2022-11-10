@@ -1,0 +1,34 @@
+.RoundedButton{
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    display: inline-block;
+
+    cursor: pointer;
+    color: #ecf4e9;
+    border: 2px solid #ecf4e9;
+    background-color: #90cc7a;
+    border-radius: 100px;
+    padding: 9px 16px 13px;
+    min-width: 175px;
+    text-align: center;
+    transition: 0.2s;
+    font-size: 25px;
+    line-height: 23px;
+    &:hover {
+        background-color: #ecf4e9;
+        color: #90cc7a;
+    }
+
+    &.collor_reverse {
+        color: #90cc7a;
+        border: 2px solid #90cc7a;
+        background-color: #ecf4e9;
+        &:hover {
+            background-color: #90cc7a;
+            color: #ecf4e9;
+        }
+    }
+}

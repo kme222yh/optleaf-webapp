@@ -1,0 +1,33 @@
+.FormInputText{
+    position: relative;
+    margin-bottom: 43px;
+    width: 100%;
+    &-input{
+        font-family: 'Noto Sans JP', sans-serif;
+        padding: 6px 22px;
+        margin-bottom: 1px;
+        border-bottom: 3px solid $color-main;
+        width: 100%;
+        font-size: 20px;
+        line-height: 27px;
+        color: $color-black;
+        transition: .3s;
+        &::placeholder{
+            opacity: .6;
+        }
+        &:focus{
+            padding-bottom: 5px;
+            margin-bottom: 0;
+            border-bottom: 5px solid $color-main;
+        }
+    }
+    &-warning{
+        position: absolute;
+        left: 22px;
+        bottom: -18px;
+        color: #CC8766;
+        font-size: 12px;
+        line-height: 14px;
+
+    }
+}
