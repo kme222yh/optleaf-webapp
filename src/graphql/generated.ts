@@ -19,7 +19,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
 
 function fetcher<TData, TVariables>(query: string, variables?: TVariables) {
     return async (): Promise<TData> => {
-        const res = await fetch(process.env.REACT_APP_GRAPHQL_API as string, {
+        const res = await fetch(import.meta.env.VITE_GRAPHQL_API as string, {
             method: 'POST',
             ...fetchParams,
             body: JSON.stringify({ query, variables })

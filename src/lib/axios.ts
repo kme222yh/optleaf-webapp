@@ -1,7 +1,7 @@
 import Axios, { AxiosRequestConfig } from 'axios';
 import { storage } from './storage';
 
-const apiUrl = process.env.REACT_APP_API;
+const apiUrl = import.meta.env.VITE_API;
 
 export const axios = Axios.create({
     baseURL: apiUrl

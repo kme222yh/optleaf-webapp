@@ -11,5 +11,5 @@ generates:
             - typescript-react-query
         config:
             fetcher:
-                endpoint: 'process.env.REACT_APP_GRAPHQL_API'
+                endpoint: 'import.meta.env.VITE_GRAPHQL_API'
                 fetchParams: 'fetchParams'
