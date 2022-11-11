@@ -9,9 +9,9 @@ export const axios = Axios.create({
 
 function authRequestInterceptor(config: AxiosRequestConfig) {
     const token = storage.getAccessToken();
-    if (config === null) {
-        return null;
-    }
+    // if (config === null) {
+    //     return null;
+    // }
     const newConfig = config;
     if (token) {
         newConfig.headers!.authorization = `Bearer ${token}`;

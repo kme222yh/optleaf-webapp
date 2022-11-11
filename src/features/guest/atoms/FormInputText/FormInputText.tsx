@@ -1,6 +1,6 @@
 import './FormInputText.scoped.scss';
 
-import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 export type FormInputTextProps = {
     className?: string;
@@ -9,7 +9,7 @@ export type FormInputTextProps = {
     placeholder?: string;
     warning?: string;
     required?: boolean;
-    config: UseFormRegister<FieldValues>;
+    config: UseFormRegisterReturn<string>;
 };
 FormInputText.defaultProps = {
     className: '',

@@ -5,11 +5,13 @@ export type RoundedButtonProps = {
     text: string;
     collor_reverse?: boolean;
     disabled?: boolean;
+    // type?: 'submit' | 'reset' | 'button' | undefined;
 };
 RoundedButton.defaultProps = {
     className: '',
     collor_reverse: false,
     disabled: false
+    // type: 'button'
 };
 
 export function RoundedButton({
@@ -17,10 +19,11 @@ export function RoundedButton({
     text,
     collor_reverse,
     disabled
-}: RoundedButtonProps) {
+}: // type
+RoundedButtonProps) {
     return (
         <button
-            type="button"
+            type="submit"
             className={`RoundedButton ${className}${
                 collor_reverse ? ' collor_reverse' : ''
             }${disabled ? ' disabled' : ''}`}

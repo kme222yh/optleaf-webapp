@@ -117,6 +117,7 @@ npx graphql-code-generator init
 ? How to name the config file? codegen.yml
 ? What script in package.json should run the codegen? codegen
 npm install -D @graphql-codegen/typescript-react-query
+# 書き換え } from '@tanstack/react-query'; → } from 'react-query';
 
 # scoped css
 # see https://www.npmjs.com/package/rollup-plugin-react-scoped-css
