@@ -1,29 +1,23 @@
-import './RegisterForm.scss';
+import './LoginForm.scss';
 
 import { FormArea } from '../../atoms/FormArea';
 import { FormInputText } from '../../atoms/FormInputText';
 import { RoundedButton } from '../../atoms/RoundedButton';
 
-export type RegisterFormProps = {
+export type LoginFormProps = {
     className?: string;
 };
-RegisterForm.defaultProps = {
+LoginForm.defaultProps = {
     className: ''
 };
 
-export function RegisterForm({ className }: RegisterFormProps) {
+export function LoginForm({ className }: LoginFormProps) {
     return (
         <FormArea
-            className={`RegisterForm ${className}`}
+            className={`LoginForm ${className}`}
             action="POST"
             onSubmit={() => {}}
         >
-            <FormInputText
-                id="name"
-                placeholder="user name"
-                type="text"
-                required
-            />
             <FormInputText
                 id="email"
                 placeholder="email"
@@ -36,13 +30,7 @@ export function RegisterForm({ className }: RegisterFormProps) {
                 type="password"
                 required
             />
-            <FormInputText
-                id="password_confirmation"
-                placeholder="confirm password"
-                type="password"
-                required
-            />
-            <RoundedButton text="register" collor_reverse disabled />
+            <RoundedButton text="login" collor_reverse disabled />
         </FormArea>
     );
 }

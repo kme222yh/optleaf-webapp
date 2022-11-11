@@ -1,0 +1,11 @@
+.TextLink {
+    font-size: 20px;
+    line-height: 23px;
+    color: $color-white;
+    transition: 0.3s;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    &:hover {
+        border-bottom: 2px solid $color-white;
+    }
+}

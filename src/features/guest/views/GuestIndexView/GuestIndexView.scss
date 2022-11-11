@@ -1,0 +1,36 @@
+.GuestIndexView {
+    background-color: $color-main;
+    &-body {
+        @include outerBody;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    &-right {
+        width: 100%;
+        max-width: 450px;
+        margin-left: 50px;
+        flex-shrink: 0.8;
+    }
+
+    .RegisterForm {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    @include tablet {
+        &-body {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        &-right {
+            margin-left: 0;
+        }
+        .TopDocument {
+            max-width: 400px;
+        }
+    }
+}

@@ -1,16 +1,13 @@
----
-to: <%= path %>/<%= name%>.stories.tsx
----
-import { type ComponentMeta, type ComponentStoryObj } from "@storybook/react";
+import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import { <%= name %> } from "./<%= name %>";
+import { GuestIndexView } from './GuestIndexView';
 
-type T = typeof <%= name %>;
+type T = typeof GuestIndexView;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: <%= name %>,
+    component: GuestIndexView,
     args: {},
     decorators: [
         (Story) => (
@@ -20,6 +17,5 @@ export default {
         )
     ]
 } as Meta;
-
 
 export const Default: Story = {};

@@ -29,4 +29,10 @@
         font-size: 12px;
         line-height: 14px;
     }
+
+    @include mobile {
+        &-input {
+            padding: 6px 15px;
+        }
+    }
 }

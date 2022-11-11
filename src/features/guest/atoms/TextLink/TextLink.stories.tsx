@@ -1,17 +1,16 @@
----
-to: <%= path %>/<%= name%>.stories.tsx
----
-import { type ComponentMeta, type ComponentStoryObj } from "@storybook/react";
+import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import { <%= name %> } from "./<%= name %>";
+import { TextLink } from './TextLink';
 
-type T = typeof <%= name %>;
+type T = typeof TextLink;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: <%= name %>,
-    args: {},
+    component: TextLink,
+    args: {
+        children: 'This is TextLink component.'
+    },
     decorators: [
         (Story) => (
             <MemoryRouter>
@@ -20,6 +19,5 @@ export default {
         )
     ]
 } as Meta;
-
 
 export const Default: Story = {};
