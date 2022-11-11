@@ -1,7 +1,12 @@
 .RegisterForm {
     position: relative;
     .RoundedButton {
-        margin-top: 37px;
+        margin-top: 15px;
+    }
+    .WarningText{
+        display: block;
+        height: 17px;
+        margin-top: 5px;
     }
     .ScreenSpinner {
         border-radius: 20px;

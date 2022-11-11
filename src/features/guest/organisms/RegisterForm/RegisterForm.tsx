@@ -11,6 +11,7 @@ import { FormArea } from '../../atoms/FormArea';
 import { FormInputText } from '../../atoms/FormInputText';
 import { RoundedButton } from '../../atoms/RoundedButton';
 import { ScreenSpinner } from '../../atoms/ScreenSpinner';
+import { WarningText } from '../../atoms/WarningText';
 
 export type RegisterFormProps = {
     className?: string;
@@ -23,6 +24,9 @@ export function RegisterForm({ className }: RegisterFormProps) {
     const { register } = useAuth();
     const form = useForm<RegisterCredentials>();
     const registerSuccess = async (data: RegisterCredentials) => {
+        setSomethingWrong(false);
+        setEmailErrorMsg('');
+        setPasswordErrorMsg('');
         try {
             await register(data);
         } catch (e) {
@@ -32,15 +36,15 @@ export function RegisterForm({ className }: RegisterFormProps) {
         }
     };
 
+    const [somethingWrong, setSomethingWrong] = useState(false);
     const [emailErrorMsg, setEmailErrorMsg] = useState('');
     const [passwordErrorMsg, setPasswordErrorMsg] = useState('');
     const handleErrorMessage = (error: ErrorMessage) => {
-        console.log(error);
-        if ('email' in error.detail) {
+        // console.log(error);
+        if ('email' in error.detail!) {
             const description = Array.isArray(error.detail.email)
                 ? error.detail.email[0]
                 : error.detail.email;
-            setEmailErrorMsg('');
             switch (description) {
                 case 'duplicate':
                     setEmailErrorMsg('Already exit.');
@@ -51,13 +55,11 @@ export function RegisterForm({ className }: RegisterFormProps) {
                 default:
                     break;
             }
-            console.log(emailErrorMsg);
         }
-        if ('password' in error.detail) {
+        if ('password' in error.detail!) {
             const description = Array.isArray(error.detail.password)
                 ? error.detail.password[0]
                 : error.detail.password;
-            setPasswordErrorMsg('');
             switch (description) {
                 case 'validation.min.string':
                     setPasswordErrorMsg('At least 8 characters are required.');
@@ -121,13 +123,15 @@ export function RegisterForm({ className }: RegisterFormProps) {
                     required: 'Password required.'
                 })}
             />
+            <WarningText>
+                {somethingWrong ? 'Sorry. Something went wrong.' : ''}
+            </WarningText>
             <RoundedButton
                 text="register"
                 collor_reverse
                 disabled={
                     !form.formState.isValid || form.formState.isSubmitting
                 }
-                // type="submit"
             />
             <CSSTransition
                 nodeRef={nodeRef}

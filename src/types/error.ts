@@ -5,6 +5,6 @@ interface DirectionArray {
 
 export type ErrorMessage = {
     code: string;
-    detail: DirectionArray;
+    detail: DirectionArray | undefined;
     message: string;
 };
