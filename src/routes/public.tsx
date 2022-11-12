@@ -5,7 +5,6 @@ import {
     GuestIndexView,
     GuestDefaultLayout
 } from '@/features/guest';
-// import { Login, Register } from '@/features/auth';
 
 function App() {
     return (

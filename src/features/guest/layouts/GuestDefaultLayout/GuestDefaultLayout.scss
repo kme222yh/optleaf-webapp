@@ -1,8 +1,22 @@
 .GuestDefaultLayout {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     &-main {
+        background-color: $color-main;
         height: 100%;
         width: 100%;
+        overflow-y: scroll;
+        &-body{
+            @include outerBody;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &>*{
+                width: 100%;
+            }
+        }
     }
 }

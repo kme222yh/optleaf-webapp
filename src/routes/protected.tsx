@@ -1,7 +1,5 @@
 import { Outlet, RouteObject } from 'react-router-dom';
 
-// import { DashboardLayout, ProjectView, ProjectTaskView, Top, ProjectListView, TeamListView, UserSettingView } from '@/features/dashboard'
-
 function App() {
     return (
         <main>
@@ -15,7 +13,7 @@ export const protectedRoutes: RouteObject[] = [
         path: '/',
         element: <App />,
         children: [
-            { path: '', element: <p>ほげ</p> }
+            { path: '', element: <div><p>ログインでけた！</p></div> }
             // { path: '', element: <Top /> },
             // { path: 'projects', element: <ProjectListView /> },
             // { path: 'teams', element: <TeamListView /> },
