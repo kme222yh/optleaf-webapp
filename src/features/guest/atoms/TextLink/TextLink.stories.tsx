@@ -1,5 +1,4 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
 import { TextLink } from './TextLink';
 
 type T = typeof TextLink;
@@ -11,13 +10,6 @@ export default {
     args: {
         children: 'This is TextLink component.'
     },
-    decorators: [
-        (Story) => (
-            <MemoryRouter>
-                <Story />
-            </MemoryRouter>
-        )
-    ]
 } as Meta;
 
 export const Default: Story = {};

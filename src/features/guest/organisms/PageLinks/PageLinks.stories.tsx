@@ -1,5 +1,4 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { MemoryRouter } from 'react-router-dom';
 import { PageLinks } from './PageLinks';
 
 type T = typeof PageLinks;
@@ -13,13 +12,6 @@ export default {
         register: true,
         fogot: false
     },
-    decorators: [
-        (Story) => (
-            <MemoryRouter>
-                <Story />
-            </MemoryRouter>
-        )
-    ]
 } as Meta;
 
 export const Default: Story = {};
