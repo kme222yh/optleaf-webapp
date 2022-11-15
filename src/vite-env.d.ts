@@ -2,9 +2,9 @@
 
 interface ImportMetaEnv {
     readonly VITE_API: string;
-    readonly VITE__GRAPHQL_API: string;
-    readonly VITE__DEFAULT_USER_ICON: string;
-    readonly VITE__NAME: string;
+    readonly VITE_GRAPHQL_API: string;
+    readonly VITE_DEFAULT_USER_ICON: string;
+    readonly VITE_NAME: string;
 }
 
 interface ImportMeta {
