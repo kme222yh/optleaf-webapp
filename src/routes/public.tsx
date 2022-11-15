@@ -3,7 +3,8 @@ import { Outlet, RouteObject, Navigate } from 'react-router-dom';
 import {
     GuestLoginView,
     GuestIndexView,
-    GuestDefaultLayout
+    GuestDefaultLayout,
+    GuestFogotPasswordView
 } from '@/features/guest';
 
 function App() {
@@ -21,6 +22,7 @@ export const publicRoutes: RouteObject[] = [
         children: [
             { path: '', element: <GuestIndexView /> },
             { path: 'login', element: <GuestLoginView /> },
+            { path: 'fogot_password', element: <GuestFogotPasswordView /> },
             { path: '*', element: <Navigate to="." /> }
         ]
     }
