@@ -1,0 +1,52 @@
+.UserDisplay {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .UserIconImage {
+        height: 30px;
+        margin-right: 5px;
+    }
+    &-name {
+        font-size: 12px;
+        color: $color-white;
+        max-width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+.UserDisplayMenu {
+    position: absolute;
+    z-index: 999;
+    right: 6px;
+    top: calc(100% + 13px);
+    &-body {
+        width: 140px;
+        background-color: $color-black;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        border-radius: 3px;
+        @include box-shadow;
+    }
+    &-item {
+        list-style: none;
+        margin-bottom: 5px;
+        transition: 0.3s;
+        & > * {
+            font-size: 15px;
+            color: $color-white;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+            display: block;
+            padding: 5px 0;
+            transition: 0.3s;
+        }
+        &:hover {
+            background-color: gray;
+        }
+    }
+}

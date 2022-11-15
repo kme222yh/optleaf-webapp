@@ -1,0 +1,30 @@
+.ProjectListView {
+    border: 1px solid $color-white;
+    border-radius: 5px;
+    height: 100%;
+    color: $color-white;
+    position: relative;
+
+    &-body {
+        @include outerBody;
+        padding-top: 35px;
+        max-width: 930px;
+    }
+
+    &-title {
+        font-size: 30px;
+        line-height: 1.8;
+        text-align: center;
+        border-bottom: 1px solid;
+        margin-bottom: 22px;
+    }
+
+    &-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        li {
+            margin: 10px;
+        }
+    }
+}
