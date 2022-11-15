@@ -3,7 +3,7 @@
 
     &-body {
         background-color: $color-white;
-        padding: 40px 45px;
+        padding: 60px 45px;
         border-radius: 20px;
 
         display: flex;
@@ -13,7 +13,7 @@
 
     @include mobile {
         &-body {
-            padding: 35px 20px;
+            padding: 50px 30px;
         }
     }
 }

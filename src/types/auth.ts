@@ -16,6 +16,11 @@ export type RegisterCredentials = {
     password_confirmation: string;
 };
 
+export type ResetPasswordCredentials = {
+    name: string;
+    email: string;
+};
+
 export type LoginResponse = {
     access_token: string;
     refresh_token: string;

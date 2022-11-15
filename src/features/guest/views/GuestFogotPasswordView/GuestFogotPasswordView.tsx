@@ -1,5 +1,9 @@
 import './GuestFogotPasswordView.scss';
 
+import { FogotPasswordForm } from '../../organisms/FogotPasswordForm';
+import { OtherDocument } from '../../organisms/OtherDocument';
+import { PageLinks } from '../../organisms/PageLinks';
+
 export type GuestFogotPasswordViewProps = {
     className?: string;
 };
@@ -13,7 +17,11 @@ export function GuestFogotPasswordView({
     return (
         <div className={`GuestFogotPasswordView ${className}`}>
             <div className="GuestFogotPasswordView-body">
-                This is GuestFogotPasswordView View.
+                <OtherDocument>Reset password ! <br /> This page does not work yet !</OtherDocument>
+                <div className="GuestLoginView-right">
+                    <FogotPasswordForm />
+                    <PageLinks register login />
+                </div>
             </div>
         </div>
     );
