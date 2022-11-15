@@ -57,7 +57,7 @@ async function registerFn(data: RegisterCredentials) {
 
 async function logoutFn() {
     storage.clearToken();
-    window.location.assign(window.location.origin as unknown as string);
+    window.location.assign('/login' as unknown as string);
 }
 
 const authConfig = {

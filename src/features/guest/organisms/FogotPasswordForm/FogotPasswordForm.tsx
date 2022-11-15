@@ -62,7 +62,7 @@ export function FogotPasswordForm({ className }: FogotPasswordFormProps) {
             />
             <WarningText>{errorMsg.somethingWrong}</WarningText>
             <RoundedButton
-                text="reset password"
+                text="submit"
                 collor_reverse
                 disabled={
                     !form.formState.isValid || form.formState.isSubmitting
