@@ -1,14 +1,31 @@
 import { Outlet, RouteObject, Navigate } from 'react-router-dom';
+import { lazyImport } from '@/lib/lazyImport';
 
-import {
-    DashboardLayout,
-    ProjectView,
-    ProjectTaskView,
-    Top,
-    ProjectListView,
-    TeamListView,
-    UserSettingView
-} from '@/features/oldDashboard';
+const { DashboardLayout } = lazyImport(
+    () => import('@/features/oldDashboard'),
+    'DashboardLayout'
+);
+const { ProjectView } = lazyImport(
+    () => import('@/features/oldDashboard'),
+    'ProjectView'
+);
+const { ProjectTaskView } = lazyImport(
+    () => import('@/features/oldDashboard'),
+    'ProjectTaskView'
+);
+const { Top } = lazyImport(() => import('@/features/oldDashboard'), 'Top');
+const { ProjectListView } = lazyImport(
+    () => import('@/features/oldDashboard'),
+    'ProjectListView'
+);
+const { TeamListView } = lazyImport(
+    () => import('@/features/oldDashboard'),
+    'TeamListView'
+);
+const { UserSettingView } = lazyImport(
+    () => import('@/features/oldDashboard'),
+    'UserSettingView'
+);
 
 function App() {
     return (
