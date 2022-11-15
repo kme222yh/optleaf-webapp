@@ -19,9 +19,7 @@ export const decorators = [
     (story) => (
         <QueryClientProvider client={queryClient}>
             <AuthProvider>
-                <MemoryRouter>
-                    {story()}
-                </MemoryRouter>
+                <MemoryRouter>{story()}</MemoryRouter>
             </AuthProvider>
         </QueryClientProvider>
     )

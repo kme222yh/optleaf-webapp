@@ -11,7 +11,7 @@ export default {
         login: true,
         register: true,
         fogot: false
-    },
+    }
 } as Meta;
 
 export const Default: Story = {};

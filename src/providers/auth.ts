@@ -1,11 +1,7 @@
 import { storage } from '@/lib/storage';
 import { initReactQueryAuth } from 'react-query-auth';
-import {
-    LoginCredentials,
-    RegisterCredentials,
-    User,
-    Error
-} from '@/types/auth';
+import { LoginCredentials, RegisterCredentials, User } from '@/types/auth';
+import { ErrorMessage } from '@/types/error';
 import {
     registerWithCredentials,
     loginWithCredentials,
@@ -74,7 +70,7 @@ const authConfig = {
 
 export const { AuthProvider, useAuth } = initReactQueryAuth<
     User | null,
-    Error,
+    ErrorMessage,
     LoginCredentials,
     RegisterCredentials
 >(authConfig);

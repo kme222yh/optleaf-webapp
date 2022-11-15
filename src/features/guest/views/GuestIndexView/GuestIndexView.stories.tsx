@@ -7,7 +7,7 @@ type Story = ComponentStoryObj<T>;
 
 export default {
     component: GuestIndexView,
-    args: {},
+    args: {}
 } as Meta;
 
 export const Default: Story = {};

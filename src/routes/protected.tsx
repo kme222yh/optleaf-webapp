@@ -13,7 +13,14 @@ export const protectedRoutes: RouteObject[] = [
         path: '/',
         element: <App />,
         children: [
-            { path: '', element: <div><p>ログインでけた！</p></div> }
+            {
+                path: '',
+                element: (
+                    <div>
+                        <p>ログインでけた！</p>
+                    </div>
+                )
+            }
             // { path: '', element: <Top /> },
             // { path: 'projects', element: <ProjectListView /> },
             // { path: 'teams', element: <TeamListView /> },

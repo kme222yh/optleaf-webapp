@@ -17,7 +17,7 @@ export default {
         disabled: false,
         icon: <FontAwesomeIcon icon={faRightToBracket} />,
         href: '/'
-    },
+    }
 } as Meta;
 
 export const Default: Story = {};

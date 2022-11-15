@@ -28,7 +28,7 @@ rules:
     import/prefer-default-export: off
     import/newline-after-import: off
     react/jsx-props-no-spreading: off
-    '@typescript-eslint/no-use-before-define': warn
+    '@typescript-eslint/no-use-before-define': off
     semi:
         - error
 overrides:

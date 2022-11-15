@@ -2,7 +2,7 @@ import './LoginForm.scss';
 
 import { useForm } from 'react-hook-form';
 import { CSSTransition } from 'react-transition-group';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { ErrorMessage } from '@/types/error';
 import { useAuth } from '@/providers/auth';
@@ -12,6 +12,7 @@ import { FormInputText } from '../../atoms/FormInputText';
 import { RoundedButton } from '../../atoms/RoundedButton';
 import { ScreenSpinner } from '../../atoms/ScreenSpinner';
 import { WarningText } from '../../atoms/WarningText';
+import { useHandleAuthErrors } from '../../hooks/handleAuthError';
 
 export type LoginFormProps = {
     className?: string;
@@ -22,90 +23,44 @@ LoginForm.defaultProps = {
 
 export function LoginForm({ className }: LoginFormProps) {
     const { login } = useAuth();
+    const nodeRef = useRef(null);
     const form = useForm<LoginCredentials>();
-    const loginSuccess = async (data: LoginCredentials) => {
-        setLoginFailed(false);
-        setEmailErrorMsg('');
-        setPasswordErrorMsg('');
+    const errorMsg = useHandleAuthErrors();
+    const sendForm = async (data: LoginCredentials) => {
         try {
             await login(data);
         } catch (e) {
             if ((e as ErrorMessage).code && (e as ErrorMessage).message) {
-                handleErrorMessage(e as ErrorMessage);
+                errorMsg.handler(e as ErrorMessage);
+            } else {
+                errorMsg.maybeServerError();
             }
         }
     };
-
-    const [loginFailed, setLoginFailed] = useState(false);
-    const [emailErrorMsg, setEmailErrorMsg] = useState('');
-    const [passwordErrorMsg, setPasswordErrorMsg] = useState('');
-    const handleErrorMessage = (error: ErrorMessage) => {
-        // console.log(error);
-        if (error.detail === undefined) {
-            setLoginFailed(true);
-            return;
-        }
-        if ('email' in error.detail!) {
-            const description = Array.isArray(error.detail.email)
-                ? error.detail.email[0]
-                : error.detail.email;
-            switch (description) {
-                case 'validation.email':
-                    setEmailErrorMsg('Invalid email.');
-                    break;
-                default:
-                    break;
-            }
-        }
-        if ('password' in error.detail!) {
-            const description = Array.isArray(error.detail.password)
-                ? error.detail.password[0]
-                : error.detail.password;
-            switch (description) {
-                case 'validation.min.string':
-                    setPasswordErrorMsg('At least 8 characters are required.');
-                    break;
-                case 'The password must contain at least one number.':
-                case 'The password must contain at least one letter.':
-                    setPasswordErrorMsg('Use letter and number.');
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
-    const nodeRef = useRef(null);
 
     return (
         <FormArea
             className={`LoginForm ${className}`}
             action="POST"
-            onSubmit={form.handleSubmit(loginSuccess)}
+            onSubmit={form.handleSubmit(sendForm)}
         >
             <FormInputText
-                id="email"
                 placeholder="email"
                 type="email"
-                warning={emailErrorMsg}
-                required
+                warning={errorMsg.email}
                 config={form.register('email', {
                     required: 'Email required.'
                 })}
             />
             <FormInputText
-                id="password"
                 placeholder="password"
                 type="password"
-                warning={passwordErrorMsg}
-                required
+                warning={errorMsg.password}
                 config={form.register('password', {
                     required: 'Password required.'
                 })}
             />
-            <WarningText>
-                {loginFailed ? 'Email or password was wrong.' : ''}
-            </WarningText>
+            <WarningText>{errorMsg.somethingWrong}</WarningText>
             <RoundedButton
                 text="login"
                 collor_reverse

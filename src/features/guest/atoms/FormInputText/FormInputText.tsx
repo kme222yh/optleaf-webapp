@@ -4,7 +4,7 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 
 export type FormInputTextProps = {
     className?: string;
-    id: string;
+    id?: string;
     type: string;
     placeholder?: string;
     warning?: string;
@@ -13,6 +13,7 @@ export type FormInputTextProps = {
 };
 FormInputText.defaultProps = {
     className: '',
+    id: '',
     placeholder: '',
     warning: '',
     required: false

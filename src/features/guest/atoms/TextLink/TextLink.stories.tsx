@@ -9,7 +9,7 @@ export default {
     component: TextLink,
     args: {
         children: 'This is TextLink component.'
-    },
+    }
 } as Meta;
 
 export const Default: Story = {};
