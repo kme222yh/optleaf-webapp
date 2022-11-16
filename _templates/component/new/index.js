@@ -9,6 +9,12 @@ module.exports = {
                     initial: ''
                 },
                 {
+                    type: 'select',
+                    name: 'type',
+                    message: 'What is type ?',
+                    choices: ['atom', 'organism', 'view', 'layout'],
+                },
+                {
                     type: 'input',
                     name: 'name',
                     message: "What is component's name ?",
@@ -16,25 +22,20 @@ module.exports = {
                 },
                 {
                     type: 'confirm',
-                    name: 'use_scoped_style',
+                    name: 'isScoped',
                     message: 'Is the style scoped ?',
                     choices: ['Yes', 'No'],
                     initial: 'Yes'
                 }
             ])
             .then((answers) => {
-                const { feature, name, use_scoped_style } = answers;
-                const { join } = require('node:path');
+                const { feature, isScoped, type } = answers;
+                const { createUniqueName, createPath, genStyleFileName } = require('./lib');
 
-                const path = join(
-                    'src/',
-                    feature ? `features/${feature}` : '',
-                    'organisms',
-                    name
-                );
-                const style_file_name = `${name}.${
-                    use_scoped_style ? 'scoped.' : ''
-                }scss`;
+                const name = isScoped ? answers.name : createUniqueName(feature, answers.name, type);
+                const path = createPath(feature, type, name);
+                const style_file_name = genStyleFileName(isScoped, name);
+                answers.name = name;
                 return { ...answers, path, style_file_name };
             })
 };
