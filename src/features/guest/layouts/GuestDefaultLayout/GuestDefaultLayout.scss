@@ -19,4 +19,12 @@
             }
         }
     }
+
+    @include tablet{
+        &-main{
+            &-body{
+                align-items: flex-start;
+            }
+        }
+    }
 }
