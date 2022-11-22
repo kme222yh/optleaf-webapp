@@ -17,11 +17,8 @@ export default defineConfig({
             }
         }
     },
-    plugins: [react(), reactScopedCssPlugin(), htmlPlugin(loadEnv('dev', "."))]
+    plugins: [react(), reactScopedCssPlugin(), htmlPlugin(loadEnv('dev', '.'))]
 });
-
-
-
 
 /**
  * Replace env variables in index.html
@@ -29,13 +26,13 @@ export default defineConfig({
  * @example `%VITE_MY_ENV%`
  * @see https://vitejs.dev/guide/api-plugin.html#transformindexhtml
  */
- function htmlPlugin(env: ReturnType<typeof loadEnv>) {
+function htmlPlugin(env: ReturnType<typeof loadEnv>) {
     return {
-      name: "html-transform",
-      transformIndexHtml: {
-        enforce: "pre" as const,
-        transform: (html: string): string =>
-          html.replace(/%(.*?)%/g, (match, p1) => env[p1] ?? match),
-      },
+        name: 'html-transform',
+        transformIndexHtml: {
+            enforce: 'pre' as const,
+            transform: (html: string): string =>
+                html.replace(/%(.*?)%/g, (match, p1) => env[p1] ?? match)
+        }
     };
-  }
+}

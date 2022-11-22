@@ -1,0 +1,7 @@
+.Greeting {
+    &-body {
+        padding: 30px;
+        @include innerBody;
+        text-align: center;
+    }
+}

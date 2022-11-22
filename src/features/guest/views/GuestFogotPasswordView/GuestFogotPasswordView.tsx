@@ -17,7 +17,9 @@ export function GuestFogotPasswordView({
     return (
         <div className={`GuestFogotPasswordView ${className}`}>
             <div className="GuestFogotPasswordView-body">
-                <OtherDocument>Reset password ! <br /> This page does not work yet !</OtherDocument>
+                <OtherDocument>
+                    Reset password ! <br /> This page does not work yet !
+                </OtherDocument>
                 <div className="GuestLoginView-right">
                     <FogotPasswordForm />
                     <PageLinks register login />

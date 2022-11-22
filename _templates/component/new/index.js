@@ -12,7 +12,7 @@ module.exports = {
                     type: 'select',
                     name: 'type',
                     message: 'What is type ?',
-                    choices: ['atom', 'molecule', 'organism', 'view', 'layout'],
+                    choices: ['atom', 'molecule', 'organism', 'view', 'layout']
                 },
                 {
                     type: 'input',
@@ -30,9 +30,15 @@ module.exports = {
             ])
             .then((answers) => {
                 const { feature, isScoped, type } = answers;
-                const { createUniqueName, createPath, genStyleFileName } = require('./lib');
+                const {
+                    createUniqueName,
+                    createPath,
+                    genStyleFileName
+                } = require('./lib');
 
-                const name = isScoped ? answers.name : createUniqueName(feature, answers.name, type);
+                const name = isScoped
+                    ? answers.name
+                    : createUniqueName(feature, answers.name, type);
                 const path = createPath(feature, type, name);
                 const style_file_name = genStyleFileName(isScoped, name);
                 answers.name = name;

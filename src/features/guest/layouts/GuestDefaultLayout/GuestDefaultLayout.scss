@@ -20,9 +20,9 @@
         }
     }
 
-    @include tablet{
-        &-main{
-            &-body{
+    @include tablet {
+        &-main {
+            &-body {
                 align-items: flex-start;
             }
         }

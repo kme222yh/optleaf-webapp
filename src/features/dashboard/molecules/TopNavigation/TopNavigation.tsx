@@ -7,7 +7,6 @@ import { faFolder, faUser } from '@fortawesome/free-solid-svg-icons';
 import { DashboardWhiteAreaAtom } from '../../atoms/DashboardWhiteAreaAtom';
 import { NavLink } from '../../atoms/NavLink';
 
-
 export type TopNavigationProps = {
     className?: string;
 };

@@ -4,7 +4,9 @@ module.exports = {
         let uniqueName = '';
         const features = featureStr.split('/');
         for (const feature of features) {
-            uniqueName = `${uniqueName}${feature[0].toUpperCase()}${feature.slice(1)}`;
+            uniqueName = `${uniqueName}${feature[0].toUpperCase()}${feature.slice(
+                1
+            )}`;
         }
         prefix = `${prefix[0].toUpperCase()}${prefix.slice(1)}`;
         uniqueName = `${uniqueName}${name}${prefix}`;
@@ -22,5 +24,5 @@ module.exports = {
     },
     genStyleFileName: (isScoped, name) => {
         return `${name}.${isScoped ? 'scoped.' : ''}scss`;
-    },
+    }
 };

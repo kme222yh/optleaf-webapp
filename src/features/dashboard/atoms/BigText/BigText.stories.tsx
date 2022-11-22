@@ -1,14 +1,14 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { FogotPasswordForm } from './FogotPasswordForm';
+import { BigText } from './BigText';
 
-type T = typeof FogotPasswordForm;
+type T = typeof BigText;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: FogotPasswordForm,
+    component: BigText,
     args: {
-        // add props here !!
+        children: 'afosejfoaej'
     }
 } as Meta;
 

@@ -8,10 +8,11 @@ DashboardWhiteAreaAtom.defaultProps = {
     className: ''
 };
 
-export function DashboardWhiteAreaAtom({className, children}: DashboardWhiteAreaAtomProps) {
+export function DashboardWhiteAreaAtom({
+    className,
+    children
+}: DashboardWhiteAreaAtomProps) {
     return (
-        <div className={`DashboardWhiteAreaAtom ${className}`}>
-            {children}
-        </div>
+        <div className={`DashboardWhiteAreaAtom ${className}`}>{children}</div>
     );
 }

@@ -1,9 +1,9 @@
-import { type ComponentMeta, type ComponentStoryObj } from "@storybook/react";
+import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 
-import { NavLink } from "./NavLink";
+import { NavLink } from './NavLink';
 
 type T = typeof NavLink;
 type Meta = ComponentMeta<T>;
@@ -17,9 +17,8 @@ export default {
         hrefPattern: 'a',
         children: <FontAwesomeIcon icon={faComment} />,
         text: 'testtest',
-        greenBack: false,
-    },
+        greenBack: false
+    }
 } as Meta;
-
 
 export const Default: Story = {};
