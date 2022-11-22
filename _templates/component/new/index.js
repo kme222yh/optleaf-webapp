@@ -12,7 +12,7 @@ module.exports = {
                     type: 'select',
                     name: 'type',
                     message: 'What is type ?',
-                    choices: ['atom', 'organism', 'view', 'layout'],
+                    choices: ['atom', 'molecule', 'organism', 'view', 'layout'],
                 },
                 {
                     type: 'input',

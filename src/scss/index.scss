@@ -1,12 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Ubuntu:wght@400;700&display=swap');
-/*
-font-family: 'Noto Sans JP', sans-serif;
-font-family: 'Ubuntu', sans-serif;
-*/
-
 body {
     margin: 0;
-    font-family: 'Ubuntu', sans-serif, 'Noto Sans JP', sans-serif;
+    @include font-en;
     font-weight: 400;
     min-height: 100vh;
 }
