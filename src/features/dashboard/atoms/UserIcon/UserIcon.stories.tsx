@@ -8,7 +8,7 @@ type Story = ComponentStoryObj<T>;
 export default {
     component: UserIcon,
     args: {
-        // add props here !!
+        src: '',
     },
 } as Meta;
 

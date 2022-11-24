@@ -6,7 +6,7 @@ import { useRef } from 'react';
 
 import { useAuth } from '@/providers/auth';
 
-import { UserIcon } from '../../molecules/UserIcon';
+import { UserIcon } from '../../atoms/UserIcon';
 
 export type UserMenuProps = {
     className?: string;
@@ -23,12 +23,15 @@ export function UserMenu({ className, isOpened }: UserMenuProps) {
         await logout();
     };
 
+    // const { user } = useAuth();
+    // const src = user?.icon_image ? user.icon_image : import.meta.env.VITE_DEFAULT_USER_ICON;
+
     return (
         <div className={`UserMenu ${className}`}>
             {isOpened}
             <div className="UserMenu-body">
                 <div className="UserMenu-header">
-                    <UserIcon />
+                    <UserIcon src={user?.icon_image} />
                     <span className="UserMenu-name">{user?.name}</span>
                 </div>
                 <ul className="UserMenu-menu">

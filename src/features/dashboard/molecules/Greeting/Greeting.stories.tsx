@@ -8,7 +8,7 @@ type Story = ComponentStoryObj<T>;
 export default {
     component: Greeting,
     args: {
-        // add props here !!
+        userName: '',
     }
 } as Meta;
 
