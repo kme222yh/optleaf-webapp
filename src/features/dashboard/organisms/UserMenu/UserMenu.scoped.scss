@@ -1,0 +1,79 @@
+.UserMenu{
+    &-body{
+        width: 250px;
+        color: $color-black;
+        overflow: hidden;
+        // width: 70px;
+        // height: 70px;
+        // &.open-enter {
+        //     width: 70px;
+        //     height: 70px;
+        // }
+        // &.open-enter-active {
+        //     width: 250px;
+        //     transition: .3s;
+        // }
+        // &.open-enter-done,
+        // &.open-exit {
+        //     width: 250px;
+        // }
+        // &.open-exit-active {
+        //     width: 70px;
+        //     height: 70px;
+        //     transition: .3s;
+        // }
+    }
+    &-header{
+        width: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        @include font-jp;
+        font-weight: bold;
+        font-size: 20px;
+        border-bottom: 3px solid $color-sub;
+    }
+    &-name{
+        width: calc(250px - 70px - 10px - 10px);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    &-menu{
+        width: 250px;
+        min-height: 280px;
+        position: relative;
+        text-align: center;
+        font-size: 20px;
+        @include font-en;
+    }
+    &-link{
+        margin: 15px 0;
+        transition: .3s;
+        a{
+            transition: .3s;
+            &:hover{
+                color: $color-transparent-black;
+            }
+        }
+    }
+    &-logout{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        button{
+            cursor: pointer;
+            width: 100%;
+            line-height: 53px;
+            color: $color-white;
+            background-color: $color-sub;
+            display: block;
+            border-radius: 0 0 35px 35px;
+            transition: .3s;
+            &:hover{
+                opacity: .8;
+            }
+        }
+    }
+}
