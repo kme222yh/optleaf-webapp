@@ -1,4 +1,6 @@
 .Greeting {
+    @include DashboardWhiteArea;
+
     &-body {
         padding: 30px;
         @include innerBody;

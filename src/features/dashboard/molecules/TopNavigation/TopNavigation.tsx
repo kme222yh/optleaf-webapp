@@ -4,7 +4,6 @@ import './TopNavigation.scoped.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder, faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { DashboardWhiteAreaAtom } from '../../atoms/DashboardWhiteAreaAtom';
 import { NavLink } from '../../atoms/NavLink';
 
 export type TopNavigationProps = {
@@ -16,7 +15,7 @@ TopNavigation.defaultProps = {
 
 export function TopNavigation({ className }: TopNavigationProps) {
     return (
-        <DashboardWhiteAreaAtom className={`TopNavigation ${className}`}>
+        <div className={`TopNavigation ${className}`}>
             <ul className="TopNavigation-body">
                 <li className="TopNavigation-link">
                     <NavLink href="/" hrefPattern="^/$" text="top">
@@ -53,6 +52,6 @@ export function TopNavigation({ className }: TopNavigationProps) {
                     </NavLink>
                 </li>
             </ul>
-        </DashboardWhiteAreaAtom>
+        </div>
     );
 }

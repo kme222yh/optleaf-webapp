@@ -1,4 +1,9 @@
 .UserMenu{
+    @include DashboardWhiteArea;
+
+    width: fit-content;
+    display: inline-block;
+
     &-body{
         width: 250px;
         color: $color-black;

@@ -1,4 +1,9 @@
 .UserIcon{
+    @include DashboardWhiteArea;
+
+    width: fit-content;
+    display: inline-block;
+
     &-body{
         width: 70px;
         height: 70px;

@@ -6,7 +6,6 @@ import { useRef } from 'react';
 
 import { useAuth } from '@/providers/auth';
 
-import { DashboardWhiteWrapperAtom } from '../../atoms/DashboardWhiteWrapperAtom';
 import { UserIcon } from '../../molecules/UserIcon';
 
 export type UserMenuProps = {
@@ -25,7 +24,7 @@ export function UserMenu({ className, isOpened }: UserMenuProps) {
     };
 
     return (
-        <DashboardWhiteWrapperAtom className={`UserMenu ${className}`}>
+        <div className={`UserMenu ${className}`}>
             {isOpened}
             <div className="UserMenu-body">
                 <div className="UserMenu-header">
@@ -51,6 +50,6 @@ export function UserMenu({ className, isOpened }: UserMenuProps) {
                     </li>
                 </ul>
             </div>
-        </DashboardWhiteWrapperAtom>
+        </div>
     );
 }
