@@ -30,7 +30,8 @@
         "react-router-dom": "^6.4.3",
         "react-tabs": "^5.1.0",
         "react-transition-group": "^4.4.5",
-        "rollup-plugin-react-scoped-css": "^0.7.0"
+        "rollup-plugin-react-scoped-css": "^0.7.0",
+        "zustand": "^4.1.4"
     },
     "devDependencies": {
         "@babel/core": "^7.20.2",

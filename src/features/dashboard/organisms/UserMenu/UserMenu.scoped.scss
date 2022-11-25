@@ -1,32 +1,49 @@
 .UserMenu{
-    @include DashboardWhiteArea;
-
     width: fit-content;
     display: inline-block;
 
+    height: 70px;
+    width: 70px;
+
+    position: relative;
+
     &-body{
-        width: 250px;
+        @include DashboardWhiteArea;
+
+        position: absolute;
+        right: 0;
+        // left: 0;
+        top: 0;
+        height: 70px;
+        width: 70px;
+
+        transition: .3s;
+
         color: $color-black;
         overflow: hidden;
-        // width: 70px;
-        // height: 70px;
-        // &.open-enter {
-        //     width: 70px;
-        //     height: 70px;
-        // }
-        // &.open-enter-active {
-        //     width: 250px;
-        //     transition: .3s;
-        // }
-        // &.open-enter-done,
-        // &.open-exit {
-        //     width: 250px;
-        // }
-        // &.open-exit-active {
-        //     width: 70px;
-        //     height: 70px;
-        //     transition: .3s;
-        // }
+
+        &.open-enter {
+            width: 70px;
+            height: 70px;
+        }
+        &.open-enter-active {
+            width: 250px;
+            height: 368px;
+        }
+        &.open-enter-done,
+        &.open-exit {
+            @include box-shadow;
+            width: 250px;
+            height: 368px;
+        }
+        &.open-enter, &.open-exit-active {
+            width: 70px;
+            height: 70px;
+        }
+
+        &:hover{
+            @include box-shadow;
+        }
     }
     &-header{
         width: 250px;
@@ -37,6 +54,7 @@
         font-weight: bold;
         font-size: 20px;
         border-bottom: 3px solid $color-sub;
+        cursor: pointer;
     }
     &-name{
         width: calc(250px - 70px - 10px - 10px);

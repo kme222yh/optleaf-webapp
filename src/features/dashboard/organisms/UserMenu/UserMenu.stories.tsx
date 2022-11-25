@@ -8,7 +8,6 @@ type Story = ComponentStoryObj<T>;
 export default {
     component: UserMenu,
     args: {
-        isOpened: true,
     },
 } as Meta;
 
