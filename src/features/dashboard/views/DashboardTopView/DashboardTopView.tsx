@@ -16,14 +16,14 @@ DashboardTopView.defaultProps = {
 
 export function DashboardTopView({ className }: DashboardTopViewProps) {
     const { user } = useAuth();
-    const {height, ref } = useElementSize();
+    const { height, ref } = useElementSize();
 
     return (
         <div className={`DashboardTopView ${className}`}>
             <div className="DashboardTopView-body" ref={ref}>
                 <div className="DashboardTopView-left">
                     <ProjectListSM height={`${(height / 5) * 3 - 12.5}px`} />
-                    <TeamListSM height='auto' />
+                    <TeamListSM height="auto" />
                 </div>
 
                 <div className="DashboardTopView-right">

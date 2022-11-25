@@ -1,4 +1,4 @@
-.PlusButtonSM{
+.PlusButtonSM {
     background-color: $color-lightgreen;
     border-radius: 25px;
     font-size: 34px;
@@ -6,13 +6,13 @@
     max-width: 290px;
     aspect-ratio: 2;
     display: block;
-    transition: .3s;
+    transition: 0.3s;
 
-    &:hover{
+    &:hover {
         background-color: $color-sub;
     }
 
-    &-body{
+    &-body {
         cursor: pointer;
         height: 100%;
         width: 100%;

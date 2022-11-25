@@ -1,24 +1,24 @@
-.DashboardDefaultLayout{
+.DashboardDefaultLayout {
     height: 100vh;
     width: 100%;
     padding: 20px 0;
     background-color: $color-main;
-    &-header{
+    &-header {
         @include outerBody;
 
         display: flex;
         align-items: center;
-        .TopNavigation{
+        .TopNavigation {
             flex-grow: 1;
         }
-        .UserMenu{
+        .UserMenu {
             margin-left: 20px;
         }
 
         margin-bottom: 30px;
     }
 
-    &-main{
+    &-main {
         @include outerBody;
     }
 }

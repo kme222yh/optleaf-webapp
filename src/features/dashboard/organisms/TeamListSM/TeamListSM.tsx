@@ -14,25 +14,25 @@ TeamListSM.defaultProps = {
     height: '500px'
 };
 
-export function TeamListSM({className, height}: TeamListSMProps) {
+export function TeamListSM({ className, height }: TeamListSMProps) {
     const query = useDashboardTopQuery();
 
-    const teams = query.isLoading ? []: query.data?.teams;
+    const teams = query.isLoading ? [] : query.data?.teams;
     const $items = [];
     let itemsLength = 0;
-    itemsLength = Array.isArray(teams) ? teams.length: 0;
+    itemsLength = Array.isArray(teams) ? teams.length : 0;
     for (let i = 0; i < itemsLength; i += 1) {
-        if(i>2)break;
+        if (i > 2) break;
         const team = (teams as Team[])[i];
         const icons: string[] = [];
         icons.push(team.owner?.icon_image as string);
-        if(Array.isArray(team.administrators)){
-            team.administrators.forEach(user => {
+        if (Array.isArray(team.administrators)) {
+            team.administrators.forEach((user) => {
                 icons.push(user?.icon_image as string);
             });
         }
-        if(Array.isArray(team.menbers)){
-            team.menbers.forEach(user => {
+        if (Array.isArray(team.menbers)) {
+            team.menbers.forEach((user) => {
                 icons.push(user?.icon_image as string);
             });
         }

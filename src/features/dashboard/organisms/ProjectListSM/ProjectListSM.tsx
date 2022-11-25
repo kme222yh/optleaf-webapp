@@ -17,22 +17,22 @@ ProjectListSM.defaultProps = {
 export function ProjectListSM({ className, height }: ProjectListSMProps) {
     const query = useDashboardTopQuery();
 
-    const projects = query.isLoading ? []: query.data?.projects;
+    const projects = query.isLoading ? [] : query.data?.projects;
     const $items = [];
     let itemsLength = 0;
-    itemsLength = Array.isArray(projects) ? projects.length: 0;
+    itemsLength = Array.isArray(projects) ? projects.length : 0;
     for (let i = 0; i < itemsLength; i += 1) {
-        if(i>3)break;
+        if (i > 3) break;
         const project = (projects as Project[])[i];
         const icons: string[] = [];
         icons.push(project.owner?.icon_image as string);
-        if(Array.isArray(project.administrators)){
-            project.administrators.forEach(user => {
+        if (Array.isArray(project.administrators)) {
+            project.administrators.forEach((user) => {
                 icons.push(user?.icon_image as string);
             });
         }
-        if(Array.isArray(project.menbers)){
-            project.menbers.forEach(user => {
+        if (Array.isArray(project.menbers)) {
+            project.menbers.forEach((user) => {
                 icons.push(user?.icon_image as string);
             });
         }

@@ -9,11 +9,11 @@ UserIconSM.defaultProps = {
     src: import.meta.env.VITE_DEFAULT_USER_ICON
 };
 
-export function UserIconSM({className, src}: UserIconSMProps) {
+export function UserIconSM({ className, src }: UserIconSMProps) {
     const defaultSrc = import.meta.env.VITE_DEFAULT_USER_ICON;
     return (
         <div className={`UserIconSM ${className}`}>
-                        <img
+            <img
                 className="UserIconSM-img"
                 src={src || defaultSrc}
                 alt="user icon"

@@ -43,8 +43,10 @@ export function PreviewLink({
                 {$icons.length > 0 ? (
                     <ul className="PreviewLink-icons">
                         {iconsLength >= 5 ? (
-                            <p className='PreviewLink-icons-num'>
-                                <span className='PreviewLink-icons-plus'>+</span>
+                            <p className="PreviewLink-icons-num">
+                                <span className="PreviewLink-icons-plus">
+                                    +
+                                </span>
                                 {iconsLength - 5}
                             </p>
                         ) : (
