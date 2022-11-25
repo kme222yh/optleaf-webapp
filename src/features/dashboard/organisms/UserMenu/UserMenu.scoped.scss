@@ -1,4 +1,4 @@
-.UserMenu{
+.UserMenu {
     width: fit-content;
     display: inline-block;
 
@@ -7,7 +7,7 @@
 
     position: relative;
 
-    &-body{
+    &-body {
         @include DashboardWhiteArea;
 
         position: absolute;
@@ -17,7 +17,7 @@
         height: 70px;
         width: 70px;
 
-        transition: .3s;
+        transition: 0.3s;
 
         color: $color-black;
         overflow: hidden;
@@ -36,16 +36,17 @@
             width: 250px;
             height: 368px;
         }
-        &.open-enter, &.open-exit-active {
+        &.open-enter,
+        &.open-exit-active {
             width: 70px;
             height: 70px;
         }
 
-        &:hover{
+        &:hover {
             @include box-shadow;
         }
     }
-    &-header{
+    &-header {
         width: 250px;
         display: flex;
         align-items: center;
@@ -56,13 +57,13 @@
         border-bottom: 3px solid $color-sub;
         cursor: pointer;
     }
-    &-name{
+    &-name {
         width: calc(250px - 70px - 10px - 10px);
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
     }
-    &-menu{
+    &-menu {
         width: 250px;
         min-height: 280px;
         position: relative;
@@ -70,22 +71,22 @@
         font-size: 20px;
         @include font-en;
     }
-    &-link{
+    &-link {
         margin: 15px 0;
-        transition: .3s;
-        a{
-            transition: .3s;
-            &:hover{
+        transition: 0.3s;
+        a {
+            transition: 0.3s;
+            &:hover {
                 color: $color-transparent-black;
             }
         }
     }
-    &-logout{
+    &-logout {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        button{
+        button {
             cursor: pointer;
             width: 100%;
             line-height: 53px;
@@ -93,9 +94,9 @@
             background-color: $color-sub;
             display: block;
             border-radius: 0 0 35px 35px;
-            transition: .3s;
-            &:hover{
-                opacity: .8;
+            transition: 0.3s;
+            &:hover {
+                opacity: 0.8;
             }
         }
     }

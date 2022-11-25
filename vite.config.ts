@@ -16,7 +16,7 @@ export default defineConfig({
                 additionalData: `
                     @import "@/scss/prepends.scss";
                     @import "../../scss/index.scss";
-                `,
+                `
             }
         }
     },

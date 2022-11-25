@@ -20,10 +20,10 @@ export const useModalManageStore = create<ModalManagerStore>((set, get) => ({
     isOpened: (key) => (key ? get().key === key : get().key !== ''),
     close: () => set(() => ({ key: '' })),
     toggle: (key) => {
-        if(get().key === key){;
+        if (get().key === key) {
             get().close();
         } else {
             get().open(key);
         }
-    },
+    }
 }));
