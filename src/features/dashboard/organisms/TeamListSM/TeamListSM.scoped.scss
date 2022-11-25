@@ -1,6 +1,7 @@
 .TeamListSM{
     @include DashboardWhiteArea;
-    width: 330px;
+    width: 100%;
+    max-width: 330px;
     padding: 20px;
     overflow-y: scroll;
 

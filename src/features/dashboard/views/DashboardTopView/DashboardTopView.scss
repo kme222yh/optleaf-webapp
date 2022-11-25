@@ -1,0 +1,48 @@
+.DashboardTopView{
+    height: 100%;
+    &-body{
+        height: 100%;
+        display: flex;
+    }
+    &-left{
+        margin-right: 25px;
+        width: 35%;
+        max-width: 330px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        .ProjectListSM{
+            margin-bottom: 25px;
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+        .TeamListSM{
+            flex: 1;
+        }
+    }
+    &-right{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        .Greeting{
+            flex-shrink: 0;
+            flex-grow: 0;
+            margin-bottom: 20px;
+        }
+    }
+    &-commingsoon{
+        flex: 1;
+        @include DashboardWhiteArea;
+        color: $color-transparent-black;
+        @include font-en;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 60px;
+        text-align: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
