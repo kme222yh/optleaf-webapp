@@ -1,6 +1,6 @@
 overwrite: true
 schema: '../optleaf-api/**/*.graphql'
-documents: './src/graphql/query/*.graphql'
+documents: './src/**/*.graphql'
 generates:
     ./src/graphql/generated.ts:
         plugins:

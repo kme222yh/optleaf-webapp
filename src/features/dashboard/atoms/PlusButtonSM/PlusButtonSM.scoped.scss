@@ -1,0 +1,23 @@
+.PlusButtonSM{
+    background-color: $color-lightgreen;
+    border-radius: 25px;
+    font-size: 34px;
+    color: $color-white;
+    max-width: 290px;
+    aspect-ratio: 2;
+    display: block;
+    transition: .3s;
+
+    &:hover{
+        background-color: $color-sub;
+    }
+
+    &-body{
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,0 +1,15 @@
+.UserIconSM{
+    background-color: $color-white;
+    border-radius: 10px;
+
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    padding: 1.5px;
+
+    &-img {
+        display: block;
+        width: 17px;
+        height: 17px;
+    }
+}

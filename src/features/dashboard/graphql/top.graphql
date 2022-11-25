@@ -1,0 +1,31 @@
+query dashboardTop {
+    projects {
+        id
+        name
+        description
+        owner {
+            icon_image
+        }
+        administrators {
+            icon_image
+        }
+        menbers {
+            icon_image
+        }
+    }
+
+    teams {
+        id
+        name
+        description
+        owner {
+            icon_image
+        }
+        administrators {
+            icon_image
+        }
+        menbers {
+            icon_image
+        }
+    }
+}

@@ -1,0 +1,49 @@
+.PreviewLink{
+    background-color: $color-lightgreen;
+    border-radius: 25px;
+    color: $color-white;
+    @include font-jp;
+    padding: 20px 30px;
+    max-width: 290px;
+    display: block;
+    transition: .3s;
+
+    &:hover{
+        background-color: $color-sub;
+    }
+
+    &-name{
+        font-size: 18px;
+        line-height: 25px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    &-content{
+        font-size: 13px;
+        line-height: 18px;
+        overflow-y: hidden;
+        word-break: break-all;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    &-icons{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+        height: 20px;
+        margin-top: 10px;
+        &-num{
+            margin-left: 10px;
+            font-size: 11px;
+            @include font-en;
+            font-weight: bold;
+        }
+    }
+    &-icon{
+        height: 20px;
+        width: 13px;
+    }
+}
