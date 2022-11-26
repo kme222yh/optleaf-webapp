@@ -14,6 +14,7 @@
         right: 0;
         // left: 0;
         top: 0;
+        z-index: 200;
         height: 70px;
         width: 70px;
 
@@ -36,7 +37,6 @@
             width: 250px;
             height: 368px;
         }
-        &.open-enter,
         &.open-exit-active {
             width: 70px;
             height: 70px;

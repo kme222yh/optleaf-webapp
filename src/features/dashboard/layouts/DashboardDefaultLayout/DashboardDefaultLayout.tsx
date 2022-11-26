@@ -4,6 +4,7 @@ import { useElementSize } from '@/hooks/useElementSize';
 
 import { TopNavigation } from '../../organisms/TopNavigation';
 import { UserMenu } from '../../organisms/UserMenu';
+import { GrayBackground } from '../../organisms/GrayBackground';
 
 export type DashboardDefaultLayoutProps = {
     className?: string;
@@ -38,6 +39,8 @@ export function DashboardDefaultLayout({
             >
                 {children}
             </main>
+
+            <GrayBackground />
         </div>
     );
 }

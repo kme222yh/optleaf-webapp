@@ -6,37 +6,13 @@ const { DashboardDefaultLayout } = lazyImport(
     'DashboardDefaultLayout'
 );
 
-// const { ProjectView } = lazyImport(
-//     () => import('@/features/oldDashboard'),
-//     'ProjectView'
-// );
-// const { ProjectTaskView } = lazyImport(
-//     () => import('@/features/oldDashboard'),
-//     'ProjectTaskView'
-// );
 const { DashboardTopView } = lazyImport(
     () => import('@/features/dashboard'),
     'DashboardTopView'
 );
-// const { ProjectListView } = lazyImport(
-//     () => import('@/features/oldDashboard'),
-//     'ProjectListView'
-// );
-// const { TeamListView } = lazyImport(
-//     () => import('@/features/oldDashboard'),
-//     'TeamListView'
-// );
-// const { UserSettingView } = lazyImport(
-//     () => import('@/features/oldDashboard'),
-//     'UserSettingView'
-// );
 
 function App() {
-    return (
-        <DashboardDefaultLayout>
-            <Outlet />
-        </DashboardDefaultLayout>
-    );
+    return <Outlet />;
 }
 
 export const protectedRoutes: RouteObject[] = [
@@ -44,15 +20,46 @@ export const protectedRoutes: RouteObject[] = [
         path: '/',
         element: <App />,
         children: [
-            { path: '', element: <DashboardTopView /> },
-            // { path: 'projects', element: <ProjectListView /> },
-            // { path: 'teams', element: <TeamListView /> },
-            // { path: 'project/:projectId', element: <ProjectView /> },
-            // {
-            //     path: 'project/:projectId/:taskId',
-            //     element: <ProjectTaskView />
-            // },
-            // { path: 'user/setting', element: <UserSettingView /> },
+            {
+                path: '',
+                element: (
+                    <DashboardDefaultLayout>
+                        <DashboardTopView />
+                    </DashboardDefaultLayout>
+                )
+            },
+            {
+                path: '/projects',
+                element: (
+                    <DashboardDefaultLayout>
+                        <p>hoghoge</p>
+                    </DashboardDefaultLayout>
+                )
+            },
+            {
+                path: '/teams',
+                element: (
+                    <DashboardDefaultLayout>
+                        <DashboardTopView />
+                    </DashboardDefaultLayout>
+                )
+            },
+            {
+                path: '/setting',
+                element: (
+                    <DashboardDefaultLayout>
+                        <DashboardTopView />
+                    </DashboardDefaultLayout>
+                )
+            },
+            {
+                path: '/profile',
+                element: (
+                    <DashboardDefaultLayout>
+                        <DashboardTopView />
+                    </DashboardDefaultLayout>
+                )
+            },
             { path: '*', element: <Navigate to="." /> }
         ]
     }
