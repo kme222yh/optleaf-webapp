@@ -46,10 +46,8 @@
         justify-content: center;
     }
 
-
-
-    @include tablet{
-        &-left{
+    @include tablet {
+        &-left {
             display: none;
         }
     }

@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { useLayoutEffect, useState, useRef } from 'react';
 
 type ElementSizeType = {
