@@ -1,12 +1,12 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { GrayBackground } from './GrayBackground';
+import { LoadingPreviewLink } from './LoadingPreviewLink';
 
-type T = typeof GrayBackground;
+type T = typeof LoadingPreviewLink;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: GrayBackground,
+    component: LoadingPreviewLink,
     args: {
         // add props here !!
     }
