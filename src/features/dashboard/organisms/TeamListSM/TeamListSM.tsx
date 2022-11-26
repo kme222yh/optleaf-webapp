@@ -23,7 +23,7 @@ export function TeamListSM({ className, height }: TeamListSMProps) {
     if (query.isLoading) {
         for (let i = 0; i < 2; i += 1) {
             $items.push(
-                <li className="TeamListSM-item">
+                <li className="TeamListSM-item" key={i}>
                     <LoadingPreviewLink />
                 </li>
             );
@@ -59,7 +59,7 @@ export function TeamListSM({ className, height }: TeamListSMProps) {
             );
         }
         $items.push(
-            <li className="TeamListSM-item">
+            <li className="TeamListSM-item" key={itemsLength}>
                 <PlusButtonSM onClick={() => {}} />
             </li>
         );

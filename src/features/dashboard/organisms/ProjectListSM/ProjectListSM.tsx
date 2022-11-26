@@ -23,7 +23,7 @@ export function ProjectListSM({ className, height }: ProjectListSMProps) {
     if (query.isLoading) {
         for (let i = 0; i < 4; i += 1) {
             $items.push(
-                <li className="ProjectListSM-item">
+                <li className="ProjectListSM-item" key={i}>
                     <LoadingPreviewLink />
                 </li>
             );
@@ -59,7 +59,7 @@ export function ProjectListSM({ className, height }: ProjectListSMProps) {
             );
         }
         $items.push(
-            <li className="ProjectListSM-item">
+            <li className="ProjectListSM-item" key={itemsLength}>
                 <PlusButtonSM onClick={() => {}} />
             </li>
         );

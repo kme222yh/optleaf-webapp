@@ -45,4 +45,12 @@
         align-items: center;
         justify-content: center;
     }
+
+
+
+    @include tablet{
+        &-left{
+            display: none;
+        }
+    }
 }
