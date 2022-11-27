@@ -10,6 +10,10 @@ const { DashboardTopView } = lazyImport(
     () => import('@/features/dashboard'),
     'DashboardTopView'
 );
+const { DashboardProjectsView } = lazyImport(
+    () => import('@/features/dashboard'),
+    'DashboardProjectsView'
+);
 
 function App() {
     return <Outlet />;
@@ -32,7 +36,7 @@ export const protectedRoutes: RouteObject[] = [
                 path: '/projects',
                 element: (
                     <DashboardDefaultLayout>
-                        <p>hoghoge</p>
+                        <DashboardProjectsView />
                     </DashboardDefaultLayout>
                 )
             },

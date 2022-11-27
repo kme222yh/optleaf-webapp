@@ -21,7 +21,7 @@ export function DashboardDefaultLayout({
     const $layout = useElementSize();
     const $header = useElementSize();
 
-    const mainHeight = $layout.height - $header.height - 60;
+    const mainHeight = $layout.height - $header.height - 70;
 
     return (
         <div

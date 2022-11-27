@@ -1,0 +1,23 @@
+.SearchButton {
+    cursor: pointer;
+
+    display: inline-block;
+    border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    color: #99d982;
+    border: 3px solid #99d982;
+    font-size: 26px;
+    padding: 0 2px 2px 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.3s;
+
+    &:hover {
+        background-color: #99d982;
+        color: $color-white;
+    }
+}
