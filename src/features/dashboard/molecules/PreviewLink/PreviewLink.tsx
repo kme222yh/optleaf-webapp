@@ -30,7 +30,7 @@ export function PreviewLink({
         if (i >= 5) break;
         $icons.push(
             <li className="PreviewLink-icon" key={i}>
-                <UserIcon src={(icons as string[])[i]} size='20px' />
+                <UserIcon src={(icons as string[])[i]} size="20px" />
             </li>
         );
     }

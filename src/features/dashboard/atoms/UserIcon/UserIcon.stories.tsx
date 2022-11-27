@@ -9,7 +9,7 @@ export default {
     component: UserIcon,
     args: {
         src: '',
-        size: '40px',
+        size: '40px'
     }
 } as Meta;
 

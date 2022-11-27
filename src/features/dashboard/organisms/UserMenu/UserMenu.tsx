@@ -40,7 +40,7 @@ export function UserMenu({ className }: UserMenuProps) {
                         role="button"
                         tabIndex={0}
                     >
-                        <UserIcon src={user?.icon_image} size='70px' />
+                        <UserIcon src={user?.icon_image} size="70px" />
                         <span className="UserMenu-name">{user?.name}</span>
                     </div>
                     <ul className="UserMenu-menu">
