@@ -51,8 +51,8 @@ export function ProjectList({ className }: ProjectListProps) {
                         icons={icons}
                         name={project.name as string}
                         to="/"
-                        nOfCompleted={10}
-                        nOfTasks={5}
+                        // nOfCompleted={10}
+                        // nOfTasks={5}
                     />
                 </li>
             );
