@@ -4,6 +4,7 @@ module.exports = {
         let uniqueName = '';
         const features = featureStr.split('/');
         for (const feature of features) {
+            if (feature === '') break;
             uniqueName = `${uniqueName}${feature[0].toUpperCase()}${feature.slice(
                 1
             )}`;

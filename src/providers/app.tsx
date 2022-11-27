@@ -1,7 +1,10 @@
-import * as React from 'react';
+import React, { Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 // import { ReactQueryDevtools } from 'react-query-devtools';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+import { LoadingView } from '@/views/LoadingView';
+
 import { AuthProvider } from './auth';
 
 type AppProviderProps = {
@@ -13,10 +16,12 @@ const queryClient = new QueryClient();
 export function AppProvider({ children }: AppProviderProps) {
     return (
         <QueryClientProvider client={queryClient}>
-            <AuthProvider>
-                <Router>{children}</Router>
-            </AuthProvider>
-            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+            <Suspense fallback={<LoadingView />}>
+                <AuthProvider>
+                    <Router>{children}</Router>
+                </AuthProvider>
+                {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+            </Suspense>
         </QueryClientProvider>
     );
 }

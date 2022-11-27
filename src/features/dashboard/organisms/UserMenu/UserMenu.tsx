@@ -35,8 +35,8 @@ export function UserMenu({ className }: UserMenuProps) {
                 <div className="UserMenu-body" ref={nodeRef}>
                     <div
                         className="UserMenu-header"
-                        onClick={() => modal.toggle('userMenu')}
-                        onKeyDown={() => modal.toggle('userMenu')}
+                        onClick={() => modal.open('userMenu')}
+                        onKeyDown={() => modal.open('userMenu')}
                         role="button"
                         tabIndex={0}
                     >

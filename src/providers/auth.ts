@@ -8,7 +8,7 @@ import {
     getUser,
     refreshWIthRefreshToken
 } from '@/api/auth';
-// import { Loading as LoaderComponent } from '../components/Loading';
+import { LoadingView as LoaderComponent } from '@/views/LoadingView';
 
 async function refreshToken() {
     storage.useRefreshToken();
@@ -64,8 +64,8 @@ const authConfig = {
     loadUser,
     loginFn,
     registerFn,
-    logoutFn
-    // LoaderComponent
+    logoutFn,
+    LoaderComponent
 };
 
 export const { AuthProvider, useAuth } = initReactQueryAuth<
