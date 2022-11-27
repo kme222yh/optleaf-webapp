@@ -2,7 +2,7 @@ import './PreviewLink.scoped.scss';
 
 import { Link } from 'react-router-dom';
 
-import { UserIconSM } from '../../atoms/UserIconSM';
+import { UserIcon } from '../../atoms/UserIcon';
 
 export type PreviewLinkProps = {
     className?: string;
@@ -30,7 +30,7 @@ export function PreviewLink({
         if (i >= 5) break;
         $icons.push(
             <li className="PreviewLink-icon" key={i}>
-                <UserIconSM src={(icons as string[])[i]} />
+                <UserIcon src={(icons as string[])[i]} size='20px' />
             </li>
         );
     }

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFolder, faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { NavLink } from '../../atoms/NavLink';
-import { LeafsLogo } from '../../atoms/LeafsLogo';
+import { LeafsLogo } from '../../svg/LeafsLogo';
 
 export type TopNavigationProps = {
     className?: string;

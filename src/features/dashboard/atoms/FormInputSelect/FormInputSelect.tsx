@@ -2,7 +2,7 @@ import './FormInputSelect.scoped.scss';
 
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-import { TriangleDown } from '../TriangleDown';
+import { TriangleDown } from '../../svg/TriangleDown';
 
 type Selection = {
     key: string;
