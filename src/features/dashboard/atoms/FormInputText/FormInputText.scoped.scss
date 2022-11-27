@@ -18,7 +18,8 @@
     }
 
     outline: 1.5px solid rgba(153, 217, 130, 0);
-    &:focus {
+    &:focus,
+    &:hover {
         outline: 1.5px solid #99d982;
     }
 }

@@ -1,0 +1,50 @@
+.PreviewLinkLG {
+    background-color: $color-lightgreen;
+    border-radius: 25px;
+    color: $color-white;
+    @include font-jp;
+    padding: 20px 30px;
+    max-width: 555px;
+    display: block;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: $color-sub;
+    }
+
+    &-name {
+        @include text-ellipsis;
+        font-size: 30px;
+        line-height: 41px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    &-content {
+        @include text-ellipsis(5);
+        font-size: 15px;
+        line-height: 23px;
+        min-height: 115px;
+        letter-spacing: 0.05em;
+        margin-bottom: 20px;
+    }
+
+    position: relative;
+    &-task {
+        position: absolute;
+        right: 30px;
+        bottom: 22px;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        &-completed {
+            margin-right: 15px;
+        }
+    }
+
+    @include mobile {
+        &-task {
+            position: static;
+        }
+    }
+}

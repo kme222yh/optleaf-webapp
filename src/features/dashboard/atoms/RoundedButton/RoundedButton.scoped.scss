@@ -1,0 +1,31 @@
+.RoundedButton {
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    display: inline-block;
+
+    cursor: pointer;
+    color: #ecf4e9;
+    background-color: #99d982;
+    border-radius: 100px;
+    padding: 14px 16px 15px;
+    min-width: 175px;
+    text-align: center;
+    transition: 0.2s;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: bold;
+    &:hover {
+        @include box-shadow;
+    }
+
+    &.collor_reverse {
+        color: #99d982;
+        background-color: #ecf4e9;
+        &:hover {
+            @include box-shadow;
+        }
+    }
+}

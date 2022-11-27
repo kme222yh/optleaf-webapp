@@ -31,7 +31,11 @@ export function FormInputSelect({
 
     if (Array.isArray(selection)) {
         selection.forEach((el) => {
-            $selections.push(<option value={el.value}>{el.key}</option>);
+            $selections.push(
+                <option value={el.value} key={el.key}>
+                    {el.key}
+                </option>
+            );
         });
     }
 

@@ -1,0 +1,28 @@
+.UserIconRow {
+    display: inline-block;
+
+    &-body {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
+
+    &-item {
+        aspect-ratio: 0.6;
+        &:first-child {
+            aspect-ratio: 1;
+        }
+    }
+
+    position: relative;
+    &-num {
+        position: absolute;
+        left: calc(100% + 3px);
+        bottom: 0;
+
+        font-size: 15px;
+        @include font-en;
+        font-weight: bold;
+        color: $color-white;
+    }
+}

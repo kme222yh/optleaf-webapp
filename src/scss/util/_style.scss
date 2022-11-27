@@ -1,3 +1,11 @@
 @mixin box-shadow {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
+
+@mixin text-ellipsis($n: 1) {
+    overflow-y: hidden;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $n;
+}

@@ -1,0 +1,23 @@
+.SearchForm {
+    display: inline-block;
+    width: 100%;
+    &-body {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0 10px;
+    }
+    &-select {
+        flex-shrink: 1;
+        width: 100%;
+        max-width: 200px;
+    }
+    &-text {
+        flex-shrink: 1;
+        width: 100%;
+        max-width: 220px;
+    }
+    &-button {
+        flex-shrink: 0;
+    }
+}

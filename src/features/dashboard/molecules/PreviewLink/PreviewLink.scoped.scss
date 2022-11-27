@@ -13,6 +13,7 @@
     }
 
     &-name {
+        @include text-ellipsis;
         font-size: 18px;
         line-height: 25px;
         margin-bottom: 10px;
@@ -20,30 +21,9 @@
     }
 
     &-content {
+        @include text-ellipsis(2);
         font-size: 13px;
         line-height: 18px;
-        overflow-y: hidden;
-        word-break: break-all;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-    }
-
-    &-icons {
-        display: flex;
-        justify-content: flex-end;
-        flex-direction: row-reverse;
-        height: 20px;
-        margin-top: 10px;
-        &-num {
-            margin-left: 10px;
-            font-size: 11px;
-            @include font-en;
-            font-weight: bold;
-        }
-    }
-    &-icon {
-        height: 20px;
-        width: 13px;
+        margin-bottom: 10px;
     }
 }

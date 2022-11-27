@@ -1,0 +1,13 @@
+.ProjectsHeader {
+    display: flex;
+    justify-content: flex-start;
+
+    &-left {
+        margin-right: 40px;
+        padding-right: 40px;
+        border-right: 3px solid #99d982;
+    }
+    &-right {
+        flex-grow: 1;
+    }
+}

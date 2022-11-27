@@ -1,15 +1,8 @@
 import './LoadingView.scss';
 
-export type LoadingViewProps = {
-    className?: string;
-};
-LoadingView.defaultProps = {
-    className: ''
-};
-
-export function LoadingView({ className }: LoadingViewProps) {
+export function LoadingView() {
     return (
-        <div className={`LoadingView ${className}`}>
+        <div className="LoadingView">
             <div className="LoadingView-body" />
         </div>
     );

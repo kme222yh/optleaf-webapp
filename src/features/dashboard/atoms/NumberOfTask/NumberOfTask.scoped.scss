@@ -1,0 +1,20 @@
+.NumberOfTask {
+    color: $color-white;
+    stroke: $color-white;
+    fill: $color-white;
+
+    font-size: 20px;
+    line-height: 1;
+    @include font-en;
+
+    &-svg {
+        transform: translateY(1px);
+        display: inline-block;
+    }
+
+    &-cross {
+        font-size: 10px;
+        margin-left: 3px;
+        margin-right: 1px;
+    }
+}
