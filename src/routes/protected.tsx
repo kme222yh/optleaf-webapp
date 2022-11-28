@@ -45,6 +45,14 @@ export const protectedRoutes: RouteObject[] = [
                 )
             },
             {
+                path: '/project/:id',
+                element: (
+                    <DashboardDefaultLayout>
+                        <DashboardProjectsView />
+                    </DashboardDefaultLayout>
+                )
+            },
+            {
                 path: '/teams',
                 element: (
                     <DashboardDefaultLayout>

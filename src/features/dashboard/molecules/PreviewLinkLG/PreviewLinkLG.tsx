@@ -3,7 +3,7 @@ import './PreviewLinkLG.scoped.scss';
 import { Link } from 'react-router-dom';
 
 import { UserIconRow } from '../UserIconRow';
-import { NumberOfTask } from '../../atoms/NumberOfTask';
+import { TaskNumbers } from '../TaskNumbers';
 
 export type PreviewLinkLGProps = {
     className?: string;
@@ -42,24 +42,10 @@ export function PreviewLinkLG({
                 />
 
                 <div className="PreviewLinkLG-task">
-                    {nOfTasks ? (
-                        <>
-                            <div className="PreviewLinkLG-task-completed">
-                                <NumberOfTask fill n={nOfCompleted as number} />
-                            </div>
-                            <div className="PreviewLinkLG-task-unCompleted">
-                                <NumberOfTask
-                                    fill={false}
-                                    n={
-                                        (nOfTasks as number) -
-                                        (nOfCompleted as number)
-                                    }
-                                />
-                            </div>
-                        </>
-                    ) : (
-                        ''
-                    )}
+                    <TaskNumbers
+                        tasks={nOfTasks as number}
+                        completed={nOfCompleted as number}
+                    />
                 </div>
             </div>
         </Link>

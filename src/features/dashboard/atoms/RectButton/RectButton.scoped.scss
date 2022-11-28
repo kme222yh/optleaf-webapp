@@ -1,0 +1,22 @@
+.RectButton {
+    cursor: pointer;
+    color: $color-white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 15px;
+    line-height: 17px;
+
+    transition: 0.3s;
+    &.default {
+        background-color: rgba(95, 102, 92, 0.7);
+        &:hover {
+            background-color: rgba(95, 102, 92, 1);
+        }
+    }
+    &.warning {
+        background-color: #cc8766;
+        &:hover {
+            background-color: #c96231;
+        }
+    }
+}

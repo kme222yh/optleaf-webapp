@@ -50,7 +50,7 @@ export function ProjectList({ className }: ProjectListProps) {
                         content={project.description as string}
                         icons={icons}
                         name={project.name as string}
-                        to="/"
+                        to={`/project/${project.id}`}
                         // nOfCompleted={10}
                         // nOfTasks={5}
                     />

@@ -34,12 +34,10 @@
         position: absolute;
         right: 30px;
         bottom: 22px;
-        display: flex;
-        justify-content: flex-end;
         margin-top: 10px;
-        &-completed {
-            margin-right: 15px;
-        }
+        color: $color-white;
+        fill: $color-white;
+        stroke: $color-white;
     }
 
     @include mobile {

@@ -53,7 +53,7 @@ export function ProjectListSM({ className, height }: ProjectListSMProps) {
                         content={project.description as string}
                         icons={icons}
                         name={project.name as string}
-                        to="/"
+                        to={`/project/${project.id}`}
                     />
                 </li>
             );

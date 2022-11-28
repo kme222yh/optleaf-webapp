@@ -7,11 +7,12 @@ import { Leaf } from '../../svg/Leaf';
 
 export type NumberOfTaskProps = {
     className?: string;
-    fill: boolean;
+    fill?: boolean;
     n: number;
 };
 NumberOfTask.defaultProps = {
-    className: ''
+    className: '',
+    fill: false
 };
 
 export function NumberOfTask({ className, fill, n }: NumberOfTaskProps) {
