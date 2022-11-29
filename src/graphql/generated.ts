@@ -279,6 +279,99 @@ export type User = {
     updated_at: Scalars['DateTime'];
 };
 
+export type ProjectQueryVariables = Exact<{
+    id?: InputMaybe<Scalars['String']>;
+}>;
+
+export type ProjectQuery = {
+    __typename?: 'Query';
+    project?: {
+        __typename?: 'Project';
+        id?: string | null;
+        name?: string | null;
+        description?: string | null;
+        created_at?: any | null;
+        owner?: {
+            __typename?: 'User';
+            ID?: string | null;
+            name: string;
+        } | null;
+        administrators?: Array<{
+            __typename?: 'User';
+            ID?: string | null;
+            icon_image?: string | null;
+        } | null> | null;
+        menbers?: Array<{
+            __typename?: 'User';
+            ID?: string | null;
+            icon_image?: string | null;
+        } | null> | null;
+        pending?: Array<{
+            __typename?: 'User';
+            ID?: string | null;
+            icon_image?: string | null;
+        } | null> | null;
+    } | null;
+};
+
+export type CreateProjectMutationVariables = Exact<{
+    name: Scalars['String'];
+    description: Scalars['String'];
+}>;
+
+export type CreateProjectMutation = {
+    __typename?: 'Mutation';
+    createProject?: { __typename?: 'Project'; id?: string | null } | null;
+};
+
+export type UpdateProjectMutationVariables = Exact<{
+    id: Scalars['String'];
+    name?: InputMaybe<Scalars['String']>;
+    description?: InputMaybe<Scalars['String']>;
+    menbers?: InputMaybe<
+        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
+    >;
+    administrators?: InputMaybe<
+        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
+    >;
+    teams?: InputMaybe<
+        Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
+    >;
+}>;
+
+export type UpdateProjectMutation = {
+    __typename?: 'Mutation';
+    updateProject?: {
+        __typename?: 'Project';
+        name?: string | null;
+        description?: string | null;
+        menbers?: Array<{
+            __typename?: 'User';
+            ID?: string | null;
+            name: string;
+        } | null> | null;
+        administrators?: Array<{
+            __typename?: 'User';
+            ID?: string | null;
+            name: string;
+        } | null> | null;
+        teams?: Array<{
+            __typename?: 'Team';
+            id?: string | null;
+            name?: string | null;
+        } | null> | null;
+    } | null;
+};
+
+export type DeleteProjectMutationVariables = Exact<{
+    id: Scalars['String'];
+}>;
+
+export type DeleteProjectMutation = {
+    __typename?: 'Mutation';
+    deleteProject?: { __typename?: 'Project'; id?: string | null } | null;
+};
+
 export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
 
 export type DashboardTopQuery = {
@@ -375,146 +468,6 @@ export type DeleteChatMutationVariables = Exact<{
 export type DeleteChatMutation = {
     __typename?: 'Mutation';
     deleteChat?: { __typename?: 'Chat'; id?: string | null } | null;
-};
-
-export type ProjectsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type ProjectsQuery = {
-    __typename?: 'Query';
-    projects?: Array<{
-        __typename?: 'Project';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        created_at?: any | null;
-        updated_at?: any | null;
-        owner?: { __typename?: 'User'; ID?: string | null } | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-        } | null> | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-        } | null> | null;
-        teams?: Array<{
-            __typename?: 'Team';
-            id?: string | null;
-        } | null> | null;
-    } | null> | null;
-};
-
-export type ProjectQueryVariables = Exact<{
-    id?: InputMaybe<Scalars['String']>;
-}>;
-
-export type ProjectQuery = {
-    __typename?: 'Query';
-    project?: {
-        __typename?: 'Project';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        created_at?: any | null;
-        updated_at?: any | null;
-        owner?: {
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-        } | null> | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-        } | null> | null;
-        pending?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-        } | null> | null;
-        teams?: Array<{
-            __typename?: 'Team';
-            id?: string | null;
-        } | null> | null;
-        tasks?: Array<{
-            __typename?: 'Task';
-            id?: string | null;
-            name?: string | null;
-            completed?: boolean | null;
-            children?: Array<{
-                __typename?: 'Task';
-                id?: string | null;
-            } | null> | null;
-        } | null> | null;
-        chats?: Array<{
-            __typename?: 'Chat';
-            id?: string | null;
-            content?: string | null;
-            owner_id?: number | null;
-            created_at?: any | null;
-            updated_at?: any | null;
-        } | null> | null;
-    } | null;
-};
-
-export type CreateProjectMutationVariables = Exact<{
-    name: Scalars['String'];
-    description: Scalars['String'];
-}>;
-
-export type CreateProjectMutation = {
-    __typename?: 'Mutation';
-    createProject?: { __typename?: 'Project'; id?: string | null } | null;
-};
-
-export type UpdateProjectMutationVariables = Exact<{
-    id: Scalars['String'];
-    name: Scalars['String'];
-    description: Scalars['String'];
-    menbers?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
-    >;
-    administrators?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
-    >;
-    teams?: InputMaybe<
-        Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
-    >;
-}>;
-
-export type UpdateProjectMutation = {
-    __typename?: 'Mutation';
-    updateProject?: {
-        __typename?: 'Project';
-        name?: string | null;
-        description?: string | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
-        teams?: Array<{
-            __typename?: 'Team';
-            id?: string | null;
-            name?: string | null;
-        } | null> | null;
-    } | null;
-};
-
-export type DeleteProjectMutationVariables = Exact<{
-    id: Scalars['String'];
-}>;
-
-export type DeleteProjectMutation = {
-    __typename?: 'Mutation';
-    deleteProject?: { __typename?: 'Project'; id?: string | null } | null;
 };
 
 export type TaskQueryVariables = Exact<{
@@ -805,6 +758,151 @@ export type DeleteTeamMutation = {
     deleteTeam?: { __typename?: 'Team'; id?: string | null } | null;
 };
 
+export const ProjectDocument = `
+    query project($id: String) {
+  project(id: $id) {
+    id
+    name
+    description
+    owner {
+      ID
+      name
+    }
+    administrators {
+      ID
+      icon_image
+    }
+    menbers {
+      ID
+      icon_image
+    }
+    pending {
+      ID
+      icon_image
+    }
+    created_at
+  }
+}
+    `;
+export const useProjectQuery = <TData = ProjectQuery, TError = unknown>(
+    variables?: ProjectQueryVariables,
+    options?: UseQueryOptions<ProjectQuery, TError, TData>
+) =>
+    useQuery<ProjectQuery, TError, TData>(
+        variables === undefined ? ['project'] : ['project', variables],
+        fetcher<ProjectQuery, ProjectQueryVariables>(
+            ProjectDocument,
+            variables
+        ),
+        options
+    );
+export const CreateProjectDocument = `
+    mutation createProject($name: String!, $description: String!) {
+  createProject(name: $name, description: $description) {
+    id
+  }
+}
+    `;
+export const useCreateProjectMutation = <TError = unknown, TContext = unknown>(
+    options?: UseMutationOptions<
+        CreateProjectMutation,
+        TError,
+        CreateProjectMutationVariables,
+        TContext
+    >
+) =>
+    useMutation<
+        CreateProjectMutation,
+        TError,
+        CreateProjectMutationVariables,
+        TContext
+    >(
+        ['createProject'],
+        (variables?: CreateProjectMutationVariables) =>
+            fetcher<CreateProjectMutation, CreateProjectMutationVariables>(
+                CreateProjectDocument,
+                variables
+            )(),
+        options
+    );
+export const UpdateProjectDocument = `
+    mutation updateProject($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int], $teams: [String]) {
+  updateProject(
+    id: $id
+    name: $name
+    description: $description
+    menbers: $menbers
+    administrators: $administrators
+    teams: $teams
+  ) {
+    name
+    description
+    menbers {
+      ID
+      name
+    }
+    administrators {
+      ID
+      name
+    }
+    teams {
+      id
+      name
+    }
+  }
+}
+    `;
+export const useUpdateProjectMutation = <TError = unknown, TContext = unknown>(
+    options?: UseMutationOptions<
+        UpdateProjectMutation,
+        TError,
+        UpdateProjectMutationVariables,
+        TContext
+    >
+) =>
+    useMutation<
+        UpdateProjectMutation,
+        TError,
+        UpdateProjectMutationVariables,
+        TContext
+    >(
+        ['updateProject'],
+        (variables?: UpdateProjectMutationVariables) =>
+            fetcher<UpdateProjectMutation, UpdateProjectMutationVariables>(
+                UpdateProjectDocument,
+                variables
+            )(),
+        options
+    );
+export const DeleteProjectDocument = `
+    mutation deleteProject($id: String!) {
+  deleteProject(id: $id) {
+    id
+  }
+}
+    `;
+export const useDeleteProjectMutation = <TError = unknown, TContext = unknown>(
+    options?: UseMutationOptions<
+        DeleteProjectMutation,
+        TError,
+        DeleteProjectMutationVariables,
+        TContext
+    >
+) =>
+    useMutation<
+        DeleteProjectMutation,
+        TError,
+        DeleteProjectMutationVariables,
+        TContext
+    >(
+        ['deleteProject'],
+        (variables?: DeleteProjectMutationVariables) =>
+            fetcher<DeleteProjectMutation, DeleteProjectMutationVariables>(
+                DeleteProjectDocument,
+                variables
+            )(),
+        options
+    );
 export const DashboardTopDocument = `
     query dashboardTop {
   projects {
@@ -963,202 +1061,6 @@ export const useDeleteChatMutation = <TError = unknown, TContext = unknown>(
         (variables?: DeleteChatMutationVariables) =>
             fetcher<DeleteChatMutation, DeleteChatMutationVariables>(
                 DeleteChatDocument,
-                variables
-            )(),
-        options
-    );
-export const ProjectsDocument = `
-    query projects {
-  projects {
-    id
-    name
-    description
-    owner {
-      ID
-    }
-    administrators {
-      ID
-    }
-    menbers {
-      ID
-    }
-    teams {
-      id
-    }
-    created_at
-    updated_at
-  }
-}
-    `;
-export const useProjectsQuery = <TData = ProjectsQuery, TError = unknown>(
-    variables?: ProjectsQueryVariables,
-    options?: UseQueryOptions<ProjectsQuery, TError, TData>
-) =>
-    useQuery<ProjectsQuery, TError, TData>(
-        variables === undefined ? ['projects'] : ['projects', variables],
-        fetcher<ProjectsQuery, ProjectsQueryVariables>(
-            ProjectsDocument,
-            variables
-        ),
-        options
-    );
-export const ProjectDocument = `
-    query project($id: String) {
-  project(id: $id) {
-    id
-    name
-    description
-    owner {
-      ID
-      name
-    }
-    administrators {
-      ID
-    }
-    menbers {
-      ID
-    }
-    pending {
-      ID
-    }
-    teams {
-      id
-    }
-    tasks {
-      id
-      name
-      completed
-      children {
-        id
-      }
-    }
-    chats {
-      id
-      content
-      owner_id
-      created_at
-      updated_at
-    }
-    created_at
-    updated_at
-  }
-}
-    `;
-export const useProjectQuery = <TData = ProjectQuery, TError = unknown>(
-    variables?: ProjectQueryVariables,
-    options?: UseQueryOptions<ProjectQuery, TError, TData>
-) =>
-    useQuery<ProjectQuery, TError, TData>(
-        variables === undefined ? ['project'] : ['project', variables],
-        fetcher<ProjectQuery, ProjectQueryVariables>(
-            ProjectDocument,
-            variables
-        ),
-        options
-    );
-export const CreateProjectDocument = `
-    mutation createProject($name: String!, $description: String!) {
-  createProject(name: $name, description: $description) {
-    id
-  }
-}
-    `;
-export const useCreateProjectMutation = <TError = unknown, TContext = unknown>(
-    options?: UseMutationOptions<
-        CreateProjectMutation,
-        TError,
-        CreateProjectMutationVariables,
-        TContext
-    >
-) =>
-    useMutation<
-        CreateProjectMutation,
-        TError,
-        CreateProjectMutationVariables,
-        TContext
-    >(
-        ['createProject'],
-        (variables?: CreateProjectMutationVariables) =>
-            fetcher<CreateProjectMutation, CreateProjectMutationVariables>(
-                CreateProjectDocument,
-                variables
-            )(),
-        options
-    );
-export const UpdateProjectDocument = `
-    mutation updateProject($id: String!, $name: String!, $description: String!, $menbers: [Int], $administrators: [Int], $teams: [String]) {
-  updateProject(
-    id: $id
-    name: $name
-    description: $description
-    menbers: $menbers
-    administrators: $administrators
-    teams: $teams
-  ) {
-    name
-    description
-    menbers {
-      ID
-      name
-    }
-    administrators {
-      ID
-      name
-    }
-    teams {
-      id
-      name
-    }
-  }
-}
-    `;
-export const useUpdateProjectMutation = <TError = unknown, TContext = unknown>(
-    options?: UseMutationOptions<
-        UpdateProjectMutation,
-        TError,
-        UpdateProjectMutationVariables,
-        TContext
-    >
-) =>
-    useMutation<
-        UpdateProjectMutation,
-        TError,
-        UpdateProjectMutationVariables,
-        TContext
-    >(
-        ['updateProject'],
-        (variables?: UpdateProjectMutationVariables) =>
-            fetcher<UpdateProjectMutation, UpdateProjectMutationVariables>(
-                UpdateProjectDocument,
-                variables
-            )(),
-        options
-    );
-export const DeleteProjectDocument = `
-    mutation deleteProject($id: String!) {
-  deleteProject(id: $id) {
-    id
-  }
-}
-    `;
-export const useDeleteProjectMutation = <TError = unknown, TContext = unknown>(
-    options?: UseMutationOptions<
-        DeleteProjectMutation,
-        TError,
-        DeleteProjectMutationVariables,
-        TContext
-    >
-) =>
-    useMutation<
-        DeleteProjectMutation,
-        TError,
-        DeleteProjectMutationVariables,
-        TContext
-    >(
-        ['deleteProject'],
-        (variables?: DeleteProjectMutationVariables) =>
-            fetcher<DeleteProjectMutation, DeleteProjectMutationVariables>(
-                DeleteProjectDocument,
                 variables
             )(),
         options

@@ -9,6 +9,7 @@ type ModalManagerStore = {
     If does not, returns whether some modal open.
     */
     isOpened: (key?: string) => boolean;
+    isClosed: (key?: string) => boolean;
 
     close: () => void;
     toggle: (key: string) => void;
@@ -19,6 +20,7 @@ export const useModalManageStore = create<ModalManagerStore>((set, get) => ({
     open: (key) => set(() => ({ key })),
     isOpened: (key) => (key ? get().key === key : get().key !== ''),
     close: () => set(() => ({ key: '' })),
+    isClosed: (key) => !(key ? get().key === key : get().key !== ''),
     toggle: (key) => {
         if (get().key === key) {
             get().close();

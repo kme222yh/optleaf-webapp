@@ -1,0 +1,76 @@
+query project($id: String) {
+    project(id: $id) {
+        id
+        name
+        description
+        owner {
+            ID
+            name
+        }
+        administrators {
+            ID
+            icon_image
+        }
+        menbers {
+            ID
+            icon_image
+        }
+        pending {
+            ID
+            icon_image
+        }
+        created_at
+
+        # todo
+        # grant{
+        #     dangerZone: bool
+        #     edit: bool
+        #     operateTask: bool
+        # }
+    }
+}
+
+mutation createProject($name: String!, $description: String!) {
+    createProject(name: $name, description: $description) {
+        id
+    }
+}
+
+mutation updateProject(
+    $id: String!
+    $name: String
+    $description: String
+    $menbers: [Int]
+    $administrators: [Int]
+    $teams: [String]
+) {
+    updateProject(
+        id: $id
+        name: $name
+        description: $description
+        menbers: $menbers
+        administrators: $administrators
+        teams: $teams
+    ) {
+        name
+        description
+        menbers {
+            ID
+            name
+        }
+        administrators {
+            ID
+            name
+        }
+        teams {
+            id
+            name
+        }
+    }
+}
+
+mutation deleteProject($id: String!) {
+    deleteProject(id: $id) {
+        id
+    }
+}

@@ -1,12 +1,12 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { DetailDisplay } from './DetailDisplay';
+import { ProjectDangerMenu } from './ProjectDangerMenu';
 
-type T = typeof DetailDisplay;
+type T = typeof ProjectDangerMenu;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: DetailDisplay,
+    component: ProjectDangerMenu,
     args: {
         // add props here !!
     }
