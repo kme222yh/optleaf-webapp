@@ -21,16 +21,15 @@ module.exports = {
                 const existsFeatures = [];
                 glob.sync('src/**/features/', glob.GLOB_ONLYDIR).forEach(
                     (dir) => {
-                        glob.sync(
-                            join(dir, '*'),
-                            glob.GLOB_ONLYDIR
-                        ).forEach((dir) => {
-                            if (dir.match('scss$')) return;
-                            const feature = dir
-                                .replace('src/', '')
-                                .replaceAll('features/', '');
-                            existsFeatures.push(feature);
-                        });
+                        glob.sync(join(dir, '*'), glob.GLOB_ONLYDIR).forEach(
+                            (dir) => {
+                                if (dir.match('scss$')) return;
+                                const feature = dir
+                                    .replace('src/', '')
+                                    .replaceAll('features/', '');
+                                existsFeatures.push(feature);
+                            }
+                        );
                     }
                 );
 

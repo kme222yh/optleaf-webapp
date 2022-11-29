@@ -7,7 +7,7 @@ export const handlers = [
         return res(
             ctx.data({
                 project: {
-                    name: 'hoge',
+                    name: 'hoge'
                 }
             })
         );

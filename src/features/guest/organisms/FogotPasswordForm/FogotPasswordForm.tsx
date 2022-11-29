@@ -46,6 +46,7 @@ export function FogotPasswordForm({ className }: FogotPasswordFormProps) {
             onSubmit={form.handleSubmit(sendForm)}
         >
             <FormInputText
+                id="name"
                 placeholder="user name"
                 type="text"
                 config={form.register('name', {
@@ -53,6 +54,7 @@ export function FogotPasswordForm({ className }: FogotPasswordFormProps) {
                 })}
             />
             <FormInputText
+                id="email"
                 placeholder="email"
                 type="email"
                 warning={errorMsg.email}

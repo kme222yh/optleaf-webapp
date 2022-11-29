@@ -1,10 +1,10 @@
 module.exports = {
     toUpper: (str) => {
         let result = [];
-        const toUpper = str => `${str[0].toUpperCase()}${str.slice(1)}`;
+        const toUpper = (str) => `${str[0].toUpperCase()}${str.slice(1)}`;
         for (const s of str.split('/')) {
             if (s === '') break;
-            result = result+=toUpper(s);
+            result = result += toUpper(s);
         }
         return result;
     },
@@ -17,5 +17,5 @@ module.exports = {
         }
         path = join(path, `${type}s`, name);
         return path;
-    },
+    }
 };

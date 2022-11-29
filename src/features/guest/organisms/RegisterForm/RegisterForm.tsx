@@ -45,6 +45,7 @@ export function RegisterForm({ className }: RegisterFormProps) {
             onSubmit={form.handleSubmit(sendForm)}
         >
             <FormInputText
+                id="name"
                 placeholder="user name"
                 type="text"
                 config={form.register('name', {
@@ -52,6 +53,7 @@ export function RegisterForm({ className }: RegisterFormProps) {
                 })}
             />
             <FormInputText
+                id="email"
                 placeholder="email"
                 type="email"
                 warning={errorMsg.email}
@@ -60,6 +62,7 @@ export function RegisterForm({ className }: RegisterFormProps) {
                 })}
             />
             <FormInputText
+                id="password"
                 placeholder="password"
                 type="password"
                 warning={errorMsg.password}
@@ -68,6 +71,7 @@ export function RegisterForm({ className }: RegisterFormProps) {
                 })}
             />
             <FormInputText
+                id="password_confirmation"
                 placeholder="confirm password"
                 type="password"
                 config={form.register('password_confirmation', {

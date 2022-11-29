@@ -45,6 +45,7 @@ export function LoginForm({ className }: LoginFormProps) {
             onSubmit={form.handleSubmit(sendForm)}
         >
             <FormInputText
+                id="email"
                 placeholder="email"
                 type="email"
                 warning={errorMsg.email}
@@ -53,6 +54,7 @@ export function LoginForm({ className }: LoginFormProps) {
                 })}
             />
             <FormInputText
+                id="password"
                 placeholder="password"
                 type="password"
                 warning={errorMsg.password}

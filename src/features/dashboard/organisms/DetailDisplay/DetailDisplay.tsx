@@ -2,9 +2,7 @@ import './DetailDisplay.scoped.scss';
 
 import { useElementSize } from '@/hooks/useElementSize';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-    useProjectQuery,
-} from '@/graphql/generated';
+import { useProjectQuery } from '@/graphql/generated';
 
 import { DetailTitle } from '../DetailTitle';
 import { TaskNumbers } from '../../molecules/TaskNumbers';
@@ -24,7 +22,7 @@ export function DetailDisplay({ className }: DetailDisplayProps) {
     const { id } = useParams();
     const query = useProjectQuery({ id });
     // console.log(id);
-    if(!query.isLoading){
+    if (!query.isLoading) {
         console.log(query.data);
     }
 

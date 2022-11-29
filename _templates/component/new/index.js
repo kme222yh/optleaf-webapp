@@ -52,7 +52,7 @@ module.exports = {
                         break;
                 }
 
-                const path = createPath(feature, type, name)
+                const path = createPath(feature, type, name);
 
                 return { feature, name, path, scss, type };
             });
