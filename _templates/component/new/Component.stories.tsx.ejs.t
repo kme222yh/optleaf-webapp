@@ -12,8 +12,7 @@ export default {
     component: <%= name %>,
     args: {
         // add props here !!
-    },
+    }
 } as Meta;
-
 
 export const Default: Story = {};

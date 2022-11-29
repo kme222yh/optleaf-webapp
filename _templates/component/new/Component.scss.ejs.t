@@ -1,6 +1,6 @@
 ---
-to: <%= path %>/<%= style_file_name %>
+to: <%= path %>/<%= scss %>
 ---
-.<%= name %>{
+.<%= name %> {
     // write css here !!
 }

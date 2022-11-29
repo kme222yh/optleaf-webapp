@@ -1,0 +1,3 @@
+---
+to: <%= path %>/index.ts
+---

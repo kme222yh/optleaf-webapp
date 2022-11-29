@@ -1,16 +1,16 @@
 ---
 to: <%= path %>/<%= name %>.tsx
 ---
-import './<%= style_file_name %>';
+import './<%= scss %>';
 
 export type <%= name%>Props = {
-    className?: string
+    className?: string;
 };
 <%= name%>.defaultProps = {
     className: ''
 };
 
-export function <%= name %>({className}: <%= name %>Props) {
+export function <%= name %>({ className }: <%= name %>Props) {
     return (
         <div className={`<%= name %> ${className}`}>
             This is <%= name %> component.

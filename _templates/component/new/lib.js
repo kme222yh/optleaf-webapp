@@ -1,17 +1,12 @@
 module.exports = {
-    createUniqueName: (featureStr, name, prefix) => {
-        const { join } = require('node:path');
-        let uniqueName = '';
-        const features = featureStr.split('/');
-        for (const feature of features) {
-            if (feature === '') break;
-            uniqueName = `${uniqueName}${feature[0].toUpperCase()}${feature.slice(
-                1
-            )}`;
+    toUpper: (str) => {
+        let result = [];
+        const toUpper = str => `${str[0].toUpperCase()}${str.slice(1)}`;
+        for (const s of str.split('/')) {
+            if (s === '') break;
+            result = result+=toUpper(s);
         }
-        prefix = `${prefix[0].toUpperCase()}${prefix.slice(1)}`;
-        uniqueName = `${uniqueName}${name}${prefix}`;
-        return uniqueName;
+        return result;
     },
     createPath: (featureStr, type, name) => {
         const { join } = require('node:path');
@@ -23,7 +18,4 @@ module.exports = {
         path = join(path, `${type}s`, name);
         return path;
     },
-    genStyleFileName: (isScoped, name) => {
-        return `${name}.${isScoped ? 'scoped.' : ''}scss`;
-    }
 };

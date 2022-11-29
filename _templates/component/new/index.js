@@ -1,12 +1,28 @@
 module.exports = {
-    prompt: ({ prompter, args }) =>
-        prompter
+    prompt: ({ prompter, args }) => {
+        const glob = require('glob');
+        const path = require('path');
+
+        // list up features
+        // pattern: src/features/**/*
+        const features = [];
+        glob.sync('src/**/features/', glob.GLOB_ONLYDIR).forEach((dir) => {
+            glob.sync(path.join(dir, '*'), glob.GLOB_ONLYDIR).forEach((dir) => {
+                if (dir.match('scss$')) return;
+                const feature = dir
+                    .replace('src/', '')
+                    .replaceAll('features/', '');
+                features.push(feature);
+            });
+        });
+
+        return prompter
             .prompt([
                 {
-                    type: 'input',
+                    type: 'select',
                     name: 'feature',
                     message: 'What is feature ?',
-                    initial: ''
+                    choices: features
                 },
                 {
                     type: 'select',
@@ -19,29 +35,26 @@ module.exports = {
                     name: 'name',
                     message: "What is component's name ?",
                     initial: 'Unknown'
-                },
-                {
-                    type: 'confirm',
-                    name: 'isScoped',
-                    message: 'Is the style scoped ?',
-                    choices: ['Yes', 'No'],
-                    initial: 'Yes'
                 }
             ])
             .then((answers) => {
-                const { feature, isScoped, type } = answers;
-                const {
-                    createUniqueName,
-                    createPath,
-                    genStyleFileName
-                } = require('./lib');
+                let { feature, name, type } = answers;
+                const { toUpper, createPath } = require('./lib');
 
-                const name = isScoped
-                    ? answers.name
-                    : createUniqueName(feature, answers.name, type);
-                const path = createPath(feature, type, name);
-                const style_file_name = genStyleFileName(isScoped, name);
-                answers.name = name;
-                return { ...answers, path, style_file_name };
-            })
+                let scss = `${name}.scoped.scss`;
+
+                switch (type) {
+                    case 'view':
+                    case 'layout':
+                        name = toUpper(feature) + toUpper(name) + toUpper(type);
+                        scss = `${name}.scss`;
+                    default:
+                        break;
+                }
+
+                const path = createPath(feature, type, name)
+
+                return { feature, name, path, scss, type };
+            });
+    }
 };

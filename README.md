@@ -23,19 +23,8 @@ npm run dev --host
 
 ## コード生成
 ```
-# コンポーネント
+hygen feature new
 hygen component new
-
-✔ What is feature ? · aaaaaaa/bbbbbb
-✔ What is type ? · atom
-✔ What is component's name ? · Test
-✔ Is the style scoped ? (Y/n) · true
-
-Loaded templates: _templates
-       added: src/features/aaaaaaa/features/bbbbbb/atoms/Test/Test.scoped.scss
-       added: src/features/aaaaaaa/features/bbbbbb/atoms/Test/Test.stories.tsx
-       added: src/features/aaaaaaa/features/bbbbbb/atoms/Test/index.ts
-       added: src/features/aaaaaaa/features/bbbbbb/atoms/Test/Test.tsx
 
 # GraphQL
 npm run codegen
