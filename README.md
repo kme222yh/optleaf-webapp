@@ -49,6 +49,10 @@ npm run storybook
 ```
 
 
+## mock server
+storybookで起動します
+
+
 
 
 セットアップログ

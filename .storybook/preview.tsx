@@ -4,6 +4,8 @@ import { AuthProvider } from '../src/providers/auth';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
 
+import "@/scss/index.scss";
+
 // Initialize MSW
 import { startMockWorker } from "../src/mocks/browser"
 void startMockWorker();

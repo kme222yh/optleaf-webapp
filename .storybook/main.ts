@@ -29,12 +29,6 @@ export default {
             else name = val.name;
             return !name.match('vite:');
         });
-        userConfig.css.preprocessorOptions.scss.additionalData = `
-            ${userConfig.css.preprocessorOptions.scss.additionalData}
-            // storybookの時はcomponent自体にindex.scssとreset.cssを差し込む
-            @import "@/scss/index.scss";
-            @import "/reset.css";
-        `
         return mergeConfig(config, userConfig);
     }
 };
