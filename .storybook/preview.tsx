@@ -1,7 +1,12 @@
 import React from 'react';
+// import { initialize, mswDecorator } from 'msw-storybook-addon';
 import { AuthProvider } from '../src/providers/auth';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { MemoryRouter } from 'react-router-dom';
+
+// Initialize MSW
+import { startMockWorker } from "../src/mocks/browser"
+void startMockWorker();
 
 const queryClient = new QueryClient();
 

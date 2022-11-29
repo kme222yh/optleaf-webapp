@@ -1,10 +1,10 @@
 import './DetailDisplay.scoped.scss';
 
 import { useElementSize } from '@/hooks/useElementSize';
-// import { useParams, useNavigate } from 'react-router-dom';
-// import {
-//     useProjectQuery,
-// } from '@/graphql/generated';
+import { useParams, useNavigate } from 'react-router-dom';
+import {
+    useProjectQuery,
+} from '@/graphql/generated';
 
 import { DetailTitle } from '../DetailTitle';
 import { TaskNumbers } from '../../molecules/TaskNumbers';
@@ -21,12 +21,12 @@ export function DetailDisplay({ className }: DetailDisplayProps) {
     const $layout = useElementSize();
     const bodySize = $layout.height - $header.height - 60;
 
-    // const { id } = useParams();
-    // const query = useProjectQuery({ id });
+    const { id } = useParams();
+    const query = useProjectQuery({ id });
     // console.log(id);
-    // if(!query.isLoading){
-    //     console.log(query.data);
-    // }
+    if(!query.isLoading){
+        console.log(query.data);
+    }
 
     return (
         <div className={`DetailDisplay ${className}`} ref={$layout.ref}>

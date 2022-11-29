@@ -129,4 +129,8 @@ npm install -D @graphql-codegen/typescript-react-query
 
 # scoped css
 # see https://www.npmjs.com/package/rollup-plugin-react-scoped-css
+
+# msw
+# see https://blog.engineer.adways.net/entry/2021/10/08/163000#GraphQL%E3%81%AE%E3%83%A2%E3%83%83%E3%82%AF%E3%81%8C%E3%81%A7%E3%81%8D%E3%82%8B
+# https://mswjs.io/docs/
 ```
