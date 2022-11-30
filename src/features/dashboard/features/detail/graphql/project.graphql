@@ -3,22 +3,47 @@ query project($id: String!) {
         id
         name
         description
+
         owner {
             ID
             name
+            icon_image
         }
+
         administrators {
             ID
+            name
             icon_image
         }
         menbers {
             ID
+            name
             icon_image
         }
         pending {
             ID
+            name
             icon_image
         }
+
+        tasks {
+            id
+            name
+            completed
+            has_child
+        }
+
+        chats {
+            id
+            content
+            owner {
+                ID
+                name
+                icon_image
+            }
+            created_at
+        }
+
         created_at
 
         grant {

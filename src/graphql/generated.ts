@@ -247,6 +247,7 @@ export type Task = {
     created_at: Scalars['DateTime'];
     description: Scalars['String'];
     due_date: Scalars['String'];
+    has_child: Scalars['Boolean'];
     id: Scalars['String'];
     name: Scalars['String'];
     owner: User;
@@ -299,14 +300,49 @@ export type ProjectQuery = {
         name: string;
         description: string;
         created_at: any;
-        owner: { __typename?: 'User'; ID: string; name: string };
+        owner: {
+            __typename?: 'User';
+            ID: string;
+            name: string;
+            icon_image: string;
+        };
         administrators: Array<{
             __typename?: 'User';
             ID: string;
+            name: string;
             icon_image: string;
         }>;
-        menbers: Array<{ __typename?: 'User'; ID: string; icon_image: string }>;
-        pending: Array<{ __typename?: 'User'; ID: string; icon_image: string }>;
+        menbers: Array<{
+            __typename?: 'User';
+            ID: string;
+            name: string;
+            icon_image: string;
+        }>;
+        pending: Array<{
+            __typename?: 'User';
+            ID: string;
+            name: string;
+            icon_image: string;
+        }>;
+        tasks: Array<{
+            __typename?: 'Task';
+            id: string;
+            name: string;
+            completed: boolean;
+            has_child: boolean;
+        }>;
+        chats: Array<{
+            __typename?: 'Chat';
+            id: string;
+            content: string;
+            created_at: any;
+            owner: {
+                __typename?: 'User';
+                ID: string;
+                name: string;
+                icon_image: string;
+            };
+        }>;
         grant: {
             __typename?: 'Grant';
             dangerZone: boolean;
@@ -364,92 +400,6 @@ export type DeleteProjectMutationVariables = Exact<{
 export type DeleteProjectMutation = {
     __typename?: 'Mutation';
     deleteProject?: { __typename?: 'Project'; id: string } | null;
-};
-
-export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
-
-export type DashboardTopQuery = {
-    __typename?: 'Query';
-    projects?: Array<{
-        __typename?: 'Project';
-        id: string;
-        name: string;
-        description: string;
-        owner: { __typename?: 'User'; icon_image: string };
-        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
-        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
-    }> | null;
-    teams?: Array<{
-        __typename?: 'Team';
-        id: string;
-        name: string;
-        description: string;
-        owner: { __typename?: 'User'; icon_image: string };
-        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
-        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
-    } | null> | null;
-};
-
-export type ChatsQueryVariables = Exact<{
-    project_id: Scalars['String'];
-    task_id?: InputMaybe<Scalars['String']>;
-}>;
-
-export type ChatsQuery = {
-    __typename?: 'Query';
-    chats?: Array<{
-        __typename?: 'Chat';
-        id: string;
-        owner_id: number;
-        content: string;
-        created_at: any;
-        updated_at?: any | null;
-    } | null> | null;
-};
-
-export type CreateChatMutationVariables = Exact<{
-    project_id: Scalars['String'];
-    task_id?: InputMaybe<Scalars['String']>;
-    content: Scalars['String'];
-}>;
-
-export type CreateChatMutation = {
-    __typename?: 'Mutation';
-    createChat?: {
-        __typename?: 'Chat';
-        id: string;
-        content: string;
-        created_at: any;
-        updated_at?: any | null;
-    } | null;
-};
-
-export type UpdateChatMutationVariables = Exact<{
-    project_id: Scalars['String'];
-    task_id: Scalars['String'];
-    id: Scalars['String'];
-    content: Scalars['String'];
-}>;
-
-export type UpdateChatMutation = {
-    __typename?: 'Mutation';
-    updateChat?: {
-        __typename?: 'Chat';
-        id: string;
-        content: string;
-        created_at: any;
-        updated_at?: any | null;
-    } | null;
-};
-
-export type DeleteChatMutationVariables = Exact<{
-    project_id: Scalars['String'];
-    id: Scalars['String'];
-}>;
-
-export type DeleteChatMutation = {
-    __typename?: 'Mutation';
-    deleteChat?: { __typename?: 'Chat'; id: string } | null;
 };
 
 export type TaskQueryVariables = Exact<{
@@ -598,6 +548,92 @@ export type DeleteTaskMutation = {
     deleteTask?: { __typename?: 'Project'; id: string } | null;
 };
 
+export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DashboardTopQuery = {
+    __typename?: 'Query';
+    projects?: Array<{
+        __typename?: 'Project';
+        id: string;
+        name: string;
+        description: string;
+        owner: { __typename?: 'User'; icon_image: string };
+        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
+        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
+    }> | null;
+    teams?: Array<{
+        __typename?: 'Team';
+        id: string;
+        name: string;
+        description: string;
+        owner: { __typename?: 'User'; icon_image: string };
+        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
+        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
+    } | null> | null;
+};
+
+export type ChatsQueryVariables = Exact<{
+    project_id: Scalars['String'];
+    task_id?: InputMaybe<Scalars['String']>;
+}>;
+
+export type ChatsQuery = {
+    __typename?: 'Query';
+    chats?: Array<{
+        __typename?: 'Chat';
+        id: string;
+        owner_id: number;
+        content: string;
+        created_at: any;
+        updated_at?: any | null;
+    } | null> | null;
+};
+
+export type CreateChatMutationVariables = Exact<{
+    project_id: Scalars['String'];
+    task_id?: InputMaybe<Scalars['String']>;
+    content: Scalars['String'];
+}>;
+
+export type CreateChatMutation = {
+    __typename?: 'Mutation';
+    createChat?: {
+        __typename?: 'Chat';
+        id: string;
+        content: string;
+        created_at: any;
+        updated_at?: any | null;
+    } | null;
+};
+
+export type UpdateChatMutationVariables = Exact<{
+    project_id: Scalars['String'];
+    task_id: Scalars['String'];
+    id: Scalars['String'];
+    content: Scalars['String'];
+}>;
+
+export type UpdateChatMutation = {
+    __typename?: 'Mutation';
+    updateChat?: {
+        __typename?: 'Chat';
+        id: string;
+        content: string;
+        created_at: any;
+        updated_at?: any | null;
+    } | null;
+};
+
+export type DeleteChatMutationVariables = Exact<{
+    project_id: Scalars['String'];
+    id: Scalars['String'];
+}>;
+
+export type DeleteChatMutation = {
+    __typename?: 'Mutation';
+    deleteChat?: { __typename?: 'Chat'; id: string } | null;
+};
+
 export type TeamsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type TeamsQuery = {
@@ -710,18 +746,38 @@ export const ProjectDocument = `
     owner {
       ID
       name
+      icon_image
     }
     administrators {
       ID
+      name
       icon_image
     }
     menbers {
       ID
+      name
       icon_image
     }
     pending {
       ID
+      name
       icon_image
+    }
+    tasks {
+      id
+      name
+      completed
+      has_child
+    }
+    chats {
+      id
+      content
+      owner {
+        ID
+        name
+        icon_image
+      }
+      created_at
     }
     created_at
     grant {
@@ -847,168 +903,6 @@ export const useDeleteProjectMutation = <TError = unknown, TContext = unknown>(
         (variables?: DeleteProjectMutationVariables) =>
             fetcher<DeleteProjectMutation, DeleteProjectMutationVariables>(
                 DeleteProjectDocument,
-                variables
-            )(),
-        options
-    );
-export const DashboardTopDocument = `
-    query dashboardTop {
-  projects {
-    id
-    name
-    description
-    owner {
-      icon_image
-    }
-    administrators {
-      icon_image
-    }
-    menbers {
-      icon_image
-    }
-  }
-  teams {
-    id
-    name
-    description
-    owner {
-      icon_image
-    }
-    administrators {
-      icon_image
-    }
-    menbers {
-      icon_image
-    }
-  }
-}
-    `;
-export const useDashboardTopQuery = <
-    TData = DashboardTopQuery,
-    TError = unknown
->(
-    variables?: DashboardTopQueryVariables,
-    options?: UseQueryOptions<DashboardTopQuery, TError, TData>
-) =>
-    useQuery<DashboardTopQuery, TError, TData>(
-        variables === undefined
-            ? ['dashboardTop']
-            : ['dashboardTop', variables],
-        fetcher<DashboardTopQuery, DashboardTopQueryVariables>(
-            DashboardTopDocument,
-            variables
-        ),
-        options
-    );
-export const ChatsDocument = `
-    query chats($project_id: String!, $task_id: String) {
-  chats(project_id: $project_id, task_id: $task_id) {
-    id
-    owner_id
-    content
-    created_at
-    updated_at
-  }
-}
-    `;
-export const useChatsQuery = <TData = ChatsQuery, TError = unknown>(
-    variables: ChatsQueryVariables,
-    options?: UseQueryOptions<ChatsQuery, TError, TData>
-) =>
-    useQuery<ChatsQuery, TError, TData>(
-        ['chats', variables],
-        fetcher<ChatsQuery, ChatsQueryVariables>(ChatsDocument, variables),
-        options
-    );
-export const CreateChatDocument = `
-    mutation createChat($project_id: String!, $task_id: String, $content: String!) {
-  createChat(project_id: $project_id, task_id: $task_id, content: $content) {
-    id
-    content
-    created_at
-    updated_at
-  }
-}
-    `;
-export const useCreateChatMutation = <TError = unknown, TContext = unknown>(
-    options?: UseMutationOptions<
-        CreateChatMutation,
-        TError,
-        CreateChatMutationVariables,
-        TContext
-    >
-) =>
-    useMutation<
-        CreateChatMutation,
-        TError,
-        CreateChatMutationVariables,
-        TContext
-    >(
-        ['createChat'],
-        (variables?: CreateChatMutationVariables) =>
-            fetcher<CreateChatMutation, CreateChatMutationVariables>(
-                CreateChatDocument,
-                variables
-            )(),
-        options
-    );
-export const UpdateChatDocument = `
-    mutation updateChat($project_id: String!, $task_id: String!, $id: String!, $content: String!) {
-  updateChat(project_id: $project_id, id: $id, content: $content) {
-    id
-    content
-    created_at
-    updated_at
-  }
-}
-    `;
-export const useUpdateChatMutation = <TError = unknown, TContext = unknown>(
-    options?: UseMutationOptions<
-        UpdateChatMutation,
-        TError,
-        UpdateChatMutationVariables,
-        TContext
-    >
-) =>
-    useMutation<
-        UpdateChatMutation,
-        TError,
-        UpdateChatMutationVariables,
-        TContext
-    >(
-        ['updateChat'],
-        (variables?: UpdateChatMutationVariables) =>
-            fetcher<UpdateChatMutation, UpdateChatMutationVariables>(
-                UpdateChatDocument,
-                variables
-            )(),
-        options
-    );
-export const DeleteChatDocument = `
-    mutation deleteChat($project_id: String!, $id: String!) {
-  deleteChat(project_id: $project_id, id: $id) {
-    id
-  }
-}
-    `;
-export const useDeleteChatMutation = <TError = unknown, TContext = unknown>(
-    options?: UseMutationOptions<
-        DeleteChatMutation,
-        TError,
-        DeleteChatMutationVariables,
-        TContext
-    >
-) =>
-    useMutation<
-        DeleteChatMutation,
-        TError,
-        DeleteChatMutationVariables,
-        TContext
-    >(
-        ['deleteChat'],
-        (variables?: DeleteChatMutationVariables) =>
-            fetcher<DeleteChatMutation, DeleteChatMutationVariables>(
-                DeleteChatDocument,
                 variables
             )(),
         options
@@ -1220,6 +1114,168 @@ export const useDeleteTaskMutation = <TError = unknown, TContext = unknown>(
         (variables?: DeleteTaskMutationVariables) =>
             fetcher<DeleteTaskMutation, DeleteTaskMutationVariables>(
                 DeleteTaskDocument,
+                variables
+            )(),
+        options
+    );
+export const DashboardTopDocument = `
+    query dashboardTop {
+  projects {
+    id
+    name
+    description
+    owner {
+      icon_image
+    }
+    administrators {
+      icon_image
+    }
+    menbers {
+      icon_image
+    }
+  }
+  teams {
+    id
+    name
+    description
+    owner {
+      icon_image
+    }
+    administrators {
+      icon_image
+    }
+    menbers {
+      icon_image
+    }
+  }
+}
+    `;
+export const useDashboardTopQuery = <
+    TData = DashboardTopQuery,
+    TError = unknown
+>(
+    variables?: DashboardTopQueryVariables,
+    options?: UseQueryOptions<DashboardTopQuery, TError, TData>
+) =>
+    useQuery<DashboardTopQuery, TError, TData>(
+        variables === undefined
+            ? ['dashboardTop']
+            : ['dashboardTop', variables],
+        fetcher<DashboardTopQuery, DashboardTopQueryVariables>(
+            DashboardTopDocument,
+            variables
+        ),
+        options
+    );
+export const ChatsDocument = `
+    query chats($project_id: String!, $task_id: String) {
+  chats(project_id: $project_id, task_id: $task_id) {
+    id
+    owner_id
+    content
+    created_at
+    updated_at
+  }
+}
+    `;
+export const useChatsQuery = <TData = ChatsQuery, TError = unknown>(
+    variables: ChatsQueryVariables,
+    options?: UseQueryOptions<ChatsQuery, TError, TData>
+) =>
+    useQuery<ChatsQuery, TError, TData>(
+        ['chats', variables],
+        fetcher<ChatsQuery, ChatsQueryVariables>(ChatsDocument, variables),
+        options
+    );
+export const CreateChatDocument = `
+    mutation createChat($project_id: String!, $task_id: String, $content: String!) {
+  createChat(project_id: $project_id, task_id: $task_id, content: $content) {
+    id
+    content
+    created_at
+    updated_at
+  }
+}
+    `;
+export const useCreateChatMutation = <TError = unknown, TContext = unknown>(
+    options?: UseMutationOptions<
+        CreateChatMutation,
+        TError,
+        CreateChatMutationVariables,
+        TContext
+    >
+) =>
+    useMutation<
+        CreateChatMutation,
+        TError,
+        CreateChatMutationVariables,
+        TContext
+    >(
+        ['createChat'],
+        (variables?: CreateChatMutationVariables) =>
+            fetcher<CreateChatMutation, CreateChatMutationVariables>(
+                CreateChatDocument,
+                variables
+            )(),
+        options
+    );
+export const UpdateChatDocument = `
+    mutation updateChat($project_id: String!, $task_id: String!, $id: String!, $content: String!) {
+  updateChat(project_id: $project_id, id: $id, content: $content) {
+    id
+    content
+    created_at
+    updated_at
+  }
+}
+    `;
+export const useUpdateChatMutation = <TError = unknown, TContext = unknown>(
+    options?: UseMutationOptions<
+        UpdateChatMutation,
+        TError,
+        UpdateChatMutationVariables,
+        TContext
+    >
+) =>
+    useMutation<
+        UpdateChatMutation,
+        TError,
+        UpdateChatMutationVariables,
+        TContext
+    >(
+        ['updateChat'],
+        (variables?: UpdateChatMutationVariables) =>
+            fetcher<UpdateChatMutation, UpdateChatMutationVariables>(
+                UpdateChatDocument,
+                variables
+            )(),
+        options
+    );
+export const DeleteChatDocument = `
+    mutation deleteChat($project_id: String!, $id: String!) {
+  deleteChat(project_id: $project_id, id: $id) {
+    id
+  }
+}
+    `;
+export const useDeleteChatMutation = <TError = unknown, TContext = unknown>(
+    options?: UseMutationOptions<
+        DeleteChatMutation,
+        TError,
+        DeleteChatMutationVariables,
+        TContext
+    >
+) =>
+    useMutation<
+        DeleteChatMutation,
+        TError,
+        DeleteChatMutationVariables,
+        TContext
+    >(
+        ['deleteChat'],
+        (variables?: DeleteChatMutationVariables) =>
+            fetcher<DeleteChatMutation, DeleteChatMutationVariables>(
+                DeleteChatDocument,
                 variables
             )(),
         options
