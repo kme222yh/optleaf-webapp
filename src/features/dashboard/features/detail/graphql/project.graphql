@@ -1,4 +1,4 @@
-query project($id: String) {
+query project($id: String!) {
     project(id: $id) {
         id
         name
@@ -21,12 +21,11 @@ query project($id: String) {
         }
         created_at
 
-        # todo
-        # grant{
-        #     dangerZone: bool
-        #     edit: bool
-        #     operateTask: bool
-        # }
+        grant {
+            dangerZone
+            edit
+            operateTask
+        }
     }
 }
 

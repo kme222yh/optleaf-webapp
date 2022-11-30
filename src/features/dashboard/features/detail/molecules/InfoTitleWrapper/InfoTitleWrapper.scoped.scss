@@ -17,7 +17,9 @@
 
         transition: 0.3s;
         &.close-enter-active,
-        &.close-enter-done {
+        &.close-enter-done,
+        &.close-appear,
+        &.close-appear-active {
             height: 50px !important;
         }
         &.close-exit-active,

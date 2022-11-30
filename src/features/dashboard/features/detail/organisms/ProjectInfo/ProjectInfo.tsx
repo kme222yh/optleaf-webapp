@@ -40,7 +40,7 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
     const bodySize = $layout.height - $header.height - 60;
 
     const { id } = useParams();
-    const query = useProjectQuery({ id });
+    const query = useProjectQuery({ id: id as string });
     const mutation = useUpdateProjectMutation();
     const form = useForm<UpdateProjectMutationVariables>();
 

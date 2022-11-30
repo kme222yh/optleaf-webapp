@@ -36,5 +36,16 @@ export const handlers = [
                 project
             })
         );
+    }),
+
+    graphql.mutation('deleteProject', (req, res, ctx) => {
+        const project = {
+            id: 'm0c25utmc23ut'
+        };
+        return res(
+            ctx.data({
+                project
+            })
+        );
     })
 ];

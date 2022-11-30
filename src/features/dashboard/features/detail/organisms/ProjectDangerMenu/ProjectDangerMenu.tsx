@@ -1,6 +1,12 @@
 import './ProjectDangerMenu.scoped.scss';
 
+import { useParams, useNavigate } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
+
+import { useDeleteProjectMutation } from '@/graphql/generated';
+
 import { OperationPanel } from '../../molecules/OperationPanel';
+import { useModalManageStore } from '../../../../stores/modalManager';
 
 export type ProjectDangerMenuProps = {
     className?: string;
@@ -10,7 +16,22 @@ ProjectDangerMenu.defaultProps = {
 };
 
 export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
-    // todo: create logic
+    const { id } = useParams();
+    const navigator = useNavigate();
+    const deleteMutator = useDeleteProjectMutation();
+    const queryQrient = useQueryClient();
+    const modal = useModalManageStore();
+
+    const deleteProject = async () => {
+        const result = window.confirm('プロジェクトを削除してよろしいですか？');
+        if (result) {
+            await deleteMutator.mutateAsync({ id: id as string });
+            await queryQrient.resetQueries(['dashboardTop']);
+            modal.close();
+            navigator('/projects');
+        }
+    };
+
     return (
         <ul className={`ProjectDangerMenu ${className}`}>
             <li className="ProjectDangerMenu-item">
@@ -35,7 +56,7 @@ export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
                     content="The project is permanently deleted. This operation cannot be undone."
                     button="Delete"
                     warning
-                    onClick={() => {}}
+                    onClick={deleteProject}
                 />
             </li>
         </ul>

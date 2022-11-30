@@ -51,12 +51,19 @@ export type Scalars = {
 
 export type Chat = {
     __typename?: 'Chat';
-    content?: Maybe<Scalars['String']>;
-    created_at?: Maybe<Scalars['DateTime']>;
-    id?: Maybe<Scalars['String']>;
-    owner?: Maybe<User>;
-    owner_id?: Maybe<Scalars['Int']>;
+    content: Scalars['String'];
+    created_at: Scalars['DateTime'];
+    id: Scalars['String'];
+    owner: User;
+    owner_id: Scalars['Int'];
     updated_at?: Maybe<Scalars['DateTime']>;
+};
+
+export type Grant = {
+    __typename?: 'Grant';
+    dangerZone: Scalars['Boolean'];
+    edit: Scalars['Boolean'];
+    operateTask: Scalars['Boolean'];
 };
 
 export type Mutation = {
@@ -82,8 +89,8 @@ export type MutationCreateChatArgs = {
 };
 
 export type MutationCreateProjectArgs = {
-    description?: InputMaybe<Scalars['String']>;
-    name?: InputMaybe<Scalars['String']>;
+    description: Scalars['String'];
+    name: Scalars['String'];
 };
 
 export type MutationCreateTaskArgs = {
@@ -106,7 +113,7 @@ export type MutationDeleteChatArgs = {
 };
 
 export type MutationDeleteProjectArgs = {
-    id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
 };
 
 export type MutationDeleteTaskArgs = {
@@ -127,7 +134,7 @@ export type MutationUpdateChatArgs = {
 export type MutationUpdateProjectArgs = {
     administrators?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
     description?: InputMaybe<Scalars['String']>;
-    id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
     menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
     name?: InputMaybe<Scalars['String']>;
     owner?: InputMaybe<Scalars['Int']>;
@@ -160,18 +167,19 @@ export type MutationUpdateTeamArgs = {
 
 export type Project = {
     __typename?: 'Project';
-    administrators?: Maybe<Array<Maybe<User>>>;
-    chats?: Maybe<Array<Maybe<Chat>>>;
-    created_at?: Maybe<Scalars['DateTime']>;
-    description?: Maybe<Scalars['String']>;
-    id?: Maybe<Scalars['String']>;
-    menbers?: Maybe<Array<Maybe<User>>>;
-    name?: Maybe<Scalars['String']>;
-    owner?: Maybe<User>;
-    pending?: Maybe<Array<Maybe<User>>>;
-    permission_level?: Maybe<Scalars['String']>;
-    tasks?: Maybe<Array<Maybe<Task>>>;
-    teams?: Maybe<Array<Maybe<Team>>>;
+    administrators: Array<User>;
+    chats: Array<Chat>;
+    created_at: Scalars['DateTime'];
+    description: Scalars['String'];
+    grant: Grant;
+    id: Scalars['String'];
+    menbers: Array<User>;
+    name: Scalars['String'];
+    owner: User;
+    pending: Array<User>;
+    permission_level: Scalars['String'];
+    tasks: Array<Task>;
+    teams: Array<Team>;
     updated_at?: Maybe<Scalars['DateTime']>;
 };
 
@@ -179,8 +187,8 @@ export type Project = {
 export type Query = {
     __typename?: 'Query';
     chats?: Maybe<Array<Maybe<Chat>>>;
-    project?: Maybe<Project>;
-    projects?: Maybe<Array<Maybe<Project>>>;
+    project: Project;
+    projects?: Maybe<Array<Project>>;
     task?: Maybe<Task>;
     tasks?: Maybe<Array<Maybe<Task>>>;
     team?: Maybe<Team>;
@@ -199,7 +207,7 @@ export type QueryChatsArgs = {
 
 /** Indicates what fields are available at the top level of a query operation. */
 export type QueryProjectArgs = {
-    id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
 };
 
 /** Indicates what fields are available at the top level of a query operation. */
@@ -232,45 +240,45 @@ export type QueryUsersArgs = {
 
 export type Task = {
     __typename?: 'Task';
-    assigned_menbers?: Maybe<Array<Maybe<User>>>;
-    chats?: Maybe<Array<Maybe<Chat>>>;
-    children?: Maybe<Array<Maybe<Task>>>;
-    completed?: Maybe<Scalars['Boolean']>;
-    created_at?: Maybe<Scalars['DateTime']>;
-    description?: Maybe<Scalars['String']>;
-    due_date?: Maybe<Scalars['String']>;
-    id?: Maybe<Scalars['String']>;
-    name?: Maybe<Scalars['String']>;
-    owner?: Maybe<User>;
+    assigned_menbers: Array<User>;
+    chats: Array<Chat>;
+    children: Array<Task>;
+    completed: Scalars['Boolean'];
+    created_at: Scalars['DateTime'];
+    description: Scalars['String'];
+    due_date: Scalars['String'];
+    id: Scalars['String'];
+    name: Scalars['String'];
+    owner: User;
     parent?: Maybe<Task>;
     updated_at?: Maybe<Scalars['DateTime']>;
 };
 
 export type Team = {
     __typename?: 'Team';
-    administrators?: Maybe<Array<Maybe<User>>>;
-    created_at?: Maybe<Scalars['DateTime']>;
-    description?: Maybe<Scalars['String']>;
-    id?: Maybe<Scalars['String']>;
-    menbers?: Maybe<Array<Maybe<User>>>;
-    name?: Maybe<Scalars['String']>;
-    owner?: Maybe<User>;
-    pending?: Maybe<Array<Maybe<User>>>;
-    permission_level?: Maybe<Scalars['String']>;
+    administrators: Array<User>;
+    created_at: Scalars['DateTime'];
+    description: Scalars['String'];
+    id: Scalars['String'];
+    menbers: Array<User>;
+    name: Scalars['String'];
+    owner: User;
+    pending: Array<User>;
+    permission_level: Scalars['String'];
     updated_at?: Maybe<Scalars['DateTime']>;
 };
 
 /** Account of a person who utilizes this application. */
 export type User = {
     __typename?: 'User';
-    ID?: Maybe<Scalars['String']>;
+    ID: Scalars['String'];
     /** When the account was created. */
     created_at: Scalars['DateTime'];
     /** Unique email address. */
     email: Scalars['String'];
     /** When the email was verified. */
     email_verified_at?: Maybe<Scalars['DateTime']>;
-    icon_image?: Maybe<Scalars['String']>;
+    icon_image: Scalars['String'];
     /** Unique primary key. */
     id: Scalars['ID'];
     /** Non-unique name. */
@@ -280,38 +288,32 @@ export type User = {
 };
 
 export type ProjectQueryVariables = Exact<{
-    id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
 }>;
 
 export type ProjectQuery = {
     __typename?: 'Query';
-    project?: {
+    project: {
         __typename?: 'Project';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        created_at?: any | null;
-        owner?: {
+        id: string;
+        name: string;
+        description: string;
+        created_at: any;
+        owner: { __typename?: 'User'; ID: string; name: string };
+        administrators: Array<{
             __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            icon_image?: string | null;
-        } | null> | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            icon_image?: string | null;
-        } | null> | null;
-        pending?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            icon_image?: string | null;
-        } | null> | null;
-    } | null;
+            ID: string;
+            icon_image: string;
+        }>;
+        menbers: Array<{ __typename?: 'User'; ID: string; icon_image: string }>;
+        pending: Array<{ __typename?: 'User'; ID: string; icon_image: string }>;
+        grant: {
+            __typename?: 'Grant';
+            dangerZone: boolean;
+            edit: boolean;
+            operateTask: boolean;
+        };
+    };
 };
 
 export type CreateProjectMutationVariables = Exact<{
@@ -321,7 +323,7 @@ export type CreateProjectMutationVariables = Exact<{
 
 export type CreateProjectMutation = {
     __typename?: 'Mutation';
-    createProject?: { __typename?: 'Project'; id?: string | null } | null;
+    createProject?: { __typename?: 'Project'; id: string } | null;
 };
 
 export type UpdateProjectMutationVariables = Exact<{
@@ -343,23 +345,15 @@ export type UpdateProjectMutation = {
     __typename?: 'Mutation';
     updateProject?: {
         __typename?: 'Project';
-        name?: string | null;
-        description?: string | null;
-        menbers?: Array<{
+        name: string;
+        description: string;
+        menbers: Array<{ __typename?: 'User'; ID: string; name: string }>;
+        administrators: Array<{
             __typename?: 'User';
-            ID?: string | null;
+            ID: string;
             name: string;
-        } | null> | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
-        teams?: Array<{
-            __typename?: 'Team';
-            id?: string | null;
-            name?: string | null;
-        } | null> | null;
+        }>;
+        teams: Array<{ __typename?: 'Team'; id: string; name: string }>;
     } | null;
 };
 
@@ -369,7 +363,7 @@ export type DeleteProjectMutationVariables = Exact<{
 
 export type DeleteProjectMutation = {
     __typename?: 'Mutation';
-    deleteProject?: { __typename?: 'Project'; id?: string | null } | null;
+    deleteProject?: { __typename?: 'Project'; id: string } | null;
 };
 
 export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
@@ -378,33 +372,21 @@ export type DashboardTopQuery = {
     __typename?: 'Query';
     projects?: Array<{
         __typename?: 'Project';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        owner?: { __typename?: 'User'; icon_image?: string | null } | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            icon_image?: string | null;
-        } | null> | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            icon_image?: string | null;
-        } | null> | null;
-    } | null> | null;
+        id: string;
+        name: string;
+        description: string;
+        owner: { __typename?: 'User'; icon_image: string };
+        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
+        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
+    }> | null;
     teams?: Array<{
         __typename?: 'Team';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        owner?: { __typename?: 'User'; icon_image?: string | null } | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            icon_image?: string | null;
-        } | null> | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            icon_image?: string | null;
-        } | null> | null;
+        id: string;
+        name: string;
+        description: string;
+        owner: { __typename?: 'User'; icon_image: string };
+        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
+        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
     } | null> | null;
 };
 
@@ -417,10 +399,10 @@ export type ChatsQuery = {
     __typename?: 'Query';
     chats?: Array<{
         __typename?: 'Chat';
-        id?: string | null;
-        owner_id?: number | null;
-        content?: string | null;
-        created_at?: any | null;
+        id: string;
+        owner_id: number;
+        content: string;
+        created_at: any;
         updated_at?: any | null;
     } | null> | null;
 };
@@ -435,9 +417,9 @@ export type CreateChatMutation = {
     __typename?: 'Mutation';
     createChat?: {
         __typename?: 'Chat';
-        id?: string | null;
-        content?: string | null;
-        created_at?: any | null;
+        id: string;
+        content: string;
+        created_at: any;
         updated_at?: any | null;
     } | null;
 };
@@ -453,9 +435,9 @@ export type UpdateChatMutation = {
     __typename?: 'Mutation';
     updateChat?: {
         __typename?: 'Chat';
-        id?: string | null;
-        content?: string | null;
-        created_at?: any | null;
+        id: string;
+        content: string;
+        created_at: any;
         updated_at?: any | null;
     } | null;
 };
@@ -467,7 +449,7 @@ export type DeleteChatMutationVariables = Exact<{
 
 export type DeleteChatMutation = {
     __typename?: 'Mutation';
-    deleteChat?: { __typename?: 'Chat'; id?: string | null } | null;
+    deleteChat?: { __typename?: 'Chat'; id: string } | null;
 };
 
 export type TaskQueryVariables = Exact<{
@@ -479,27 +461,23 @@ export type TaskQuery = {
     __typename?: 'Query';
     task?: {
         __typename?: 'Task';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        completed?: boolean | null;
-        due_date?: string | null;
-        created_at?: any | null;
+        id: string;
+        name: string;
+        description: string;
+        completed: boolean;
+        due_date: string;
+        created_at: any;
         updated_at?: any | null;
-        owner?: {
+        owner: { __typename?: 'User'; ID: string; name: string };
+        assigned_menbers: Array<{
             __typename?: 'User';
-            ID?: string | null;
+            ID: string;
             name: string;
-        } | null;
-        assigned_menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
+        }>;
         parent?: {
             __typename?: 'Task';
-            id?: string | null;
-            parent?: { __typename?: 'Task'; id?: string | null } | null;
+            id: string;
+            parent?: { __typename?: 'Task'; id: string } | null;
         } | null;
     } | null;
 };
@@ -513,11 +491,11 @@ export type TasksQuery = {
     __typename?: 'Query';
     tasks?: Array<{
         __typename?: 'Task';
-        id?: string | null;
-        name?: string | null;
-        completed?: boolean | null;
-        due_date?: string | null;
-        created_at?: any | null;
+        id: string;
+        name: string;
+        completed: boolean;
+        due_date: string;
+        created_at: any;
         updated_at?: any | null;
     } | null> | null;
 };
@@ -537,30 +515,26 @@ export type CreateTaskMutation = {
     __typename?: 'Mutation';
     createTask?: {
         __typename?: 'Task';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        completed?: boolean | null;
-        due_date?: string | null;
-        created_at?: any | null;
+        id: string;
+        name: string;
+        description: string;
+        completed: boolean;
+        due_date: string;
+        created_at: any;
         updated_at?: any | null;
-        owner?: {
+        owner: { __typename?: 'User'; ID: string; name: string };
+        assigned_menbers: Array<{
             __typename?: 'User';
-            ID?: string | null;
+            ID: string;
             name: string;
-        } | null;
-        assigned_menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
+        }>;
         parent?: {
             __typename?: 'Task';
-            id?: string | null;
-            name?: string | null;
-            description?: string | null;
-            completed?: boolean | null;
-            created_at?: any | null;
+            id: string;
+            name: string;
+            description: string;
+            completed: boolean;
+            created_at: any;
             updated_at?: any | null;
         } | null;
     } | null;
@@ -582,42 +556,35 @@ export type UpdateTaskMutation = {
     __typename?: 'Mutation';
     updateTask?: {
         __typename?: 'Task';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        completed?: boolean | null;
-        due_date?: string | null;
-        created_at?: any | null;
+        id: string;
+        name: string;
+        description: string;
+        completed: boolean;
+        due_date: string;
+        created_at: any;
         updated_at?: any | null;
-        owner?: {
+        owner: { __typename?: 'User'; ID: string; name: string };
+        assigned_menbers: Array<{
             __typename?: 'User';
-            ID?: string | null;
+            ID: string;
             name: string;
-        } | null;
-        assigned_menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
+        }>;
         parent?: {
             __typename?: 'Task';
-            id?: string | null;
-            name?: string | null;
-            description?: string | null;
-            completed?: boolean | null;
-            created_at?: any | null;
+            id: string;
+            name: string;
+            description: string;
+            completed: boolean;
+            created_at: any;
             updated_at?: any | null;
         } | null;
-        children?: Array<{
+        children: Array<{
             __typename?: 'Task';
-            id?: string | null;
-            name?: string | null;
-            completed?: boolean | null;
-            children?: Array<{
-                __typename?: 'Task';
-                id?: string | null;
-            } | null> | null;
-        } | null> | null;
+            id: string;
+            name: string;
+            completed: boolean;
+            children: Array<{ __typename?: 'Task'; id: string }>;
+        }>;
     } | null;
 };
 
@@ -628,7 +595,7 @@ export type DeleteTaskMutationVariables = Exact<{
 
 export type DeleteTaskMutation = {
     __typename?: 'Mutation';
-    deleteTask?: { __typename?: 'Project'; id?: string | null } | null;
+    deleteTask?: { __typename?: 'Project'; id: string } | null;
 };
 
 export type TeamsQueryVariables = Exact<{ [key: string]: never }>;
@@ -637,10 +604,10 @@ export type TeamsQuery = {
     __typename?: 'Query';
     teams?: Array<{
         __typename?: 'Team';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        created_at?: any | null;
+        id: string;
+        name: string;
+        description: string;
+        created_at: any;
         updated_at?: any | null;
     } | null> | null;
 };
@@ -653,26 +620,18 @@ export type TeamQuery = {
     __typename?: 'Query';
     team?: {
         __typename?: 'Team';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        created_at?: any | null;
+        id: string;
+        name: string;
+        description: string;
+        created_at: any;
         updated_at?: any | null;
-        owner?: {
+        owner: { __typename?: 'User'; ID: string; name: string };
+        administrators: Array<{
             __typename?: 'User';
-            ID?: string | null;
+            ID: string;
             name: string;
-        } | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
+        }>;
+        menbers: Array<{ __typename?: 'User'; ID: string; name: string }>;
     } | null;
 };
 
@@ -691,24 +650,16 @@ export type CreateTeamMutation = {
     __typename?: 'Mutation';
     createTeam?: {
         __typename?: 'Team';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        owner?: {
+        id: string;
+        name: string;
+        description: string;
+        owner: { __typename?: 'User'; ID: string; name: string };
+        menbers: Array<{ __typename?: 'User'; ID: string; name: string }>;
+        administrators: Array<{
             __typename?: 'User';
-            ID?: string | null;
+            ID: string;
             name: string;
-        } | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
+        }>;
     } | null;
 };
 
@@ -728,24 +679,16 @@ export type UpdateTeamMutation = {
     __typename?: 'Mutation';
     updateTeam?: {
         __typename?: 'Team';
-        id?: string | null;
-        name?: string | null;
-        description?: string | null;
-        owner?: {
+        id: string;
+        name: string;
+        description: string;
+        owner: { __typename?: 'User'; ID: string; name: string };
+        menbers: Array<{ __typename?: 'User'; ID: string; name: string }>;
+        administrators: Array<{
             __typename?: 'User';
-            ID?: string | null;
+            ID: string;
             name: string;
-        } | null;
-        menbers?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
-        administrators?: Array<{
-            __typename?: 'User';
-            ID?: string | null;
-            name: string;
-        } | null> | null;
+        }>;
     } | null;
 };
 
@@ -755,11 +698,11 @@ export type DeleteTeamMutationVariables = Exact<{
 
 export type DeleteTeamMutation = {
     __typename?: 'Mutation';
-    deleteTeam?: { __typename?: 'Team'; id?: string | null } | null;
+    deleteTeam?: { __typename?: 'Team'; id: string } | null;
 };
 
 export const ProjectDocument = `
-    query project($id: String) {
+    query project($id: String!) {
   project(id: $id) {
     id
     name
@@ -781,15 +724,20 @@ export const ProjectDocument = `
       icon_image
     }
     created_at
+    grant {
+      dangerZone
+      edit
+      operateTask
+    }
   }
 }
     `;
 export const useProjectQuery = <TData = ProjectQuery, TError = unknown>(
-    variables?: ProjectQueryVariables,
+    variables: ProjectQueryVariables,
     options?: UseQueryOptions<ProjectQuery, TError, TData>
 ) =>
     useQuery<ProjectQuery, TError, TData>(
-        variables === undefined ? ['project'] : ['project', variables],
+        ['project', variables],
         fetcher<ProjectQuery, ProjectQueryVariables>(
             ProjectDocument,
             variables
