@@ -1,5 +1,5 @@
-import { type ComponentMeta, type ComponentStoryObj } from "@storybook/react";
-import { TaskBrancies } from "./TaskBrancies";
+import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
+import { TaskBrancies } from './TaskBrancies';
 
 type T = typeof TaskBrancies;
 type Meta = ComponentMeta<T>;

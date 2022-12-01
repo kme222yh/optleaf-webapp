@@ -16,12 +16,20 @@ List.defaultProps = {
 
 export function List({ className, tasks }: ListProps) {
     const { id, taskId } = useParams();
-    const query = useTaskQuery({ project_id: id as string, id: taskId as string });
+    const query = useTaskQuery({
+        project_id: id as string,
+        id: taskId as string
+    });
 
     const $tasks: JSX.Element[] = [];
     tasks.forEach((task) => {
         $tasks.push(
-            <li className={`List-item ${query.data?.task?.tree.includes(task.id)? 'current': ''}`} key={task.id}>
+            <li
+                className={`List-item ${
+                    query.data?.task?.tree.includes(task.id) ? 'current' : ''
+                }`}
+                key={task.id}
+            >
                 <Item
                     hasChild={task.has_child}
                     text={task.name}
@@ -32,9 +40,5 @@ export function List({ className, tasks }: ListProps) {
         );
     });
 
-    return (
-        <ul className={`List ${className}`}>
-            {$tasks}
-        </ul>
-    );
+    return <ul className={`List ${className}`}>{$tasks}</ul>;
 }

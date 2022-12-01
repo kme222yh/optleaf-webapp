@@ -1,17 +1,14 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { Item } from './Item';
+import { DashboardProjectView } from './DashboardProjectView';
 
-type T = typeof Item;
+type T = typeof DashboardProjectView;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: Item,
+    component: DashboardProjectView,
     args: {
-        isCompleted: false,
-        text: 'Test Task',
-        to: '/',
-        hasChild: false
+        // add props here !!
     }
 } as Meta;
 

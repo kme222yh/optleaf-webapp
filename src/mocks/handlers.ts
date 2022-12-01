@@ -41,10 +41,10 @@ export const handlers = [
         // if((id??'').match('^root')){
         //     data = task;
         // }
-        if((id??'').match('^sub1')){
+        if ((id ?? '').match('^sub1')) {
             data = sub1Task;
         }
-        if((id??'').match('^sub2')){
+        if ((id ?? '').match('^sub2')) {
             data = sub2Task;
         }
         return res(

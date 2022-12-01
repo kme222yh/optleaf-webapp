@@ -17,7 +17,11 @@ TaskChildren.defaultProps = {
     className: ''
 };
 
-export function TaskChildren({ className, projectId, taskId }: TaskChildrenProps) {
+export function TaskChildren({
+    className,
+    projectId,
+    taskId
+}: TaskChildrenProps) {
     const query = useTaskQuery({
         project_id: projectId as string,
         id: taskId as string

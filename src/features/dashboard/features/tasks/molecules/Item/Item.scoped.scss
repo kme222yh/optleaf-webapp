@@ -11,24 +11,25 @@
     color: $color-black;
     @include font-jp;
 
-    &.completed{
-        color: #A2E68A;
-        opacity: .8;
+    &.completed {
+        color: #a2e68a;
+        opacity: 0.8;
     }
 
-    &-text{
+    &-text {
         @include text-ellipsis;
         flex-grow: 1;
         margin-right: 5px;
     }
 
-    &-leaf, &-arrow{
-        color: #A2E68A;
-        fill: #A2E68A;
-        stroke: #A2E68A;
+    &-leaf,
+    &-arrow {
+        color: #a2e68a;
+        fill: #a2e68a;
+        stroke: #a2e68a;
     }
 
-    &-leaf{
+    &-leaf {
         cursor: pointer;
         margin-right: 7px;
     }

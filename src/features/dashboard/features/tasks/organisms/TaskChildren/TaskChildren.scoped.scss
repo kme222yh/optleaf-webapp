@@ -4,15 +4,15 @@
     position: relative;
 
     &-button {
-        transition: .2s;
+        transition: 0.2s;
         pointer-events: none;
         opacity: 0;
         position: absolute;
         right: 15px;
         bottom: 0px;
     }
-    &:hover{
-        .TaskChildren-button{
+    &:hover {
+        .TaskChildren-button {
             opacity: 1;
             pointer-events: initial;
             bottom: 5px;

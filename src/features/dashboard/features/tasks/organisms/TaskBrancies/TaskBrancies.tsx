@@ -44,7 +44,6 @@ export function TaskBrancies({ className }: TaskBranciesProps) {
                     className={`TaskBrancies-item ${
                         idx === arr.length - 2 ? 'current' : ''
                     }`}
-
                 >
                     <TaskChildren projectId={id as string} taskId={val} />
                 </li>
@@ -55,7 +54,11 @@ export function TaskBrancies({ className }: TaskBranciesProps) {
     return (
         <div className={`TaskBrancies ${className}`}>
             <ul className="TaskBrancies-body">
-                <li className={`TaskBrancies-item ${$brancies.length===1 ? 'current' : ''}`}>
+                <li
+                    className={`TaskBrancies-item ${
+                        $brancies.length <= 1 ? 'current' : ''
+                    }`}
+                >
                     <RootTasks />
                 </li>
                 {$brancies}

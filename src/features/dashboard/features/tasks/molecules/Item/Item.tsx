@@ -27,7 +27,10 @@ export function Item({
     onComplete
 }: ItemProps) {
     return (
-        <Link className={`Item ${className} ${isCompleted? 'completed': ''}`} to={to}>
+        <Link
+            className={`Item ${className} ${isCompleted ? 'completed' : ''}`}
+            to={to}
+        >
             <button className="Item-leaf" type="button" onClick={onComplete}>
                 <Leaf fill={isCompleted} />
             </button>
