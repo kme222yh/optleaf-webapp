@@ -37,7 +37,6 @@ query project($id: String!) {
             id
             content
             owner {
-                ID
                 name
                 icon_image
             }

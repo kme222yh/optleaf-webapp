@@ -1,0 +1,5 @@
+mutation createChat($project_id: String!, $task_id: String, $content: String!) {
+  createChat(project_id: $project_id, task_id: $task_id, content: $content) {
+    id
+  }
+}

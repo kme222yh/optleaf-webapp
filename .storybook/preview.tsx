@@ -26,7 +26,9 @@ export const decorators = [
     (story) => (
         <QueryClientProvider client={queryClient}>
             <AuthProvider>
-                <MemoryRouter>{story()}</MemoryRouter>
+                <MemoryRouter>
+                    <div style={{ height: '1000px' }}>{story()}</div>
+                </MemoryRouter>
             </AuthProvider>
         </QueryClientProvider>
     )

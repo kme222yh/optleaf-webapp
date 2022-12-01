@@ -1,0 +1,39 @@
+.Chat {
+    position: relative;
+
+    max-width: 500px;
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    @include font-jp;
+    color: $color-black;
+
+    &-body {
+        flex-grow: 1;
+        margin-left: 15px;
+    }
+
+    &-name {
+        @include text-ellipsis;
+        width: calc(100% - 55px);
+        font-size: 15px;
+        line-height: 20px;
+        margin-bottom: 5px;
+    }
+
+    &-content {
+        font-size: 15px;
+    }
+
+    &-date {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 10px;
+        line-height: 20px;
+        color: $color-transparent-black;
+    }
+}

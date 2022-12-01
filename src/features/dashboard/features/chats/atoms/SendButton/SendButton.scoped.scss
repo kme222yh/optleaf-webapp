@@ -1,0 +1,22 @@
+.SendButton {
+    cursor: pointer;
+
+    background-color: #90cc7a;
+    width: 60px;
+    border-radius: 2px;
+
+    @include font-en;
+    font-size: 15px;
+    line-height: 25px;
+    text-align: center;
+    color: $color-white;
+
+    transition: 0.3s;
+    &:hover {
+        background-color: $color-sub;
+    }
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
