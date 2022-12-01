@@ -1,4 +1,4 @@
-import { Project, User, Chat } from '@/graphql/generated';
+import { Project, Task, User, Chat } from '@/graphql/generated';
 
 export const user: User = {
     ID: '1',
@@ -29,6 +29,62 @@ for (let i = 0; i < 10; i += 1) {
     });
 }
 
+export const task: any = {
+    assigned_menbers: [],
+    chats,
+    children: [],
+    completed: false,
+    created_at: '2022/22/22',
+    description: 'This is test task. This is test task. This is test task. This is test task. This is test task. This is test task.',
+    due_date: '2022/22/22',
+    has_child: false,
+    id: 'root',
+    name: 'test task',
+    owner: user,
+};
+
+export const sub1Task: any = {
+    ...task,
+    id: 'sub1',
+    children: [],
+    parent: {
+        id: task.id,
+    },
+};
+for (let i = 0; i < 5; i += 1) {
+    task.children.push({
+        id: `${sub1Task.id}${i},`,
+        name: sub1Task.name,
+        completed: false,
+        has_child: false,
+    });
+}
+
+export const sub2Task: any = {
+    ...task,
+    id: 'sub2',
+    children: [],
+    parent: {
+        id: sub1Task.id,
+    },
+};
+for (let i = 0; i < 5; i += 1) {
+    sub1Task.children.push({
+        id: `${sub2Task.id}${i},`,
+        name: sub2Task.name,
+        completed: false,
+        has_child: false,
+    });
+}
+
+export const tasks: Task[] = [];
+for (let i = 0; i < 10; i += 1) {
+    tasks.push({
+        ...task,
+        id: `${task.id}${i},`
+    });
+}
+
 export const project: Project = {
     id: 'm0c25utmc23ut',
     name: 'Test Project',
@@ -42,7 +98,7 @@ export const project: Project = {
     teams: [],
     permission_level: 'owner',
     chats,
-    tasks: [],
+    tasks,
     grant: {
         dangerZone: true,
         edit: true,

@@ -6,6 +6,8 @@ import { MemoryRouter } from 'react-router-dom';
 
 import '@/scss/index.scss';
 
+import { MemoryRoutes } from '../src/routes/';
+
 // Initialize MSW
 import { startMockWorker } from '../src/mocks/browser';
 void startMockWorker();
@@ -27,7 +29,9 @@ export const decorators = [
         <QueryClientProvider client={queryClient}>
             <AuthProvider>
                 <MemoryRouter>
-                    <div style={{ height: '1000px' }}>{story()}</div>
+                    <div style={{ height: '1000px' }}>
+                        {MemoryRoutes(story())}
+                    </div>
                 </MemoryRouter>
             </AuthProvider>
         </QueryClientProvider>

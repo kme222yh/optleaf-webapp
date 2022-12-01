@@ -1,0 +1,23 @@
+.CreateButton {
+    cursor: pointer;
+
+    display: inline-block;
+    border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    color: #99d982;
+    font-size: 26px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.3s;
+
+    background-color: #99d982;
+    color: $color-white;
+    @include box-shadow;
+    &:hover {
+        background-color: $color-sub;
+    }
+}

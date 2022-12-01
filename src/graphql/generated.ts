@@ -418,30 +418,15 @@ export type TaskQuery = {
             ID: string;
             name: string;
         }>;
-        parent?: {
+        parent?: { __typename?: 'Task'; id: string } | null;
+        children: Array<{
             __typename?: 'Task';
             id: string;
-            parent?: { __typename?: 'Task'; id: string } | null;
-        } | null;
+            name: string;
+            completed: boolean;
+            has_child: boolean;
+        }>;
     } | null;
-};
-
-export type TasksQueryVariables = Exact<{
-    project_id: Scalars['String'];
-    task_id?: InputMaybe<Scalars['String']>;
-}>;
-
-export type TasksQuery = {
-    __typename?: 'Query';
-    tasks?: Array<{
-        __typename?: 'Task';
-        id: string;
-        name: string;
-        completed: boolean;
-        due_date: string;
-        created_at: any;
-        updated_at?: any | null;
-    } | null> | null;
 };
 
 export type CreateTaskMutationVariables = Exact<{
@@ -886,9 +871,15 @@ export const TaskDocument = `
     }
     parent {
       id
-      parent {
-        id
-      }
+    }
+    parent {
+      id
+    }
+    children {
+      id
+      name
+      completed
+      has_child
     }
     created_at
     updated_at
@@ -902,27 +893,6 @@ export const useTaskQuery = <TData = TaskQuery, TError = unknown>(
     useQuery<TaskQuery, TError, TData>(
         ['task', variables],
         fetcher<TaskQuery, TaskQueryVariables>(TaskDocument, variables),
-        options
-    );
-export const TasksDocument = `
-    query tasks($project_id: String!, $task_id: String) {
-  tasks(project_id: $project_id, task_id: $task_id) {
-    id
-    name
-    completed
-    due_date
-    created_at
-    updated_at
-  }
-}
-    `;
-export const useTasksQuery = <TData = TasksQuery, TError = unknown>(
-    variables: TasksQueryVariables,
-    options?: UseQueryOptions<TasksQuery, TError, TData>
-) =>
-    useQuery<TasksQuery, TError, TData>(
-        ['tasks', variables],
-        fetcher<TasksQuery, TasksQueryVariables>(TasksDocument, variables),
         options
     );
 export const CreateTaskDocument = `

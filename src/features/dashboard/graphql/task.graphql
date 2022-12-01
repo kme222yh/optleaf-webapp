@@ -15,21 +15,13 @@ query task($project_id: String!, $id: String!) {
         }
         parent {
             id
-            parent {
-                id
-            }
         }
-        created_at
-        updated_at
-    }
-}
-
-query tasks($project_id: String!, $task_id: String) {
-    tasks(project_id: $project_id, task_id: $task_id) {
-        id
-        name
-        completed
-        due_date
+        children {
+            id
+            name
+            completed
+            has_child
+        }
         created_at
         updated_at
     }
