@@ -45,6 +45,8 @@ query project($id: String!) {
 
         created_at
 
+        permission_level
+
         grant {
             dangerZone
             edit

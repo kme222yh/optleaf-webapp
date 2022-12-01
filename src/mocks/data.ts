@@ -1,4 +1,4 @@
-import { Project, Task, User, Chat } from '@/graphql/generated';
+import { Project, User, Chat } from '@/graphql/generated';
 
 export const user: User = {
     ID: '1',

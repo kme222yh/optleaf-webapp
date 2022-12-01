@@ -3,7 +3,7 @@ import './ProjectDangerMenu.scoped.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
-import { useDeleteProjectMutation } from '@/graphql/generated';
+import { useProjectQuery, useDeleteProjectMutation } from '@/graphql/generated';
 
 import { OperationPanel } from '../../molecules/OperationPanel';
 import { useModalManageStore } from '../../../../stores/modalManager';
@@ -17,10 +17,30 @@ ProjectDangerMenu.defaultProps = {
 
 export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
     const { id } = useParams();
+    const query = useProjectQuery({ id: id as string });
     const navigator = useNavigate();
     const deleteMutator = useDeleteProjectMutation();
     const queryQrient = useQueryClient();
     const modal = useModalManageStore();
+
+    let projectRestriction = '';
+    let taskRestriction = '';
+    switch (query.data?.project.permission_level as string) {
+        case 'owner':
+            taskRestriction = 'owner';
+            projectRestriction = 'owner';
+            break;
+        case 'administrators':
+            taskRestriction = 'administrator or above';
+            projectRestriction = 'administrator or above';
+            break;
+        case 'menber':
+            taskRestriction = 'everyone';
+            projectRestriction = 'administrator or above';
+            break;
+        default:
+            break;
+    }
 
     const deleteProject = async () => {
         const result = window.confirm('プロジェクトを削除してよろしいですか？');
@@ -45,7 +65,7 @@ export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
             <li className="ProjectDangerMenu-item">
                 <OperationPanel
                     title="Change access restrictions."
-                    content="Currently, this project can be operated by the owner or more."
+                    content={`Currently, the project's information is editable by ${projectRestriction}, and tasks by ${taskRestriction}.`}
                     button="Change"
                     onClick={() => {}}
                 />

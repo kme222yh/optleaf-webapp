@@ -46,9 +46,9 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
 
     useEffect(() => {
         form.reset({ description: query.data?.project?.description as string });
-    }, [query.isFetching]);
+    }, [query.isLoading, query.data?.project.description]);
 
-    if (!query.isFetching) {
+    if (!query.isLoading) {
         const project = query.data?.project;
         if (project?.grant?.edit)
             $description = (

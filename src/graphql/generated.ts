@@ -298,6 +298,7 @@ export type ProjectQuery = {
         name: string;
         description: string;
         created_at: any;
+        permission_level: string;
         owner: {
             __typename?: 'User';
             ID: string;
@@ -739,6 +740,7 @@ export const ProjectDocument = `
       created_at
     }
     created_at
+    permission_level
     grant {
       dangerZone
       edit
