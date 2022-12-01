@@ -6,7 +6,7 @@
 
     &-item {
         transition: 0.2s;
-        &:hover {
+        &:hover, &.current {
             background-color: rgba(153, 217, 130, 0.2);
         }
     }

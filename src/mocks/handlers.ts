@@ -38,6 +38,9 @@ export const handlers = [
     graphql.query('task', (req, res, ctx) => {
         const { id } = req.variables;
         let data = task;
+        // if((id??'').match('^root')){
+        //     data = task;
+        // }
         if((id??'').match('^sub1')){
             data = sub1Task;
         }

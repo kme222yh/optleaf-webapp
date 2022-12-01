@@ -41,6 +41,7 @@ export const task: any = {
     id: 'root',
     name: 'test task',
     owner: user,
+    tree: ['root0'],
 };
 
 export const sub1Task: any = {
@@ -50,10 +51,11 @@ export const sub1Task: any = {
     parent: {
         id: task.id,
     },
+    tree: ['root0', 'sub10'],
 };
 for (let i = 0; i < 5; i += 1) {
     task.children.push({
-        id: `${sub1Task.id}${i},`,
+        id: `${sub1Task.id}${i}`,
         name: sub1Task.name,
         completed: false,
         has_child: false,
@@ -67,10 +69,11 @@ export const sub2Task: any = {
     parent: {
         id: sub1Task.id,
     },
+    tree: ['root0', 'sub10', 'sub20'],
 };
 for (let i = 0; i < 5; i += 1) {
     sub1Task.children.push({
-        id: `${sub2Task.id}${i},`,
+        id: `${sub2Task.id}${i}`,
         name: sub2Task.name,
         completed: false,
         has_child: false,
@@ -81,7 +84,7 @@ export const tasks: Task[] = [];
 for (let i = 0; i < 10; i += 1) {
     tasks.push({
         ...task,
-        id: `${task.id}${i},`
+        id: `${task.id}${i}`
     });
 }
 

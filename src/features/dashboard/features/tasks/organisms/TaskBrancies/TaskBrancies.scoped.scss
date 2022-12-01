@@ -1,38 +1,26 @@
-.TaskList {
+.TaskBrancies {
     @include DashboardWhiteArea;
     height: 100%;
     width: 100%;
     max-width: 700px;
+    background-color: #D9EBD2;
 
     overflow-y: scroll;
-
-    &.taskPage{
-        background-color: #D9EBD2;
-    }
 
     &-body{
         height: 100%;
         display: flex;
     }
 
-    &-root, &-branch{
+    &-item{
         padding: 35px 0 25px;
         width: 280px;
         height: 100%;
-    }
-    &-root{
-        flex-shrink: 0;
-        padding-left: 10px;
-    }
-    &-brancies{
-        flex-shrink: 0;
-        display: flex;
-    }
-    &-branch{
         border-left: 4px solid $color-main;
-        width: 280px;
-        &.empty{
-            width: 150px;
+        flex-shrink: 0;
+        &:first-child{
+            padding-left: 10px;
+            border: none;
         }
     }
     .current{

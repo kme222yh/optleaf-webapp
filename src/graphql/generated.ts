@@ -239,6 +239,7 @@ export type Task = {
     name: Scalars['String'];
     owner: User;
     parent?: Maybe<Task>;
+    tree: Array<Scalars['String']>;
     updated_at?: Maybe<Scalars['DateTime']>;
 };
 
@@ -412,6 +413,7 @@ export type TaskQuery = {
         due_date: string;
         created_at: any;
         updated_at?: any | null;
+        tree: Array<string>;
         owner: { __typename?: 'User'; ID: string; name: string };
         assigned_menbers: Array<{
             __typename?: 'User';
@@ -872,9 +874,6 @@ export const TaskDocument = `
     parent {
       id
     }
-    parent {
-      id
-    }
     children {
       id
       name
@@ -883,6 +882,7 @@ export const TaskDocument = `
     }
     created_at
     updated_at
+    tree
   }
 }
     `;
