@@ -1,6 +1,6 @@
 import './InfoTitleWrapper.scoped.scss';
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import { CSSTransition } from 'react-transition-group';
@@ -32,6 +32,11 @@ export function InfoTitleWrapper({
     const $header = useElementSize();
     const $menu = useElementSize();
     const bodyHeight = $header.height + $menu.height + 8;
+
+    useEffect(() => {
+        $header.forceUpdate();
+        $menu.forceUpdate();
+    }, [modal.isClosed('DetailMenu')]);
 
     return (
         <div className={`InfoTitleWrapper ${className}`}>

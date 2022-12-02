@@ -1,6 +1,6 @@
 import './ProjectInfoTitle.scoped.scss';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
     useProjectQuery,
@@ -20,49 +20,48 @@ ProjectInfoTitle.defaultProps = {
 };
 
 export function ProjectInfoTitle({ className }: ProjectInfoTitleProps) {
-    let $title = <p>fetching...</p>;
+    const [displayMenu, setDisplayMenu] = useState(false);
 
     const { id } = useParams();
-    const query = useProjectQuery({ id });
+    const query = useProjectQuery({ id: id as string });
     const mutation = useUpdateProjectMutation();
     const form = useForm<UpdateProjectMutationVariables>();
 
+    useEffect(() => {
+        if (query.isLoading) {
+            form.reset({ name: 'fetching...' });
+        } else {
+            setDisplayMenu(query.data?.project?.grant.dangerZone as boolean);
+            form.reset({ name: query.data?.project?.name as string });
+        }
+    }, [query.data?.project?.name, query.isLoading]);
+
     let updateTimeoutId: NodeJS.Timeout;
-    const updateFn = async (data: UpdateProjectMutationVariables) => {
+    const updateFn = () => {
         clearTimeout(updateTimeoutId);
         updateTimeoutId = setTimeout(() => {
-            mutation.mutate({
-                id: id as string,
-                name: data.name
-            });
-        }, 3000);
+            const data: UpdateProjectMutationVariables = {
+                name: form.getValues('name'),
+                id: id as string
+            };
+            mutation.mutate(data);
+        }, 2000);
     };
-
-    useEffect(() => {
-        form.reset({ name: query.data?.project?.name as string });
-    }, [query.isFetching]);
-
-    if (!query.isFetching) {
-        const project = query.data?.project;
-        if (project?.grant?.edit)
-            $title = (
-                <input
-                    className="ProjectInfoTitle-inline"
-                    type="text"
-                    {...form.register('name')}
-                    onChange={form.handleSubmit(updateFn)}
-                />
-            );
-        else
-            $title = <p className="ProjectInfoTitle-inline">{project?.name}</p>;
-    }
 
     return (
         <div className={`ProjectInfoTitle ${className}`}>
             <InfoTitleWrapper
-                title={$title}
+                title={
+                    <input
+                        className="ProjectInfoTitle-inline"
+                        type="text"
+                        {...form.register('name')}
+                        onChange={updateFn}
+                        disabled={!query.data?.project.grant.edit}
+                    />
+                }
                 menu={<ProjectDangerMenu />}
-                displayMenu={query.data?.project?.grant?.dangerZone}
+                displayMenu={displayMenu}
             />
         </div>
     );

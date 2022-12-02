@@ -14,6 +14,14 @@ const { DashboardProjectsView } = lazyImport(
     () => import('@/features/dashboard'),
     'DashboardProjectsView'
 );
+const { DashboardProjectView } = lazyImport(
+    () => import('@/features/dashboard'),
+    'DashboardProjectView'
+);
+const { DashboardTaskView } = lazyImport(
+    () => import('@/features/dashboard'),
+    'DashboardTaskView'
+);
 const { DashboardTeamsView } = lazyImport(
     () => import('@/features/dashboard'),
     'DashboardTeamsView'
@@ -48,7 +56,7 @@ export const protectedRoutes: RouteObject[] = [
                 path: '/project/:id',
                 element: (
                     <DashboardDefaultLayout>
-                        <DashboardProjectsView />
+                        <DashboardProjectView />
                     </DashboardDefaultLayout>
                 )
             },
@@ -56,7 +64,7 @@ export const protectedRoutes: RouteObject[] = [
                 path: '/project/:id/:taskId',
                 element: (
                     <DashboardDefaultLayout>
-                        <DashboardProjectsView />
+                        <DashboardTaskView />
                     </DashboardDefaultLayout>
                 )
             },

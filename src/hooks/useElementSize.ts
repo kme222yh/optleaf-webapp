@@ -7,21 +7,21 @@ type ElementSizeType = {
     width: number;
     height: number;
     ref: React.MutableRefObject<null>;
+    forceUpdate: () => void;
 };
 
 export const useElementSize = (): ElementSizeType => {
     const [size, setSize] = useState([0, 0]);
     const elm = useRef(null);
+    const updateSize = (): void => {
+        if (elm.current) {
+            const boundingClientRect = elm.current.getBoundingClientRect();
+            setSize([boundingClientRect.width, boundingClientRect.height]);
+        } else {
+            setSize([0, 0]);
+        }
+    };
     useLayoutEffect(() => {
-        const updateSize = (): void => {
-            if (elm.current) {
-                const boundingClientRect = elm.current.getBoundingClientRect();
-                setSize([boundingClientRect.width, boundingClientRect.height]);
-            } else {
-                setSize([0, 0]);
-            }
-        };
-
         window.addEventListener('resize', updateSize);
         updateSize();
 
@@ -36,5 +36,8 @@ export const useElementSize = (): ElementSizeType => {
 
         return () => window.removeEventListener('resize', updateSize);
     }, []);
-    return { width: size[0], height: size[1], ref: elm };
+    const forceUpdate = () => {
+        updateSize();
+    };
+    return { width: size[0], height: size[1], ref: elm, forceUpdate };
 };

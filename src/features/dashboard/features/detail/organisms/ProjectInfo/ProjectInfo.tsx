@@ -10,6 +10,7 @@ import {
     UpdateProjectMutationVariables,
     useUpdateProjectMutation
 } from '@/graphql/generated';
+import { formatDate } from '@/lib/date';
 
 import { ProjectInfoTitle } from '../ProjectInfoTitle';
 import { TaskNumbers } from '../../../../molecules/TaskNumbers';
@@ -22,49 +23,40 @@ ProjectInfo.defaultProps = {
 };
 
 export function ProjectInfo({ className }: ProjectInfoProps) {
-    let $description = <p className="ProjectInfo-description">fetching...</p>;
-
-    let updateTimeoutId: NodeJS.Timeout;
-    const updateFn = async (data: UpdateProjectMutationVariables) => {
-        clearTimeout(updateTimeoutId);
-        updateTimeoutId = setTimeout(() => {
-            mutation.mutate({
-                id: id as string,
-                description: data.description
-            });
-        }, 3000);
-    };
-
-    const $header = useElementSize();
-    const $layout = useElementSize();
-    const bodySize = $layout.height - $header.height - 60;
-
     const { id } = useParams();
     const query = useProjectQuery({ id: id as string });
     const mutation = useUpdateProjectMutation();
     const form = useForm<UpdateProjectMutationVariables>();
 
+    const $header = useElementSize();
+    const $layout = useElementSize();
+    const bodySize = $layout.height - $header.height - 60;
+
+    let updateTimeoutId: NodeJS.Timeout;
+    const updateFn = () => {
+        clearTimeout(updateTimeoutId);
+        updateTimeoutId = setTimeout(() => {
+            const data: UpdateProjectMutationVariables = {
+                description: form.getValues('description'),
+                id: id as string
+            };
+            mutation.mutate(data);
+        }, 2000);
+    };
+
+    useEffect(() => {
+        if (query.isLoading) {
+            form.reset({ description: 'fetching...' });
+        } else {
+            form.reset({
+                description: query.data?.project?.description as string
+            });
+        }
+    }, [query.data?.project?.description, query.isLoading]);
+
     useEffect(() => {
         form.reset({ description: query.data?.project?.description as string });
     }, [query.isLoading, query.data?.project.description]);
-
-    if (!query.isLoading) {
-        const project = query.data?.project;
-        if (project?.grant?.edit)
-            $description = (
-                <textarea
-                    className="ProjectInfo-description"
-                    {...form.register('description')}
-                    onChange={form.handleSubmit(updateFn)}
-                />
-            );
-        else
-            $description = (
-                <p className="ProjectInfo-description">
-                    {project?.description}
-                </p>
-            );
-    }
 
     return (
         <div className={`ProjectInfo ${className}`} ref={$layout.ref}>
@@ -78,7 +70,9 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
                             Created at
                         </span>
                         <span className="ProjectInfo-info-item-data">
-                            {query.data?.project?.created_at}
+                            {formatDate(
+                                query.data?.project?.created_at ?? '1912-12-3'
+                            )}
                         </span>
                     </li>
                     <li className="ProjectInfo-info-item">
@@ -93,7 +87,12 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
                 <div className="ProjectInfo-tasknum">
                     <TaskNumbers tasks={10} completed={5} />
                 </div>
-                {$description}
+                <textarea
+                    className="ProjectInfo-description"
+                    {...form.register('description')}
+                    onChange={updateFn}
+                    disabled={!query.data?.project.grant.edit}
+                />
             </div>
         </div>
     );

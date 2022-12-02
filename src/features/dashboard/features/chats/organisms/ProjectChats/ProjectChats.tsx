@@ -1,5 +1,6 @@
 import './ProjectChats.scoped.scss';
 
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useQueryClient } from 'react-query';
@@ -22,13 +23,18 @@ ProjectChats.defaultProps = {
 };
 
 export function ProjectChats({ className }: ProjectChatsProps) {
+    const [chats, setChats] = useState<Chat[]>([]);
     const { id, taskId } = useParams();
     const queryClient = useQueryClient();
     const query = useProjectQuery({ id: id as string });
     const mutator = useCreateChatMutation();
     const form = useForm<CreateChatMutationVariables>();
 
-    const chats = (query.isLoading ? [] : query.data?.project.chats) as Chat[];
+    useEffect(() => {
+        if (!query.isLoading) {
+            setChats(query.data?.project.chats as Chat[]);
+        }
+    }, [query.isLoading, query.data?.project.chats]);
 
     const onSend = async () => {
         const data: CreateChatMutationVariables = {
@@ -36,9 +42,9 @@ export function ProjectChats({ className }: ProjectChatsProps) {
             project_id: id as string,
             task_id: taskId
         };
-        await mutator.mutateAsync(data);
         form.setValue('content', '');
-        await queryClient.resetQueries([
+        await mutator.mutateAsync(data);
+        await queryClient.invalidateQueries([
             'project',
             { id } as ProjectQueryVariables
         ]);

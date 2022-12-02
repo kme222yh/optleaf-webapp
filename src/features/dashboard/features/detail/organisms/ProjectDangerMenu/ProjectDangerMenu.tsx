@@ -43,12 +43,13 @@ export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
     }
 
     const deleteProject = async () => {
-        const result = window.confirm('プロジェクトを削除してよろしいですか？');
+        const result = window.confirm('Do you want to delete?');
         if (result) {
+            modal.open('ScreenTransition');
             await deleteMutator.mutateAsync({ id: id as string });
             await queryQrient.resetQueries(['dashboardTop']);
-            modal.close();
             navigator('/projects');
+            modal.close();
         }
     };
 

@@ -1,0 +1,25 @@
+.ScreenTransitionView {
+    opacity: 0;
+    display: none;
+    transition: 0.4s;
+    position: absolute;
+    z-index: 999;
+
+    &.fade-enter {
+        display: block;
+        opacity: 0;
+    }
+    &.fade-enter-active {
+        display: block;
+        opacity: 1;
+    }
+    &.fade-enter-done,
+    &.fade-exit {
+        display: block;
+        opacity: 1;
+    }
+    &.fade-exit-active {
+        display: block;
+        opacity: 0;
+    }
+}

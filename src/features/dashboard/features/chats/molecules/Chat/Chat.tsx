@@ -1,5 +1,6 @@
 import './Chat.scoped.scss';
 
+import { formatDateTime } from '@/lib/date';
 import { UserIcon } from '@/features/dashboard/atoms/UserIcon';
 
 export type ChatProps = {
@@ -34,7 +35,9 @@ export function Chat({
                 <p className="Chat-name">{name}</p>
                 <p className="Chat-content">{content}</p>
             </div>
-            <span className="Chat-date">{date}</span>
+            <span className="Chat-date">
+                {formatDateTime(date ?? '1912-12-3')}
+            </span>
         </div>
     );
 }

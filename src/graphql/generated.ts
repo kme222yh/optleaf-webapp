@@ -92,11 +92,9 @@ export type MutationCreateProjectArgs = {
 };
 
 export type MutationCreateTaskArgs = {
-    assigned_menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-    description?: InputMaybe<Scalars['String']>;
-    due_date?: InputMaybe<Scalars['String']>;
-    name?: InputMaybe<Scalars['String']>;
-    project_id?: InputMaybe<Scalars['String']>;
+    description: Scalars['String'];
+    name: Scalars['String'];
+    project_id: Scalars['String'];
     task_id?: InputMaybe<Scalars['String']>;
 };
 
@@ -110,8 +108,8 @@ export type MutationDeleteProjectArgs = {
 };
 
 export type MutationDeleteTaskArgs = {
-    id?: InputMaybe<Scalars['String']>;
-    project_id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
+    project_id: Scalars['String'];
 };
 
 export type MutationDeleteTeamArgs = {
@@ -131,14 +129,14 @@ export type MutationUpdateProjectArgs = {
 };
 
 export type MutationUpdateTaskArgs = {
-    assigned_menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+    assigned_menbers?: InputMaybe<Array<Scalars['Int']>>;
     completed?: InputMaybe<Scalars['Boolean']>;
     description?: InputMaybe<Scalars['String']>;
     due_date?: InputMaybe<Scalars['String']>;
-    id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
     name?: InputMaybe<Scalars['String']>;
     parent_id?: InputMaybe<Scalars['String']>;
-    project_id?: InputMaybe<Scalars['String']>;
+    project_id: Scalars['String'];
 };
 
 export type MutationUpdateTeamArgs = {
@@ -173,23 +171,15 @@ export type Project = {
 /** Indicates what fields are available at the top level of a query operation. */
 export type Query = {
     __typename?: 'Query';
-    chats?: Maybe<Array<Maybe<Chat>>>;
     project: Project;
     projects?: Maybe<Array<Project>>;
     task?: Maybe<Task>;
-    tasks?: Maybe<Array<Maybe<Task>>>;
     team?: Maybe<Team>;
     teams?: Maybe<Array<Maybe<Team>>>;
     /** Find a single user by an identifying attribute. */
     user?: Maybe<User>;
     /** List multiple users. */
     users: Array<User>;
-};
-
-/** Indicates what fields are available at the top level of a query operation. */
-export type QueryChatsArgs = {
-    project_id?: InputMaybe<Scalars['String']>;
-    task_id?: InputMaybe<Scalars['String']>;
 };
 
 /** Indicates what fields are available at the top level of a query operation. */
@@ -201,12 +191,6 @@ export type QueryProjectArgs = {
 export type QueryTaskArgs = {
     id?: InputMaybe<Scalars['String']>;
     project_id?: InputMaybe<Scalars['String']>;
-};
-
-/** Indicates what fields are available at the top level of a query operation. */
-export type QueryTasksArgs = {
-    project_id?: InputMaybe<Scalars['String']>;
-    task_id?: InputMaybe<Scalars['String']>;
 };
 
 /** Indicates what fields are available at the top level of a query operation. */
@@ -436,87 +420,27 @@ export type CreateTaskMutationVariables = Exact<{
     task_id?: InputMaybe<Scalars['String']>;
     name: Scalars['String'];
     description: Scalars['String'];
-    due_date?: InputMaybe<Scalars['String']>;
-    assigned_menbers?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
-    >;
 }>;
 
 export type CreateTaskMutation = {
     __typename?: 'Mutation';
-    createTask?: {
-        __typename?: 'Task';
-        id: string;
-        name: string;
-        description: string;
-        completed: boolean;
-        due_date: string;
-        created_at: any;
-        updated_at?: any | null;
-        owner: { __typename?: 'User'; ID: string; name: string };
-        assigned_menbers: Array<{
-            __typename?: 'User';
-            ID: string;
-            name: string;
-        }>;
-        parent?: {
-            __typename?: 'Task';
-            id: string;
-            name: string;
-            description: string;
-            completed: boolean;
-            created_at: any;
-            updated_at?: any | null;
-        } | null;
-    } | null;
+    createTask?: { __typename?: 'Task'; id: string } | null;
 };
 
 export type UpdateTaskMutationVariables = Exact<{
     project_id: Scalars['String'];
     id: Scalars['String'];
-    name: Scalars['String'];
-    description: Scalars['String'];
+    name?: InputMaybe<Scalars['String']>;
+    description?: InputMaybe<Scalars['String']>;
     completed?: InputMaybe<Scalars['Boolean']>;
     due_date?: InputMaybe<Scalars['String']>;
-    assigned_menbers?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
-    >;
+    assigned_menbers?: InputMaybe<Array<Scalars['Int']> | Scalars['Int']>;
+    parent_id?: InputMaybe<Scalars['String']>;
 }>;
 
 export type UpdateTaskMutation = {
     __typename?: 'Mutation';
-    updateTask?: {
-        __typename?: 'Task';
-        id: string;
-        name: string;
-        description: string;
-        completed: boolean;
-        due_date: string;
-        created_at: any;
-        updated_at?: any | null;
-        owner: { __typename?: 'User'; ID: string; name: string };
-        assigned_menbers: Array<{
-            __typename?: 'User';
-            ID: string;
-            name: string;
-        }>;
-        parent?: {
-            __typename?: 'Task';
-            id: string;
-            name: string;
-            description: string;
-            completed: boolean;
-            created_at: any;
-            updated_at?: any | null;
-        } | null;
-        children: Array<{
-            __typename?: 'Task';
-            id: string;
-            name: string;
-            completed: boolean;
-            children: Array<{ __typename?: 'Task'; id: string }>;
-        }>;
-    } | null;
+    updateTask?: { __typename?: 'Task'; id: string } | null;
 };
 
 export type DeleteTaskMutationVariables = Exact<{
@@ -896,38 +820,14 @@ export const useTaskQuery = <TData = TaskQuery, TError = unknown>(
         options
     );
 export const CreateTaskDocument = `
-    mutation createTask($project_id: String!, $task_id: String, $name: String!, $description: String!, $due_date: String, $assigned_menbers: [Int]) {
+    mutation createTask($project_id: String!, $task_id: String, $name: String!, $description: String!) {
   createTask(
     project_id: $project_id
     task_id: $task_id
     name: $name
     description: $description
-    due_date: $due_date
-    assigned_menbers: $assigned_menbers
   ) {
     id
-    name
-    description
-    completed
-    due_date
-    owner {
-      ID
-      name
-    }
-    assigned_menbers {
-      ID
-      name
-    }
-    parent {
-      id
-      name
-      description
-      completed
-      created_at
-      updated_at
-    }
-    created_at
-    updated_at
   }
 }
     `;
@@ -954,7 +854,7 @@ export const useCreateTaskMutation = <TError = unknown, TContext = unknown>(
         options
     );
 export const UpdateTaskDocument = `
-    mutation updateTask($project_id: String!, $id: String!, $name: String!, $description: String!, $completed: Boolean, $due_date: String, $assigned_menbers: [Int]) {
+    mutation updateTask($project_id: String!, $id: String!, $name: String, $description: String, $completed: Boolean, $due_date: String, $assigned_menbers: [Int!], $parent_id: String) {
   updateTask(
     project_id: $project_id
     id: $id
@@ -963,38 +863,9 @@ export const UpdateTaskDocument = `
     completed: $completed
     due_date: $due_date
     assigned_menbers: $assigned_menbers
+    parent_id: $parent_id
   ) {
     id
-    name
-    description
-    completed
-    due_date
-    owner {
-      ID
-      name
-    }
-    assigned_menbers {
-      ID
-      name
-    }
-    parent {
-      id
-      name
-      description
-      completed
-      created_at
-      updated_at
-    }
-    children {
-      id
-      name
-      completed
-      children {
-        id
-      }
-    }
-    created_at
-    updated_at
   }
 }
     `;
