@@ -1,0 +1,57 @@
+.TaskInfo {
+    @include DashboardWhiteArea;
+    padding: 20px;
+    max-width: 450px;
+    min-height: 361px;
+    height: 100%;
+
+    &-header {
+        margin-bottom: 20px;
+    }
+
+    &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &-info {
+        width: 100%;
+        padding: 0 20px 15px;
+        margin-bottom: 15px;
+        &-item {
+            font-size: 15px;
+            @include font-jp;
+            color: #99d982;
+            line-height: 22px;
+            margin-bottom: 15px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            &-title {
+                display: inline-block;
+                width: 100px;
+            }
+        }
+        border-bottom: 2px solid #99d982;
+    }
+
+    &-description {
+        flex-grow: 1;
+        overflow-y: scroll;
+        width: 100%;
+        padding: 0 20px;
+        @include font-jp;
+        font-size: 15px;
+        color: $color-black;
+        line-height: 23px;
+        letter-spacing: 0.05em;
+        transition: 0.2s;
+        border-radius: 5px;
+        outline: #99d98200 3px solid;
+        &:focus {
+            outline: #99d982 3px solid;
+        }
+    }
+}

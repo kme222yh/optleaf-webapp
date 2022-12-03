@@ -14,7 +14,6 @@
         right: 0;
         // left: 0;
         top: 0;
-        z-index: 200;
         height: 70px;
         width: 70px;
 
@@ -26,20 +25,24 @@
         &.open-enter {
             width: 70px;
             height: 70px;
+            z-index: 200;
         }
         &.open-enter-active {
             width: 250px;
             height: 368px;
+            z-index: 200;
         }
         &.open-enter-done,
         &.open-exit {
             @include box-shadow;
             width: 250px;
             height: 368px;
+            z-index: 200;
         }
         &.open-exit-active {
             width: 70px;
             height: 70px;
+            z-index: 200;
         }
 
         &:hover {

@@ -1,6 +1,6 @@
 import './DashboardProjectView.scss';
 
-import { TaskBrancies } from '../../features/tasks';
+import { ProjectTasks } from '../../features/tasks';
 import { ProjectChats } from '../../features/chats';
 import { ProjectInfo } from '../../features/detail';
 
@@ -15,7 +15,7 @@ export function DashboardProjectView({ className }: DashboardProjectViewProps) {
     return (
         <div className={`DashboardProjectView ${className}`}>
             <div className="DashboardProjectView-tasks">
-                <TaskBrancies />
+                <ProjectTasks />
             </div>
             <div className="DashboardProjectView-chats">
                 <ProjectChats />

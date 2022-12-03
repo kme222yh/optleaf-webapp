@@ -61,9 +61,9 @@ export type Chat = {
 
 export type Grant = {
     __typename?: 'Grant';
-    dangerZone: Scalars['Boolean'];
+    dangerZone?: Maybe<Scalars['Boolean']>;
     edit: Scalars['Boolean'];
-    operateTask: Scalars['Boolean'];
+    operateTask?: Maybe<Scalars['Boolean']>;
 };
 
 export type Mutation = {
@@ -324,9 +324,9 @@ export type ProjectQuery = {
         }>;
         grant: {
             __typename?: 'Grant';
-            dangerZone: boolean;
+            dangerZone?: boolean | null;
             edit: boolean;
-            operateTask: boolean;
+            operateTask?: boolean | null;
         };
     };
 };
@@ -412,6 +412,13 @@ export type TaskQuery = {
             completed: boolean;
             has_child: boolean;
         }>;
+        chats: Array<{
+            __typename?: 'Chat';
+            id: string;
+            content: string;
+            created_at: any;
+            owner: { __typename?: 'User'; name: string; icon_image: string };
+        }>;
     } | null;
 };
 
@@ -440,7 +447,11 @@ export type UpdateTaskMutationVariables = Exact<{
 
 export type UpdateTaskMutation = {
     __typename?: 'Mutation';
-    updateTask?: { __typename?: 'Task'; id: string } | null;
+    updateTask?: {
+        __typename?: 'Task';
+        id: string;
+        parent?: { __typename?: 'Task'; id: string } | null;
+    } | null;
 };
 
 export type DeleteTaskMutationVariables = Exact<{
@@ -804,6 +815,15 @@ export const TaskDocument = `
       completed
       has_child
     }
+    chats {
+      id
+      content
+      owner {
+        name
+        icon_image
+      }
+      created_at
+    }
     created_at
     updated_at
     tree
@@ -866,6 +886,9 @@ export const UpdateTaskDocument = `
     parent_id: $parent_id
   ) {
     id
+    parent {
+      id
+    }
   }
 }
     `;

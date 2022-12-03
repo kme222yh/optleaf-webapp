@@ -32,7 +32,7 @@ export function TaskBrancies({ className }: TaskBranciesProps) {
                 $endOfListRef.current.scrollIntoView(200);
             }
         }
-    }, [query.isLoading]);
+    }, [query.data?.task?.tree, query.isLoading]);
 
     const $brancies: ReactNode[] = [];
     if (taskId) {

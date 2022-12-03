@@ -33,8 +33,9 @@ export function List({ className, tasks }: ListProps) {
                 <Item
                     hasChild={task.has_child}
                     text={task.name}
-                    to={`/project/t2m0j34mutv02/${String(task.id)}`}
+                    to={`/project/${id}/${String(task.id)}`}
                     isCompleted={task.completed}
+                    taskId={task.id}
                 />
             </li>
         );

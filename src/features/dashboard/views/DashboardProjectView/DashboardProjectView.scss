@@ -24,4 +24,10 @@
         height: 400px;
         margin-bottom: 25px;
     }
+
+    @include tablet {
+        &-chats {
+            display: none;
+        }
+    }
 }

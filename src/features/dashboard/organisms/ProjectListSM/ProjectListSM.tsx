@@ -1,6 +1,14 @@
 import './ProjectListSM.scoped.scss';
 
-import { useDashboardTopQuery, Project } from '@/graphql/generated';
+import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
+
+import {
+    useDashboardTopQuery,
+    Project,
+    useCreateProjectMutation
+} from '@/graphql/generated';
+import { useModalManageStore } from '../../stores/modalManager';
 
 import { PreviewLink } from '../../molecules/PreviewLink';
 import { PlusButtonSM } from '../../atoms/PlusButtonSM';
@@ -17,6 +25,20 @@ ProjectListSM.defaultProps = {
 
 export function ProjectListSM({ className, height }: ProjectListSMProps) {
     const query = useDashboardTopQuery();
+    const navigator = useNavigate();
+    const modal = useModalManageStore();
+    const mutator = useCreateProjectMutation();
+    const queryQrient = useQueryClient();
+    const createProject = async () => {
+        modal.open('ScreenTransition');
+        const result = await mutator.mutateAsync({
+            name: 'New Project',
+            description: 'This is new project.'
+        });
+        await queryQrient.resetQueries(['dashboardTop']);
+        navigator(`/project/${result.createProject?.id}`);
+        modal.close();
+    };
 
     const $items = [];
 
@@ -60,7 +82,7 @@ export function ProjectListSM({ className, height }: ProjectListSMProps) {
         }
         $items.push(
             <li className="ProjectListSM-item" key={itemsLength}>
-                <PlusButtonSM onClick={() => {}} />
+                <PlusButtonSM onClick={createProject} />
             </li>
         );
     }

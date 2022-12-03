@@ -1,11 +1,9 @@
 .Item {
-    height: 43px;
     width: 100%;
     max-width: 500px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding: 0 10px;
 
     font-size: 18px;
     color: $color-black;
@@ -14,6 +12,13 @@
     &.completed {
         color: #a2e68a;
         opacity: 0.8;
+    }
+
+    &-link {
+        line-height: 43px;
+        flex-grow: 1;
+        padding-right: 10px;
+        display: flex;
     }
 
     &-text {
@@ -31,6 +36,7 @@
 
     &-leaf {
         cursor: pointer;
-        margin-right: 7px;
+        padding-right: 7px;
+        padding-left: 10px;
     }
 }

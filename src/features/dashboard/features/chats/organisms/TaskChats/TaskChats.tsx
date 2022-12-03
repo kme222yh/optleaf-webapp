@@ -1,4 +1,4 @@
-import './ProjectChats.scoped.scss';
+import './TaskChats.scoped.scss';
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -6,8 +6,9 @@ import { useForm } from 'react-hook-form';
 import { useQueryClient } from 'react-query';
 
 import {
-    useProjectQuery,
+    useTaskQuery,
     ProjectQueryVariables,
+    TaskQueryVariables,
     Chat,
     CreateChatMutationVariables,
     useCreateChatMutation
@@ -15,43 +16,54 @@ import {
 
 import { Chats } from '../../molecules/Chats';
 
-export type ProjectChatsProps = {
+export type TaskChatsProps = {
     className?: string;
 };
-ProjectChats.defaultProps = {
+TaskChats.defaultProps = {
     className: ''
 };
 
-export function ProjectChats({ className }: ProjectChatsProps) {
+export function TaskChats({ className }: TaskChatsProps) {
     const [chats, setChats] = useState<Chat[]>([]);
-    const { id } = useParams();
+    const { id, taskId } = useParams();
     const queryClient = useQueryClient();
-    const query = useProjectQuery({ id: id as string });
+    const query = useTaskQuery({
+        project_id: id as string,
+        id: taskId as string
+    });
     const mutator = useCreateChatMutation();
     const form = useForm<CreateChatMutationVariables>();
 
     useEffect(() => {
         if (!query.isLoading) {
-            setChats(query.data?.project.chats as Chat[]);
+            setChats(query.data?.task?.chats as Chat[]);
         }
-    }, [query.isLoading, query.data?.project.chats]);
+    }, [query.isLoading, query.data?.task?.chats]);
 
     const onSend = async () => {
         const data: CreateChatMutationVariables = {
             content: form.getValues('content'),
-            project_id: id as string
+            project_id: id as string,
+            task_id: taskId
         };
         form.setValue('content', '');
         await mutator.mutateAsync(data);
-        await queryClient.invalidateQueries([
-            'project',
-            { id } as ProjectQueryVariables
-        ]);
+        if (taskId) {
+            await queryClient.invalidateQueries([
+                'task',
+                { project_id: id, id: taskId } as TaskQueryVariables
+            ]);
+        } else {
+            await queryClient.invalidateQueries([
+                'project',
+                { id } as ProjectQueryVariables
+            ]);
+        }
     };
 
     return (
         <Chats
-            className={`ProjectChats ${className}`}
+            className={`TaskChats ${className}`}
             chats={chats}
             onSend={onSend}
             config={form.register('content', {

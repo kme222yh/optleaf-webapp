@@ -1,6 +1,7 @@
 import './ProjectsHeader.scoped.scss';
 
 import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
 
 import { useCreateProjectMutation } from '@/graphql/generated';
 import { useModalManageStore } from '../../stores/modalManager';
@@ -19,13 +20,14 @@ export function ProjectsHeader({ className }: ProjectsHeaderProps) {
     const navigator = useNavigate();
     const modal = useModalManageStore();
     const mutator = useCreateProjectMutation();
+    const queryQrient = useQueryClient();
     const createProject = async () => {
         modal.open('ScreenTransition');
         const result = await mutator.mutateAsync({
             name: 'New Project',
             description: 'This is new project.'
         });
-        // await queryQrient.resetQueries(['dashboardTop']);
+        await queryQrient.resetQueries(['dashboardTop']);
         navigator(`/project/${result.createProject?.id}`);
         modal.close();
     };

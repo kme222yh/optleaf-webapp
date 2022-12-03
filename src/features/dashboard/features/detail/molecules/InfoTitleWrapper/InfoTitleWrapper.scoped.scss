@@ -8,7 +8,6 @@
         top: 0;
         left: 0;
         right: 0;
-        z-index: 200;
 
         background-color: #99d982;
         padding: 0 20px;
@@ -16,15 +15,19 @@
         overflow-y: hidden;
 
         transition: 0.3s;
-        &.close-enter-active,
         &.close-enter-done,
         &.close-appear,
         &.close-appear-active {
             height: 50px !important;
         }
+        &.close-enter-active {
+            height: 50px !important;
+            z-index: 200;
+        }
         &.close-exit-active,
         &.close-exit-done {
             @include box-shadow;
+            z-index: 200;
         }
     }
 
