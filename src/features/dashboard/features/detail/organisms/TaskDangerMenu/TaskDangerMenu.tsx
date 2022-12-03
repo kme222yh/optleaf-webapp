@@ -38,9 +38,9 @@ export function TaskDangerMenu({ className }: TaskDangerMenuProps) {
             });
             await queryQrient.resetQueries([
                 'task',
-                { project_id: id as string, id: taskId as string }
+                { project_id: id as string, id: parentId ?? '' }
             ]);
-            navigator(`/project/${id}/${parentId}`);
+            navigator(`/project/${id}/${parentId ?? ''}`);
             modal.close();
         }
     };

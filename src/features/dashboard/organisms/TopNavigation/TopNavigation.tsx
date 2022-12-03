@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import './TopNavigation.scoped.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

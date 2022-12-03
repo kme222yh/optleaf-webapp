@@ -23,9 +23,9 @@
         font-size: 13px;
         line-height: 15px;
         color: $color-sub;
-        &.greenBack {
-            color: $color-white;
-        }
+    }
+    &.greenBack &-text{
+        color: $color-white;
     }
 
     &:hover,

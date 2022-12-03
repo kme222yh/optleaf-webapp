@@ -73,7 +73,7 @@ export type Mutation = {
     createTask?: Maybe<Task>;
     createTeam?: Maybe<Team>;
     deleteProject?: Maybe<Project>;
-    deleteTask?: Maybe<Project>;
+    deleteTask?: Maybe<Task>;
     deleteTeam?: Maybe<Team>;
     updateProject?: Maybe<Project>;
     updateTask?: Maybe<Task>;
@@ -461,7 +461,7 @@ export type DeleteTaskMutationVariables = Exact<{
 
 export type DeleteTaskMutation = {
     __typename?: 'Mutation';
-    deleteTask?: { __typename?: 'Project'; id: string } | null;
+    deleteTask?: { __typename?: 'Task'; id: string } | null;
 };
 
 export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
