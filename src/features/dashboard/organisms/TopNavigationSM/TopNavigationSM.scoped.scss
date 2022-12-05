@@ -25,6 +25,10 @@
             @include box-shadow;
             z-index: 200;
         }
+
+        &:hover {
+            @include box-shadow;
+        }
     }
 
     &-humburger {

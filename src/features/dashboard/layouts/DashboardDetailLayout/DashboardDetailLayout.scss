@@ -1,0 +1,22 @@
+.DashboardDetailLayout {
+    height: 100vh;
+    width: 100%;
+    padding: 20px 0;
+    background-color: $color-main;
+    &-header {
+        @include outerBody;
+
+        display: flex;
+        align-items: center;
+        .ProjectTreeBar {
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        margin-bottom: 30px;
+    }
+
+    &-main {
+        @include outerBody;
+    }
+}

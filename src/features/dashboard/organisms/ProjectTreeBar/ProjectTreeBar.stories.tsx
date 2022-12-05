@@ -1,12 +1,12 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { TopNavigationSM } from './TopNavigationSM';
+import { ProjectTreeBar } from './ProjectTreeBar';
 
-type T = typeof TopNavigationSM;
+type T = typeof ProjectTreeBar;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: TopNavigationSM,
+    component: ProjectTreeBar,
     args: {
         // add props here !!
     }

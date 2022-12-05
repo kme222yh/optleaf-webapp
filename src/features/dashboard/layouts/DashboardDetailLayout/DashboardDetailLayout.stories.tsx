@@ -1,12 +1,12 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { TopNavigationSM } from './TopNavigationSM';
+import { DashboardDetailLayout } from './DashboardDetailLayout';
 
-type T = typeof TopNavigationSM;
+type T = typeof DashboardDetailLayout;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: TopNavigationSM,
+    component: DashboardDetailLayout,
     args: {
         // add props here !!
     }

@@ -7,6 +7,7 @@ import { useTaskQuery, useCreateTaskMutation, Task } from '@/graphql/generated';
 
 import { List } from '../../molecules/List';
 import { CreateButton } from '../../atoms/CreateButton';
+import { useModalManageStore } from '../../../../stores/modalManager';
 
 export type TaskChildrenProps = {
     className?: string;
@@ -29,10 +30,12 @@ export function TaskChildren({
     const mutator = useCreateTaskMutation();
     const navigator = useNavigate();
     const queryClient = useQueryClient();
+    const modal = useModalManageStore();
 
     const tasks = (query.isLoading ? [] : query.data?.task?.children) as Task[];
 
     const createTask = async () => {
+        modal.open('ScreenTransition');
         const task = await mutator.mutateAsync({
             project_id: projectId as string,
             task_id: taskId,
@@ -46,6 +49,7 @@ export function TaskChildren({
         navigator(
             `/project/${projectId as string}/${String(task.createTask?.id)}`
         );
+        modal.close();
     };
 
     return (

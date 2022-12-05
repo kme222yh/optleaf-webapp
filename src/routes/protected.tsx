@@ -6,6 +6,11 @@ const { DashboardDefaultLayout } = lazyImport(
     'DashboardDefaultLayout'
 );
 
+const { DashboardDetailLayout } = lazyImport(
+    () => import('@/features/dashboard'),
+    'DashboardDetailLayout'
+);
+
 const { DashboardTopView } = lazyImport(
     () => import('@/features/dashboard'),
     'DashboardTopView'
@@ -55,17 +60,17 @@ export const protectedRoutes: RouteObject[] = [
             {
                 path: '/project/:id',
                 element: (
-                    <DashboardDefaultLayout>
+                    <DashboardDetailLayout>
                         <DashboardProjectView />
-                    </DashboardDefaultLayout>
+                    </DashboardDetailLayout>
                 )
             },
             {
                 path: '/project/:id/:taskId',
                 element: (
-                    <DashboardDefaultLayout>
+                    <DashboardDetailLayout>
                         <DashboardTaskView />
-                    </DashboardDefaultLayout>
+                    </DashboardDetailLayout>
                 )
             },
             {

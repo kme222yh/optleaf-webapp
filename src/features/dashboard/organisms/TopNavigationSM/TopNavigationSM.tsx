@@ -44,20 +44,33 @@ export function TopNavigationSM({ className }: TopNavigationSMProps) {
                 >
                     <div className="TopNavigationSM-header" ref={$header.ref}>
                         <button
-                            className={`TopNavigationSM-humburger ${modal.isOpened('TopMenu')? 'close': ''}`}
+                            className={`TopNavigationSM-humburger ${
+                                modal.isOpened('TopMenu') ? 'close' : ''
+                            }`}
                             type="button"
                             onClick={() => modal.toggle('TopMenu')}
                         >
-                            <span/>
-                            <span/>
-                            <span/>
+                            <span />
+                            <span />
+                            <span />
                         </button>
-                        <Link className="TopNavigationSM-logo" to="/" onClick={() => modal.close()} onKeyDown={() => modal.close()} role="menuitem">
+                        <Link
+                            className="TopNavigationSM-logo"
+                            to="/"
+                            onClick={() => modal.close()}
+                            onKeyDown={() => modal.close()}
+                            role="menuitem"
+                        >
                             <Logo />
                         </Link>
                     </div>
                     <ul className="TopNavigationSM-nav" ref={$nav.ref}>
-                        <li className="TopNavigationSM-link" onClick={() => modal.close()} onKeyDown={() => modal.close()} role="menuitem">
+                        <li
+                            className="TopNavigationSM-link"
+                            onClick={() => modal.close()}
+                            onKeyDown={() => modal.close()}
+                            role="menuitem"
+                        >
                             <NavLink
                                 href="/projects"
                                 hrefPattern="^/(projects|project)(/.+)*$"
@@ -67,7 +80,12 @@ export function TopNavigationSM({ className }: TopNavigationSMProps) {
                                 <FontAwesomeIcon icon={faFolder} />
                             </NavLink>
                         </li>
-                        <li className="TopNavigationSM-link" onClick={() => modal.close()} onKeyDown={() => modal.close()} role="menuitem">
+                        <li
+                            className="TopNavigationSM-link"
+                            onClick={() => modal.close()}
+                            onKeyDown={() => modal.close()}
+                            role="menuitem"
+                        >
                             <NavLink
                                 href="/teams"
                                 hrefPattern="^/(teams|team)(/.+)*$"
