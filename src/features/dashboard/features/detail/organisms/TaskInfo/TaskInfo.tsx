@@ -9,9 +9,11 @@ import {
     UpdateTaskMutationVariables,
     useProjectQuery,
     useTaskQuery,
-    useUpdateTaskMutation
+    useUpdateTaskMutation,
+    TaskQueryVariables
 } from '@/graphql/generated';
 import { formatDate } from '@/lib/date';
+import { useQueryClient } from 'react-query';
 
 import { TaskInfoTitlte } from '../TaskInfoTitlte';
 
@@ -24,6 +26,7 @@ TaskInfo.defaultProps = {
 
 export function TaskInfo({ className }: TaskInfoProps) {
     const { id, taskId } = useParams();
+    const queryClient = useQueryClient();
     const query = useTaskQuery({
         project_id: id as string,
         id: taskId as string
@@ -39,13 +42,20 @@ export function TaskInfo({ className }: TaskInfoProps) {
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = () => {
         clearTimeout(updateTimeoutId);
-        updateTimeoutId = setTimeout(() => {
+        updateTimeoutId = setTimeout(async () => {
             const data: UpdateTaskMutationVariables = {
                 description: form.getValues('description'),
                 project_id: id as string,
                 id: taskId as string
             };
-            mutation.mutate(data);
+            await mutation.mutateAsync(data);
+            await queryClient.invalidateQueries([
+                'task',
+                {
+                    project_id: id as string,
+                    id: taskId as string
+                } as TaskQueryVariables
+            ]);
         }, 2000);
     };
 

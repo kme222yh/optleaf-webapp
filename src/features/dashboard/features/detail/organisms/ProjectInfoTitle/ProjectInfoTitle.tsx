@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom';
 import {
     useProjectQuery,
     UpdateProjectMutationVariables,
-    useUpdateProjectMutation
+    useUpdateProjectMutation,
+    ProjectQueryVariables
 } from '@/graphql/generated';
 import { useForm } from 'react-hook-form';
+import { useQueryClient } from 'react-query';
 
 import { InfoTitleWrapper } from '../../molecules/InfoTitleWrapper';
 import { ProjectDangerMenu } from '../ProjectDangerMenu';
@@ -23,6 +25,7 @@ export function ProjectInfoTitle({ className }: ProjectInfoTitleProps) {
     const [displayMenu, setDisplayMenu] = useState(false);
 
     const { id } = useParams();
+    const queryClient = useQueryClient();
     const query = useProjectQuery({ id: id as string });
     const mutation = useUpdateProjectMutation();
     const form = useForm<UpdateProjectMutationVariables>();
@@ -39,12 +42,16 @@ export function ProjectInfoTitle({ className }: ProjectInfoTitleProps) {
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = () => {
         clearTimeout(updateTimeoutId);
-        updateTimeoutId = setTimeout(() => {
+        updateTimeoutId = setTimeout(async () => {
             const data: UpdateProjectMutationVariables = {
                 name: form.getValues('name'),
                 id: id as string
             };
-            mutation.mutate(data);
+            await mutation.mutateAsync(data);
+            await queryClient.invalidateQueries([
+                'project',
+                { id } as ProjectQueryVariables
+            ]);
         }, 2000);
     };
 

@@ -26,7 +26,7 @@ function TaskNode({ id }: TaskNodeProps) {
     }, [query.isLoading, query.data?.task?.name]);
     return (
         <li className={`ProjectTreeBar-item ${taskId === id ? 'current' : ''}`}>
-            <Link to={`project/${id ?? ''}/${id}`}>{name}</Link>
+            <Link to={`/project/${id ?? ''}/${id}`}>{name}</Link>
         </li>
     );
 }

@@ -6,9 +6,11 @@ import {
     useTaskQuery,
     useProjectQuery,
     UpdateTaskMutationVariables,
+    TaskQueryVariables,
     useUpdateTaskMutation
 } from '@/graphql/generated';
 import { useForm } from 'react-hook-form';
+import { useQueryClient } from 'react-query';
 
 import { InfoTitleWrapper } from '../../molecules/InfoTitleWrapper';
 import { TaskDangerMenu } from '../TaskDangerMenu';
@@ -23,6 +25,7 @@ TaskInfoTitlte.defaultProps = {
 export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
     const [displayMenu, setDisplayMenu] = useState(false);
 
+    const queryClient = useQueryClient();
     const { id, taskId } = useParams();
     const query = useTaskQuery({
         project_id: id as string,
@@ -50,13 +53,20 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = () => {
         clearTimeout(updateTimeoutId);
-        updateTimeoutId = setTimeout(() => {
+        updateTimeoutId = setTimeout(async () => {
             const data: UpdateTaskMutationVariables = {
                 name: form.getValues('name'),
                 project_id: id as string,
                 id: taskId as string
             };
-            mutation.mutate(data);
+            await mutation.mutateAsync(data);
+            await queryClient.invalidateQueries([
+                'task',
+                {
+                    project_id: id as string,
+                    id: taskId as string
+                } as TaskQueryVariables
+            ]);
         }, 2000);
     };
 

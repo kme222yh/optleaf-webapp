@@ -8,9 +8,11 @@ import { useElementSize } from '@/hooks/useElementSize';
 import {
     useProjectQuery,
     UpdateProjectMutationVariables,
-    useUpdateProjectMutation
+    useUpdateProjectMutation,
+    ProjectQueryVariables
 } from '@/graphql/generated';
 import { formatDate } from '@/lib/date';
+import { useQueryClient } from 'react-query';
 
 import { ProjectInfoTitle } from '../ProjectInfoTitle';
 import { TaskNumbers } from '../../../../molecules/TaskNumbers';
@@ -24,6 +26,7 @@ ProjectInfo.defaultProps = {
 
 export function ProjectInfo({ className }: ProjectInfoProps) {
     const { id } = useParams();
+    const queryClient = useQueryClient();
     const query = useProjectQuery({ id: id as string });
     const mutation = useUpdateProjectMutation();
     const form = useForm<UpdateProjectMutationVariables>();
@@ -35,12 +38,16 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = () => {
         clearTimeout(updateTimeoutId);
-        updateTimeoutId = setTimeout(() => {
+        updateTimeoutId = setTimeout(async () => {
             const data: UpdateProjectMutationVariables = {
                 description: form.getValues('description'),
                 id: id as string
             };
-            mutation.mutate(data);
+            await mutation.mutateAsync(data);
+            await queryClient.invalidateQueries([
+                'project',
+                { id } as ProjectQueryVariables
+            ]);
         }, 2000);
     };
 
