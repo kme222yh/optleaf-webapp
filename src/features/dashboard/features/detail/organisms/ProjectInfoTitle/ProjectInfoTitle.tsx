@@ -40,11 +40,11 @@ export function ProjectInfoTitle({ className }: ProjectInfoTitleProps) {
     }, [query.data?.project?.name, query.isLoading]);
 
     let updateTimeoutId: NodeJS.Timeout;
-    const updateFn = () => {
+    const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
         updateTimeoutId = setTimeout(async () => {
             const data: UpdateProjectMutationVariables = {
-                name: form.getValues('name'),
+                name: event?.target?.value ?? form.getValues('name'),
                 id: id as string
             };
             await mutation.mutateAsync(data);

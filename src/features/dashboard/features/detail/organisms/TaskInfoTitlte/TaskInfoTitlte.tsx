@@ -7,7 +7,8 @@ import {
     useProjectQuery,
     UpdateTaskMutationVariables,
     TaskQueryVariables,
-    useUpdateTaskMutation
+    useUpdateTaskMutation,
+    ProjectQueryVariables
 } from '@/graphql/generated';
 import { useForm } from 'react-hook-form';
 import { useQueryClient } from 'react-query';
@@ -53,20 +54,27 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = () => {
         clearTimeout(updateTimeoutId);
-        updateTimeoutId = setTimeout(async () => {
+        updateTimeoutId = setTimeout(async (event: any) => {
             const data: UpdateTaskMutationVariables = {
-                name: form.getValues('name'),
+                name: event?.target?.value ?? form.getValues('name'),
                 project_id: id as string,
                 id: taskId as string
             };
             await mutation.mutateAsync(data);
-            await queryClient.invalidateQueries([
-                'task',
-                {
-                    project_id: id as string,
-                    id: taskId as string
-                } as TaskQueryVariables
-            ]);
+            if (query.data?.task?.parent?.id) {
+                await queryClient.invalidateQueries([
+                    'task',
+                    {
+                        project_id: id as string,
+                        id: taskId as string
+                    } as TaskQueryVariables
+                ]);
+            } else {
+                await queryClient.invalidateQueries([
+                    'project',
+                    { id } as ProjectQueryVariables
+                ]);
+            }
         }, 2000);
     };
 

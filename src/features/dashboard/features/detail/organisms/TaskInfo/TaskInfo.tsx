@@ -40,11 +40,12 @@ export function TaskInfo({ className }: TaskInfoProps) {
     const bodySize = $layout.height - $header.height - 60;
 
     let updateTimeoutId: NodeJS.Timeout;
-    const updateFn = () => {
+    const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
         updateTimeoutId = setTimeout(async () => {
             const data: UpdateTaskMutationVariables = {
-                description: form.getValues('description'),
+                description:
+                    event?.target?.value ?? form.getValues('description'),
                 project_id: id as string,
                 id: taskId as string
             };
@@ -54,6 +55,13 @@ export function TaskInfo({ className }: TaskInfoProps) {
                 {
                     project_id: id as string,
                     id: taskId as string
+                } as TaskQueryVariables
+            ]);
+            await queryClient.invalidateQueries([
+                'task',
+                {
+                    project_id: id as string,
+                    id: query.data?.task?.parent?.id as string
                 } as TaskQueryVariables
             ]);
         }, 2000);
@@ -90,12 +98,6 @@ export function TaskInfo({ className }: TaskInfoProps) {
                             )}
                         </span>
                     </li>
-                    {/* <li className="TaskInfo-info-item">
-                        <span className="TaskInfo-info-item-title">Owner</span>
-                        <span className="TaskInfo-info-item-data">
-                            {query.data?.task?.owner?.name}
-                        </span>
-                    </li> */}
                 </ul>
                 <textarea
                     className="TaskInfo-description"

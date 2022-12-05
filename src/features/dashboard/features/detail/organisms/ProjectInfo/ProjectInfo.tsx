@@ -36,11 +36,12 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
     const bodySize = $layout.height - $header.height - 60;
 
     let updateTimeoutId: NodeJS.Timeout;
-    const updateFn = () => {
+    const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
         updateTimeoutId = setTimeout(async () => {
             const data: UpdateProjectMutationVariables = {
-                description: form.getValues('description'),
+                description:
+                    event?.target?.value ?? form.getValues('description'),
                 id: id as string
             };
             await mutation.mutateAsync(data);
