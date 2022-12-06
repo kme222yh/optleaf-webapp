@@ -1,0 +1,29 @@
+.Modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    opacity: 0;
+    border-radius: 35px;
+    transform: translate(50%, -50%);
+
+    &.fade-enter {
+        display: block;
+        opacity: 0;
+    }
+    &.fade-enter-active,
+    &.fade-enter-done {
+        transition: 0.3s;
+        display: block;
+        opacity: 1;
+        @include box-shadow;
+        transform: translate(50%, -55%);
+        z-index: 200;
+    }
+    &.fade-exit,
+    &.fade-active {
+        transition: 0.3s;
+        z-index: 200;
+        display: block;
+    }
+}

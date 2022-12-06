@@ -1,8 +1,22 @@
 .Team {
-    @include text-ellipsis;
-    @include font-jp;
-    color: $color-black;
-    font-size: 15px;
-    line-height: 40px;
     padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &-name {
+        @include text-ellipsis;
+        @include font-jp;
+        color: $color-black;
+        font-size: 15px;
+        line-height: 40px;
+        flex-grow: 1;
+    }
+
+    &-selected {
+        color: $color-main;
+        margin-left: 10px;
+        font-size: 20px;
+    }
 }

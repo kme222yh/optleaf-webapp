@@ -1,5 +1,8 @@
 import './User.scoped.scss';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
 import { UserIcon } from '@/features/dashboard/atoms/UserIcon';
 
 export type UserProps = {
@@ -8,14 +11,23 @@ export type UserProps = {
     name: string;
     userRole?: 'owner' | 'admin' | '' | 'pending';
     onClick?: () => void;
+    selected?: boolean;
 };
 User.defaultProps = {
     className: '',
     userRole: '',
-    onClick: () => {}
+    onClick: () => {},
+    selected: false
 };
 
-export function User({ className, icon, name, userRole, onClick }: UserProps) {
+export function User({
+    className,
+    icon,
+    name,
+    userRole,
+    onClick,
+    selected
+}: UserProps) {
     return (
         <div
             className={`User ${className}`}
@@ -29,6 +41,13 @@ export function User({ className, icon, name, userRole, onClick }: UserProps) {
             </div>
             <p className="User-name">{name}</p>
             {userRole === '' ? '' : <p className="User-role">{userRole}</p>}
+            {selected ? (
+                <p className="User-selected">
+                    <FontAwesomeIcon icon={faCheck} />
+                </p>
+            ) : (
+                ''
+            )}
         </div>
     );
 }

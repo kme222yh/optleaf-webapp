@@ -1,0 +1,41 @@
+.AddTeamModal {
+    padding: 20px;
+    background-color: #99d982;
+    border-radius: 35px;
+    width: 90vw;
+    max-width: 500px;
+
+    &-title {
+        @include font-en;
+        color: $color-white;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 23px;
+        margin-bottom: 20px;
+    }
+
+    &-teams {
+        background-color: $color-white;
+        border-radius: 25px;
+        height: 400px;
+        padding: 20px;
+        overflow-y: scroll;
+    }
+    &-list {
+    }
+    &-item {
+        margin-bottom: 1px;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover,
+        &.selected {
+            background-color: rgba(153, 217, 130, 0.3);
+        }
+    }
+
+    &-button {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+    }
+}

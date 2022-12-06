@@ -28,6 +28,13 @@ export const team: Team = {
         edit: true
     }
 };
+export const teams: Team[] = [];
+for (let i = 0; i < 10; i += 1) {
+    teams.push({
+        ...team,
+        id: `${team.id}${i}`
+    });
+}
 
 export const chat: Chat = {
     content:

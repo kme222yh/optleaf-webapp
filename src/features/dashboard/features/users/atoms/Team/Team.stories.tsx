@@ -8,7 +8,8 @@ type Story = ComponentStoryObj<T>;
 export default {
     component: Team,
     args: {
-        name: 'test team'
+        name: 'test team',
+        selected: false
     }
 } as Meta;
 

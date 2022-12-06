@@ -1,17 +1,14 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { User } from './User';
+import { AddUserModal } from './AddUserModal';
 
-type T = typeof User;
+type T = typeof AddUserModal;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: User,
+    component: AddUserModal,
     args: {
-        icon: '',
-        name: 'test user',
-        role: 'owner',
-        selected: false
+        // add props here !!
     }
 } as Meta;
 

@@ -1,0 +1,20 @@
+.RoundedButton {
+    cursor: pointer;
+    @include font-en;
+    font-size: 15px;
+    color: $color-white;
+    background-color: #99d982;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    padding: 0 20px;
+    min-width: 120px;
+    border: 2px solid $color-white;
+    border-radius: 25px;
+
+    transition: 0.2s;
+    &:hover {
+        color: #99d982;
+        background-color: $color-white;
+    }
+}

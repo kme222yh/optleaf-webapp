@@ -1,11 +1,21 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { graphql } from 'msw';
 
-import { project, chat, task, sub1Task, sub2Task, team } from './data';
+import { project, chat, task, sub1Task, sub2Task, team, teams } from './data';
 
 export const handlers = [
+    graphql.query('dashboardTop', (req, res, ctx) =>
+        res(
+            ctx.data({
+                projects: [project],
+                teams
+            })
+        )
+    ),
+
     graphql.query('project', (req, res, ctx) =>
         res(
+            ctx.delay(1000),
             ctx.data({
                 project
             })
@@ -13,6 +23,7 @@ export const handlers = [
     ),
     graphql.mutation('updateProject', (req, res, ctx) =>
         res(
+            ctx.delay(1000),
             ctx.data({
                 project
             })
