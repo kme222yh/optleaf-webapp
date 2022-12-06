@@ -174,7 +174,7 @@ export type Query = {
     project: Project;
     projects?: Maybe<Array<Project>>;
     task?: Maybe<Task>;
-    team?: Maybe<Team>;
+    team: Team;
     teams?: Maybe<Array<Maybe<Team>>>;
     /** Find a single user by an identifying attribute. */
     user?: Maybe<User>;
@@ -195,7 +195,7 @@ export type QueryTaskArgs = {
 
 /** Indicates what fields are available at the top level of a query operation. */
 export type QueryTeamArgs = {
-    id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
 };
 
 /** Indicates what fields are available at the top level of a query operation. */
@@ -232,6 +232,7 @@ export type Team = {
     administrators: Array<User>;
     created_at: Scalars['DateTime'];
     description: Scalars['String'];
+    grant: Grant;
     id: Scalars['String'];
     menbers: Array<User>;
     name: Scalars['String'];
@@ -308,6 +309,7 @@ export type ProjectQuery = {
             name: string;
             icon_image: string;
         }>;
+        teams: Array<{ __typename?: 'Team'; id: string; name: string }>;
         tasks: Array<{
             __typename?: 'Task';
             id: string;
@@ -464,65 +466,41 @@ export type DeleteTaskMutation = {
     deleteTask?: { __typename?: 'Task'; id: string } | null;
 };
 
-export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
-
-export type DashboardTopQuery = {
-    __typename?: 'Query';
-    projects?: Array<{
-        __typename?: 'Project';
-        id: string;
-        name: string;
-        description: string;
-        owner: { __typename?: 'User'; icon_image: string };
-        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
-        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
-    }> | null;
-    teams?: Array<{
-        __typename?: 'Team';
-        id: string;
-        name: string;
-        description: string;
-        owner: { __typename?: 'User'; icon_image: string };
-        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
-        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
-    } | null> | null;
-};
-
-export type TeamsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type TeamsQuery = {
-    __typename?: 'Query';
-    teams?: Array<{
-        __typename?: 'Team';
-        id: string;
-        name: string;
-        description: string;
-        created_at: any;
-        updated_at?: any | null;
-    } | null> | null;
-};
-
 export type TeamQueryVariables = Exact<{
     id: Scalars['String'];
 }>;
 
 export type TeamQuery = {
     __typename?: 'Query';
-    team?: {
+    team: {
         __typename?: 'Team';
         id: string;
         name: string;
-        description: string;
-        created_at: any;
-        updated_at?: any | null;
-        owner: { __typename?: 'User'; ID: string; name: string };
+        owner: {
+            __typename?: 'User';
+            ID: string;
+            name: string;
+            icon_image: string;
+        };
         administrators: Array<{
             __typename?: 'User';
             ID: string;
             name: string;
+            icon_image: string;
         }>;
-        menbers: Array<{ __typename?: 'User'; ID: string; name: string }>;
-    } | null;
+        menbers: Array<{
+            __typename?: 'User';
+            ID: string;
+            name: string;
+            icon_image: string;
+        }>;
+        pending: Array<{
+            __typename?: 'User';
+            ID: string;
+            name: string;
+            icon_image: string;
+        }>;
+    };
 };
 
 export type CreateTeamMutationVariables = Exact<{
@@ -591,6 +569,30 @@ export type DeleteTeamMutation = {
     deleteTeam?: { __typename?: 'Team'; id: string } | null;
 };
 
+export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DashboardTopQuery = {
+    __typename?: 'Query';
+    projects?: Array<{
+        __typename?: 'Project';
+        id: string;
+        name: string;
+        description: string;
+        owner: { __typename?: 'User'; icon_image: string };
+        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
+        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
+    }> | null;
+    teams?: Array<{
+        __typename?: 'Team';
+        id: string;
+        name: string;
+        description: string;
+        owner: { __typename?: 'User'; icon_image: string };
+        administrators: Array<{ __typename?: 'User'; icon_image: string }>;
+        menbers: Array<{ __typename?: 'User'; icon_image: string }>;
+    } | null> | null;
+};
+
 export const CreateChatDocument = `
     mutation createChat($project_id: String!, $task_id: String, $content: String!) {
   createChat(project_id: $project_id, task_id: $task_id, content: $content) {
@@ -645,6 +647,10 @@ export const ProjectDocument = `
       ID
       name
       icon_image
+    }
+    teams {
+      id
+      name
     }
     tasks {
       id
@@ -943,95 +949,31 @@ export const useDeleteTaskMutation = <TError = unknown, TContext = unknown>(
             )(),
         options
     );
-export const DashboardTopDocument = `
-    query dashboardTop {
-  projects {
-    id
-    name
-    description
-    owner {
-      icon_image
-    }
-    administrators {
-      icon_image
-    }
-    menbers {
-      icon_image
-    }
-  }
-  teams {
-    id
-    name
-    description
-    owner {
-      icon_image
-    }
-    administrators {
-      icon_image
-    }
-    menbers {
-      icon_image
-    }
-  }
-}
-    `;
-export const useDashboardTopQuery = <
-    TData = DashboardTopQuery,
-    TError = unknown
->(
-    variables?: DashboardTopQueryVariables,
-    options?: UseQueryOptions<DashboardTopQuery, TError, TData>
-) =>
-    useQuery<DashboardTopQuery, TError, TData>(
-        variables === undefined
-            ? ['dashboardTop']
-            : ['dashboardTop', variables],
-        fetcher<DashboardTopQuery, DashboardTopQueryVariables>(
-            DashboardTopDocument,
-            variables
-        ),
-        options
-    );
-export const TeamsDocument = `
-    query teams {
-  teams {
-    id
-    name
-    description
-    created_at
-    updated_at
-  }
-}
-    `;
-export const useTeamsQuery = <TData = TeamsQuery, TError = unknown>(
-    variables?: TeamsQueryVariables,
-    options?: UseQueryOptions<TeamsQuery, TError, TData>
-) =>
-    useQuery<TeamsQuery, TError, TData>(
-        variables === undefined ? ['teams'] : ['teams', variables],
-        fetcher<TeamsQuery, TeamsQueryVariables>(TeamsDocument, variables),
-        options
-    );
 export const TeamDocument = `
     query team($id: String!) {
   team(id: $id) {
     id
     name
-    description
     owner {
       ID
       name
+      icon_image
     }
     administrators {
       ID
       name
+      icon_image
     }
     menbers {
       ID
       name
+      icon_image
     }
-    created_at
-    updated_at
+    pending {
+      ID
+      name
+      icon_image
+    }
   }
 }
     `;
@@ -1163,5 +1105,54 @@ export const useDeleteTeamMutation = <TError = unknown, TContext = unknown>(
                 DeleteTeamDocument,
                 variables
             )(),
+        options
+    );
+export const DashboardTopDocument = `
+    query dashboardTop {
+  projects {
+    id
+    name
+    description
+    owner {
+      icon_image
+    }
+    administrators {
+      icon_image
+    }
+    menbers {
+      icon_image
+    }
+  }
+  teams {
+    id
+    name
+    description
+    owner {
+      icon_image
+    }
+    administrators {
+      icon_image
+    }
+    menbers {
+      icon_image
+    }
+  }
+}
+    `;
+export const useDashboardTopQuery = <
+    TData = DashboardTopQuery,
+    TError = unknown
+>(
+    variables?: DashboardTopQueryVariables,
+    options?: UseQueryOptions<DashboardTopQuery, TError, TData>
+) =>
+    useQuery<DashboardTopQuery, TError, TData>(
+        variables === undefined
+            ? ['dashboardTop']
+            : ['dashboardTop', variables],
+        fetcher<DashboardTopQuery, DashboardTopQueryVariables>(
+            DashboardTopDocument,
+            variables
+        ),
         options
     );

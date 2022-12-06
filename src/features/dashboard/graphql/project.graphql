@@ -26,6 +26,11 @@ query project($id: String!) {
             icon_image
         }
 
+        teams {
+            id
+            name
+        }
+
         tasks {
             id
             name

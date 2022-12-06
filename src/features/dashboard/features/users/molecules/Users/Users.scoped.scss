@@ -1,0 +1,8 @@
+.Users {
+    &-item {
+        transition: 0.3s;
+        &:hover {
+            background-color: rgba(153, 217, 130, 0.3);
+        }
+    }
+}

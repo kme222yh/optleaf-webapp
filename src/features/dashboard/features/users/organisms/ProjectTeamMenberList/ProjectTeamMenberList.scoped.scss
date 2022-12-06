@@ -1,0 +1,53 @@
+.ProjectTeamMenberList {
+    @include DashboardWhiteArea;
+    max-width: 600px;
+    padding: 20px;
+    height: 100%;
+    &-body {
+        height: 100%;
+    }
+
+    &-switchTab {
+        padding-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        &-button {
+            cursor: pointer;
+            width: calc(50% - 10px);
+            @include font-en;
+            text-align: center;
+            font-size: 18px;
+            line-height: 50px;
+            border: 2px solid $color-main;
+            border-radius: 25px;
+            color: $color-main;
+            font-weight: bold;
+            transition: 0.2s;
+            &:hover,
+            &.current {
+                color: $color-white;
+                background-color: $color-main;
+            }
+        }
+    }
+
+    &-control {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+    }
+    &-create {
+        &-button {
+            cursor: pointer;
+            color: $color-main;
+            font-size: 30px;
+            line-height: 40px;
+        }
+    }
+
+    &-content {
+        border-top: 2px solid $color-main;
+    }
+}

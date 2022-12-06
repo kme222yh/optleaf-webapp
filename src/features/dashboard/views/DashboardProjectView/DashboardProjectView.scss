@@ -19,10 +19,16 @@
     &-info {
         height: 100%;
         width: 450px;
+        display: flex;
+        flex-shrink: 0;
+        flex-direction: column;
     }
     &-detail {
         height: 400px;
         margin-bottom: 25px;
+    }
+    &-menbers {
+        flex-grow: 1;
     }
 
     @include tablet {

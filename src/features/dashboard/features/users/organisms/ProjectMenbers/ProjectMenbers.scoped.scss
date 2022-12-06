@@ -1,0 +1,13 @@
+.ProjectMenbers {
+    height: 100%;
+    overflow-y: scroll;
+    padding-top: 20px;
+
+    &-item {
+        padding: 0 10px;
+        transition: 0.3s;
+        &:hover {
+            background-color: rgba(153, 217, 130, 0.3);
+        }
+    }
+}

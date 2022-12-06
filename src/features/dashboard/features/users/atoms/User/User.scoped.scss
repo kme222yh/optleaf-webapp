@@ -1,0 +1,21 @@
+.User {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px 10px;
+    font-size: 15px;
+
+    &-name {
+        @include text-ellipsis;
+        @include font-jp;
+        color: $color-black;
+        flex-grow: 1;
+        margin-left: 10px;
+    }
+
+    &-role {
+        @include font-en;
+        color: $color-main;
+        margin-left: 10px;
+    }
+}

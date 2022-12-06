@@ -1,0 +1,32 @@
+.ProjectTeams {
+    height: 100%;
+
+    &-body {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        height: 100%;
+    }
+
+    &-users,
+    &-teams {
+        width: 50%;
+        height: 100%;
+        overflow-y: scroll;
+        padding: 10px 0;
+    }
+    &-teams {
+        border-right: 2px solid $color-main;
+    }
+
+    &-item {
+        padding: 0 10px;
+        transition: 0.3s;
+        &:hover {
+            background-color: rgba(153, 217, 130, 0.3);
+        }
+    }
+    &-teams &-item {
+        cursor: pointer;
+    }
+}

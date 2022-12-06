@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { graphql } from 'msw';
 
-import { project, chat, task, sub1Task, sub2Task } from './data';
+import { project, chat, task, sub1Task, sub2Task, team } from './data';
 
 export const handlers = [
     graphql.query('project', (req, res, ctx) =>
@@ -59,6 +59,13 @@ export const handlers = [
             ctx.delay(1000),
             ctx.data({
                 task
+            })
+        )
+    ),
+    graphql.query('team', (req, res, ctx) =>
+        res(
+            ctx.data({
+                team
             })
         )
     )

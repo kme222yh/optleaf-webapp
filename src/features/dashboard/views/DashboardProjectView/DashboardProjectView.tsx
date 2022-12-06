@@ -3,6 +3,7 @@ import './DashboardProjectView.scss';
 import { ProjectTasks } from '../../features/tasks';
 import { ProjectChats } from '../../features/chats';
 import { ProjectInfo } from '../../features/detail';
+import { ProjectTeamMenberList } from '../../features/users';
 
 export type DashboardProjectViewProps = {
     className?: string;
@@ -23,6 +24,9 @@ export function DashboardProjectView({ className }: DashboardProjectViewProps) {
             <div className="DashboardProjectView-info">
                 <div className="DashboardProjectView-detail">
                     <ProjectInfo />
+                </div>
+                <div className="DashboardProjectView-menbers">
+                    <ProjectTeamMenberList />
                 </div>
             </div>
         </div>

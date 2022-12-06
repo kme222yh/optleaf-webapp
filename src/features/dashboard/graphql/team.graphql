@@ -1,0 +1,90 @@
+query team($id: String!) {
+    team(id: $id) {
+        id
+        name
+        owner {
+            ID
+            name
+            icon_image
+        }
+
+        administrators {
+            ID
+            name
+            icon_image
+        }
+        menbers {
+            ID
+            name
+            icon_image
+        }
+        pending {
+            ID
+            name
+            icon_image
+        }
+    }
+}
+
+mutation createTeam(
+    $name: String!
+    $description: String!
+    $menbers: [Int]
+    $administrators: [Int]
+) {
+    createTeam(name: $name, description: $description) {
+        id
+        name
+        description
+        owner {
+            ID
+            name
+        }
+        menbers {
+            ID
+            name
+        }
+        administrators {
+            ID
+            name
+        }
+    }
+}
+
+mutation updateTeam(
+    $id: String!
+    $name: String!
+    $description: String!
+    $menbers: [Int]
+    $administrators: [Int]
+) {
+    updateTeam(
+        id: $id
+        name: $name
+        description: $description
+        menbers: $menbers
+        administrators: $administrators
+    ) {
+        id
+        name
+        description
+        owner {
+            ID
+            name
+        }
+        menbers {
+            ID
+            name
+        }
+        administrators {
+            ID
+            name
+        }
+    }
+}
+
+mutation deleteTeam($id: String!) {
+    deleteTeam(id: $id) {
+        id
+    }
+}

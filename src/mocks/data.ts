@@ -1,4 +1,4 @@
-import { Project, Task, User, Chat } from '@/graphql/generated';
+import { Project, Task, User, Chat, Team } from '@/graphql/generated';
 
 export const user: User = {
     ID: '1',
@@ -10,6 +10,23 @@ export const user: User = {
     created_at: '2022/22/22',
     updated_at: undefined,
     id: 'mqu4trfm4wqr'
+};
+
+export const team: Team = {
+    id: 'm0c25utmc23utteam',
+    name: 'Test Team',
+    description:
+        'This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. ',
+    owner: user,
+    created_at: '2022/12/2',
+    menbers: [user, user, user],
+    administrators: [user],
+    pending: [user],
+    permission_level: 'owner',
+    grant: {
+        dangerZone: true,
+        edit: true
+    }
 };
 
 export const chat: Chat = {
@@ -96,9 +113,9 @@ export const project: Project = {
         'This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. This is test data. ',
     owner: user,
     created_at: '2022/12/2',
-    menbers: [],
-    administrators: [],
-    pending: [],
+    menbers: [user, user, user],
+    administrators: [user],
+    pending: [user],
     teams: [],
     permission_level: 'owner',
     chats,
@@ -109,3 +126,9 @@ export const project: Project = {
         operateTask: true
     }
 };
+for (let i = 0; i < 10; i += 1) {
+    project.teams.push({
+        ...team,
+        id: `${team.id}${i}`
+    });
+}

@@ -1,0 +1,8 @@
+.Team {
+    @include text-ellipsis;
+    @include font-jp;
+    color: $color-black;
+    font-size: 15px;
+    line-height: 40px;
+    padding: 0 10px;
+}
