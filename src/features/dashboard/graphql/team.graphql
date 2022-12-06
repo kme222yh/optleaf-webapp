@@ -53,10 +53,10 @@ mutation createTeam(
 
 mutation updateTeam(
     $id: String!
-    $name: String!
-    $description: String!
-    $menbers: [Int]
-    $administrators: [Int]
+    $name: String
+    $description: String
+    $menbers: [String]
+    $administrators: [String]
 ) {
     updateTeam(
         id: $id

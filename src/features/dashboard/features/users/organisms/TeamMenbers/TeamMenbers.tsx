@@ -10,13 +10,23 @@ export type TeamMenbersProps = {
     className?: string;
     id: string;
     omit?: boolean;
+    selector?: (id: string) => void;
+    selected?: string[];
 };
 TeamMenbers.defaultProps = {
     className: '',
-    omit: false
+    omit: false,
+    selector: () => {},
+    selected: []
 };
 
-export function TeamMenbers({ className, id, omit }: TeamMenbersProps) {
+export function TeamMenbers({
+    className,
+    id,
+    omit,
+    selector,
+    selected
+}: TeamMenbersProps) {
     const query = useTeamQuery({ id });
     const [owner, setOwner] = useState<User>({
         name: ''
@@ -42,6 +52,8 @@ export function TeamMenbers({ className, id, omit }: TeamMenbersProps) {
                     icon={owner.icon_image}
                     name={owner.name}
                     userRole={omit ? '' : 'owner'}
+                    selected={selected?.includes(owner.ID)}
+                    onClick={selector ? () => selector(owner.ID) : () => {}}
                 />
             </li>
         );
@@ -53,6 +65,8 @@ export function TeamMenbers({ className, id, omit }: TeamMenbersProps) {
                     icon={user.icon_image}
                     name={user.name}
                     userRole={omit ? '' : 'admin'}
+                    selected={selected?.includes(user.ID)}
+                    onClick={selector ? () => selector(user.ID) : () => {}}
                 />
             </li>
         );
@@ -60,7 +74,12 @@ export function TeamMenbers({ className, id, omit }: TeamMenbersProps) {
     menbers.forEach((user) => {
         $items.push(
             <li className="TeamMenbers-item" key={user.ID}>
-                <UserItem icon={user.icon_image} name={user.name} />
+                <UserItem
+                    icon={user.icon_image}
+                    name={user.name}
+                    selected={selected?.includes(user.ID)}
+                    onClick={selector ? () => selector(user.ID) : () => {}}
+                />
             </li>
         );
     });
@@ -71,6 +90,8 @@ export function TeamMenbers({ className, id, omit }: TeamMenbersProps) {
                     icon={user.icon_image}
                     name={user.name}
                     userRole={omit ? '' : 'pending'}
+                    selected={selected?.includes(user.ID)}
+                    onClick={selector ? () => selector(user.ID) : () => {}}
                 />
             </li>
         );

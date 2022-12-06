@@ -117,13 +117,13 @@ export type MutationDeleteTeamArgs = {
 };
 
 export type MutationUpdateProjectArgs = {
-    administrators?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+    administrators?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
     description?: InputMaybe<Scalars['String']>;
     id: Scalars['String'];
-    menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+    menbers?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
     name?: InputMaybe<Scalars['String']>;
-    owner?: InputMaybe<Scalars['Int']>;
-    pending?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+    owner?: InputMaybe<Scalars['String']>;
+    pending?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
     permission_level?: InputMaybe<Scalars['String']>;
     teams?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -140,13 +140,13 @@ export type MutationUpdateTaskArgs = {
 };
 
 export type MutationUpdateTeamArgs = {
-    administrators?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+    administrators?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
     description?: InputMaybe<Scalars['String']>;
     id?: InputMaybe<Scalars['String']>;
-    menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+    menbers?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
     name?: InputMaybe<Scalars['String']>;
-    owner?: InputMaybe<Scalars['Int']>;
-    pending?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+    owner?: InputMaybe<Scalars['String']>;
+    pending?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
     permission_level?: InputMaybe<Scalars['String']>;
 };
 
@@ -172,10 +172,10 @@ export type Project = {
 export type Query = {
     __typename?: 'Query';
     project: Project;
-    projects?: Maybe<Array<Project>>;
+    projects: Array<Project>;
     task?: Maybe<Task>;
     team: Team;
-    teams?: Maybe<Array<Maybe<Team>>>;
+    teams: Array<Team>;
     /** Find a single user by an identifying attribute. */
     user?: Maybe<User>;
     /** List multiple users. */
@@ -348,10 +348,10 @@ export type UpdateProjectMutationVariables = Exact<{
     name?: InputMaybe<Scalars['String']>;
     description?: InputMaybe<Scalars['String']>;
     menbers?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
+        Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
     >;
     administrators?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
+        Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
     >;
     teams?: InputMaybe<
         Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
@@ -533,13 +533,13 @@ export type CreateTeamMutation = {
 
 export type UpdateTeamMutationVariables = Exact<{
     id: Scalars['String'];
-    name: Scalars['String'];
-    description: Scalars['String'];
+    name?: InputMaybe<Scalars['String']>;
+    description?: InputMaybe<Scalars['String']>;
     menbers?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
+        Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
     >;
     administrators?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
+        Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
     >;
 }>;
 
@@ -573,7 +573,7 @@ export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
 
 export type DashboardTopQuery = {
     __typename?: 'Query';
-    projects?: Array<{
+    projects: Array<{
         __typename?: 'Project';
         id: string;
         name: string;
@@ -581,8 +581,8 @@ export type DashboardTopQuery = {
         owner: { __typename?: 'User'; icon_image: string };
         administrators: Array<{ __typename?: 'User'; icon_image: string }>;
         menbers: Array<{ __typename?: 'User'; icon_image: string }>;
-    }> | null;
-    teams?: Array<{
+    }>;
+    teams: Array<{
         __typename?: 'Team';
         id: string;
         name: string;
@@ -590,7 +590,7 @@ export type DashboardTopQuery = {
         owner: { __typename?: 'User'; icon_image: string };
         administrators: Array<{ __typename?: 'User'; icon_image: string }>;
         menbers: Array<{ __typename?: 'User'; icon_image: string }>;
-    } | null> | null;
+    }>;
 };
 
 export const CreateChatDocument = `
@@ -719,7 +719,7 @@ export const useCreateProjectMutation = <TError = unknown, TContext = unknown>(
         options
     );
 export const UpdateProjectDocument = `
-    mutation updateProject($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int], $teams: [String]) {
+    mutation updateProject($id: String!, $name: String, $description: String, $menbers: [String], $administrators: [String], $teams: [String]) {
   updateProject(
     id: $id
     name: $name
@@ -1030,7 +1030,7 @@ export const useCreateTeamMutation = <TError = unknown, TContext = unknown>(
         options
     );
 export const UpdateTeamDocument = `
-    mutation updateTeam($id: String!, $name: String!, $description: String!, $menbers: [Int], $administrators: [Int]) {
+    mutation updateTeam($id: String!, $name: String, $description: String, $menbers: [String], $administrators: [String]) {
   updateTeam(
     id: $id
     name: $name

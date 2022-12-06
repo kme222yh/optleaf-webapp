@@ -4,6 +4,7 @@
     border-radius: 35px;
     width: 90vw;
     max-width: 500px;
+    position: relative;
 
     &-title {
         @include font-en;

@@ -70,8 +70,8 @@ mutation updateProject(
     $id: String!
     $name: String
     $description: String
-    $menbers: [Int]
-    $administrators: [Int]
+    $menbers: [String]
+    $administrators: [String]
     $teams: [String]
 ) {
     updateProject(

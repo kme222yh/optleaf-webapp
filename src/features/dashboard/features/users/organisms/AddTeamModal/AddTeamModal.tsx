@@ -13,6 +13,7 @@ import {
     useUpdateProjectMutation
 } from '@/graphql/generated';
 import { useModalManageStore } from '@/features/dashboard/stores/modalManager';
+import { ScreenSpinner } from '@/features/dashboard/atoms/ScreenSpinner';
 
 import { RoundedButton } from '../../atoms/RoundedButton';
 import { Team as TeamItem } from '../../atoms/Team';
@@ -25,6 +26,7 @@ AddTeamModal.defaultProps = {
 };
 
 export function AddTeamModal({ className }: AddTeamModalProps) {
+    const [waiting, setWaiting] = useState(false);
     const { id: projectId } = useParams();
     const query = useDashboardTopQuery();
     const projectQuery = useProjectQuery({ id: projectId as string });
@@ -66,6 +68,7 @@ export function AddTeamModal({ className }: AddTeamModalProps) {
 
     const updateProject = async () => {
         if (!projectQuery.data) return;
+        setWaiting(true);
         const data: UpdateProjectMutationVariables = {
             id: projectId as string,
             teams: [
@@ -78,11 +81,14 @@ export function AddTeamModal({ className }: AddTeamModalProps) {
             'project',
             { id: projectId } as ProjectQueryVariables
         ]);
+        setWaiting(false);
         modal.close();
     };
 
     return (
         <div className={`AddTeamModal ${className}`}>
+            <ScreenSpinner visible={waiting} />
+
             <div className="AddTeamModal-body">
                 <p className="AddTeamModal-title">Add Team</p>
                 <div className="AddTeamModal-teams">
