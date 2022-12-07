@@ -9,7 +9,7 @@ import { Modal } from '@/features/dashboard/molecules/Modal';
 import { useTeamQuery } from '@/graphql/generated';
 
 import { TeamMenbers } from '../TeamMenbers';
-import { TeamAddUserModal } from '../TeamAddUserModal';
+import { TeamAddUserModal } from '../../molecules/TeamAddUserModal';
 
 export type TeamMembersListProps = {
     className?: string;

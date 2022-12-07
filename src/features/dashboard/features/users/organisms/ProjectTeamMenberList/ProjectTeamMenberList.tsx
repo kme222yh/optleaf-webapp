@@ -13,7 +13,7 @@ import { Modal } from '@/features/dashboard/molecules/Modal';
 import { ProjectTeams } from '../ProjectTeams';
 import { ProjectMenbers } from '../ProjectMenbers';
 import { AddTeamModal } from '../AddTeamModal';
-import { ProjectAddUserModal } from '../ProjectAddUserModal';
+import { ProjectAddUserModal } from '../../molecules/ProjectAddUserModal';
 
 export type ProjectTeamMenberListProps = {
     className?: string;

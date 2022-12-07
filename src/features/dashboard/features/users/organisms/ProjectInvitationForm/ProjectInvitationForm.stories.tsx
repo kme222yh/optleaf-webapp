@@ -1,12 +1,12 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { AddUserModal } from './AddUserModal';
+import { ProjectInvitationForm } from './ProjectInvitationForm';
 
-type T = typeof AddUserModal;
+type T = typeof ProjectInvitationForm;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: AddUserModal,
+    component: ProjectInvitationForm,
     args: {
         // add props here !!
     }

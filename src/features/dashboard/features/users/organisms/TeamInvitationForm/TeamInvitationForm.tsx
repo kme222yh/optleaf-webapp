@@ -1,6 +1,5 @@
-import './TeamAddUserModal.scoped.scss';
+import './TeamInvitationForm.scoped.scss';
 
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
@@ -10,17 +9,22 @@ import { useModalManageStore } from '@/features/dashboard/stores/modalManager';
 
 import { inviteTeamByEmail } from '../../api/invitation';
 import { InvitationCredentials } from '../../types';
-import { AddUserModal } from '../../molecules/AddUserModal';
 
-export type TeamAddUserModalProps = {
+import { InvitationForm } from '../../molecules/InvitationForm';
+
+export type TeamInvitationFormProps = {
     className?: string;
+    setWaitingFn?: (v: boolean) => void;
 };
-TeamAddUserModal.defaultProps = {
-    className: ''
+TeamInvitationForm.defaultProps = {
+    className: '',
+    setWaitingFn: () => {}
 };
 
-export function TeamAddUserModal({ className }: TeamAddUserModalProps) {
-    const [waiting, setWaiting] = useState(false);
+export function TeamInvitationForm({
+    className,
+    setWaitingFn
+}: TeamInvitationFormProps) {
     const { teamId } = useParams();
     const query = useTeamQuery({ id: teamId as string });
     const queryClient = useQueryClient();
@@ -29,7 +33,7 @@ export function TeamAddUserModal({ className }: TeamAddUserModalProps) {
 
     const submitFn = async (data: InvitationCredentials) => {
         if (!query.data?.team) return;
-        setWaiting(true);
+        setWaitingFn!(true);
         try {
             await inviteTeamByEmail({
                 id: query.data.team.id,
@@ -44,13 +48,12 @@ export function TeamAddUserModal({ className }: TeamAddUserModalProps) {
         } catch (error) {
             console.log(error);
         }
-        setWaiting(false);
+        setWaitingFn!(false);
     };
 
     return (
-        <AddUserModal
-            className={`TeamAddUserModal ${className}`}
-            waiting={waiting}
+        <InvitationForm
+            className={`TeamInvitationForm ${className}`}
             submitFn={submitFn}
         />
     );

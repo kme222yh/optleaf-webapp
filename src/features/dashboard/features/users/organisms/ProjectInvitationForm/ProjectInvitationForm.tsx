@@ -1,6 +1,5 @@
-import './ProjectAddUserModal.scoped.scss';
+import './ProjectInvitationForm.scoped.scss';
 
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
@@ -10,17 +9,22 @@ import { useModalManageStore } from '@/features/dashboard/stores/modalManager';
 
 import { inviteProjectByEmail } from '../../api/invitation';
 import { InvitationCredentials } from '../../types';
-import { AddUserModal } from '../../molecules/AddUserModal';
 
-export type ProjectAddUserModalProps = {
+import { InvitationForm } from '../../molecules/InvitationForm';
+
+export type ProjectInvitationFormProps = {
     className?: string;
+    setWaitingFn?: (v: boolean) => void;
 };
-ProjectAddUserModal.defaultProps = {
-    className: ''
+ProjectInvitationForm.defaultProps = {
+    className: '',
+    setWaitingFn: () => {}
 };
 
-export function ProjectAddUserModal({ className }: ProjectAddUserModalProps) {
-    const [waiting, setWaiting] = useState(false);
+export function ProjectInvitationForm({
+    className,
+    setWaitingFn
+}: ProjectInvitationFormProps) {
     const { id: projectId } = useParams();
     const query = useProjectQuery({ id: projectId as string });
     const queryClient = useQueryClient();
@@ -29,7 +33,7 @@ export function ProjectAddUserModal({ className }: ProjectAddUserModalProps) {
 
     const submitFn = async (data: InvitationCredentials) => {
         if (!query.data?.project) return;
-        setWaiting(true);
+        setWaitingFn!(true);
         try {
             await inviteProjectByEmail({
                 id: query.data.project.id,
@@ -44,13 +48,12 @@ export function ProjectAddUserModal({ className }: ProjectAddUserModalProps) {
         } catch (error) {
             console.log(error);
         }
-        setWaiting(false);
+        setWaitingFn!(false);
     };
 
     return (
-        <AddUserModal
-            className={`ProjectAddUserModal ${className}`}
-            waiting={waiting}
+        <InvitationForm
+            className={`ProjectInvitationForm ${className}`}
             submitFn={submitFn}
         />
     );
