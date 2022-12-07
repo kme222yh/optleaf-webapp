@@ -45,9 +45,13 @@ export function RootTasks({ className }: RootTasksProps) {
     return (
         <div className={`RootTasks ${className}`}>
             <List tasks={tasks} />
-            <div className="RootTasks-button">
-                <CreateButton onClick={createTask} />
-            </div>
+            {query.data?.project.grant.operateTask ? (
+                <div className="RootTasks-button">
+                    <CreateButton onClick={createTask} />
+                </div>
+            ) : (
+                ''
+            )}
         </div>
     );
 }

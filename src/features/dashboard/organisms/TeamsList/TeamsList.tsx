@@ -50,7 +50,7 @@ export function TeamsList({ className }: TeamsListProps) {
                         content={team.description as string}
                         icons={icons}
                         name={team.name as string}
-                        to="/"
+                        to={`/team/${team.id}`}
                     />
                 </li>
             );

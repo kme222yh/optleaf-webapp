@@ -46,8 +46,12 @@ export function TeamMenbers({
 
     const $items = [];
     if (owner.name !== '') {
+        const isSelected = selected!.includes(owner.ID);
         $items.push(
-            <li className="TeamMenbers-item" key={owner.ID}>
+            <li
+                className={`TeamMenbers-item ${isSelected ? 'selected' : ''}`}
+                key={owner.ID}
+            >
                 <UserItem
                     icon={owner.icon_image}
                     name={owner.name}
@@ -59,8 +63,12 @@ export function TeamMenbers({
         );
     }
     admins.forEach((user) => {
+        const isSelected = selected!.includes(user.ID);
         $items.push(
-            <li className="TeamMenbers-item" key={user.ID}>
+            <li
+                className={`TeamMenbers-item ${isSelected ? 'selected' : ''}`}
+                key={user.ID}
+            >
                 <UserItem
                     icon={user.icon_image}
                     name={user.name}
@@ -72,8 +80,12 @@ export function TeamMenbers({
         );
     });
     menbers.forEach((user) => {
+        const isSelected = selected!.includes(user.ID);
         $items.push(
-            <li className="TeamMenbers-item" key={user.ID}>
+            <li
+                className={`TeamMenbers-item ${isSelected ? 'selected' : ''}`}
+                key={user.ID}
+            >
                 <UserItem
                     icon={user.icon_image}
                     name={user.name}
@@ -84,8 +96,12 @@ export function TeamMenbers({
         );
     });
     pendings.forEach((user) => {
+        const isSelected = selected!.includes(user.ID);
         $items.push(
-            <li className="TeamMenbers-item" key={user.ID}>
+            <li
+                className={`TeamMenbers-item ${isSelected ? 'selected' : ''}`}
+                key={user.ID}
+            >
                 <UserItem
                     icon={user.icon_image}
                     name={user.name}

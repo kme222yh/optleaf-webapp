@@ -99,8 +99,8 @@ export type MutationCreateTaskArgs = {
 };
 
 export type MutationCreateTeamArgs = {
-    description?: InputMaybe<Scalars['String']>;
-    name?: InputMaybe<Scalars['String']>;
+    description: Scalars['String'];
+    name: Scalars['String'];
 };
 
 export type MutationDeleteProjectArgs = {
@@ -113,7 +113,7 @@ export type MutationDeleteTaskArgs = {
 };
 
 export type MutationDeleteTeamArgs = {
-    id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
 };
 
 export type MutationUpdateProjectArgs = {
@@ -140,13 +140,13 @@ export type MutationUpdateTaskArgs = {
 };
 
 export type MutationUpdateTeamArgs = {
-    administrators?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+    administrators?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
     description?: InputMaybe<Scalars['String']>;
-    id?: InputMaybe<Scalars['String']>;
-    menbers?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+    id: Scalars['String'];
+    menbers?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
     name?: InputMaybe<Scalars['String']>;
     owner?: InputMaybe<Scalars['String']>;
-    pending?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+    pending?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
     permission_level?: InputMaybe<Scalars['String']>;
 };
 
@@ -189,8 +189,8 @@ export type QueryProjectArgs = {
 
 /** Indicates what fields are available at the top level of a query operation. */
 export type QueryTaskArgs = {
-    id?: InputMaybe<Scalars['String']>;
-    project_id?: InputMaybe<Scalars['String']>;
+    id: Scalars['String'];
+    project_id: Scalars['String'];
 };
 
 /** Indicates what fields are available at the top level of a query operation. */
@@ -476,6 +476,9 @@ export type TeamQuery = {
         __typename?: 'Team';
         id: string;
         name: string;
+        description: string;
+        created_at: any;
+        permission_level: string;
         owner: {
             __typename?: 'User';
             ID: number;
@@ -500,18 +503,18 @@ export type TeamQuery = {
             name: string;
             icon_image: string;
         }>;
+        grant: {
+            __typename?: 'Grant';
+            dangerZone?: boolean | null;
+            edit: boolean;
+            operateTask?: boolean | null;
+        };
     };
 };
 
 export type CreateTeamMutationVariables = Exact<{
     name: Scalars['String'];
     description: Scalars['String'];
-    menbers?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
-    >;
-    administrators?: InputMaybe<
-        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
-    >;
 }>;
 
 export type CreateTeamMutation = {
@@ -536,10 +539,10 @@ export type UpdateTeamMutationVariables = Exact<{
     name?: InputMaybe<Scalars['String']>;
     description?: InputMaybe<Scalars['String']>;
     menbers?: InputMaybe<
-        Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
+        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
     >;
     administrators?: InputMaybe<
-        Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
+        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
     >;
 }>;
 
@@ -954,6 +957,7 @@ export const TeamDocument = `
   team(id: $id) {
     id
     name
+    description
     owner {
       ID
       name
@@ -974,6 +978,13 @@ export const TeamDocument = `
       name
       icon_image
     }
+    created_at
+    permission_level
+    grant {
+      dangerZone
+      edit
+      operateTask
+    }
   }
 }
     `;
@@ -987,7 +998,7 @@ export const useTeamQuery = <TData = TeamQuery, TError = unknown>(
         options
     );
 export const CreateTeamDocument = `
-    mutation createTeam($name: String!, $description: String!, $menbers: [Int], $administrators: [Int]) {
+    mutation createTeam($name: String!, $description: String!) {
   createTeam(name: $name, description: $description) {
     id
     name
@@ -1030,7 +1041,7 @@ export const useCreateTeamMutation = <TError = unknown, TContext = unknown>(
         options
     );
 export const UpdateTeamDocument = `
-    mutation updateTeam($id: String!, $name: String, $description: String, $menbers: [String], $administrators: [String]) {
+    mutation updateTeam($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int]) {
   updateTeam(
     id: $id
     name: $name

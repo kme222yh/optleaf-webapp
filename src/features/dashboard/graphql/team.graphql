@@ -2,6 +2,7 @@ query team($id: String!) {
     team(id: $id) {
         id
         name
+        description
         owner {
             ID
             name
@@ -23,14 +24,21 @@ query team($id: String!) {
             name
             icon_image
         }
+
+        created_at
+
+        permission_level
+
+        grant {
+            dangerZone
+            edit
+        }
     }
 }
 
 mutation createTeam(
     $name: String!
     $description: String!
-    $menbers: [Int]
-    $administrators: [Int]
 ) {
     createTeam(name: $name, description: $description) {
         id
@@ -55,8 +63,8 @@ mutation updateTeam(
     $id: String!
     $name: String
     $description: String
-    $menbers: [String]
-    $administrators: [String]
+    $menbers: [Int]
+    $administrators: [Int]
 ) {
     updateTeam(
         id: $id

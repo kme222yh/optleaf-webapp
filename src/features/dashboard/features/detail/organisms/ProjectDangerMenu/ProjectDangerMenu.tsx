@@ -55,14 +55,14 @@ export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
 
     return (
         <ul className={`ProjectDangerMenu ${className}`}>
-            <li className="ProjectDangerMenu-item">
+            {/* <li className="ProjectDangerMenu-item">
                 <OperationPanel
                     title="Deligate the project."
                     content="The owner will change to other menber and you will be administrator."
                     button="Deligate"
                     onClick={() => {}}
                 />
-            </li>
+            </li> */}
             <li className="ProjectDangerMenu-item">
                 <OperationPanel
                     title="Change access restrictions."

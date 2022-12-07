@@ -11,5 +11,5 @@ export async function inviteProjectByEmail(
 export async function inviteTeamByEmail(
     data: InvitationCredentials
 ): Promise<NormalResponse> {
-    return axios.post('/auth/team', data);
+    return axios.post('/invite/team', data);
 }

@@ -3,7 +3,12 @@ import './TaskChildren.scoped.scss';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
-import { useTaskQuery, useCreateTaskMutation, Task } from '@/graphql/generated';
+import {
+    useTaskQuery,
+    useCreateTaskMutation,
+    Task,
+    useProjectQuery
+} from '@/graphql/generated';
 
 import { List } from '../../molecules/List';
 import { CreateButton } from '../../atoms/CreateButton';
@@ -27,6 +32,7 @@ export function TaskChildren({
         project_id: projectId as string,
         id: taskId as string
     });
+    const projectQuery = useProjectQuery({ id: projectId });
     const mutator = useCreateTaskMutation();
     const navigator = useNavigate();
     const queryClient = useQueryClient();
@@ -55,9 +61,13 @@ export function TaskChildren({
     return (
         <div className={`TaskChildren ${className}`}>
             <List tasks={tasks} />
-            <div className="TaskChildren-button">
-                <CreateButton onClick={createTask} />
-            </div>
+            {projectQuery.data?.project.grant.operateTask ? (
+                <div className="TaskChildren-button">
+                    <CreateButton onClick={createTask} />
+                </div>
+            ) : (
+                ''
+            )}
         </div>
     );
 }

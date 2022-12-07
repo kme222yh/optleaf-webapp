@@ -121,21 +121,25 @@ export function ProjectMenbers({ className }: ProjectMenbersProps) {
     return (
         <div className={`ProjectMenbers ${className}`}>
             <ul className="ProjectMenbers-body">{$items}</ul>
-            <CSSTransition
-                nodeRef={nodeRef}
-                in={focusedUserId !== 0}
-                timeout={300}
-                classNames="fade"
-            >
-                <div
-                    className="ProjectMenbers-userinfo"
-                    onPointerLeave={closeUserModal}
-                    style={{ top: modalPos.y, left: modalPos.x }}
-                    ref={nodeRef}
+            {query.data?.project.grant.edit ? (
+                <CSSTransition
+                    nodeRef={nodeRef}
+                    in={focusedUserId !== 0}
+                    timeout={300}
+                    classNames="fade"
                 >
-                    <ProjectUserMenu userId={focusedUserId} />
-                </div>
-            </CSSTransition>
+                    <div
+                        className="ProjectMenbers-userinfo"
+                        onPointerLeave={closeUserModal}
+                        style={{ top: modalPos.y, left: modalPos.x }}
+                        ref={nodeRef}
+                    >
+                        <ProjectUserMenu userId={focusedUserId} />
+                    </div>
+                </CSSTransition>
+            ) : (
+                ''
+            )}
         </div>
     );
 }

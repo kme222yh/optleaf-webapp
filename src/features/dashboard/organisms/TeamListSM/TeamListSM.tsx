@@ -53,7 +53,7 @@ export function TeamListSM({ className, height }: TeamListSMProps) {
                         content={team.description as string}
                         icons={icons}
                         name={team.name as string}
-                        to="/"
+                        to={`/team/${team.id}`}
                     />
                 </li>
             );

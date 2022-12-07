@@ -73,8 +73,26 @@ export const handlers = [
             })
         )
     ),
+
     graphql.query('team', (req, res, ctx) =>
         res(
+            ctx.delay(1000),
+            ctx.data({
+                team
+            })
+        )
+    ),
+    graphql.mutation('updateTeam', (req, res, ctx) =>
+        res(
+            ctx.delay(1000),
+            ctx.data({
+                team
+            })
+        )
+    ),
+    graphql.mutation('deleteTeam', (req, res, ctx) =>
+        res(
+            ctx.delay(1000),
             ctx.data({
                 team
             })

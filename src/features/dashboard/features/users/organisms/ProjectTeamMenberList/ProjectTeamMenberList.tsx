@@ -13,7 +13,7 @@ import { Modal } from '@/features/dashboard/molecules/Modal';
 import { ProjectTeams } from '../ProjectTeams';
 import { ProjectMenbers } from '../ProjectMenbers';
 import { AddTeamModal } from '../AddTeamModal';
-import { AddUserModal } from '../AddUserModal';
+import { ProjectAddUserModal } from '../ProjectAddUserModal';
 
 export type ProjectTeamMenberListProps = {
     className?: string;
@@ -118,7 +118,7 @@ export function ProjectTeamMenberList({
                 <AddTeamModal />
             </Modal>
             <Modal visible={modal.isOpened('addUserMenu')}>
-                <AddUserModal />
+                <ProjectAddUserModal />
             </Modal>
         </div>
     );
