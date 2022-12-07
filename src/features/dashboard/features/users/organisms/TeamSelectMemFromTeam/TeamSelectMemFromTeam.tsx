@@ -70,6 +70,7 @@ export function TeamSelectMemFromTeam({
         ]);
         setWaitingFn!(false);
         modal.close();
+        setSelectedUsers([]);
     };
 
     return (
