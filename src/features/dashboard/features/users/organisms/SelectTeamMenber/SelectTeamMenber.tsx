@@ -36,7 +36,7 @@ export function SelectTeamMenber({ className }: SelectTeamMenberProps) {
     const queryClient = useQueryClient();
     const [teams, setTeams] = useState<Team[]>([]);
     const [teamId, setTeamId] = useState<string>('');
-    const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+    const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
     const modal = useModalManageStore();
 
     useEffect(() => {
@@ -49,7 +49,7 @@ export function SelectTeamMenber({ className }: SelectTeamMenberProps) {
         }
     }, [query.isLoading, query.data?.teams]);
 
-    const selectUser = (id: string) => {
+    const selectUser = (id: number) => {
         if (selectedUsers.includes(id)) {
             setSelectedUsers(selectedUsers.filter((val) => val !== id));
         } else {

@@ -10,8 +10,8 @@ export type TeamMenbersProps = {
     className?: string;
     id: string;
     omit?: boolean;
-    selector?: (id: string) => void;
-    selected?: string[];
+    selector?: (id: number) => void;
+    selected?: number[];
 };
 TeamMenbers.defaultProps = {
     className: '',

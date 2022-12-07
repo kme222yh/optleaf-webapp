@@ -1,7 +1,7 @@
 import { Project, Task, User, Chat, Team } from '@/graphql/generated';
 
 export const user: User = {
-    ID: '1',
+    ID: 1,
     name: 'testUser',
     icon_image: '',
 
