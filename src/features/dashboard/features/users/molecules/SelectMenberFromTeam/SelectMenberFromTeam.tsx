@@ -5,13 +5,14 @@ import { ReactNode, useState, useEffect } from 'react';
 import { Team } from '@/graphql/generated';
 
 import { RoundedButton } from '../../atoms/RoundedButton';
-import { TeamMenbers } from '../../organisms/TeamMenbers';
 import { Team as TeamItem } from '../../atoms/Team';
+import { TeamMenbersSelector } from '../../organisms/TeamMenbersSelector';
 
 export type SelectMenberFromTeamProps = {
     className?: string;
     teams: Team[];
     selected: number[];
+    excluded: number[];
     selectorFn: (id: number) => void;
     updateFn: () => void;
 };
@@ -23,6 +24,7 @@ export function SelectMenberFromTeam({
     className,
     teams,
     selected,
+    excluded,
     selectorFn,
     updateFn
 }: SelectMenberFromTeamProps) {
@@ -34,7 +36,12 @@ export function SelectMenberFromTeam({
     };
     teams.forEach((team) => {
         $teams.push(
-            <li className="SelectTeamMenber-item" key={team.id}>
+            <li
+                className={`SelectMenberFromTeam-item ${
+                    teamId === team.id ? 'current' : ''
+                }`}
+                key={team.id}
+            >
                 <TeamItem
                     name={team.name}
                     onClick={() => switchTeam(team.id)}
@@ -58,11 +65,11 @@ export function SelectMenberFromTeam({
                 <div className="SelectMenberFromTeam-users">
                     <ul className="SelectMenberFromTeam-list">
                         {teamId ? (
-                            <TeamMenbers
+                            <TeamMenbersSelector
                                 id={teamId}
-                                omit
                                 selected={selected}
                                 selector={selectorFn}
+                                excluded={excluded}
                             />
                         ) : (
                             ''

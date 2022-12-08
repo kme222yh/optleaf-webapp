@@ -8,8 +8,8 @@ import { useModalManageStore } from '@/features/dashboard/stores/modalManager';
 import { Modal } from '@/features/dashboard/molecules/Modal';
 import { useTeamQuery } from '@/graphql/generated';
 
-import { TeamMenbers } from '../TeamMenbers';
 import { TeamAddUserModal } from '../../molecules/TeamAddUserModal';
+import { TeamMenbersEx } from '../TeamMenbersEx';
 
 export type TeamMembersListProps = {
     className?: string;
@@ -42,7 +42,7 @@ export function TeamMembersList({ className }: TeamMembersListProps) {
                 ''
             )}
             <div className="TeamMembersList-list">
-                <TeamMenbers id={teamId as string} />
+                <TeamMenbersEx id={teamId as string} />
             </div>
             <Modal visible={modal.isOpened('addUserMenu')}>
                 <TeamAddUserModal />

@@ -37,7 +37,12 @@ export function ProjectTeams({ className }: ProjectTeamsProps) {
     };
     teams.forEach((team) => {
         $teams.push(
-            <li className="ProjectTeams-item" key={team.id}>
+            <li
+                className={`ProjectTeams-item ${
+                    teamId === team.id ? 'current' : ''
+                }`}
+                key={team.id}
+            >
                 <TeamItem
                     name={team.name}
                     onClick={() => switchTeam(team.id)}
@@ -54,7 +59,7 @@ export function ProjectTeams({ className }: ProjectTeamsProps) {
                 </div>
                 <div className="ProjectTeams-users">
                     <ul className="ProjectTeams-list">
-                        {teamId ? <TeamMenbers id={teamId} omit /> : ''}
+                        {teamId ? <TeamMenbers id={teamId} /> : ''}
                     </ul>
                 </div>
             </div>

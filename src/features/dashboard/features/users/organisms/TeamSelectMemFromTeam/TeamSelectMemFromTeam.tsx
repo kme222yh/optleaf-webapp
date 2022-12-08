@@ -36,6 +36,7 @@ export function TeamSelectMemFromTeam({
     const queryClient = useQueryClient();
     const [teams, setTeams] = useState<Team[]>([]);
     const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+    const [existUsers, setExistUsers] = useState<number[]>([]);
     const modal = useModalManageStore();
 
     useEffect(() => {
@@ -44,6 +45,19 @@ export function TeamSelectMemFromTeam({
             setTeams(query.data.teams as Team[]);
         }
     }, [query.isLoading, query.data?.teams]);
+
+    useEffect(() => {
+        if (!teamQuery.isLoading) {
+            if (!teamQuery.data) return;
+            const { team } = teamQuery.data;
+            setExistUsers([
+                team.owner.ID,
+                ...team.administrators.map((v) => v.ID),
+                ...team.menbers.map((v) => v.ID),
+                ...team.pending.map((v) => v.ID)
+            ]);
+        }
+    }, [teamQuery.isLoading, teamQuery.data?.team]);
 
     const selectorFn = (id: number) => {
         if (selectedUsers.includes(id)) {
@@ -80,6 +94,7 @@ export function TeamSelectMemFromTeam({
             selected={selectedUsers}
             selectorFn={selectorFn}
             updateFn={updateFn}
+            excluded={existUsers}
         />
     );
 }

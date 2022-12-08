@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import './TeamMenbers.scoped.scss';
+import './TeamMenbersSelector.scoped.scss';
 
 import { useState, useEffect, ReactNode } from 'react';
 
@@ -7,15 +6,25 @@ import { useTeamQuery, User } from '@/graphql/generated';
 
 import { User as UserItem } from '../../atoms/User';
 
-export type TeamMenbersProps = {
+export type TeamMenbersSelectorProps = {
     className?: string;
     id: string;
+    selector: (id: number) => void;
+    selected: number[];
+    excluded?: number[];
 };
-TeamMenbers.defaultProps = {
-    className: ''
+TeamMenbersSelector.defaultProps = {
+    className: '',
+    excluded: []
 };
 
-export function TeamMenbers({ className, id }: TeamMenbersProps) {
+export function TeamMenbersSelector({
+    className,
+    id,
+    selector,
+    selected,
+    excluded
+}: TeamMenbersSelectorProps) {
     const query = useTeamQuery({ id });
     const [owner, setOwner] = useState<User>({
         ID: 0,
@@ -43,17 +52,30 @@ export function TeamMenbers({ className, id }: TeamMenbersProps) {
     };
     Object.keys(menberObj).forEach((key) => {
         menberObj[key].forEach((val) => {
+            const isSelected = selected!.includes(val.ID);
+            const isExcluded = excluded!.includes(val.ID);
             $items.push(
-                <li className="TeamMenbers-item" key={val.ID}>
-                    <UserItem icon={val.icon_image} name={val.name} />
+                <li
+                    className={`TeamMenbersSelector-item ${
+                        isSelected ? 'selected' : ''
+                    } ${isExcluded ? 'exclude' : ''}`}
+                    key={val.ID}
+                    role="row"
+                >
+                    <UserItem
+                        icon={val.icon_image}
+                        name={val.name}
+                        selected={isSelected}
+                        onClick={isExcluded ? () => {} : () => selector(val.ID)}
+                    />
                 </li>
             );
         });
     });
 
     return (
-        <div className={`TeamMenbers ${className}`}>
-            <ul className="TeamMenbers-body">{$items}</ul>
+        <div className={`TeamMenbersSelector ${className}`}>
+            <ul className="TeamMenbersSelector-body">{$items}</ul>
         </div>
     );
 }

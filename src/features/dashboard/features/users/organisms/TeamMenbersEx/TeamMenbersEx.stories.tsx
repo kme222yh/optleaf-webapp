@@ -1,13 +1,15 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { TeamMenbers } from './TeamMenbers';
+import { TeamMenbersEx } from './TeamMenbersEx';
 
-type T = typeof TeamMenbers;
+type T = typeof TeamMenbersEx;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: TeamMenbers,
-    args: {}
+    component: TeamMenbersEx,
+    args: {
+        // add props here !!
+    }
 } as Meta;
 
 export const Default: Story = {};

@@ -36,6 +36,7 @@ export function ProjectSelectMemFromTeam({
     const queryClient = useQueryClient();
     const [teams, setTeams] = useState<Team[]>([]);
     const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+    const [existUsers, setExistUsers] = useState<number[]>([]);
     const modal = useModalManageStore();
 
     useEffect(() => {
@@ -44,6 +45,19 @@ export function ProjectSelectMemFromTeam({
             setTeams(query.data.teams as Team[]);
         }
     }, [query.isLoading, query.data?.teams]);
+
+    useEffect(() => {
+        if (!projectQuery.isLoading) {
+            if (!projectQuery.data) return;
+            const { project } = projectQuery.data;
+            setExistUsers([
+                project.owner.ID,
+                ...project.administrators.map((v) => v.ID),
+                ...project.menbers.map((v) => v.ID),
+                ...project.pending.map((v) => v.ID)
+            ]);
+        }
+    }, [projectQuery.isLoading, projectQuery.data?.project]);
 
     const selectorFn = (id: number) => {
         if (selectedUsers.includes(id)) {
@@ -80,6 +94,7 @@ export function ProjectSelectMemFromTeam({
             selected={selectedUsers}
             selectorFn={selectorFn}
             updateFn={updateFn}
+            excluded={existUsers}
         />
     );
 }
