@@ -12,15 +12,17 @@ UserIcon.defaultProps = {
 };
 
 export function UserIcon({ className, src, size }: UserIconProps) {
-    const defaultSrc = import.meta.env.VITE_DEFAULT_USER_ICON;
+    let dataSrc = import.meta.env.VITE_DEFAULT_USER_ICON;
+    if (src) {
+        dataSrc = src;
+        if (!src.match('^data:image/'))
+            dataSrc = `${import.meta.env.VITE_FILE_URL}/${dataSrc}`;
+    }
+
     return (
         <div className={`UserIcon ${className}`} style={{ height: size }}>
             <div className="UserIcon-body">
-                <img
-                    className="UserIcon-img"
-                    src={src || defaultSrc}
-                    alt="user icon"
-                />
+                <img className="UserIcon-img" src={dataSrc} alt="user icon" />
             </div>
         </div>
     );

@@ -1,0 +1,12 @@
+.CropperModal {
+    background-color: $color-main;
+    border-radius: 35px;
+    padding: 20px 15px;
+    width: 90vw;
+    max-width: 600px;
+    &-control {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
