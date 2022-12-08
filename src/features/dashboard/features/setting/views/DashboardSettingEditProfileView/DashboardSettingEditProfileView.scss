@@ -1,0 +1,17 @@
+.DashboardSettingEditProfileView {
+    padding: 20px 30px 40px;
+    border: 3px solid $color-white;
+    border-radius: 35px;
+    background-color: $color-main;
+    max-width: 600px;
+    position: relative;
+    overflow-y: scroll;
+
+    &-title {
+        @include font-en;
+        text-align: center;
+        color: $color-white;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+}

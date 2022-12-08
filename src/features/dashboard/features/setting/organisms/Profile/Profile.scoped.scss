@@ -1,0 +1,47 @@
+.Profile {
+    color: $color-white;
+
+    &-main {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        margin-bottom: 33px;
+    }
+    &-icon {
+        margin-right: 20px;
+    }
+    &-name {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    &-email {
+        font-size: 13px;
+    }
+    &-edit {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    &-sub {
+        &-row {
+            margin-bottom: 20px;
+            @include font-en;
+            font-size: 15px;
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+            &-head {
+                width: 150px;
+                margin-right: 20px;
+            }
+            &-button {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}

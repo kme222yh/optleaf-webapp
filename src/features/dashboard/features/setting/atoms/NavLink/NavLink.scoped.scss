@@ -1,0 +1,16 @@
+.NavLink {
+    display: inline-block;
+    color: $color-white;
+    width: 120px;
+    padding: 6px 0;
+    line-height: 23px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+
+    transition: 0.2s;
+    &:hover,
+    &.current {
+        background-color: $color-sub;
+    }
+}

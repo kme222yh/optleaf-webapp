@@ -4,7 +4,8 @@
 import './GrayBackground.scoped.scss';
 
 import { CSSTransition } from 'react-transition-group';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { useModalManageStore } from '../../stores/modalManager';
 
@@ -18,6 +19,12 @@ GrayBackground.defaultProps = {
 export function GrayBackground({ className }: GrayBackgroundProps) {
     const nodeRef = useRef(null);
     const modal = useModalManageStore();
+    const location = useLocation();
+
+    useEffect(() => {
+        modal.close();
+    }, [location]);
+
     return (
         <CSSTransition
             nodeRef={nodeRef}

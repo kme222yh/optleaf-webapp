@@ -1,0 +1,23 @@
+.DeleteAccountForm {
+    &-title {
+        @include font-en;
+        font-size: 20px;
+        color: $color-white;
+        line-height: 23px;
+        margin-bottom: 15px;
+    }
+
+    &-msg {
+        @include font-en;
+        font-size: 15px;
+        color: $color-white;
+        line-height: 20px;
+        margin-bottom: 10px;
+    }
+
+    &-form {
+        &-row {
+            margin-bottom: 20px;
+        }
+    }
+}

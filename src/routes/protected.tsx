@@ -5,7 +5,10 @@ const { DashboardDefaultLayout } = lazyImport(
     () => import('@/features/dashboard'),
     'DashboardDefaultLayout'
 );
-
+const { DashboardSettingLayout } = lazyImport(
+    () => import('@/features/dashboard'),
+    'DashboardSettingLayout'
+);
 const { DashboardDetailLayout } = lazyImport(
     () => import('@/features/dashboard'),
     'DashboardDetailLayout'
@@ -34,6 +37,15 @@ const { DashboardTeamsView } = lazyImport(
 const { DashboardTeamView } = lazyImport(
     () => import('@/features/dashboard'),
     'DashboardTeamView'
+);
+
+const { DashboardSettingProfileView } = lazyImport(
+    () => import('@/features/dashboard/features/setting'),
+    'DashboardSettingProfileView'
+);
+const { DashboardSettingEditProfileView } = lazyImport(
+    () => import('@/features/dashboard/features/setting'),
+    'DashboardSettingEditProfileView'
 );
 
 function App() {
@@ -93,20 +105,28 @@ export const protectedRoutes: RouteObject[] = [
                     </DashboardDefaultLayout>
                 )
             },
-            {
-                path: '/setting',
-                element: (
-                    <DashboardDefaultLayout>
-                        <DashboardTopView />
-                    </DashboardDefaultLayout>
-                )
-            },
+            // {
+            //     path: '/setting',
+            //     element: (
+            //         <DashboardSettingLayout>
+            //             <DashboardSettingProfileView />
+            //         </DashboardSettingLayout>
+            //     )
+            // },
             {
                 path: '/profile',
                 element: (
-                    <DashboardDefaultLayout>
-                        <DashboardTopView />
-                    </DashboardDefaultLayout>
+                    <DashboardSettingLayout>
+                        <DashboardSettingProfileView />
+                    </DashboardSettingLayout>
+                )
+            },
+            {
+                path: '/profile/edit',
+                element: (
+                    <DashboardSettingLayout>
+                        <DashboardSettingEditProfileView />
+                    </DashboardSettingLayout>
                 )
             },
             { path: '*', element: <Navigate to="." /> }

@@ -6,3 +6,4 @@ export * from './views/DashboardProjectView';
 export * from './views/DashboardTaskView';
 export * from './layouts/DashboardDetailLayout';
 export * from './views/DashboardTeamView';
+export * from './layouts/DashboardSettingLayout';

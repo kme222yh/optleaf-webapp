@@ -24,7 +24,8 @@
         flex-direction: column;
     }
     &-detail {
-        height: 400px;
+        max-height: 500px;
+        height: 50%;
         margin-bottom: 25px;
     }
     &-menbers {

@@ -1,0 +1,22 @@
+.RoundedButtonDanger {
+    cursor: pointer;
+    color: $color-white;
+    background-color: #cc8766;
+    border-radius: 15px;
+    padding: 6px 15px;
+    min-width: 100px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 15px;
+    @include font-en;
+
+    transition: 0.2s;
+    &:hover {
+        background-color: #c96231;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
