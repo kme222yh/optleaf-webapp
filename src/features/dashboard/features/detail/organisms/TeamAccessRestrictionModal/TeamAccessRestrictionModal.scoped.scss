@@ -1,0 +1,50 @@
+.TeamAccessRestrictionModal {
+    padding: 20px;
+    background-color: #99d982;
+    border-radius: 35px;
+    width: 90vw;
+    max-width: 350px;
+    overflow: hidden;
+    position: relative;
+
+    &-title {
+        @include font-en;
+        color: $color-white;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 23px;
+        margin-bottom: 20px;
+    }
+
+    &-list {
+        margin-bottom: 20px;
+    }
+
+    &-item {
+        cursor: pointer;
+        border-radius: 25px;
+        padding: 15px;
+        margin-bottom: 10px;
+        transition: 0.3s;
+        &:hover,
+        &.selected {
+            background-color: $color-sub;
+        }
+    }
+
+    &-name {
+        @include font-en;
+        font-size: 15px;
+        color: $color-white;
+        line-height: 17px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    &-text {
+        @include font-en;
+        font-size: 15px;
+        color: $color-white;
+        line-height: 17px;
+        line-height: 20px;
+    }
+}

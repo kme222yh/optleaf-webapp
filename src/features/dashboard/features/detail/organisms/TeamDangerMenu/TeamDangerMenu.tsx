@@ -4,9 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
 import { useDeleteTeamMutation, useTeamQuery } from '@/graphql/generated';
+import { Modal } from '@/features/dashboard/molecules/Modal';
 
 import { OperationPanel } from '../../molecules/OperationPanel';
 import { useModalManageStore } from '../../../../stores/modalManager';
+import { TeamAccessRestrictionModal } from '../TeamAccessRestrictionModal';
 
 export type TeamDangerMenuProps = {
     className?: string;
@@ -53,7 +55,9 @@ export function TeamDangerMenu({ className }: TeamDangerMenuProps) {
                     title="Change access restrictions."
                     content={`Currently, the teams's information and members are editable by ${restriction}.`}
                     button="Change"
-                    onClick={() => {}}
+                    onClick={() => {
+                        modal.open('RestrictionMenu');
+                    }}
                 />
             </li>
             <li className="TeamDangerMenu-item">
@@ -65,6 +69,9 @@ export function TeamDangerMenu({ className }: TeamDangerMenuProps) {
                     onClick={deleteFn}
                 />
             </li>
+            <Modal visible={modal.isOpened('RestrictionMenu')}>
+                <TeamAccessRestrictionModal />
+            </Modal>
         </ul>
     );
 }

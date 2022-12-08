@@ -65,6 +65,7 @@ mutation updateTeam(
     $description: String
     $menbers: [Int]
     $administrators: [Int]
+    $permission_level: String
 ) {
     updateTeam(
         id: $id
@@ -72,6 +73,7 @@ mutation updateTeam(
         description: $description
         menbers: $menbers
         administrators: $administrators
+        permission_level: $permission_level
     ) {
         id
         name

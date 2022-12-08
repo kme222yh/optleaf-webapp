@@ -1,0 +1,7 @@
+.ProjectTeamMenu {
+    position: relative;
+    overflow: hidden;
+    width: fit-content;
+    border-radius: 25px;
+    @include box-shadow;
+}

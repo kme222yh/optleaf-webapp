@@ -4,9 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
 import { useProjectQuery, useDeleteProjectMutation } from '@/graphql/generated';
+import { Modal } from '@/features/dashboard/molecules/Modal';
 
 import { OperationPanel } from '../../molecules/OperationPanel';
 import { useModalManageStore } from '../../../../stores/modalManager';
+import { ProjectAccessRestrictionModal } from '../ProjectAccessRestrictionModal';
 
 export type ProjectDangerMenuProps = {
     className?: string;
@@ -68,7 +70,9 @@ export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
                     title="Change access restrictions."
                     content={`Currently, the project's information is editable by ${projectRestriction}, and tasks by ${taskRestriction}.`}
                     button="Change"
-                    onClick={() => {}}
+                    onClick={() => {
+                        modal.open('RestrictionMenu');
+                    }}
                 />
             </li>
             <li className="ProjectDangerMenu-item">
@@ -80,6 +84,9 @@ export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
                     onClick={deleteProject}
                 />
             </li>
+            <Modal visible={modal.isOpened('RestrictionMenu')}>
+                <ProjectAccessRestrictionModal />
+            </Modal>
         </ul>
     );
 }

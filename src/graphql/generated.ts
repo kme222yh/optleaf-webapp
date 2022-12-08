@@ -356,6 +356,7 @@ export type UpdateProjectMutationVariables = Exact<{
     teams?: InputMaybe<
         Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
     >;
+    permission_level?: InputMaybe<Scalars['String']>;
 }>;
 
 export type UpdateProjectMutation = {
@@ -507,7 +508,6 @@ export type TeamQuery = {
             __typename?: 'Grant';
             dangerZone?: boolean | null;
             edit: boolean;
-            operateTask?: boolean | null;
         };
     };
 };
@@ -544,6 +544,7 @@ export type UpdateTeamMutationVariables = Exact<{
     administrators?: InputMaybe<
         Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
     >;
+    permission_level?: InputMaybe<Scalars['String']>;
 }>;
 
 export type UpdateTeamMutation = {
@@ -722,7 +723,7 @@ export const useCreateProjectMutation = <TError = unknown, TContext = unknown>(
         options
     );
 export const UpdateProjectDocument = `
-    mutation updateProject($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int], $teams: [String]) {
+    mutation updateProject($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int], $teams: [String], $permission_level: String) {
   updateProject(
     id: $id
     name: $name
@@ -730,6 +731,7 @@ export const UpdateProjectDocument = `
     menbers: $menbers
     administrators: $administrators
     teams: $teams
+    permission_level: $permission_level
   ) {
     name
     description
@@ -983,7 +985,6 @@ export const TeamDocument = `
     grant {
       dangerZone
       edit
-      operateTask
     }
   }
 }
@@ -1041,13 +1042,14 @@ export const useCreateTeamMutation = <TError = unknown, TContext = unknown>(
         options
     );
 export const UpdateTeamDocument = `
-    mutation updateTeam($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int]) {
+    mutation updateTeam($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int], $permission_level: String) {
   updateTeam(
     id: $id
     name: $name
     description: $description
     menbers: $menbers
     administrators: $administrators
+    permission_level: $permission_level
   ) {
     id
     name

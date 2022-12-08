@@ -30,4 +30,30 @@
     &-teams &-item {
         cursor: pointer;
     }
+
+    &-teaminfo {
+        position: fixed;
+        transform: translate(-50%, 0);
+        display: none;
+        opacity: 0;
+
+        &.fade-enter {
+            display: block;
+            opacity: 0;
+        }
+        &.fade-enter-active,
+        &.fade-enter-done {
+            transition: 0.3s;
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -10px);
+            z-index: 200;
+        }
+        &.fade-exit,
+        &.fade-active {
+            transition: 0.3s;
+            z-index: 200;
+            display: block;
+        }
+    }
 }

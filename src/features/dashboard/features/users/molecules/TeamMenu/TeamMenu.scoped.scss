@@ -1,0 +1,55 @@
+.TeamMenu {
+    padding: 10px 10px 15px 10px;
+    background-color: #99d982;
+    border-radius: 25px;
+    width: 270px;
+
+    &-info {
+        padding-bottom: 10px;
+        border-bottom: 2px solid $color-white;
+    }
+    &-name {
+        @include font-jp;
+        font-size: 20px;
+        color: $color-white;
+        word-break: break-word;
+        margin-bottom: 5px;
+    }
+    &-description {
+        @include font-jp;
+        font-size: 15px;
+        color: $color-white;
+        word-break: break-word;
+    }
+
+    &-control {
+        padding-top: 10px;
+    }
+
+    &-remove {
+        @include font-en;
+        text-align: left;
+        color: $color-white;
+        font-size: 13px;
+
+        &-title {
+            line-height: 15px;
+            margin-bottom: 3px;
+        }
+        &-text {
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+        &-button {
+            cursor: pointer;
+            padding: 5px 15px;
+            border-radius: 5px;
+            line-height: 16px;
+            transition: 0.3s;
+            background-color: #cc8766;
+            &:hover {
+                background-color: #c96231;
+            }
+        }
+    }
+}
