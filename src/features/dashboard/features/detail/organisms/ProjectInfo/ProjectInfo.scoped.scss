@@ -18,8 +18,9 @@
 
     &-info {
         width: 100%;
-        padding: 0 20px;
+        padding: 0 20px 15px;
         margin-bottom: 15px;
+        border-bottom: 2px solid #99d982;
         &-item {
             font-size: 15px;
             @include font-jp;

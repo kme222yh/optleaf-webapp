@@ -1,6 +1,6 @@
 import './DeleteAccountForm.scoped.scss';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from '@/providers/auth';
@@ -33,6 +33,8 @@ export function DeleteAccountForm({
 
     const submitFn = async (data: UserInputData) => {
         if (data.email !== user?.email) return;
+        const result = window.confirm('Are you ok?');
+        if (!result) return;
 
         waitingFn(true);
         try {
@@ -62,7 +64,7 @@ export function DeleteAccountForm({
                         config={form.register('email', { required: true })}
                     />
                 </div>
-                <RoundedButtonDanger text="submit" disabled={buttonDisabled} />
+                <RoundedButtonDanger text="delete" disabled={buttonDisabled} />
             </form>
         </div>
     );

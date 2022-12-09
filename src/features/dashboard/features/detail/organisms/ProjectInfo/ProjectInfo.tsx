@@ -92,9 +92,9 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
                         </span>
                     </li>
                 </ul>
-                <div className="ProjectInfo-tasknum">
+                {/* <div className="ProjectInfo-tasknum">
                     <TaskNumbers tasks={10} completed={5} />
-                </div>
+                </div> */}
                 <textarea
                     className="ProjectInfo-description"
                     {...form.register('description')}
