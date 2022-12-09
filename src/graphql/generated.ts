@@ -381,7 +381,7 @@ export type DeleteProjectMutationVariables = Exact<{
 
 export type DeleteProjectMutation = {
     __typename?: 'Mutation';
-    deleteProject?: { __typename?: 'Project'; id: string } | null;
+    deleteProject?: { __typename?: 'Project'; id: string; name: string } | null;
 };
 
 export type TaskQueryVariables = Exact<{
@@ -570,7 +570,7 @@ export type DeleteTeamMutationVariables = Exact<{
 
 export type DeleteTeamMutation = {
     __typename?: 'Mutation';
-    deleteTeam?: { __typename?: 'Team'; id: string } | null;
+    deleteTeam?: { __typename?: 'Team'; id: string; name: string } | null;
 };
 
 export type DashboardTopQueryVariables = Exact<{ [key: string]: never }>;
@@ -776,6 +776,7 @@ export const DeleteProjectDocument = `
     mutation deleteProject($id: String!) {
   deleteProject(id: $id) {
     id
+    name
   }
 }
     `;
@@ -1095,6 +1096,7 @@ export const DeleteTeamDocument = `
     mutation deleteTeam($id: String!) {
   deleteTeam(id: $id) {
     id
+    name
   }
 }
     `;

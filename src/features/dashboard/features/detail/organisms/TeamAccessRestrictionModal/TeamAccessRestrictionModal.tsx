@@ -14,6 +14,7 @@ import {
 } from '@/graphql/generated';
 import { ScreenSpinner } from '@/features/dashboard/atoms/ScreenSpinner';
 import { useModalManageStore } from '@/features/dashboard/stores/modalManager';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { RoundedButton } from '../../atoms/RoundedButton';
 
@@ -36,6 +37,7 @@ export function TeamAccessRestrictionModal({
     >('');
     const [waiting, setWaiting] = useState(false);
     const modal = useModalManageStore();
+    const messanger = useMessanger();
 
     useEffect(() => {
         if (teamQuery.isLoading) return;
@@ -53,11 +55,16 @@ export function TeamAccessRestrictionModal({
             id: teamId,
             permission_level: restriction
         } as UpdateTeamMutationVariables;
-        await teamMutator.mutateAsync(data);
-        await queryClient.invalidateQueries([
-            'team',
-            { id: teamId } as TeamQueryVariables
-        ]);
+        try {
+            await teamMutator.mutateAsync(data);
+            await queryClient.invalidateQueries([
+                'team',
+                { id: teamId } as TeamQueryVariables
+            ]);
+            messanger.push('Changed the restriction.', 'success');
+        } catch (error) {
+            messanger.push('Failed to change.', 'warning');
+        }
         modal.close();
         setWaiting(false);
     };

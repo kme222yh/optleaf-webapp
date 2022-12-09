@@ -1,12 +1,6 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
-type Message = {
-    text: string;
-    type: 'success' | 'warning';
-    key: string;
-    timeoutId: NodeJS.Timeout | null;
-    deleteHandler: () => void;
-};
+import { Message, useMessangerStore } from '../stores/messanger';
 
 type MessangerType = {
     queue: Message[];
@@ -16,7 +10,7 @@ type MessangerType = {
 };
 
 export const useMessanger = (): MessangerType => {
-    const [queue, setQueue] = useState<Message[]>([]);
+    const { queue, set } = useMessangerStore();
     const stateRef = useRef<any>();
     stateRef.current = queue;
 
@@ -30,7 +24,7 @@ export const useMessanger = (): MessangerType => {
         } as Message;
         message.timeoutId = setTimeout(process, 3000, message.key);
         message.deleteHandler = () => process(message.key);
-        setQueue([...stateRef.current, message]);
+        set([...stateRef.current, message]);
     };
 
     const process = (key: string) => {
@@ -39,7 +33,7 @@ export const useMessanger = (): MessangerType => {
         clearTimeout(localQueue[index].timeoutId as NodeJS.Timeout);
         const newQueue = [...localQueue];
         newQueue.splice(index, 1);
-        setQueue(newQueue);
+        set(newQueue);
     };
 
     return { queue, push, process };

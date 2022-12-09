@@ -3,6 +3,7 @@ import './Profile.scoped.scss';
 import { UserIcon } from '@/features/dashboard/atoms/UserIcon';
 import { useAuth } from '@/providers/auth';
 import { formatDate } from '@/lib/date';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { RoundedButton } from '../../atoms/RoundedButton';
 import { RoundedLink } from '../../atoms/RoundedLink';
@@ -18,13 +19,15 @@ Profile.defaultProps = {
 
 export function Profile({ className, waitingFn }: ProfileProps) {
     const { user } = useAuth();
+    const messanger = useMessanger();
 
     const resendVerifyMailFn = async () => {
         waitingFn(true);
         try {
             await ResendVerifyMail();
+            messanger.push('Verify mail was sent.', 'success');
         } catch (error) {
-            console.log(error);
+            messanger.push('Something went wrong.', 'warning');
         }
         waitingFn(false);
     };

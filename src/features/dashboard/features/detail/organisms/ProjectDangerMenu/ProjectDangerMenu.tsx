@@ -5,6 +5,7 @@ import { useQueryClient } from 'react-query';
 
 import { useProjectQuery, useDeleteProjectMutation } from '@/graphql/generated';
 import { Modal } from '@/features/dashboard/molecules/Modal';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { OperationPanel } from '../../molecules/OperationPanel';
 import { useModalManageStore } from '../../../../stores/modalManager';
@@ -24,6 +25,7 @@ export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
     const deleteMutator = useDeleteProjectMutation();
     const queryQrient = useQueryClient();
     const modal = useModalManageStore();
+    const messanger = useMessanger();
 
     let projectRestriction = '';
     let taskRestriction = '';
@@ -48,9 +50,19 @@ export function ProjectDangerMenu({ className }: ProjectDangerMenuProps) {
         const result = window.confirm('Do you want to delete?');
         if (result) {
             modal.open('ScreenTransition');
-            await deleteMutator.mutateAsync({ id: id as string });
-            await queryQrient.resetQueries(['dashboardTop']);
-            navigator('/projects');
+            try {
+                const project = await deleteMutator.mutateAsync({
+                    id: id as string
+                });
+                await queryQrient.resetQueries(['dashboardTop']);
+                navigator('/projects');
+                messanger.push(
+                    `${project.deleteProject?.name ?? 'Project'} was deleted.`,
+                    'success'
+                );
+            } catch (error) {
+                messanger.push('Failed to delete team.', 'warning');
+            }
             modal.close();
         }
     };

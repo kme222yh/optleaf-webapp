@@ -96,5 +96,6 @@ mutation updateTeam(
 mutation deleteTeam($id: String!) {
     deleteTeam(id: $id) {
         id
+        name
     }
 }

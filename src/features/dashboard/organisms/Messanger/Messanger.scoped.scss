@@ -83,13 +83,13 @@
         padding: 0 15px;
         margin: 0;
         line-height: 60px;
-        color: white;
+        color: $color-white;
 
         &.warning {
-            background-color: #f7a79c;
+            background-color: #cc8766;
         }
         &.success {
-            background-color: #c4f7c1;
+            background-color: $color-sub;
         }
         &.info {
             background-color: #8feef7;

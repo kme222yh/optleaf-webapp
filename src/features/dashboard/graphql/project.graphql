@@ -104,5 +104,6 @@ mutation updateProject(
 mutation deleteProject($id: String!) {
     deleteProject(id: $id) {
         id
+        name
     }
 }

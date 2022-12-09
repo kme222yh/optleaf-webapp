@@ -2,6 +2,8 @@ import './ChangePasswordForm.scoped.scss';
 
 import { useForm } from 'react-hook-form';
 
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
+
 import { InputText } from '../../atoms/InputText';
 import { RoundedButton } from '../../atoms/RoundedButton';
 import { UserInputData } from '../../types';
@@ -20,13 +22,15 @@ export function ChangePasswordForm({
     waitingFn
 }: ChangePasswordFormProps) {
     const form = useForm<UserInputData>();
+    const messanger = useMessanger();
 
     const submitFn = async (data: UserInputData) => {
         waitingFn(true);
         try {
             await UpdateUserData(data);
+            messanger.push('Password changed.', 'success');
         } catch (error) {
-            console.log(error);
+            messanger.push('Something went wrong.', 'warning');
         }
         waitingFn(false);
     };

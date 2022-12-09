@@ -9,6 +9,7 @@ import { UserIcon } from '@/features/dashboard/atoms/UserIcon';
 import { useAuth } from '@/providers/auth';
 import { Modal } from '@/features/dashboard/molecules/Modal';
 import { useModalManageStore } from '@/features/dashboard/stores/modalManager';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { InputText } from '../../atoms/InputText';
 import { UserInputData } from '../../types';
@@ -35,6 +36,7 @@ export function EditProfileForm({
     const [cropImage, setCropImage] = useState('');
     const [iconImage, setIconImage] = useState('');
     const modal = useModalManageStore();
+    const messanger = useMessanger();
 
     useEffect(() => {
         if (!user) return;
@@ -74,8 +76,9 @@ export function EditProfileForm({
         try {
             await UpdateUserData(data);
             await refetchUser();
+            messanger.push('Profile updated.', 'success');
         } catch (error) {
-            console.log(error);
+            messanger.push('Update failed.', 'warning');
         }
         waitingFn(false);
     };

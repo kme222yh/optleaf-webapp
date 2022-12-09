@@ -11,6 +11,7 @@ import { useModalManageStore } from '../../stores/modalManager';
 
 import { SearchForm } from '../SearchForm';
 import { RoundedButton } from '../../atoms/RoundedButton';
+import { useMessanger } from '../../hooks/useMessanger';
 
 export type TeamsHeaderProps = {
     className?: string;
@@ -24,14 +25,21 @@ export function TeamsHeader({ className }: TeamsHeaderProps) {
     const modal = useModalManageStore();
     const mutator = useCreateTeamMutation();
     const queryQrient = useQueryClient();
+    const messanger = useMessanger();
+
     const createFn = async () => {
         modal.open('ScreenTransition');
-        const result = await mutator.mutateAsync({
-            name: 'New Team',
-            description: 'This is new team.'
-        } as CreateTeamMutationVariables);
-        await queryQrient.resetQueries(['dashboardTop']);
-        navigator(`/team/${result.createTeam?.id}`);
+        try {
+            const result = await mutator.mutateAsync({
+                name: 'New Team',
+                description: 'This is new team.'
+            } as CreateTeamMutationVariables);
+            queryQrient.resetQueries(['dashboardTop']);
+            navigator(`/team/${result.createTeam?.id}`);
+            messanger.push('New team was created.', 'success');
+        } catch (error) {
+            messanger.push('Failed to create team.', 'warning');
+        }
         modal.close();
     };
 

@@ -14,6 +14,7 @@ import {
 } from '@/graphql/generated';
 import { ScreenSpinner } from '@/features/dashboard/atoms/ScreenSpinner';
 import { useModalManageStore } from '@/features/dashboard/stores/modalManager';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { RoundedButton } from '../../atoms/RoundedButton';
 
@@ -36,6 +37,7 @@ export function ProjectAccessRestrictionModal({
     >('');
     const [waiting, setWaiting] = useState(false);
     const modal = useModalManageStore();
+    const messanger = useMessanger();
 
     useEffect(() => {
         if (projectQuery.isLoading) return;
@@ -57,11 +59,16 @@ export function ProjectAccessRestrictionModal({
             id: projectId,
             permission_level: restriction
         } as UpdateProjectMutationVariables;
-        await projectMutator.mutateAsync(data);
-        await queryClient.invalidateQueries([
-            'project',
-            { id: projectId } as ProjectQueryVariables
-        ]);
+        try {
+            await projectMutator.mutateAsync(data);
+            await queryClient.invalidateQueries([
+                'project',
+                { id: projectId } as ProjectQueryVariables
+            ]);
+            messanger.push('Changed the restriction.', 'success');
+        } catch (error) {
+            messanger.push('Failed to change.', 'warning');
+        }
         modal.close();
         setWaiting(false);
     };

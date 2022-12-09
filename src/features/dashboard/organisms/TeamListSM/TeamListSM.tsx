@@ -1,10 +1,20 @@
 import './TeamListSM.scoped.scss';
 
-import { useDashboardTopQuery, Team } from '@/graphql/generated';
+import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
+
+import {
+    useDashboardTopQuery,
+    Team,
+    useCreateTeamMutation,
+    CreateTeamMutationVariables
+} from '@/graphql/generated';
 
 import { PreviewLink } from '../../molecules/PreviewLink';
 import { PlusButtonSM } from '../../atoms/PlusButtonSM';
 import { LoadingPreviewLink } from '../../molecules/LoadingPreviewLink';
+import { useMessanger } from '../../hooks/useMessanger';
+import { useModalManageStore } from '../../stores/modalManager';
 
 export type TeamListSMProps = {
     className?: string;
@@ -17,6 +27,27 @@ TeamListSM.defaultProps = {
 
 export function TeamListSM({ className, height }: TeamListSMProps) {
     const query = useDashboardTopQuery();
+    const navigator = useNavigate();
+    const modal = useModalManageStore();
+    const mutator = useCreateTeamMutation();
+    const queryQrient = useQueryClient();
+    const messanger = useMessanger();
+
+    const createFn = async () => {
+        modal.open('ScreenTransition');
+        try {
+            const result = await mutator.mutateAsync({
+                name: 'New Team',
+                description: 'This is new team.'
+            } as CreateTeamMutationVariables);
+            queryQrient.resetQueries(['dashboardTop']);
+            navigator(`/team/${result.createTeam?.id}`);
+            messanger.push('New team was created.', 'success');
+        } catch (error) {
+            messanger.push('Failed to create team.', 'warning');
+        }
+        modal.close();
+    };
 
     const $items = [];
 
@@ -60,7 +91,7 @@ export function TeamListSM({ className, height }: TeamListSMProps) {
         }
         $items.push(
             <li className="TeamListSM-item" key={itemsLength}>
-                <PlusButtonSM onClick={() => {}} />
+                <PlusButtonSM onClick={createFn} />
             </li>
         );
     }

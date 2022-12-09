@@ -5,6 +5,7 @@ import { useQueryClient } from 'react-query';
 
 import { useDeleteTeamMutation, useTeamQuery } from '@/graphql/generated';
 import { Modal } from '@/features/dashboard/molecules/Modal';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { OperationPanel } from '../../molecules/OperationPanel';
 import { useModalManageStore } from '../../../../stores/modalManager';
@@ -24,6 +25,7 @@ export function TeamDangerMenu({ className }: TeamDangerMenuProps) {
     const deleteMutator = useDeleteTeamMutation();
     const queryQrient = useQueryClient();
     const modal = useModalManageStore();
+    const messanger = useMessanger();
 
     let restriction = '';
     switch (query.data?.team.permission_level as string) {
@@ -41,9 +43,19 @@ export function TeamDangerMenu({ className }: TeamDangerMenuProps) {
         const result = window.confirm('Do you want to delete?');
         if (result) {
             modal.open('ScreenTransition');
-            await deleteMutator.mutateAsync({ id: teamId as string });
-            await queryQrient.resetQueries(['dashboardTop']);
-            navigator('/teams');
+            try {
+                const team = await deleteMutator.mutateAsync({
+                    id: teamId as string
+                });
+                await queryQrient.resetQueries(['dashboardTop']);
+                navigator('/teams');
+                messanger.push(
+                    `${team.deleteTeam?.name ?? 'Team'} was deleted.`,
+                    'success'
+                );
+            } catch (error) {
+                messanger.push('Failed to delete team.', 'warning');
+            }
             modal.close();
         }
     };
