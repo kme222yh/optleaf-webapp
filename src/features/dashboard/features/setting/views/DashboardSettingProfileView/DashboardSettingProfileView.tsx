@@ -27,7 +27,7 @@ export function DashboardSettingProfileView({
                 <p className="DashboardSettingProfileView-title">
                     Your Account
                 </p>
-                <DisplayProfile />
+                <DisplayProfile waitingFn={setWaiting} />
                 <hr />
                 <ChangePasswordForm waitingFn={setWaiting} />
                 <hr />

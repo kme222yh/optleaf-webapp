@@ -2,6 +2,7 @@ export type User = {
     email: string;
     name: string;
     icon_image: string;
+    email_verified: boolean;
 };
 
 export type LoginCredentials = {

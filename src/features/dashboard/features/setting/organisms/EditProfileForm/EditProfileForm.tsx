@@ -95,12 +95,6 @@ export function EditProfileForm({
                         onChange={startCropFn}
                         ref={imageReceiverRef}
                     />
-                    {/* <input
-                        {...form.register('icon_image')}
-                        type="file"
-                        id="icon_image"
-                        hidden
-                    /> */}
                 </div>
                 <div className="EditProfileForm-form-row">
                     <InputText

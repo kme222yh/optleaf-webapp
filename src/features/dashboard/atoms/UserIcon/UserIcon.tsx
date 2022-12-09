@@ -13,7 +13,7 @@ UserIcon.defaultProps = {
 
 export function UserIcon({ className, src, size }: UserIconProps) {
     let dataSrc = import.meta.env.VITE_DEFAULT_USER_ICON;
-    if (src) {
+    if (src && src !== dataSrc) {
         dataSrc = src;
         if (!src.match('^data:image/'))
             dataSrc = `${import.meta.env.VITE_FILE_URL}/${dataSrc}`;

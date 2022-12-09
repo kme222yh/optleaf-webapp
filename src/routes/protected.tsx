@@ -47,6 +47,10 @@ const { DashboardSettingEditProfileView } = lazyImport(
     () => import('@/features/dashboard/features/setting'),
     'DashboardSettingEditProfileView'
 );
+const { DashboardSettingSettingView } = lazyImport(
+    () => import('@/features/dashboard/features/setting'),
+    'DashboardSettingSettingView'
+);
 
 function App() {
     return <Outlet />;
@@ -105,14 +109,14 @@ export const protectedRoutes: RouteObject[] = [
                     </DashboardDefaultLayout>
                 )
             },
-            // {
-            //     path: '/setting',
-            //     element: (
-            //         <DashboardSettingLayout>
-            //             <DashboardSettingProfileView />
-            //         </DashboardSettingLayout>
-            //     )
-            // },
+            {
+                path: '/setting',
+                element: (
+                    <DashboardSettingLayout>
+                        <DashboardSettingSettingView />
+                    </DashboardSettingLayout>
+                )
+            },
             {
                 path: '/profile',
                 element: (

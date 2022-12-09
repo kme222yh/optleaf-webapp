@@ -17,3 +17,7 @@ export async function UpdateUserData(
 export async function DeleteUser(): Promise<NormalResponse> {
     return axios.delete('/user/me');
 }
+
+export async function ResendVerifyMail(): Promise<NormalResponse> {
+    return axios.get('/auth/email/verify_try');
+}
