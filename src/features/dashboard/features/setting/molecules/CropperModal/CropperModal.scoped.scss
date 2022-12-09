@@ -1,9 +1,13 @@
 .CropperModal {
     background-color: $color-main;
     border-radius: 35px;
-    padding: 20px 15px;
+    padding: 15px;
     width: 90vw;
     max-width: 600px;
+    &-cropper {
+        border-radius: 25px;
+        overflow: hidden;
+    }
     &-control {
         margin-top: 20px;
         display: flex;

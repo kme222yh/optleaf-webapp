@@ -50,7 +50,7 @@ export function ChangePasswordForm({
                         id="password_confirmed"
                         type="password"
                         label="Confirm password"
-                        config={form.register('password_confirmed', {
+                        config={form.register('password_confirmation', {
                             required: true
                         })}
                     />

@@ -25,9 +25,11 @@
         @include outerBody;
         max-width: 540px;
         position: relative;
+        height: 100%;
     }
     &-center {
         flex: 1;
+        height: 100%;
     }
     &-side {
         flex-shrink: 0;

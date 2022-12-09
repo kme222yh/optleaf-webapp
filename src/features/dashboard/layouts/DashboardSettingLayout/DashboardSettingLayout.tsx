@@ -25,7 +25,10 @@ export function DashboardSettingLayout({
     const mainHeight = $layout.height - $header.height - 70;
 
     return (
-        <div className={`DashboardSettingLayout ${className}`}>
+        <div
+            className={`DashboardSettingLayout ${className}`}
+            ref={$layout.ref}
+        >
             <header className="DashboardSettingLayout-header" ref={$header.ref}>
                 <TopNavigation />
                 <UserMenu />

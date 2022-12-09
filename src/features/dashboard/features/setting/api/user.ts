@@ -9,8 +9,8 @@ export async function UpdateUserData(
     if (data.name) params.append('name', data.name);
     if (data.icon_image) params.append('icon_image', data.icon_image);
     if (data.password) params.append('password', data.password);
-    if (data.password_confirmed)
-        params.append('password_confirmed', data.password_confirmed);
+    if (data.password_confirmation)
+        params.append('password_confirmation', data.password_confirmation);
     return axios.post('/user/me', params);
 }
 

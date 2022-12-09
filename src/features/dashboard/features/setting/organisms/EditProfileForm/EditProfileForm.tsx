@@ -29,7 +29,7 @@ export function EditProfileForm({
     waitingFn
 }: EditProfileFormProps) {
     const form = useForm<UserInputData>();
-    const { user } = useAuth();
+    const { user, refetchUser } = useAuth();
     const cropperRef = useRef<HTMLImageElement>(null);
     const imageReceiverRef = useRef(null);
     const [cropImage, setCropImage] = useState('');
@@ -73,6 +73,7 @@ export function EditProfileForm({
         waitingFn(true);
         try {
             await UpdateUserData(data);
+            await refetchUser();
         } catch (error) {
             console.log(error);
         }

@@ -3,7 +3,7 @@ export type UserInputData = {
     name?: string | null | undefined;
     icon_image?: File | null | undefined;
     password?: string | null | undefined;
-    password_confirmed?: string | null | undefined;
+    password_confirmation?: string | null | undefined;
 };
 
 export type NormalResponse = {

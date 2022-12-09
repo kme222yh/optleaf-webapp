@@ -22,17 +22,21 @@ export function CropperModal({
     return (
         <div className={`CropperModal ${className}`}>
             <div className="CropperModal-body">
-                <Cropper
-                    src={src}
+                <div
+                    className="CropperModal-cropper"
                     style={{ height: 400, width: '100%' }}
-                    // Cropper.js options
-                    initialAspectRatio={1}
-                    aspectRatio={1}
-                    guides
-                    // crop={cropFn}
-                    ref={cropperRef}
-                />
-
+                >
+                    <Cropper
+                        src={src}
+                        style={{ height: '100%', width: '100%' }}
+                        // Cropper.js options
+                        initialAspectRatio={1}
+                        aspectRatio={1}
+                        guides
+                        // crop={cropFn}
+                        ref={cropperRef}
+                    />
+                </div>
                 <div className="CropperModal-control">
                     <RoundedButton text="crop" onClick={cropFn} />
                 </div>

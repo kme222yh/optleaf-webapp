@@ -1,8 +1,9 @@
 export type User = {
-    email: string;
     name: string;
     icon_image: string;
+    email: string;
     email_verified: boolean;
+    CreatedAt: string;
 };
 
 export type LoginCredentials = {

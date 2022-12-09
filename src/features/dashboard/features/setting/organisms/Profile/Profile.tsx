@@ -2,6 +2,7 @@ import './Profile.scoped.scss';
 
 import { UserIcon } from '@/features/dashboard/atoms/UserIcon';
 import { useAuth } from '@/providers/auth';
+import { formatDate } from '@/lib/date';
 
 import { RoundedButton } from '../../atoms/RoundedButton';
 import { RoundedLink } from '../../atoms/RoundedLink';
@@ -47,7 +48,9 @@ export function Profile({ className, waitingFn }: ProfileProps) {
             <div className="Profile-sub">
                 <div className="Profile-sub-row">
                     <p className="Profile-sub-row-head">Joned at</p>
-                    <p className="Profile-sub-row-text">2022/12/12</p>
+                    <p className="Profile-sub-row-text">
+                        {formatDate(user?.CreatedAt ?? '1912/12/12')}
+                    </p>
                 </div>
                 <div className="Profile-sub-row">
                     <p className="Profile-sub-row-head">Email verified</p>
