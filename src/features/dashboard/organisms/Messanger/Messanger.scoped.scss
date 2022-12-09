@@ -50,30 +50,6 @@
             margin-bottom: 0;
             transform: translateY(30px);
         }
-
-        // &.fade-enter-active,
-        // &.fade-exit-active {
-        //     transition: 0.3s;
-        // }
-        // &.fade-enter,
-        // &.fade-enter-active {
-        //     opacity: 0;
-        //     max-height: 0;
-        //     margin-bottom: 0;
-        // }
-        // &.fade-enter {
-        //     transform: translateY(-30px);
-        // }
-        // &.fade-exit-active {
-        //     transform: translateY(10px);
-        // }
-        // &.fade-exit,
-        // &.fade-exit-active {
-        //     opacity: 1;
-        //     max-height: 60px;
-        //     transform: none;
-        //     margin-bottom: 20px;
-        // }
     }
     &-text {
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
@@ -89,7 +65,8 @@
             background-color: #cc8766;
         }
         &.success {
-            background-color: $color-sub;
+            // background-color: $color-sub;
+            background-color: #8feef7;
         }
         &.info {
             background-color: #8feef7;

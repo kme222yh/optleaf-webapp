@@ -6,10 +6,10 @@ import { useQueryClient } from 'react-query';
 
 import { ProjectQueryVariables, useProjectQuery } from '@/graphql/generated';
 import { useModalManageStore } from '@/features/dashboard/stores/modalManager';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { inviteProjectByEmail } from '../../api/invitation';
 import { InvitationCredentials } from '../../types';
-
 import { InvitationForm } from '../../molecules/InvitationForm';
 
 export type ProjectInvitationFormProps = {
@@ -30,6 +30,7 @@ export function ProjectInvitationForm({
     const queryClient = useQueryClient();
     const form = useForm<InvitationCredentials>();
     const modal = useModalManageStore();
+    const messanger = useMessanger();
 
     const submitFn = async (data: InvitationCredentials) => {
         if (!query.data?.project) return;
@@ -45,8 +46,9 @@ export function ProjectInvitationForm({
             ]);
             form.reset();
             modal.close();
+            messanger.push('Invitation was succeeded.', 'success');
         } catch (error) {
-            console.log(error);
+            messanger.push('Failed to invite.', 'success');
         }
         setWaitingFn!(false);
     };
