@@ -48,7 +48,7 @@ export function ProjectInvitationForm({
             modal.close();
             messanger.push('Invitation was succeeded.', 'success');
         } catch (error) {
-            messanger.push('Failed to invite.', 'success');
+            messanger.push('Failed to invite.', 'warning');
         }
         setWaitingFn!(false);
     };
