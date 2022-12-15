@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { useElementSize } from '@/hooks/useElementSize';
 import {
     useProjectQuery,
     UpdateProjectMutationVariables,
@@ -29,10 +28,6 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
     const mutation = useUpdateProjectMutation();
     const form = useForm<UpdateProjectMutationVariables>();
     const messanger = useMessanger();
-
-    const $header = useElementSize();
-    const $layout = useElementSize();
-    const bodySize = $layout.height - $header.height - 60;
 
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = (event: any) => {
@@ -60,11 +55,11 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
     }, [query.isLoading]);
 
     return (
-        <div className={`ProjectInfo ${className}`} ref={$layout.ref}>
-            <div className="ProjectInfo-header" ref={$header.ref}>
+        <div className={`ProjectInfo ${className}`}>
+            <div className="ProjectInfo-header">
                 <ProjectInfoTitle />
             </div>
-            <div className="ProjectInfo-body" style={{ height: bodySize }}>
+            <div className="ProjectInfo-body">
                 <ul className="ProjectInfo-info">
                     <li className="ProjectInfo-info-item">
                         <span className="ProjectInfo-info-item-title">

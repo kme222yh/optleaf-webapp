@@ -29,8 +29,7 @@ export function Chats({
     buttonDisabled
 }: ChatsProps) {
     const $form = useElementSize();
-    const $layout = useElementSize();
-    const listHeight = $layout.height - $form.height - 40 - 15;
+    const listHeight = `calc(100% - ${$form.height}px)`;
 
     const $bottomRef = useRef(null);
     useEffect(() => {
@@ -55,7 +54,7 @@ export function Chats({
     });
 
     return (
-        <div className={`Chats ${className}`} ref={$layout.ref}>
+        <div className={`Chats ${className}`}>
             <div className="Chats-body">
                 <ul className="Chats-list" style={{ height: listHeight }}>
                     {$chats}

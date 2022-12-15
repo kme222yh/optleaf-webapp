@@ -30,10 +30,8 @@ export function ProjectTeamMenberList({
     const query = useProjectQuery({ id: projectId as string });
     const [displayMenu, setDisplayMenu] = useState(false);
     const [view, setView] = useState<'menbers' | 'teams'>('menbers');
-    const $body = useElementSize();
-    const $switchTab = useElementSize();
-    const $control = useElementSize();
-    const contentHeight = $body.height - $switchTab.height - $control.height;
+    const $header = useElementSize();
+    const contentHeight = `calc(100% - ${$header.height}px)`;
 
     useEffect(() => {
         if (!query.isLoading) {
@@ -43,11 +41,8 @@ export function ProjectTeamMenberList({
 
     return (
         <div className={`ProjectTeamMenberList ${className}`}>
-            <div className="ProjectTeamMenberList-body" ref={$body.ref}>
-                <div
-                    className="ProjectTeamMenberList-switchTab"
-                    ref={$switchTab.ref}
-                >
+            <div className="ProjectTeamMenberList-header" ref={$header.ref}>
+                <div className="ProjectTeamMenberList-switchTab">
                     <button
                         className={`ProjectTeamMenberList-switchTab-button ${
                             view === 'menbers' ? 'current' : ''
@@ -67,10 +62,7 @@ export function ProjectTeamMenberList({
                         Teams
                     </button>
                 </div>
-                <div
-                    className="ProjectTeamMenberList-control"
-                    ref={$control.ref}
-                >
+                <div className="ProjectTeamMenberList-control">
                     <div className="ProjectTeamMenberList-form" />
                     {displayMenu ? (
                         <div className="ProjectTeamMenberList-create">
@@ -105,13 +97,13 @@ export function ProjectTeamMenberList({
                         ''
                     )}
                 </div>
-                <div
-                    className="ProjectTeamMenberList-content"
-                    style={{ height: contentHeight }}
-                >
-                    {view === 'teams' ? <ProjectTeams /> : ''}
-                    {view === 'menbers' ? <ProjectMenbers /> : ''}
-                </div>
+            </div>
+            <div
+                className="ProjectTeamMenberList-body"
+                style={{ height: contentHeight }}
+            >
+                {view === 'teams' ? <ProjectTeams /> : ''}
+                {view === 'menbers' ? <ProjectMenbers /> : ''}
             </div>
 
             <Modal visible={modal.isOpened('addTeamMenu')}>

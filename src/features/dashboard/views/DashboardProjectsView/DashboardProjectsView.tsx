@@ -16,18 +16,15 @@ export function DashboardProjectsView({
     className
 }: DashboardProjectsViewProps) {
     const $header = useElementSize();
-    const $layout = useElementSize();
-
-    const bodyHeight = $layout.height - $header.height - 60 - 20 - 20;
 
     return (
-        <div className={`DashboardProjectsView ${className}`} ref={$layout.ref}>
+        <div className={`DashboardProjectsView ${className}`}>
             <div className="DashboardProjectsView-header" ref={$header.ref}>
                 <ProjectsHeader />
             </div>
             <div
                 className="DashboardProjectsView-body"
-                style={{ height: bodyHeight }}
+                style={{ height: `calc(100% - 60px - ${$header.height}px)` }}
             >
                 <ProjectList />
             </div>

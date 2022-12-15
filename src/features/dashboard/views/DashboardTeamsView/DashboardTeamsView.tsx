@@ -14,9 +14,6 @@ DashboardTeamsView.defaultProps = {
 
 export function DashboardTeamsView({ className }: DashboardTeamsViewProps) {
     const $header = useElementSize();
-    const $layout = useElementSize();
-
-    const bodyHeight = $layout.height - $header.height - 60 - 20 - 20;
 
     return (
         <div className={`DashboardTeamsView ${className}`}>
@@ -25,7 +22,7 @@ export function DashboardTeamsView({ className }: DashboardTeamsViewProps) {
             </div>
             <div
                 className="DashboardTeamsView-body"
-                style={{ height: bodyHeight }}
+                style={{ height: `calc(100% - 60px - ${$header.height}px)` }}
             >
                 <TeamsList />
             </div>

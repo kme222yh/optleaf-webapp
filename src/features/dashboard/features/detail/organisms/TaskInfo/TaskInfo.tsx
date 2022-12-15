@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { useElementSize } from '@/hooks/useElementSize';
 import {
     UpdateTaskMutationVariables,
     useProjectQuery,
@@ -34,10 +33,6 @@ export function TaskInfo({ className }: TaskInfoProps) {
     const form = useForm<UpdateTaskMutationVariables>();
     const messanger = useMessanger();
 
-    const $header = useElementSize();
-    const $layout = useElementSize();
-    const bodySize = $layout.height - $header.height - 60;
-
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
@@ -65,11 +60,11 @@ export function TaskInfo({ className }: TaskInfoProps) {
     }, [query.isLoading]);
 
     return (
-        <div className={`TaskInfo ${className}`} ref={$layout.ref}>
-            <div className="TaskInfo-header" ref={$header.ref}>
+        <div className={`TaskInfo ${className}`}>
+            <div className="TaskInfo-header">
                 <TaskInfoTitlte />
             </div>
-            <div className="TaskInfo-body" style={{ height: bodySize }}>
+            <div className="TaskInfo-body">
                 <ul className="TaskInfo-info">
                     <li className="TaskInfo-info-item">
                         <span className="TaskInfo-info-item-title">
