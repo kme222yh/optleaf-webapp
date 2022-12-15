@@ -8,11 +8,10 @@ import { useElementSize } from '@/hooks/useElementSize';
 import {
     useProjectQuery,
     UpdateProjectMutationVariables,
-    useUpdateProjectMutation,
-    ProjectQueryVariables
+    useUpdateProjectMutation
 } from '@/graphql/generated';
 import { formatDate } from '@/lib/date';
-import { useQueryClient } from 'react-query';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { ProjectInfoTitle } from '../ProjectInfoTitle';
 // import { TaskNumbers } from '../../../../molecules/TaskNumbers';
@@ -26,10 +25,10 @@ ProjectInfo.defaultProps = {
 
 export function ProjectInfo({ className }: ProjectInfoProps) {
     const { id } = useParams();
-    const queryClient = useQueryClient();
     const query = useProjectQuery({ id: id as string });
     const mutation = useUpdateProjectMutation();
     const form = useForm<UpdateProjectMutationVariables>();
+    const messanger = useMessanger();
 
     const $header = useElementSize();
     const $layout = useElementSize();
@@ -44,27 +43,21 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
                     event?.target?.value ?? form.getValues('description'),
                 id: id as string
             };
-            await mutation.mutateAsync(data);
-            await queryClient.invalidateQueries([
-                'project',
-                { id } as ProjectQueryVariables
-            ]);
+            try {
+                await mutation.mutateAsync(data);
+            } catch (error) {
+                messanger.push('Failed to update.', 'warning');
+            }
         }, 2000);
     };
 
     useEffect(() => {
         if (query.isLoading) {
             form.reset({ description: 'fetching...' });
-        } else {
-            form.reset({
-                description: query.data?.project?.description as string
-            });
+            return;
         }
-    }, [query.data?.project?.description, query.isLoading]);
-
-    useEffect(() => {
         form.reset({ description: query.data?.project?.description as string });
-    }, [query.isLoading, query.data?.project.description]);
+    }, [query.isLoading]);
 
     return (
         <div className={`ProjectInfo ${className}`} ref={$layout.ref}>
@@ -99,7 +92,9 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
                     className="ProjectInfo-description"
                     {...form.register('description')}
                     onChange={updateFn}
-                    disabled={!query.data?.project.grant.edit}
+                    disabled={
+                        !query.data?.project.grant.edit || query.isLoading
+                    }
                 />
             </div>
         </div>

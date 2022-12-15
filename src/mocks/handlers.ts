@@ -21,14 +21,16 @@ export const handlers = [
             })
         )
     ),
-    graphql.mutation('updateProject', (req, res, ctx) =>
+    graphql.mutation('updateProject', (req, res, ctx) => {
+        const { description } = req.variables;
         res(
-            ctx.delay(1000),
+            ctx.delay(2000),
             ctx.data({
-                project
+                ...project,
+                description
             })
-        )
-    ),
+        );
+    }),
     graphql.mutation('deleteProject', (req, res, ctx) =>
         res(
             ctx.data({
@@ -73,6 +75,16 @@ export const handlers = [
             })
         )
     ),
+    graphql.mutation('updateTask', (req, res, ctx) => {
+        const { description } = req.variables;
+        return res(
+            ctx.delay(2000),
+            ctx.data({
+                ...task,
+                description: description ?? task.description
+            })
+        );
+    }),
 
     graphql.query('team', (req, res, ctx) =>
         res(

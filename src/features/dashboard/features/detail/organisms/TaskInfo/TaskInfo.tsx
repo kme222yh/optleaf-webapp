@@ -9,11 +9,10 @@ import {
     UpdateTaskMutationVariables,
     useProjectQuery,
     useTaskQuery,
-    useUpdateTaskMutation,
-    TaskQueryVariables
+    useUpdateTaskMutation
 } from '@/graphql/generated';
 import { formatDate } from '@/lib/date';
-import { useQueryClient } from 'react-query';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { TaskInfoTitlte } from '../TaskInfoTitlte';
 
@@ -26,7 +25,6 @@ TaskInfo.defaultProps = {
 
 export function TaskInfo({ className }: TaskInfoProps) {
     const { id, taskId } = useParams();
-    const queryClient = useQueryClient();
     const query = useTaskQuery({
         project_id: id as string,
         id: taskId as string
@@ -34,6 +32,7 @@ export function TaskInfo({ className }: TaskInfoProps) {
     const projectQuery = useProjectQuery({ id: id as string });
     const mutation = useUpdateTaskMutation();
     const form = useForm<UpdateTaskMutationVariables>();
+    const messanger = useMessanger();
 
     const $header = useElementSize();
     const $layout = useElementSize();
@@ -49,37 +48,21 @@ export function TaskInfo({ className }: TaskInfoProps) {
                 project_id: id as string,
                 id: taskId as string
             };
-            await mutation.mutateAsync(data);
-            await queryClient.invalidateQueries([
-                'task',
-                {
-                    project_id: id as string,
-                    id: taskId as string
-                } as TaskQueryVariables
-            ]);
-            await queryClient.invalidateQueries([
-                'task',
-                {
-                    project_id: id as string,
-                    id: query.data?.task?.parent?.id as string
-                } as TaskQueryVariables
-            ]);
+            try {
+                await mutation.mutateAsync(data);
+            } catch (error) {
+                messanger.push('Failed to update.', 'warning');
+            }
         }, 2000);
     };
 
     useEffect(() => {
         if (query.isLoading) {
             form.reset({ description: 'fetching...' });
-        } else {
-            form.reset({
-                description: query.data?.task?.description as string
-            });
+            return;
         }
-    }, [query.data?.task?.description, query.isLoading]);
-
-    useEffect(() => {
         form.reset({ description: query.data?.task?.description as string });
-    }, [query.isLoading, query.data?.task?.description]);
+    }, [query.isLoading]);
 
     return (
         <div className={`TaskInfo ${className}`} ref={$layout.ref}>
@@ -103,7 +86,10 @@ export function TaskInfo({ className }: TaskInfoProps) {
                     className="TaskInfo-description"
                     {...form.register('description')}
                     onChange={updateFn}
-                    disabled={!projectQuery.data?.project.grant.edit}
+                    disabled={
+                        !projectQuery.data?.project.grant.edit ||
+                        query.isLoading
+                    }
                 />
             </div>
         </div>

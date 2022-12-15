@@ -2,6 +2,9 @@ import './TaskInfoTitlte.scoped.scss';
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
+import { useForm } from 'react-hook-form';
+
 import {
     useTaskQuery,
     useProjectQuery,
@@ -10,8 +13,7 @@ import {
     useUpdateTaskMutation,
     ProjectQueryVariables
 } from '@/graphql/generated';
-import { useForm } from 'react-hook-form';
-import { useQueryClient } from 'react-query';
+import { useMessanger } from '@/features/dashboard/hooks/useMessanger';
 
 import { InfoTitleWrapper } from '../../molecules/InfoTitleWrapper';
 import { TaskDangerMenu } from '../TaskDangerMenu';
@@ -25,7 +27,6 @@ TaskInfoTitlte.defaultProps = {
 
 export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
     const [displayMenu, setDisplayMenu] = useState(false);
-
     const queryClient = useQueryClient();
     const { id, taskId } = useParams();
     const query = useTaskQuery({
@@ -35,14 +36,16 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
     const projectQuery = useProjectQuery({ id: id as string });
     const mutation = useUpdateTaskMutation();
     const form = useForm<UpdateTaskMutationVariables>();
+    const messanger = useMessanger();
 
     useEffect(() => {
         if (query.isLoading) {
             form.reset({ name: 'fetching...' });
-        } else {
-            form.reset({ name: query.data?.task?.name as string });
+            return;
         }
-    }, [query.data?.task?.name, query.isLoading]);
+        form.reset({ name: query.data?.task?.name as string });
+    }, [query.isLoading]);
+
     useEffect(() => {
         if (!projectQuery.isLoading) {
             setDisplayMenu(
@@ -52,16 +55,16 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
     }, [projectQuery.data?.project.grant, projectQuery.isLoading]);
 
     let updateTimeoutId: NodeJS.Timeout;
-    const updateFn = () => {
+    const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
-        updateTimeoutId = setTimeout(async (event: any) => {
+        updateTimeoutId = setTimeout(async () => {
             const data: UpdateTaskMutationVariables = {
                 name: event?.target?.value ?? form.getValues('name'),
                 project_id: id as string,
                 id: taskId as string
             };
-            await mutation.mutateAsync(data);
-            if (query.data?.task?.parent?.id) {
+            try {
+                await mutation.mutateAsync(data);
                 await queryClient.invalidateQueries([
                     'task',
                     {
@@ -69,11 +72,22 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
                         id: taskId as string
                     } as TaskQueryVariables
                 ]);
-            } else {
-                await queryClient.invalidateQueries([
-                    'project',
-                    { id } as ProjectQueryVariables
-                ]);
+                if (query.data?.task?.parent?.id) {
+                    await queryClient.invalidateQueries([
+                        'task',
+                        {
+                            project_id: id as string,
+                            id: query.data?.task?.parent?.id as string
+                        } as TaskQueryVariables
+                    ]);
+                } else {
+                    await queryClient.invalidateQueries([
+                        'project',
+                        { id } as ProjectQueryVariables
+                    ]);
+                }
+            } catch (error) {
+                messanger.push('Failed to update.', 'warning');
             }
         }, 2000);
     };
@@ -88,7 +102,8 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
                         {...form.register('name')}
                         onChange={updateFn}
                         disabled={
-                            !projectQuery.data?.project?.grant.operateTask
+                            !projectQuery.data?.project?.grant.operateTask &&
+                            query.isLoading
                         }
                     />
                 }
