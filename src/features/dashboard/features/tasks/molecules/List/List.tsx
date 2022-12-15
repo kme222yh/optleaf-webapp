@@ -21,6 +21,13 @@ export function List({ className, tasks }: ListProps) {
         id: taskId as string
     });
 
+    // sort completed task to the bottom
+    tasks.sort(
+        (v1, v2) =>
+            (v1.completed as unknown as number) -
+            (v2.completed as unknown as number)
+    );
+
     const $tasks: JSX.Element[] = [];
     tasks.forEach((task) => {
         $tasks.push(

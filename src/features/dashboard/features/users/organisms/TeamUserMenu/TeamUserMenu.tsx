@@ -53,6 +53,11 @@ export function TeamUserMenu({ className, userId }: TeamUserMenuProps) {
                 setRole('member');
                 setUser(result as User);
             }
+            result = team.pending.find((v) => v.ID === userId);
+            if (result) {
+                setRole('');
+                setUser(result as User);
+            }
         }
     }, [teamQuery.isLoading, teamQuery.data?.team, userId]);
 
@@ -95,6 +100,9 @@ export function TeamUserMenu({ className, userId }: TeamUserMenuProps) {
             id: teamId as string,
             menbers: [
                 ...team.menbers.map((v) => v.ID).filter((v) => v !== userId)
+            ],
+            pending: [
+                ...team.pending.map((v) => v.ID).filter((v) => v !== userId)
             ]
         };
         await teamMutator.mutateAsync(data);

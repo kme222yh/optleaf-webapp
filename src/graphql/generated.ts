@@ -347,10 +347,13 @@ export type UpdateProjectMutationVariables = Exact<{
     id: Scalars['String'];
     name?: InputMaybe<Scalars['String']>;
     description?: InputMaybe<Scalars['String']>;
+    administrators?: InputMaybe<
+        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
+    >;
     menbers?: InputMaybe<
         Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
     >;
-    administrators?: InputMaybe<
+    pending?: InputMaybe<
         Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
     >;
     teams?: InputMaybe<
@@ -366,6 +369,7 @@ export type UpdateProjectMutation = {
         name: string;
         description: string;
         menbers: Array<{ __typename?: 'User'; ID: number; name: string }>;
+        pending: Array<{ __typename?: 'User'; ID: number; name: string }>;
         administrators: Array<{
             __typename?: 'User';
             ID: number;
@@ -538,10 +542,13 @@ export type UpdateTeamMutationVariables = Exact<{
     id: Scalars['String'];
     name?: InputMaybe<Scalars['String']>;
     description?: InputMaybe<Scalars['String']>;
+    administrators?: InputMaybe<
+        Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
+    >;
     menbers?: InputMaybe<
         Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
     >;
-    administrators?: InputMaybe<
+    pending?: InputMaybe<
         Array<InputMaybe<Scalars['Int']>> | InputMaybe<Scalars['Int']>
     >;
     permission_level?: InputMaybe<Scalars['String']>;
@@ -556,6 +563,7 @@ export type UpdateTeamMutation = {
         description: string;
         owner: { __typename?: 'User'; ID: number; name: string };
         menbers: Array<{ __typename?: 'User'; ID: number; name: string }>;
+        pending: Array<{ __typename?: 'User'; ID: number; name: string }>;
         administrators: Array<{
             __typename?: 'User';
             ID: number;
@@ -723,19 +731,24 @@ export const useCreateProjectMutation = <TError = unknown, TContext = unknown>(
         options
     );
 export const UpdateProjectDocument = `
-    mutation updateProject($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int], $teams: [String], $permission_level: String) {
+    mutation updateProject($id: String!, $name: String, $description: String, $administrators: [Int], $menbers: [Int], $pending: [Int], $teams: [String], $permission_level: String) {
   updateProject(
     id: $id
     name: $name
     description: $description
-    menbers: $menbers
     administrators: $administrators
+    menbers: $menbers
+    pending: $pending
     teams: $teams
     permission_level: $permission_level
   ) {
     name
     description
     menbers {
+      ID
+      name
+    }
+    pending {
       ID
       name
     }
@@ -1043,13 +1056,14 @@ export const useCreateTeamMutation = <TError = unknown, TContext = unknown>(
         options
     );
 export const UpdateTeamDocument = `
-    mutation updateTeam($id: String!, $name: String, $description: String, $menbers: [Int], $administrators: [Int], $permission_level: String) {
+    mutation updateTeam($id: String!, $name: String, $description: String, $administrators: [Int], $menbers: [Int], $pending: [Int], $permission_level: String) {
   updateTeam(
     id: $id
     name: $name
     description: $description
-    menbers: $menbers
     administrators: $administrators
+    menbers: $menbers
+    pending: $pending
     permission_level: $permission_level
   ) {
     id
@@ -1060,6 +1074,10 @@ export const UpdateTeamDocument = `
       name
     }
     menbers {
+      ID
+      name
+    }
+    pending {
       ID
       name
     }

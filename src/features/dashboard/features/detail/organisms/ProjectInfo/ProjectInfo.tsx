@@ -15,7 +15,7 @@ import { formatDate } from '@/lib/date';
 import { useQueryClient } from 'react-query';
 
 import { ProjectInfoTitle } from '../ProjectInfoTitle';
-import { TaskNumbers } from '../../../../molecules/TaskNumbers';
+// import { TaskNumbers } from '../../../../molecules/TaskNumbers';
 
 export type ProjectInfoProps = {
     className?: string;

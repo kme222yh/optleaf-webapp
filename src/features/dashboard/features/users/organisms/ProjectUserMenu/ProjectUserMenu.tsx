@@ -53,6 +53,11 @@ export function ProjectUserMenu({ className, userId }: ProjectUserMenuProps) {
                 setRole('member');
                 setUser(result as User);
             }
+            result = project.pending.find((v) => v.ID === userId);
+            if (result) {
+                setRole('');
+                setUser(result as User);
+            }
         }
     }, [projectQuery.isLoading, projectQuery.data?.project, userId]);
 
@@ -95,6 +100,9 @@ export function ProjectUserMenu({ className, userId }: ProjectUserMenuProps) {
             id: projectId as string,
             menbers: [
                 ...project.menbers.map((v) => v.ID).filter((v) => v !== userId)
+            ],
+            pending: [
+                ...project.pending.map((v) => v.ID).filter((v) => v !== userId)
             ]
         };
         await projectMutator.mutateAsync(data);

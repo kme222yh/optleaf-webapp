@@ -1,8 +1,5 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
-
 import { NavLink } from './NavLink';
 
 type T = typeof NavLink;

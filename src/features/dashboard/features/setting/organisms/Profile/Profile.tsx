@@ -50,7 +50,7 @@ export function Profile({ className, waitingFn }: ProfileProps) {
             </div>
             <div className="Profile-sub">
                 <div className="Profile-sub-row">
-                    <p className="Profile-sub-row-head">Joned at</p>
+                    <p className="Profile-sub-row-head">Joined at</p>
                     <p className="Profile-sub-row-text">
                         {formatDate(user?.CreatedAt ?? '1912/12/12')}
                     </p>

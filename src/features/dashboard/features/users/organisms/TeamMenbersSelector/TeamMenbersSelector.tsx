@@ -53,7 +53,7 @@ export function TeamMenbersSelector({
     Object.keys(menberObj).forEach((key) => {
         menberObj[key].forEach((val) => {
             const isSelected = selected!.includes(val.ID);
-            const isExcluded = excluded!.includes(val.ID) || key==='pending';
+            const isExcluded = excluded!.includes(val.ID) || key === 'pending';
             $items.push(
                 <li
                     className={`TeamMenbersSelector-item ${

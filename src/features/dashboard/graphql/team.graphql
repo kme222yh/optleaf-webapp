@@ -63,16 +63,18 @@ mutation updateTeam(
     $id: String!
     $name: String
     $description: String
-    $menbers: [Int]
     $administrators: [Int]
+    $menbers: [Int]
+    $pending: [Int]
     $permission_level: String
 ) {
     updateTeam(
         id: $id
         name: $name
         description: $description
-        menbers: $menbers
         administrators: $administrators
+        menbers: $menbers
+        pending: $pending
         permission_level: $permission_level
     ) {
         id
@@ -83,6 +85,10 @@ mutation updateTeam(
             name
         }
         menbers {
+            ID
+            name
+        }
+        pending {
             ID
             name
         }

@@ -13,7 +13,7 @@ type MessageManagerStore = {
     set: (queue: Message[]) => void;
 };
 
-export const useMessangerStore = create<MessageManagerStore>((set, get) => ({
+export const useMessangerStore = create<MessageManagerStore>((set) => ({
     queue: [],
     set: (queue: Message[]) => set({ queue })
 }));
