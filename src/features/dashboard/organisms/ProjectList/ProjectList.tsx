@@ -30,7 +30,6 @@ export function ProjectList({ className }: ProjectListProps) {
         let itemsLength = 0;
         itemsLength = Array.isArray(projects) ? projects.length : 0;
         for (let i = 0; i < itemsLength; i += 1) {
-            if (i > 3) break;
             const project = (projects as Project[])[i];
             const icons: string[] = [];
             icons.push(project.owner?.icon_image as string);

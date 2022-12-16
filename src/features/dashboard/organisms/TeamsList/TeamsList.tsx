@@ -30,7 +30,6 @@ export function TeamsList({ className }: TeamsListProps) {
         let itemsLength = 0;
         itemsLength = Array.isArray(teams) ? teams.length : 0;
         for (let i = 0; i < itemsLength; i += 1) {
-            if (i > 3) break;
             const team = (teams as Team[])[i];
             const icons: string[] = [];
             icons.push(team.owner?.icon_image as string);

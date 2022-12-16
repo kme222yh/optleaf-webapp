@@ -16,8 +16,8 @@ DashboardTaskView.defaultProps = {
 };
 
 export function DashboardTaskView({ className }: DashboardTaskViewProps) {
-    const [detailHeight, setDetailHeight] = useState('500px');
-    const [chatsHeight, setChatsHeight] = useState('calc(100% - 500px - 25px)');
+    const [detailHeight, setDetailHeight] = useState('200px');
+    const [chatsHeight, setChatsHeight] = useState('calc(100% - 200px - 25px)');
     const $layout = useElementSize();
 
     useEffect(() => {

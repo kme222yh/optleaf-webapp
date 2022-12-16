@@ -1,6 +1,6 @@
 import './ProjectInfo.scoped.scss';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -28,6 +28,7 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
     const mutation = useUpdateProjectMutation();
     const form = useForm<UpdateProjectMutationVariables>();
     const messanger = useMessanger();
+    const [isFocused, setIsFocused] = useState(false);
 
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = (event: any) => {
@@ -51,8 +52,9 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
             form.reset({ description: 'fetching...' });
             return;
         }
+        if (isFocused) return;
         form.reset({ description: query.data?.project?.description as string });
-    }, [query.isLoading]);
+    }, [query.isLoading, query.data?.project.description]);
 
     return (
         <div className={`ProjectInfo ${className}`}>
@@ -90,6 +92,8 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
                     disabled={
                         !query.data?.project.grant.edit || query.isLoading
                     }
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
                 />
             </div>
         </div>

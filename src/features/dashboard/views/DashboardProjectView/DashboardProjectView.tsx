@@ -18,9 +18,9 @@ DashboardProjectView.defaultProps = {
 };
 
 export function DashboardProjectView({ className }: DashboardProjectViewProps) {
-    const [detailHeight, setDetailHeight] = useState('500px');
+    const [detailHeight, setDetailHeight] = useState('200px');
     const [menbersHeight, setMenbersHeight] = useState(
-        'calc(100% - 500px - 25px)'
+        'calc(100% - 200px - 25px)'
     );
     const $layout = useElementSize();
 

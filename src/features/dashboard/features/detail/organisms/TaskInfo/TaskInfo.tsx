@@ -1,6 +1,6 @@
 import './TaskInfo.scoped.scss';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -32,6 +32,7 @@ export function TaskInfo({ className }: TaskInfoProps) {
     const mutation = useUpdateTaskMutation();
     const form = useForm<UpdateTaskMutationVariables>();
     const messanger = useMessanger();
+    const [isFocused, setIsFocused] = useState(false);
 
     let updateTimeoutId: NodeJS.Timeout;
     const updateFn = (event: any) => {
@@ -56,8 +57,9 @@ export function TaskInfo({ className }: TaskInfoProps) {
             form.reset({ description: 'fetching...' });
             return;
         }
+        if (isFocused) return;
         form.reset({ description: query.data?.task?.description as string });
-    }, [query.isLoading]);
+    }, [query.data?.task?.description, query.isLoading]);
 
     return (
         <div className={`TaskInfo ${className}`}>
@@ -85,6 +87,8 @@ export function TaskInfo({ className }: TaskInfoProps) {
                         !projectQuery.data?.project.grant.edit ||
                         query.isLoading
                     }
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
                 />
             </div>
         </div>
