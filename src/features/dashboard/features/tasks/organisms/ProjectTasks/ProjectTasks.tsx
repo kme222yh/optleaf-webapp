@@ -1,5 +1,7 @@
 import './ProjectTasks.scoped.scss';
 
+import { DragDropContext } from 'react-beautiful-dnd';
+
 import { RootTasks } from '../RootTasks';
 
 export type ProjectTasksProps = {
@@ -12,11 +14,13 @@ ProjectTasks.defaultProps = {
 export function ProjectTasks({ className }: ProjectTasksProps) {
     return (
         <div className={`ProjectTasks ${className}`}>
-            <ul className="ProjectTasks-body">
-                <li className="ProjectTasks-item current">
-                    <RootTasks />
-                </li>
-            </ul>
+            <DragDropContext onDragEnd={() => {}}>
+                <ul className="ProjectTasks-body">
+                    <li className="ProjectTasks-item current">
+                        <RootTasks />
+                    </li>
+                </ul>
+            </DragDropContext>
         </div>
     );
 }

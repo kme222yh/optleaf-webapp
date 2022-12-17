@@ -1,5 +1,7 @@
 import './TaskChildren.scoped.scss';
 
+import _ from 'lodash';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
@@ -13,6 +15,7 @@ import {
 import { List } from '../../molecules/List';
 import { CreateButton } from '../../atoms/CreateButton';
 import { useModalManageStore } from '../../../../stores/modalManager';
+import { useTaskBranciesStore } from '../../stores/taskBrancies';
 
 export type TaskChildrenProps = {
     className?: string;
@@ -37,8 +40,15 @@ export function TaskChildren({
     const navigator = useNavigate();
     const queryClient = useQueryClient();
     const modal = useModalManageStore();
+    const brancies = useTaskBranciesStore();
+    const [oldChildrenCache, setOldChildrenCache] = useState<Task[]>([]);
 
-    const tasks = (query.isLoading ? [] : query.data?.task?.children) as Task[];
+    useEffect(() => {
+        if (query.isLoading || !query.data?.task) return;
+        if (_.isEqual(oldChildrenCache, query.data.task.children)) return;
+        setOldChildrenCache(_.cloneDeep(query.data.task.children as Task[]));
+        brancies.set(taskId, _.cloneDeep(query.data.task.children as Task[]));
+    }, [query.isLoading, query.data?.task?.children]);
 
     const createTask = async () => {
         modal.open('ScreenTransition');
@@ -60,7 +70,7 @@ export function TaskChildren({
 
     return (
         <div className={`TaskChildren ${className}`}>
-            <List tasks={tasks} />
+            <List tasks={brancies.get(taskId)} parentTaskId={taskId} />
             {projectQuery.data?.project.grant.operateTask ? (
                 <div className="TaskChildren-button">
                     <CreateButton onClick={createTask} />
