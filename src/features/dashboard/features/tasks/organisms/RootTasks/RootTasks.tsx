@@ -37,7 +37,10 @@ export function RootTasks({ className }: RootTasksProps) {
         if (query.isLoading || !query.data?.project) return;
         if (_.isEqual(oldChildrenCache, query.data.project.tasks)) return;
         setOldChildrenCache(_.cloneDeep(query.data.project.tasks as Task[]));
-        brancies.set('project', _.cloneDeep(query.data.project.tasks as Task[]));
+        brancies.set(
+            'project',
+            _.cloneDeep(query.data.project.tasks as Task[])
+        );
     }, [query.isLoading, query.data?.project?.tasks]);
 
     const createTask = async () => {
