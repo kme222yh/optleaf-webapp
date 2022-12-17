@@ -37,14 +37,16 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
     const mutation = useUpdateTaskMutation();
     const form = useForm<UpdateTaskMutationVariables>();
     const messanger = useMessanger();
+    const [isFocused, setIsFocused] = useState(false);
 
     useEffect(() => {
         if (query.isLoading) {
             form.reset({ name: 'fetching...' });
             return;
         }
+        if (isFocused) return;
         form.reset({ name: query.data?.task?.name as string });
-    }, [query.isLoading]);
+    }, [query.isLoading, query.data?.task?.name]);
 
     useEffect(() => {
         if (!projectQuery.isLoading) {
@@ -105,6 +107,8 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
                             !projectQuery.data?.project?.grant.operateTask &&
                             query.isLoading
                         }
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
                     />
                 }
                 menu={<TaskDangerMenu />}
