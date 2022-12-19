@@ -9,7 +9,6 @@ import {
     useProjectQuery,
     useCreateTaskMutation,
     Task,
-    UpdateTaskMutationVariables,
     useUpdateTaskMutation,
     ProjectQueryVariables
 } from '@/graphql/generated';
@@ -18,6 +17,7 @@ import { List } from '../../molecules/List';
 import { CreateButton } from '../../atoms/CreateButton';
 import { useModalManageStore } from '../../../../stores/modalManager';
 import { useTaskBranciesStore } from '../../stores/taskBrancies';
+import { useNodeTreeStore } from '../../stores/nodeTree';
 
 export type RootProps = {
     className?: string;
@@ -35,6 +35,7 @@ export function Root({ className }: RootProps) {
     const queryClient = useQueryClient();
     const modal = useModalManageStore();
     const brancies = useTaskBranciesStore();
+    const nodeTree = useNodeTreeStore();
     const [oldChildrenCache, setOldChildrenCache] = useState<Task[]>([]);
 
     useEffect(() => {
@@ -61,13 +62,12 @@ export function Root({ className }: RootProps) {
         modal.close();
     };
 
-    const toggleCompleteFn = async (targetTaskId: string) => {
-        const data: UpdateTaskMutationVariables = {
+    const toggleCompleteFn = async (task: Task) => {
+        await updateMutator.mutateAsync({
             project_id: projectId as string,
-            id: targetTaskId as string,
-            completed: false
-        };
-        await updateMutator.mutateAsync(data);
+            id: task.id,
+            completed: !task.completed
+        });
         await queryClient.invalidateQueries([
             'project',
             { id: projectId } as ProjectQueryVariables
@@ -80,7 +80,7 @@ export function Root({ className }: RootProps) {
                 tasks={brancies.get('project')}
                 projectId={projectId as string}
                 parentTaskId="project"
-                nodeTree={[]}
+                nodeTree={nodeTree.get()}
                 toggleCompletedFn={toggleCompleteFn}
                 editable={
                     (query.data?.project.grant.operateTask && taskId) as boolean

@@ -11,7 +11,6 @@ import {
     Task,
     useProjectQuery,
     useUpdateTaskMutation,
-    UpdateTaskMutationVariables,
     TaskQueryVariables
 } from '@/graphql/generated';
 
@@ -68,18 +67,17 @@ export function Children({ className, projectId, taskId }: ChildrenProps) {
         modal.close();
     };
 
-    const toggleCompleteFn = async (targetTaskId: string) => {
-        const data: UpdateTaskMutationVariables = {
+    const toggleCompleteFn = async (task: Task) => {
+        const updatedTask = await updateMutator.mutateAsync({
             project_id: projectId as string,
-            id: targetTaskId as string,
-            completed: false
-        };
-        const task = await updateMutator.mutateAsync(data);
+            id: task.id,
+            completed: !task.completed
+        });
         await queryClient.invalidateQueries([
             'task',
             {
                 project_id: projectId,
-                id: task.updateTask?.parent?.id
+                id: updatedTask.updateTask?.parent?.id
             } as TaskQueryVariables
         ]);
     };

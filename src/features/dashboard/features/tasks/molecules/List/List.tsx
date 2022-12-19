@@ -12,7 +12,7 @@ export type ListProps = {
     nodeTree: string[];
     parentTaskId: string;
     projectId: string;
-    toggleCompletedFn: (taskId: string) => void;
+    toggleCompletedFn: (task: Task) => void;
     editable?: boolean;
 };
 List.defaultProps = {
@@ -49,7 +49,7 @@ export function List({
                             task={task}
                             index={index}
                             editable={editable}
-                            toggleCompletedFn={() => toggleCompletedFn(task.id)}
+                            toggleCompletedFn={() => toggleCompletedFn(task)}
                             selected={nodeTree.includes(task.id)}
                             key={task.id}
                         />
