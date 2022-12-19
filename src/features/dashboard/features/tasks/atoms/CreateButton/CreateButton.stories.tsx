@@ -8,7 +8,8 @@ type Story = ComponentStoryObj<T>;
 export default {
     component: CreateButton,
     args: {
-        // add props here !!
+        disabled: false,
+        onClickFn: () => {}
     }
 } as Meta;
 

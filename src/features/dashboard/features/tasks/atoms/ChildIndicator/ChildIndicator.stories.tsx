@@ -1,14 +1,14 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { TaskChildren } from './TaskChildren';
+import { ChildIndicator } from './ChildIndicator';
 
-type T = typeof TaskChildren;
+type T = typeof ChildIndicator;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: TaskChildren,
+    component: ChildIndicator,
     args: {
-        // add props here !!
+        visible: true
     }
 } as Meta;
 

@@ -1,21 +1,15 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-
 import { DragDropContext } from 'react-beautiful-dnd';
+import { Root } from './Root';
 
-import { tasks } from '@/mocks/data';
-
-import { List } from './List';
-
-type T = typeof List;
+type T = typeof Root;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: List,
+    component: Root,
     args: {
-        tasks,
-        parentTaskId: 'storybook',
-        nodeTree: []
+        // add props here !!
     },
     decorators: [
         (story) => (

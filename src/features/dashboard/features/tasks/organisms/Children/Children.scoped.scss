@@ -1,4 +1,4 @@
-.TaskChildren {
+.Children {
     height: 100%;
     max-width: 500px;
     position: relative;
@@ -11,11 +11,9 @@
         right: 15px;
         bottom: 0px;
     }
-    &:hover {
-        .TaskChildren-button {
-            opacity: 1;
-            pointer-events: initial;
-            bottom: 5px;
-        }
+    &:hover &-button {
+        opacity: 1;
+        pointer-events: initial;
+        bottom: 5px;
     }
 }

@@ -1,14 +1,17 @@
+/* eslint-disable no-console */
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { RootTasks } from './RootTasks';
+import { LeafButton } from './LeafButton';
 
-type T = typeof RootTasks;
+type T = typeof LeafButton;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: RootTasks,
+    component: LeafButton,
     args: {
-        // add props here !!
+        disabled: false,
+        fill: false,
+        onClickFn: () => console.log('click!!')
     }
 } as Meta;
 

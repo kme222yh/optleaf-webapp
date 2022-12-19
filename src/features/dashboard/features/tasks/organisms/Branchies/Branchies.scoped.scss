@@ -1,17 +1,4 @@
-.TaskBrancies {
-    @include DashboardWhiteArea;
-    height: 100%;
-    width: 100%;
-    max-width: 800px;
-    background-color: #d9ebd2;
-
-    overflow-y: scroll;
-
-    &-body {
-        height: 100%;
-        display: flex;
-    }
-
+.Branchies {
     &-item {
         padding: 35px 0 25px;
         width: 300px;
@@ -25,8 +12,9 @@
         &:last-child {
             padding-right: 10px;
         }
-    }
-    .current {
-        background-color: $color-white;
+
+        &.current {
+            background-color: $color-white;
+        }
     }
 }

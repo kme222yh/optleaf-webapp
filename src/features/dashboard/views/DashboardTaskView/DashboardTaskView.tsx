@@ -4,7 +4,7 @@ import './DashboardTaskView.scss';
 import { useElementSize } from '@/hooks/useElementSize';
 import { useEffect, useState } from 'react';
 
-import { TaskBrancies } from '../../features/tasks';
+import { ProjectTasks } from '../../features/tasks';
 import { TaskChats } from '../../features/chats';
 import { TaskInfo } from '../../features/detail';
 
@@ -45,7 +45,7 @@ export function DashboardTaskView({ className }: DashboardTaskViewProps) {
     return (
         <div className={`DashboardTaskView ${className}`} ref={$layout.ref}>
             <div className="DashboardTaskView-tasks">
-                <TaskBrancies />
+                <ProjectTasks />
             </div>
             <div className="DashboardTaskView-info">
                 <div

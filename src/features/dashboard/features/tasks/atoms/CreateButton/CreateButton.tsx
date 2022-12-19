@@ -5,18 +5,26 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 
 export type CreateButtonProps = {
     className?: string;
-    onClick: () => void;
+    disabled?: boolean;
+    onClickFn: () => void;
 };
 CreateButton.defaultProps = {
-    className: ''
+    className: '',
+    disabled: false
 };
 
-export function CreateButton({ className, onClick }: CreateButtonProps) {
-    return (
+export function CreateButton({
+    className,
+    disabled,
+    onClickFn
+}: CreateButtonProps) {
+    return disabled ? (
+        ('' as unknown as JSX.Element)
+    ) : (
         <button
             className={`CreateButton ${className}`}
             type="button"
-            onClick={onClick}
+            onClick={onClickFn}
         >
             <FontAwesomeIcon icon={faPen} />
         </button>

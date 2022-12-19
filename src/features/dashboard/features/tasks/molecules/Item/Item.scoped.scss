@@ -27,16 +27,14 @@
         margin-right: 5px;
     }
 
-    &-leaf,
-    &-arrow {
-        color: #a2e68a;
-        fill: #a2e68a;
-        stroke: #a2e68a;
+    transition: 0.2s;
+    &:hover,
+    &.current,
+    &.selected,
+    &.dragging {
+        background-color: rgba(153, 217, 130, 0.2);
     }
-
-    &-leaf {
-        cursor: pointer;
-        padding-right: 7px;
-        padding-left: 10px;
+    &.dragging {
+        @include box-shadow;
     }
 }
