@@ -38,6 +38,7 @@ export function TaskInfo({ className }: TaskInfoProps) {
     const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
         updateTimeoutId = setTimeout(async () => {
+            if (!event?.target?.value ?? form.getValues('description')) return;
             const data: UpdateTaskMutationVariables = {
                 description:
                     event?.target?.value ?? form.getValues('description'),

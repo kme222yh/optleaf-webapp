@@ -1,6 +1,6 @@
 import './Branchies.scoped.scss';
 
-import { useEffect, useState, ReactNode, useRef } from 'react';
+import { useEffect, ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useTaskQuery } from '@/graphql/generated';

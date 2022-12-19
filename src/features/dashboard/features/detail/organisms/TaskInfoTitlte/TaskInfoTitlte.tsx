@@ -60,6 +60,7 @@ export function TaskInfoTitlte({ className }: TaskInfoTitlteProps) {
     const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
         updateTimeoutId = setTimeout(async () => {
+            if (!event?.target?.value ?? form.getValues('name')) return;
             const data: UpdateTaskMutationVariables = {
                 name: event?.target?.value ?? form.getValues('name'),
                 project_id: id as string,

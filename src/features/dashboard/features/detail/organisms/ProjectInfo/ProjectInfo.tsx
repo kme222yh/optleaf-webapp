@@ -34,6 +34,7 @@ export function ProjectInfo({ className }: ProjectInfoProps) {
     const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
         updateTimeoutId = setTimeout(async () => {
+            if (!event?.target?.value ?? form.getValues('description')) return;
             const data: UpdateProjectMutationVariables = {
                 description:
                     event?.target?.value ?? form.getValues('description'),

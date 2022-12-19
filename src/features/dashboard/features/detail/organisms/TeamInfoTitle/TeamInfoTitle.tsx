@@ -43,6 +43,7 @@ export function TeamInfoTitle({ className }: TeamInfoTitleProps) {
     const updateFn = (event: any) => {
         clearTimeout(updateTimeoutId);
         updateTimeoutId = setTimeout(async () => {
+            if (!event?.target?.value ?? form.getValues('name')) return;
             const data: UpdateTeamMutationVariables = {
                 name: event?.target?.value ?? form.getValues('name'),
                 id: teamId as string
