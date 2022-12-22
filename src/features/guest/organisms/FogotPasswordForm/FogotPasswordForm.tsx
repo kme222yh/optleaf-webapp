@@ -1,17 +1,13 @@
 import './FogotPasswordForm.scss';
 
 import { useForm } from 'react-hook-form';
-import { CSSTransition } from 'react-transition-group';
-import { useRef } from 'react';
 
 // import { ErrorMessage } from '@/types/error';
 // import { useAuth } from '@/providers/auth';
 import { ResetPasswordCredentials } from '@/types/auth';
-import { FormArea } from '../../atoms/FormArea';
-import { FormInputText } from '../../atoms/FormInputText';
-import { RoundedButton } from '../../atoms/RoundedButton';
-import { ScreenSpinner } from '../../atoms/ScreenSpinner';
-import { WarningText } from '../../atoms/WarningText';
+
+import { FormRow } from '../../molecules/FormRow';
+import { Form } from '../../molecules/Form';
 import { useHandleAuthErrors } from '../../hooks/handleAuthError';
 
 export type FogotPasswordFormProps = {
@@ -23,10 +19,9 @@ FogotPasswordForm.defaultProps = {
 
 export function FogotPasswordForm({ className }: FogotPasswordFormProps) {
     // const { login } = useAuth();
-    const nodeRef = useRef(null);
     const form = useForm<ResetPasswordCredentials>();
     const errorMsg = useHandleAuthErrors();
-    const sendForm = async (data: ResetPasswordCredentials) => {
+    const onSubmitFn = async (data: ResetPasswordCredentials) => {
         console.log(data);
         // try {
         //     await login(data);
@@ -40,20 +35,24 @@ export function FogotPasswordForm({ className }: FogotPasswordFormProps) {
     };
 
     return (
-        <FormArea
+        <Form
             className={`FogotPasswordForm ${className}`}
-            action="POST"
-            onSubmit={form.handleSubmit(sendForm)}
+            onSubmitFn={form.handleSubmit(onSubmitFn)}
+            errText={errorMsg.somethingWrong}
+            isWaiting={form.formState.isSubmitting}
+            disabled={!form.formState.isValid || form.formState.isSubmitting}
+            buttonText="submit"
         >
-            <FormInputText
+            <FormRow
                 id="name"
                 placeholder="user name"
                 type="text"
+                warning=""
                 config={form.register('name', {
                     required: true
                 })}
             />
-            <FormInputText
+            <FormRow
                 id="email"
                 placeholder="email"
                 type="email"
@@ -62,22 +61,6 @@ export function FogotPasswordForm({ className }: FogotPasswordFormProps) {
                     required: true
                 })}
             />
-            <WarningText>{errorMsg.somethingWrong}</WarningText>
-            <RoundedButton
-                text="submit"
-                collor_reverse
-                disabled={
-                    !form.formState.isValid || form.formState.isSubmitting
-                }
-            />
-            <CSSTransition
-                nodeRef={nodeRef}
-                in={form.formState.isSubmitting}
-                timeout={300}
-                classNames="fade"
-            >
-                <ScreenSpinner nodeRef={nodeRef} />
-            </CSSTransition>
-        </FormArea>
+        </Form>
     );
 }

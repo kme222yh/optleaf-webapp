@@ -1,17 +1,16 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { FormInputText } from './FormInputText';
+import { Input } from './Input';
 
-type T = typeof FormInputText;
+type T = typeof Input;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: FormInputText,
+    component: Input,
     args: {
         id: 'name',
         type: 'text',
-        placeholder: 'This is placeholder.',
-        warning: 'Warning text.'
+        placeholder: 'This is placeholder.'
     }
 } as Meta;
 

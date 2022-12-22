@@ -1,9 +1,10 @@
-.FormInputText {
+.Input {
     position: relative;
     margin-bottom: 43px;
     width: 100%;
-    &-input {
-        font-family: 'Noto Sans JP', sans-serif;
+
+    &-body {
+        @include font-jp;
         padding: 6px 22px;
         margin-bottom: 1px;
         border-bottom: 3px solid $color-main;
@@ -11,27 +12,29 @@
         font-size: 20px;
         line-height: 27px;
         color: $color-black;
-        transition: 0.3s;
+        position: relative;
         &::placeholder {
             opacity: 0.6;
         }
-        &:focus {
-            padding-bottom: 5px;
-            margin-bottom: 0;
-            border-bottom: 5px solid $color-main;
-        }
     }
-    &-warning {
+
+    &::after {
+        content: '';
         position: absolute;
-        left: 22px;
-        bottom: -18px;
-        color: #cc8766;
-        font-size: 12px;
-        line-height: 14px;
+        top: 38px;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background-color: $color-main;
+        opacity: 0;
+        transition: 0.3s;
+    }
+    &:has(&-body:focus)::after {
+        opacity: 1;
     }
 
     @include mobile {
-        &-input {
+        &-body {
             padding: 6px 15px;
         }
     }

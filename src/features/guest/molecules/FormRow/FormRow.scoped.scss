@@ -1,0 +1,9 @@
+.FormRow {
+    position: relative;
+    width: 100%;
+    &-warning {
+        position: absolute;
+        left: 22px;
+        bottom: -18px;
+    }
+}

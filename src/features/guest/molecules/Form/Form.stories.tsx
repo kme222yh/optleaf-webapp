@@ -1,15 +1,18 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { FormArea } from './FormArea';
+import { Form } from './Form';
 
-type T = typeof FormArea;
+type T = typeof Form;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: FormArea,
+    component: Form,
     args: {
         children: <p>Form Area</p>,
-        action: 'post'
+        errText: '',
+        buttonText: 'login',
+        isWaiting: false,
+        disabled: false
     }
 } as Meta;
 
