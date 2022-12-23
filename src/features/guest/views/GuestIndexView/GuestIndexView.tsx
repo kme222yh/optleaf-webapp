@@ -1,8 +1,9 @@
 import './GuestIndexView.scss';
 
 import { RegisterForm } from '../../organisms/RegisterForm';
-import { TopDocument } from '../../organisms/TopDocument';
-import { PageLinks } from '../../organisms/PageLinks';
+import { Text1 } from '../../atoms/Text1';
+import { Logo } from '../../svg/Logo';
+import { PageLinks } from '../../molecules/PageLinks';
 
 export type GuestIndexViewProps = {
     className?: string;
@@ -15,7 +16,17 @@ export function GuestIndexView({ className }: GuestIndexViewProps) {
     return (
         <div className={`GuestIndexView ${className}`}>
             <div className="GuestIndexView-body">
-                <TopDocument />
+                <div className="GuestIndexView-left">
+                    <Text1>Optimize</Text1>
+                    <Text1>Organize</Text1>
+                    <Text1>Collaboration</Text1>
+                    <Logo />
+                    <Text1>
+                        Start new project
+                        <br />
+                        with Optleaf
+                    </Text1>
+                </div>
                 <div className="GuestIndexView-right">
                     <RegisterForm />
                     <PageLinks login />

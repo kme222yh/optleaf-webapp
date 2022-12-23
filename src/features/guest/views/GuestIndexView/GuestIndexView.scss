@@ -5,6 +5,22 @@
         align-items: center;
     }
 
+    &-left{
+        .Text1 {
+            margin-bottom: 44px;
+            &:nth-child(3) {
+                margin-bottom: 39.5px;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        .Logo {
+            margin-bottom: 25px;
+            min-width: 380px;
+        }
+    }
+
     &-right {
         width: 100%;
         max-width: 500px;
@@ -22,6 +38,15 @@
         &-body {
             flex-direction: column;
             justify-content: flex-start;
+        }
+        &-left{
+            .Text1 {
+                display: none;
+            }
+            .Logo {
+                margin-bottom: 20px;
+                min-width: auto;
+            }
         }
         &-right {
             margin-left: 0;

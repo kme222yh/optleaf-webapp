@@ -1,8 +1,9 @@
 import './GuestLoginView.scss';
 
 import { LoginForm } from '../../organisms/LoginForm';
-import { OtherDocument } from '../../organisms/OtherDocument';
-import { PageLinks } from '../../organisms/PageLinks';
+import { Text1 } from '../../atoms/Text1';
+import { Logo } from '../../svg/Logo';
+import { PageLinks } from '../../molecules/PageLinks';
 
 export type GuestLoginViewProps = {
     className?: string;
@@ -15,7 +16,10 @@ export function GuestLoginView({ className }: GuestLoginViewProps) {
     return (
         <div className={`GuestLoginView ${className}`}>
             <div className="GuestLoginView-body">
-                <OtherDocument>Welcome Back !</OtherDocument>
+                <div className="GuestLoginView-left">
+                    <Logo />
+                    <Text1>Welcome Back !</Text1>
+                </div>
                 <div className="GuestLoginView-right">
                     <LoginForm />
                     <PageLinks register fogot />
