@@ -1,12 +1,12 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { ScreenSpinner } from './ScreenSpinner';
+import { Register } from './Register';
 
-type T = typeof ScreenSpinner;
+type T = typeof Register;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: ScreenSpinner,
+    component: Register,
     args: {
         // add props here !!
     }

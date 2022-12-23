@@ -1,12 +1,12 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { LoginForm } from './LoginForm';
+import { FogotPassword } from './FogotPassword';
 
-type T = typeof LoginForm;
+type T = typeof FogotPassword;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: LoginForm,
+    component: FogotPassword,
     args: {
         // add props here !!
     }

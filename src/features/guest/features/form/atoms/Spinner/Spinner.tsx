@@ -1,20 +1,16 @@
-import './ScreenSpinner.scoped.scss';
+import './Spinner.scoped.scss';
 
-import { LegacyRef } from 'react';
-
-export type ScreenSpinnerProps = {
+export type SpinnerProps = {
     className?: string;
-    nodeRef?: LegacyRef<HTMLDivElement> | undefined;
 };
-ScreenSpinner.defaultProps = {
-    className: '',
-    nodeRef: undefined
+Spinner.defaultProps = {
+    className: ''
 };
 
-export function ScreenSpinner({ className, nodeRef }: ScreenSpinnerProps) {
+export function Spinner({ className }: SpinnerProps) {
     /* eslint-disable */
     return (
-        <div className={`ScreenSpinner ${className}`} ref={nodeRef}>
+        <div className={`Spinner ${className}`}>
             <div className="ScreenSpinner-body">
                 <div className="lds-ellipsis">
                     <div></div>

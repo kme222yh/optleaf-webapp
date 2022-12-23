@@ -1,30 +1,27 @@
-import './RoundedButton.scoped.scss';
+import './Button.scoped.scss';
 
-export type RoundedButtonProps = {
+export type ButtonProps = {
     className?: string;
     text: string;
     collor_reverse?: boolean;
     disabled?: boolean;
-    // type?: 'submit' | 'reset' | 'button' | undefined;
 };
-RoundedButton.defaultProps = {
+Button.defaultProps = {
     className: '',
     collor_reverse: false,
     disabled: false
-    // type: 'button'
 };
 
-export function RoundedButton({
+export function Button({
     className,
     text,
     collor_reverse,
     disabled
-}: // type
-RoundedButtonProps) {
+}: ButtonProps) {
     return (
         <button
             type="submit"
-            className={`RoundedButton ${className}${
+            className={`Button ${className}${
                 collor_reverse ? ' collor_reverse' : ''
             }${disabled ? ' disabled' : ''}`}
         >

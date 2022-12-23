@@ -1,6 +1,6 @@
 import './GuestIndexView.scss';
 
-import { RegisterForm } from '../../organisms/RegisterForm';
+import { Register } from '../../features/form';
 import { Text1 } from '../../atoms/Text1';
 import { Logo } from '../../svg/Logo';
 import { PageLinks } from '../../molecules/PageLinks';
@@ -28,7 +28,7 @@ export function GuestIndexView({ className }: GuestIndexViewProps) {
                     </Text1>
                 </div>
                 <div className="GuestIndexView-right">
-                    <RegisterForm />
+                    <Register />
                     <PageLinks login />
                 </div>
             </div>

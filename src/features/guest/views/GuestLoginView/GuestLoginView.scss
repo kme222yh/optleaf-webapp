@@ -19,7 +19,7 @@
         flex-shrink: 0.8;
     }
 
-    .LoginForm {
+    .Login {
         width: 100%;
         margin-bottom: 20px;
     }
@@ -30,7 +30,7 @@
             flex-direction: column;
             justify-content: flex-start;
         }
-        &-left{
+        &-left {
             .Text1 {
                 display: none;
             }

@@ -1,16 +1,14 @@
 import { type ComponentMeta, type ComponentStoryObj } from '@storybook/react';
-import { RoundedButton } from './RoundedButton';
+import { Spinner } from './Spinner';
 
-type T = typeof RoundedButton;
+type T = typeof Spinner;
 type Meta = ComponentMeta<T>;
 type Story = ComponentStoryObj<T>;
 
 export default {
-    component: RoundedButton,
+    component: Spinner,
     args: {
-        text: 'testtest',
-        collor_reverse: false,
-        disabled: false
+        // add props here !!
     }
 } as Meta;
 

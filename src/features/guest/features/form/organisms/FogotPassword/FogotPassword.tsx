@@ -1,4 +1,4 @@
-import './FogotPasswordForm.scss';
+import './FogotPassword.scoped.scss';
 
 import { useForm } from 'react-hook-form';
 
@@ -10,14 +10,14 @@ import { FormRow } from '../../molecules/FormRow';
 import { Form } from '../../molecules/Form';
 import { useHandleAuthErrors } from '../../hooks/handleAuthError';
 
-export type FogotPasswordFormProps = {
+export type FogotPasswordProps = {
     className?: string;
 };
-FogotPasswordForm.defaultProps = {
+FogotPassword.defaultProps = {
     className: ''
 };
 
-export function FogotPasswordForm({ className }: FogotPasswordFormProps) {
+export function FogotPassword({ className }: FogotPasswordProps) {
     // const { login } = useAuth();
     const form = useForm<ResetPasswordCredentials>();
     const errorMsg = useHandleAuthErrors();
@@ -36,7 +36,7 @@ export function FogotPasswordForm({ className }: FogotPasswordFormProps) {
 
     return (
         <Form
-            className={`FogotPasswordForm ${className}`}
+            className={`FogotPassword ${className}`}
             onSubmitFn={form.handleSubmit(onSubmitFn)}
             errText={errorMsg.somethingWrong}
             isWaiting={form.formState.isSubmitting}

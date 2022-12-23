@@ -1,4 +1,4 @@
-import './LoginForm.scss';
+import './Login.scoped.scss';
 
 import { useForm } from 'react-hook-form';
 
@@ -10,14 +10,14 @@ import { FormRow } from '../../molecules/FormRow';
 import { Form } from '../../molecules/Form';
 import { useHandleAuthErrors } from '../../hooks/handleAuthError';
 
-export type LoginFormProps = {
+export type LoginProps = {
     className?: string;
 };
-LoginForm.defaultProps = {
+Login.defaultProps = {
     className: ''
 };
 
-export function LoginForm({ className }: LoginFormProps) {
+export function Login({ className }: LoginProps) {
     const { login } = useAuth();
     const form = useForm<LoginCredentials>();
     const errorMsg = useHandleAuthErrors();
@@ -35,7 +35,7 @@ export function LoginForm({ className }: LoginFormProps) {
 
     return (
         <Form
-            className={`LoginForm ${className}`}
+            className={`Login ${className}`}
             onSubmitFn={form.handleSubmit(onSubmitFn)}
             errText={errorMsg.somethingWrong}
             isWaiting={form.formState.isSubmitting}

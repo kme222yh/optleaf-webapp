@@ -3,9 +3,9 @@ import './Form.scoped.scss';
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { RoundedButton } from '../../atoms/RoundedButton';
+import { Button } from '../../atoms/Button';
 import { WarningText } from '../../atoms/WarningText';
-import { ScreenSpinner } from '../../atoms/ScreenSpinner';
+import { Spinner } from '../../atoms/Spinner';
 
 export type FormProps = {
     className?: string;
@@ -38,11 +38,7 @@ export function Form({
                 <WarningText>{errText}</WarningText>
             </div>
             <div className="Form-button">
-                <RoundedButton
-                    text={buttonText}
-                    collor_reverse
-                    disabled={disabled}
-                />
+                <Button text={buttonText} collor_reverse disabled={disabled} />
             </div>
             <CSSTransition
                 nodeRef={nodeRef}
@@ -51,7 +47,7 @@ export function Form({
                 classNames="fade"
             >
                 <div className="Form-spinner" ref={nodeRef}>
-                    <ScreenSpinner />
+                    <Spinner />
                 </div>
             </CSSTransition>
         </form>

@@ -1,6 +1,6 @@
 import './GuestFogotPasswordView.scss';
 
-import { FogotPasswordForm } from '../../organisms/FogotPasswordForm';
+import { FogotPassword } from '../../features/form';
 import { Text1 } from '../../atoms/Text1';
 import { Logo } from '../../svg/Logo';
 import { PageLinks } from '../../molecules/PageLinks';
@@ -20,10 +20,12 @@ export function GuestFogotPasswordView({
             <div className="GuestFogotPasswordView-body">
                 <div className="GuestFogotPasswordView-left">
                     <Logo />
-                    <Text1>Reset password ! <br /> This page does not work yet !</Text1>
+                    <Text1>
+                        Reset password ! <br /> This page does not work yet !
+                    </Text1>
                 </div>
                 <div className="GuestLoginView-right">
-                    <FogotPasswordForm />
+                    <FogotPassword />
                     <PageLinks register login />
                 </div>
             </div>
